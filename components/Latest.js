@@ -32,7 +32,7 @@ const Latest = () => {
                                     <h1 className="text-sm uppercase">Sermon</h1>
                                     <h1 className="font-medium">Finishing Strong, Finishing Well</h1>
                                     <h1 className="text-sm text-secondary-black/80">9th Febuary, 2022</h1>
-                                    <p className="hidden md:inline-block text-sm text-justify text-secondary-black/90">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                    <p className="hidden md:block text-sm text-justify text-secondary-black/90">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
                                     <div className="flex items-center !mt-5 md:!mt-10 space-x-2">
                                         <div className="w-[40px] h-[40px] rounded-full relative">
                                             <Image src="/img/eleazar.jpg"
