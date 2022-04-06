@@ -25,7 +25,7 @@ const Footer = () => {
 
                 </div>
                 <div className="flex flex-col md:flex-row space-y-4 !mt-5 md:!mt-10 md:space-y-0 md:justify-between items-start">
-                    <div className="flex flex-col space-y-1">
+                    <div className="flex flex-col space-y-3">
                         <h1 className="text-sm md:text-base font-medium uppercase">Services</h1>
                         <h2 className="text-sm md:text-base uppercase">LORD'S DAY SERVICES:</h2>
                         <h2 className="text-xs md:text-sm ">Sunday School 9AM - 10AM</h2>
@@ -34,7 +34,7 @@ const Footer = () => {
                         <h2 className="text-sm md:text-base uppercase !mt-4">TUSEDAY BIBLE STUDY: 6PM - 7:30PM</h2>
                         <h2 className="text-sm md:text-base uppercase ">FRIDAY PRAYER MEETING: 6PM - 7:30PM</h2>
                     </div>
-                    <div className="flex flex-col space-y-1">
+                    <div className="flex flex-col space-y-3">
                         <h1 className="text-sm md:text-base font-medium uppercase">LOCATION</h1>
                         <h2 className="text-xs md:text-sm ">Trinity Baptist Church,</h2>
                         <h2 className="text-xs md:text-sm ">House 4, Juba Street,</h2>
@@ -43,7 +43,7 @@ const Footer = () => {
                         <h2 className="text-sm md:text-base uppercase !mt-4 underline cursor-pointer hover:scale-105 ">Maps and Direction </h2>
 
                     </div>
-                    <div className="flex flex-col space-y-1">
+                    <div className="flex flex-col space-y-3">
                         <h1 className="text-sm md:text-base font-medium uppercase">CONTACT</h1>
                         <h2 className="text-sm md:text-base uppercase">M-F 8AM - 5PM</h2>
                         <h2 className="text-xs md:text-sm ">+234 902 999 829</h2>
