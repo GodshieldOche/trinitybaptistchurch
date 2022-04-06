@@ -21,8 +21,8 @@ const Sections = () => {
                             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters as opposed to using Content here content here making it look like readable English Many desktop publishing packages and web page editors now use Lorem Ipsum
                         </p>
                         <div className="max-w-[230px] md:max-w-[300px] !mt-10 px-3 py-2 flex justify-center
-                bg-primary-light text-[white] cursor-pointer ">
-                            <h1 className="uppercase text-sm md:text-base  ">Read about Tbc Abuja</h1>
+                bg-primary-light text-[white] cursor-pointer hover:scale-105 hover:shadow-xl ">
+                            <h1 className="uppercase text-sm md:text-base   ">Read about Tbc Abuja</h1>
                         </div>
                     </div>
                 </div>
@@ -45,9 +45,9 @@ const Sections = () => {
                         </p>
                         <div className="flex !mt-10 space-x-3  ">
                             <h1 className="uppercase text-sm md:text-base  px-5 py-2 text-center
-                            bg-primary-light text-[white] cursor-pointer ">Read More</h1>
+                            bg-primary-light text-[white] cursor-pointer hover:scale-105 hover:shadow-xl ">Read More</h1>
                             <h1 className="uppercase text-sm md:text-base  px-5 py-2 text-center
-                            bg-primary-dark text-[white] cursor-pointer">Give</h1>
+                            bg-primary-dark text-[white] cursor-pointer hover:scale-105 hover:shadow-xl">Give</h1>
                         </div>
                     </div>
                 </div>

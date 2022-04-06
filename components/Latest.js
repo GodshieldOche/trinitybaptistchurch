@@ -50,7 +50,7 @@ const Latest = () => {
                     }
                 </div>
                 <div className="w-full md:max-w-[250px] mx-auto !mt-5 px-5 py-[5px] flex justify-center
-                bg-primary-light text-[white] cursor-pointer ">
+                bg-primary-light text-[white] cursor-pointer hover:scale-105 hover:shadow-xl ">
                     <h1 className="uppercase text-sm md:text-base">See All</h1>
                 </div>
             </div>

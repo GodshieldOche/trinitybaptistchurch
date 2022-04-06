@@ -32,7 +32,7 @@ const Hero = () => {
                                 </a>
                             </Link>
                         </div>
-                        <div className="w-full">
+                        <div className="w-full hover:bg-primary-dark/10 py-3">
                             <Link href="/">
                                 <a>
                                     <h1 className="text-sm uppercase md:text-base text-center">Live Stream Service</h1>

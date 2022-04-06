@@ -20,8 +20,8 @@ const Address = () => {
                         <h1>Abuja, F.C.T</h1>
                         <h1 className="text-primary-dark font-medium  uppercase text-xl">Directions</h1>
                         <div className="flex items-center space-x-5 w-full !mt-3">
-                            <h1 className="text-center px-4 py-2 bg-primary-light text-[white]">GOOGLE MAPS</h1>
-                            <h1 className="text-center px-4 py-2 bg-primary-dark text-[white]">APPLE MAPS</h1>
+                            <h1 className="text-center px-4 py-2 bg-primary-light cursor-pointer hover:scale-105 hover:shadow-xl text-[white]">GOOGLE MAPS</h1>
+                            <h1 className="text-center px-4 py-2 bg-primary-dark cursor-pointer hover:scale-105 hover:shadow-xl text-[white]">APPLE MAPS</h1>
                             
                         </div>
                     </div>
