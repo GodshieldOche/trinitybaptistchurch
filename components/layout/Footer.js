@@ -50,7 +50,7 @@ const Footer = () => {
                         <h2 className="text-xs md:text-sm ">+234 817 562 828</h2>
                     </div>
                 </div>
-                <h1 className="text-center text-sm md:text-base !mt-4">Copyright © 2022 Trinity Baptist Church. All Rights Reserved.</h1>
+                <h1 className="text-center text-sm md:text-base !mt-4">Copyright 2022 Trinity Baptist Church. All Rights Reserved.</h1>
             </div>
         </div>
     )
