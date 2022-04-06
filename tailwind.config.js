@@ -4,7 +4,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      scale: {
+        '105': '1.003',
+      }
+    },
     colors: {
       'primary-black': '#141313',
       'secondary-black': '#272525',

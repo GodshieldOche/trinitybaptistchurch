@@ -23,19 +23,19 @@ const Hero = () => {
                         </a>
                     </Link>
                 </div>
-                <div className="space-y-2">
+                <div className="!mt-20 md:!mt-0 space-y-2">
                     <div className="grid grid-cols-2 mb-3 items-center border-b border-b-primary-dark">
                         <div className="w-full bg-primary-dark py-3">
                             <Link href="/">
                                 <a>
-                                    <h1 className="text-center text-[#fff]">Upcoming Events</h1>
+                                    <h1 className="text-center text-sm uppercase md:text-base text-[#fff]">Upcoming Events</h1>
                                 </a>
                             </Link>
                         </div>
                         <div className="w-full">
                             <Link href="/">
                                 <a>
-                                    <h1 className="text-center">Live Stream Service</h1>
+                                    <h1 className="text-sm uppercase md:text-base text-center">Live Stream Service</h1>
                                 </a>
                             </Link>
                         </div>
