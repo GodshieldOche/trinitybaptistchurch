@@ -1,3 +1,4 @@
+import Address from "./Address"
 import Hero from "./Hero"
 import Latest from "./Latest"
 import Sections from "./Sections"
@@ -8,6 +9,7 @@ const Home = () => {
             <Hero />
             <Latest />
             <Sections />
+            <Address/>
         </div>
     )
 }
