@@ -10,7 +10,7 @@ const Hero = () => {
                     <h1 className="text-center lg:text-left text-2xl lg:text-3xl uppercase font-semibold text-secondary-black/90 md:text-secondary-black ">Trinity Baptist Church</h1>
                     <h1 className="text-primary-dark text-sm md:text-base text-center lg:text-left">GOD-FOCUSED, CHRIST-CENTERED, GOSPEL-DRIVEN CHURCH LOCATED AT THE HEART OF ABUJA</h1>
                 </div>
-                <div className="flex justify-center !my-16 lg:!my-10 lg:justify-start items-center">
+                <div className="flex justify-center !my-10 lg:justify-start items-center">
                     <Link href="/">
                         <a>
                             <h1 className="uppercase border
