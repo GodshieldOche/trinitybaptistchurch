@@ -4,7 +4,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 
 const Footer = () => {
     return (
-        <div className="bg-[#f5f5f5]">
+        <div className="">
             <div className="container lg:px-[2rem] py-4 !mt-10 px-2 md:px-0 space-y-4 ">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-5 md:space-y-0">
                     <div className="flex space-x-2 items-center">
@@ -17,9 +17,9 @@ const Footer = () => {
                         <h1 className="uppercase text-sm md:text-base">New Resources in your inbox</h1>
                         <div className="flex">
                             <input type="text" className="border border-primary-dark py-1 
-                        text-sm md:text-base px-3 md:px-5 outline-none bg-[#f5f5f5] text-primary-dark " placeholder="Email Address" />
+                        text-sm md:text-base px-3 md:px-5 outline-none text-primary-dark " placeholder="Email Address" />
                             <button className="border border-primary-dark py-1 px-3 md:px-4 uppercase
-                        text-sm md:text-base bg-primary-dark text-[white] ">Submit</button>
+                        text-xs md:text-sm bg-primary-dark text-[white] ">Submit</button>
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@ const Footer = () => {
                         <h2 className="text-xs md:text-sm ">+234 817 562 828</h2>
                     </div>
                 </div>
-                <h1 className="text-center text-sm md:text-base !mt-4">Copyright © 2022 Trinity Baptist Church. All Rights Reserved.</h1>
+                <h1 className="text-center text-xs md:text-sm !mt-4">Copyright © 2022 Trinity Baptist Church. All Rights Reserved.</h1>
             </div>
         </div>
     )

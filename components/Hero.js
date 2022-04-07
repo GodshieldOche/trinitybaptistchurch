@@ -6,7 +6,7 @@ const Hero = () => {
         <div className="container grid gap-5 xl:gap-20 mb-5  grid-cols-1 lg:grid-cols-12 items-center w-full overflow-hidden">
         {/* col 1 */}
             <div className="lg:col-span-5 order-last lg:order-first space-y-10 ">
-                <div className="space-y-2">
+                <div className="space-y-2 px-2 md:px-0">
                     <h1 className="text-center lg:text-left text-2xl lg:text-3xl uppercase font-semibold text-secondary-black/90 md:text-secondary-black ">Trinity Baptist Church</h1>
                     <h1 className="text-primary-dark text-sm md:text-base text-center lg:text-left">GOD-FOCUSED, CHRIST-CENTERED, GOSPEL-DRIVEN CHURCH LOCATED AT THE HEART OF ABUJA</h1>
                 </div>

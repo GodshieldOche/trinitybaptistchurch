@@ -24,6 +24,8 @@ module.exports = {
     },
     fontFamily: {
       Poppins: ["Poppins, sans-serif"],
+      Montserrat: ["Montserrat, sans-serif"],
+      Mecury: ["Mercury Text G2, Times New Roman, sans-serif"],
     }
   },
   plugins: [],

@@ -5,7 +5,7 @@ import Link from "next/link"
 
 const Header = () => {
     return (
-        <header className="bg-[#fff] shadow-md  fixed top-0 left-0 right-0 !z-50 py-1 md:py-2">
+        <header className="bg-[#fff] shadow-md  fixed top-0 left-0 right-0 !z-40 py-1 md:py-2">
             <nav className="flex justify-between items-center container px-1 md:px-0 relative">
                 <div className="flex items-center">
                     <Image src="/logo.png" width={50} height={50} alt="logo" />
