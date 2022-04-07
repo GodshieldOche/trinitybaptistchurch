@@ -14,7 +14,7 @@ const Header = () => {
                 <div className=" hidden lg:flex  justify-between space-x-8 ">
                     <Link href="/ministries"><a className=" ">Ministries</a></Link>
                     <Link href="/ministries"><a className=" ">About</a></Link>
-                    <Link href="/ministries"><a className=" ">Resources</a></Link>
+                    <Link href="/resources"><a className=" ">Resources</a></Link>
                     <Link href="/ministries"><a className=" ">Events & News</a></Link>
                     <Link href="/ministries"><a className=" ">Give</a></Link>
                 </div>

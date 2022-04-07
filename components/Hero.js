@@ -16,7 +16,7 @@ const Hero = () => {
                             <h1 className="uppercase border
                             border-primary-light px-4 md:px-5 py-2 bg-primary-light
                             lg:bg-[#fff] lg:text-primary-light
-                            text-base md:text-lg
+                            text-sm md:text-base
                             hover:lg:bg-primary-light hover:lg:text-[#fff] cursor-pointer
                             text-primary-white"
                             >New Here? Learn more</h1>
