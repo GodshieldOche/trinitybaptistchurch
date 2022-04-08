@@ -9,7 +9,7 @@ const Categories = () => {
             id: 1
         },
         {
-            name: "Series",
+            name: "Preaching Series",
             image: "/img/series.jpg",
             id: 2
         },
@@ -22,6 +22,11 @@ const Categories = () => {
             name: "Articles",
             image: "/img/article.jpg",
             id: 4
+        },
+        {
+            name: "Bible Study",
+            image: "/img/bible.jpg",
+            id: 5
         },
     ]
     return (
@@ -40,10 +45,10 @@ const Categories = () => {
                                     alt="logo" />
                             </div>
                             <div className="w-full p-5 space-y-5">
-                                <h1 className="font-medium !mt-4 !mb-5 text-base md:text-lg text-center uppercase">
+                                <h1 className=" !mt-4 !mb-5 text-base text-center uppercase">
                                     {list.name}
                                 </h1>
-                                <p className="text-sm text-justify text-secondary-black/90">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                                <p className="text-sm text-justify font-light text-secondary-black/90">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
                                 <hr className="border-primary-dark !mt-16"></hr>
                                 <h2 className="text-center text-primary-dark text-sm ">Veiw All</h2>
                             </div>

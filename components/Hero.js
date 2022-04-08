@@ -7,7 +7,7 @@ const Hero = () => {
         {/* col 1 */}
             <div className="lg:col-span-5 order-last lg:order-first space-y-10 ">
                 <div className="space-y-2 px-2 md:px-0">
-                    <h1 className="text-center lg:text-left text-2xl lg:text-3xl uppercase font-semibold text-secondary-black/90 md:text-secondary-black ">Trinity Baptist Church</h1>
+                    <h1 className="text-center lg:text-left text-2xl lg:text-3xl uppercase font-medium text-secondary-black/90 md:text-secondary-black ">Trinity Baptist Church</h1>
                     <h1 className="text-primary-dark text-sm md:text-base text-center lg:text-left">GOD-FOCUSED, CHRIST-CENTERED, GOSPEL-DRIVEN CHURCH LOCATED AT THE HEART OF ABUJA</h1>
                 </div>
                 <div className="flex justify-center !my-10 lg:justify-start items-center">
@@ -51,11 +51,11 @@ const Hero = () => {
                         </div>
                         <div className="col-span-7 sm:col-span-6 flex flex-col sm:ml-3">
                             <div className="space-y-2">
-                                <h1 className="uppercase text-xs md:text-sm !mb-3 ">Conference</h1>
-                                <h1 className="font-medium text-lg ">The Sovereignty of God</h1>
-                                <h1 className=" text-xs md:text-sm">9th October 2022</h1>
+                                <h1 className="uppercase text-xs md:text-sm font-light !mb-3 ">Conference</h1>
+                                <h1 className="font-medium text-lg  ">The Sovereignty of God</h1>
+                                <h1 className=" text-xs md:text-sm ">9th October 2022</h1>
 
-                                <h1 className=" text-sm !mt-8 !mb-3">Would be attending?</h1>
+                                <h1 className=" text-sm !mt-8 !mb-3 ">Would be attending?</h1>
 
                                 <div className="flex items-center space-x-3">
                                     <h1 className=" text-xs md:text-sm py-[6px] px-3

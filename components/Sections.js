@@ -16,11 +16,11 @@ const Sections = () => {
                         </div>
                     </div>
                     <div className="flex flex-col px-2 md:px-0 space-y-2">
-                        <h1 className="uppercase font-bold text-xl md:text-2xl">Our Mission</h1>
-                        <p className="text-left text-primary-black/90">
+                        <h1 className="uppercase font-medium text-xl md:text-2xl">Our Mission</h1>
+                        <p className="text-left font-light">
                             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters as opposed to using Content here content here making it look like readable English Many desktop publishing packages and web page editors now use Lorem Ipsum
                         </p>
-                        <div className=" flex justify-center md:justify-start !mt-10 mb-5">
+                        <div className=" flex  !mt-10 mb-5">
                             <h1 className="uppercase text-sm md:text-base
                             max-w-[230px] md:max-w-[300px] px-3 py-2
                             bg-primary-light text-[white] cursor-pointer hover:scale-105 hover:shadow-xl
@@ -41,8 +41,8 @@ const Sections = () => {
                     </div>
                     <div className="flex flex-col px-2 md:px-0 space-y-2">
                         <h1 className="uppercase text-primary-light">News</h1>
-                        <h1 className="uppercase font-bold text-xl md:text-2xl">Church Building Project</h1>
-                        <p className="text-left text-primary-black/90">
+                        <h1 className="uppercase font-medium text-xl md:text-2xl">Church Building Project</h1>
+                        <p className="text-left font-light">
                             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters as opposed to using Content here content here making it look like readable English Many desktop publishing packages and web page editors now use Lorem Ipsum
                         </p>
                         <div className="flex !mt-10 space-x-3  ">

@@ -9,7 +9,7 @@ const Latest = () => {
             <div className="container lg:px-[2rem] space-y-5">
                 <div className="flex items-center space-x-1">
                     <span className="w-7 h-[2.5px] bg-primary-dark"></span>
-                    <h1 className="text-base lg:text-lg font-medium uppercase">Latest Resources</h1>
+                    <h1 className="text-base lg:text-lg  uppercase">Latest Resources</h1>
                 </div>
                 
                 {/* resource card list */}
@@ -30,10 +30,10 @@ const Latest = () => {
                                     </div>
                                 </div>
                                 <div className="w-full md:p-5 space-y-3">
-                                    <h1 className="text-xs uppercase">Sermon</h1>
-                                    <h1 className="font-medium">Finishing Strong, Finishing Well</h1>
-                                    <h1 className="text-sm text-secondary-black/80">9th Febuary, 2022</h1>
-                                    <p className="hidden md:block text-sm text-left text-secondary-black/90">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                                    <h1 className="text-xs uppercase font-light">Sermon</h1>
+                                    <h1 className="">Finishing Strong, Finishing Well</h1>
+                                    <h1 className="text-sm font-light">9th Febuary, 2022</h1>
+                                    <p className="hidden md:block text-sm font-light text-left text-secondary-black/90">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
                                     <div className="flex items-center !mt-5 md:!mt-10 space-x-2">
                                         <div className="h-[30px] w-[30px] md:w-[35px] md:h-[35px] rounded-full relative">
                                             <Image src="/img/eleazar.jpg"
@@ -43,7 +43,7 @@ const Latest = () => {
                                                 placeholder="blur"
                                                 alt="logo" />
                                         </div>
-                                        <h1 className="text-sm text-secondary-black md:text-base">Eleazar Maduka</h1>
+                                        <h1 className="text-sm text-secondary-black font-light md:text-base">Eleazar Maduka</h1>
                                     </div>
                                 </div>
                             </div>
