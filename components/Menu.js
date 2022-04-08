@@ -1,7 +1,6 @@
 import { setMenuState } from "../redux/features/menu"
 import { useDispatch } from "react-redux"
 import CloseIcon from '@mui/icons-material/Close';
-import Link from "next/link"
 import MenuLinks from "./MenuLinks";
 
 const Menu = ({ menuState }) => {

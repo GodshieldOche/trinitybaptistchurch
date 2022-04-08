@@ -10,8 +10,8 @@ const MenuLinks = ({ title }) => {
     const dispatch = useDispatch()
 
     return (
-        <Link href={`/${title}`}>
-            <a>
+        <Link href={`/${title}`} className="outline-none">
+            <a >
                 <h1 className={`
                 ${menuState ? "text-[white]/70 " : "!text-primary-black"}
                 ${router.pathname.split("/")[1] === title ? "font-medium !text-[white]" : "font-light"}
