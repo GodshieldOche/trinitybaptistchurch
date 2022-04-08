@@ -18,7 +18,7 @@ const Hero = () => {
                             lg:bg-[#fff] lg:text-primary-light
                             text-sm md:text-base
                             hover:lg:bg-primary-light hover:lg:text-[#fff] cursor-pointer
-                            text-primary-white"
+                            text-primary-white "
                             >New Here? Learn more</h1>
                         </a>
                     </Link>
