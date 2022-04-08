@@ -8,7 +8,7 @@ const Menu = ({ menuState }) => {
     const dispatch = useDispatch()
 
     return (
-        <div className={`${menuState ? " w-full md:w-[40%] " : "w-0"} lg:hidden py-5 fixed transition-all duration-700 ease-in-out bg-[white] h-screen top-0 right-0 !z-50 !overflow-x-hidden `}>
+        <div className={`${menuState ? " w-full md:w-[40%] " : "w-0"} !shadow-2xl lg:hidden py-5 fixed transition-all duration-700 ease-in-out bg-[white] h-screen top-0 right-0 !z-50 !overflow-x-hidden `}>
             <div className="flex flex-col w-full px-5">
                 <div className="flex justify-end">
                     <CloseIcon className={`  ${menuState ? " text-primary-black " : "text-[white]/80"} cursor-pointer transition-all duration-500 ease-in-out font-light`}

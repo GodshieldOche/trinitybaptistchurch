@@ -33,7 +33,7 @@ const MenuLinks = ({ title }) => {
                 }}
             >
 
-                <h1 className={`${router.pathname.split("/")[1] === title ? "font-medium" : "font-light"} text-2xl md:text-xl md:hover:font-medium md:hover:!text-[white]/60 capitalize cursor-pointer`}>
+                <h1 className={`${router.pathname.split("/")[1] === title ? "font-medium" : "font-light"} text-2xl md:text-xl md:hover:font-medium capitalize cursor-pointer`}>
                     {title}
                 </h1>
                 
