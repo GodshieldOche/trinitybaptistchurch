@@ -4,6 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Link from "next/link"
 import { useDispatch } from "react-redux"
 import { setMenuState } from "../../redux/features/menu";
+import Links from "./Links";
 
 const Header = ({ menuState }) => {
 
@@ -17,11 +18,11 @@ const Header = ({ menuState }) => {
                     <Link href="/"><a className="text-sm lg:text-base">Triniy Baptist Church</a></Link>
                 </div>
                 <div className=" hidden lg:flex  justify-between space-x-8 ">
-                    <Link href="/ministries"><a className=" ">Ministries</a></Link>
-                    <Link href="/ministries"><a className=" ">About</a></Link>
-                    <Link href="/resources"><a className=" ">Resources</a></Link>
-                    <Link href="/ministries"><a className=" ">Events & News</a></Link>
-                    <Link href="/ministries"><a className=" ">Give</a></Link>
+                    <Links title={"ministries"} />
+                    <Links title={"about"} />
+                    <Links title={"resources"} />
+                    <Links title={"events & news"} />
+                    <Links title={"give"} />
                 </div>
                
                 <div className="hidden lg:block lg:ml-28 ">

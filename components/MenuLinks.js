@@ -10,7 +10,7 @@ const MenuLinks = ({ title }) => {
     const dispatch = useDispatch()
 
     return (
-        <Link href={`/${title}`} className="outline-none">
+        <Link href={`/${title}`} className="">
             <a >
                 <h1 className={`
                 ${menuState ? "text-[white]/70 " : "!text-primary-black"}
