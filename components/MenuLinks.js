@@ -27,7 +27,6 @@ const MenuLinks = ({ title }) => {
                 onClick={() => {
                     if (title === "ministries") {
                         setMinistries(!ministries)
-                        console.log(ministries)
                     } else {
                         handleClick()
                     }
