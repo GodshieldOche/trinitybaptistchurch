@@ -55,10 +55,10 @@ const MenuLinks = ({ title }) => {
 
             {
                 title === "ministries" && ministries && menuState &&
-                <div className={`flex flex-col w-full font-light space-y-1`}>
-                    <a>Men</a>
-                    <a>Women</a>
-                    <a>Children</a>
+                <div className={`flex flex-col w-full text-lg font-light border-l border-l-primary-black/30 pl-3 space-y-2 ml-3  `}>
+                    <h1 className=" ">Men</h1>
+                    <h1 className=" ">Women</h1>
+                    <h1 className=" ">Children</h1>
                 </div>
             }
         </div>

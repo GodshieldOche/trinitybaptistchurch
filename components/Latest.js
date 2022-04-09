@@ -16,11 +16,11 @@ const Latest = () => {
                 <div className="max-w-screen-lg mx-auto grid gap-2 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {
                         lists.map(list => (
-                            <div key={list} className="w-full flex flex-row-reverse md:flex-col md:rounded-xl bg-[white] space-x-1 md:space-x-0
+                            <div key={list} className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-xl bg-[white] space-x-1 md:space-x-0
                             md:py-0 md:px-0 px-1 py-2 shadow-lg md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
-                                <div className="w-[100px] h-[80px] md:w-full md:h-[170px] md:rounded-t-xl relative">
+                                <div className="w-[100px] h-[80px] md:w-full md:h-[170px] rounded-lg md:rounded-b-none md:rounded-t-xl relative">
                                     <Image src="/img/study.jpg"
-                                        className="object-cover w-full h-full md:rounded-t-xl"
+                                        className="object-cover w-full h-full rounded-lg md:rounded-t-xl"
                                         layout="fill"
                                         blurDataURL="data:..."
                                         placeholder="blur"
@@ -33,7 +33,7 @@ const Latest = () => {
                                     <h1 className="text-xs uppercase font-light">Sermon</h1>
                                     <h1 className="">Finishing Strong, Finishing Well</h1>
                                     <h1 className="text-sm font-light">9th Febuary, 2022</h1>
-                                    <p className="hidden md:block text-sm font-light text-left ">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                                    <p className="hidden md:block text-sm font-light  text-left ">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
                                     <div className="flex items-center !mt-5 md:!mt-10 space-x-2">
                                         <div className="h-[25px] w-[25px] md:w-[30px] md:h-[30px] rounded-full relative">
                                             <Image src="/img/eleazar.jpg"

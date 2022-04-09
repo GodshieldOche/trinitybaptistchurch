@@ -4,14 +4,16 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 
 const Footer = () => {
     return (
-        <div className="bg-[#f5f5f5] pt-2">
+        <div className="bg-[#eee]/30 pt-2">
             <div className="container lg:px-[2rem] py-4 !mt-10 px-2 md:px-0 space-y-4 ">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-5 md:space-y-0">
-                    <div className="flex space-x-2 items-center">
+                    <div className="flex flex-col space-y-1 md:space-x-2 justify-center md:flex-row items-center">
                         <h1 className="text-sm lg:text-base">follow us on:</h1>
-                        <FacebookIcon className="text-xl lg:text-2xl " />
-                        <InstagramIcon className="text-xl lg:text-2xl " />
-                        <YouTubeIcon className="text-xl lg:text-2xl " />
+                        <div className="space-x-3">
+                            <FacebookIcon className="text-xl lg:text-2xl " />
+                            <InstagramIcon className="text-xl lg:text-2xl " />
+                            <YouTubeIcon className="text-xl lg:text-2xl " />
+                        </div>
                     </div>
                     <div className="flex flex-col space-y-1">
                         <h1 className="uppercase text-xs lg:text-sm">New Resources in your inbox</h1>

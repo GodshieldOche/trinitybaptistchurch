@@ -2,11 +2,11 @@ import Head from "next/head";
 import Resources from "../components/resources/Resources";
 
 
-export default function HomePage() {
+export default function ResourcePage() {
     return (
         <div >
             <Head>
-                <title>Resources</title>
+                <title>TBC || Resources</title>
             </Head>
             <Resources />
         </div>

@@ -29,12 +29,12 @@ const Header = ({ menuState }) => {
                     <SearchIcon className="!md:text-3xl" />
                 </div>
                 <div className="flex lg:hidden items-center !space-x-5">
-                    <SearchIcon className=" !text-[28px] !text-primary-black/70 " />
+                    <SearchIcon className=" !text-[28px] !text-primary-black/70 cursor-pointer " />
                     <MenuIcon
                         onClick={() => {
                             dispatch(setMenuState(true))
                         }}
-                        className=" !text-4xl !text-primary-black/70" />
+                        className=" !text-4xl !text-primary-black/70 cursor-pointer" />
                 </div>
 
             </nav>
