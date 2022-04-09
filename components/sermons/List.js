@@ -4,6 +4,7 @@ import { useState } from "react"
 
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
+    const [sortToggle, setSortToggle] = useState(false)
 
     const lists = [1,2,3,4,5,6,7,8,9,10]
     return (
@@ -16,7 +17,7 @@ const List = () => {
                         <div className="flex flex-col mt-2 md:mt-5 space-y-3">
                             {
                                 lists.map(list => (
-                                    <div key={list} className="flex py-2 hover:bg-secondary-one/10 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10">
+                                    <div key={list} className="flex py-2 hover:bg-secondary-one/20 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10">
                                         <div className="flex flex-col space-y-2">
                                             <h1 className="font-light text-xs ">Audio | 9th Feb 2022</h1>
                                             <h1 className=" text-base md:text-lg capitalize ">The King who restores the sinners</h1>
@@ -49,7 +50,8 @@ const List = () => {
                         </div>
                     </div>
                     <div className=" lg:col-span-5 lg:!mt-10 order-first lg:order-last">
-                        <Filter fitlerToggle={fitlerToggle} setFilterToggle={setFilterToggle}  />
+                        <Filter fitlerToggle={fitlerToggle} setFilterToggle={setFilterToggle}
+                            sortToggle={sortToggle} setSortToggle={setSortToggle} />
                     </div>
                 </div>
             </div>
