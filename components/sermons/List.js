@@ -1,14 +1,17 @@
 import Filter from "./Filter"
 import Image from "next/image"
+import { useState } from "react"
 
 const List = () => {
+    const [fitlerToggle, setFilterToggle] = useState(false)
+
     const lists = [1,2,3,4,5,6,7,8,9,10]
     return (
-        <div className="md:mt-10" >
+        <div className={`${fitlerToggle ? " !h-screen  !overflow-y-hidden  " : "w-full"} md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
-                <h1 className="hidden md:block text-center lg:text-left text-sm font-light mb-5">20 Results - Page 1</h1>
+                <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">20 Results - Page 1</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-20 ">
-                    <h1 className="md:hidden text-center  text-xs font-light ">20 Results - Page 1</h1>
+                    <h1 className="lg:hidden text-center uppercase text-xs font-light ">20 Results - Page 1</h1>
                     <div className="lg:col-span-7">
                         <div className="flex flex-col mt-2 md:mt-5 space-y-3">
                             {
@@ -46,7 +49,7 @@ const List = () => {
                         </div>
                     </div>
                     <div className=" lg:col-span-5 lg:!mt-10 order-first lg:order-last">
-                        <Filter />
+                        <Filter fitlerToggle={fitlerToggle} setFilterToggle={setFilterToggle}  />
                     </div>
                 </div>
             </div>

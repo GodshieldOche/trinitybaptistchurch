@@ -4,7 +4,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 
 const Footer = () => {
     return (
-        <div className="bg-[#eee]/50 pt-2">
+        <div className="bg-[#eee]/40 pt-2">
             <div className="container lg:px-[2rem] py-4 !mt-10 px-2 md:px-0 space-y-4 ">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-5 md:space-y-0">
                     <div className="flex flex-col space-y-1 md:space-x-2 justify-center md:flex-row items-center">
@@ -19,7 +19,7 @@ const Footer = () => {
                         <h1 className="uppercase text-xs lg:text-sm">New Resources in your inbox</h1>
                         <div className="flex">
                             <input type="text" className="border border-primary-dark py-1 
-                        text-sm lg:text-base bg-[#f5f5f5] !w-full h-9 px-3 lg:px-5 outline-none text-primary-dark " placeholder="Email Address" />
+                        text-sm lg:text-base bg-[#eee]/30 !w-full h-9 px-3 lg:px-5 outline-none text-primary-dark " placeholder="Email Address" />
                             <button className="border border-primary-dark py-1 px-3 md:px-4 uppercase
                         text-xs w-28 lg:text-sm bg-primary-dark text-[white] ">Submit</button>
                         </div>
