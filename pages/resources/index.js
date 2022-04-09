@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Resources from "../components/resources/Resources";
+import Resources from "../../components/resources/Resources";
 
 
 export default function ResourcePage() {

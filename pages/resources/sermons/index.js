@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Sermons from "../../components/sermons/Sermons";
+import Sermons from "../../../components/sermons/Sermons";
 
 
 export default function SermonPage() {

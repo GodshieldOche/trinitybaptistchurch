@@ -7,8 +7,9 @@ const Filter = ({ fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) =>
             <div className={` ${fitlerToggle || sortToggle ? "pb-5 pt-1 w-full h-screen fixed top-0 right-0  !z-50 !overflow-y-scroll" : ""}
             transition-all duration-500 ease-in-out lg:hidden  bg-[white]`}>
                 <div className="grid grid-cols-2 items-center ">
-                    <div className="w-full border cursor-pointer border-primary-dark/30 bg-primary-dark ">
-                        <h1 className="text-center  text-sm lg:text-xs text-[white] py-2 uppercase"
+                    <div className={`${!sortToggle ? "text-[white] bg-primary-dark" : "bg-[white] text-[black]"}
+                    w-full border cursor-pointer border-primary-dark/30  `}>
+                        <h1 className="text-center  text-sm lg:text-xs  py-2 uppercase"
                             onClick={() => {
                                 if (!sortToggle) {
                                     setFilterToggle(!fitlerToggle)
@@ -20,7 +21,7 @@ const Filter = ({ fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) =>
                             }}>
                             filter</h1>
                     </div>
-                    <div className="w-full cursor-pointer border border-primary-dark/30 bg-[white]">
+                    <div className={` ${sortToggle ? "bg-primary-dark text-[white]" : " bg-[white] text-[black] " } w-full cursor-pointer border border-primary-dark/30 `}>
                         <h1 className="text-center text-sm lg:text-xs py-2 uppercase"
                             onClick={() => {
                                 if (!fitlerToggle) {
@@ -44,8 +45,9 @@ const Filter = ({ fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) =>
 
             <div className="hidden lg:block bg-[white]">
                 <div className="grid grid-cols-2 items-center shadow-md">
-                    <div className="w-full cursor-pointer border border-primary-dark/30 bg-primary-dark ">
-                        <h1 className="text-center text-sm lg:text-xs text-[white] py-2 uppercase"
+                    <div className={`${!sortToggle ? "bg-primary-dark text-[white]" : "bg-[white] text-[black]"}
+                    w-full cursor-pointer border border-primary-dark/30 `}>
+                        <h1 className="text-center text-sm lg:text-xs py-2 uppercase"
                             onClick={() => {
                                 if (!sortToggle) {
                                     setFilterToggle(!fitlerToggle)
@@ -56,7 +58,8 @@ const Filter = ({ fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) =>
 
                             }}>filter</h1>
                     </div>
-                    <div className="w-full cursor-pointer border border-primary-dark/30 bg-[white]">
+                    <div className={`${sortToggle ? "bg-primary-dark text-[white]" : "bg-[white] text-[black]"}
+                    w-full cursor-pointer border border-primary-dark/30`}>
                         <h1 className="text-center text-sm lg:text-xs py-2 uppercase"
                             onClick={() => {
                                 if (!fitlerToggle) {
