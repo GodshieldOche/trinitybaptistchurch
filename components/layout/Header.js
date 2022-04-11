@@ -15,7 +15,7 @@ const Header = ({ menuState }) => {
             <nav className="flex justify-between items-center container px-1 md:px-0 relative">
                 <div className="flex items-center">
                     <Image src="/logo.png" width={50} height={50} alt="logo" />
-                    <Link href="/"><a className="text-sm lg:text-base">Triniy Baptist Church</a></Link>
+                    <Link href="/"><a className="text-sm lg:text-base">Trinity Baptist Church</a></Link>
                 </div>
                 <div className=" hidden lg:flex  justify-between space-x-8 ">
                     <Links title={"ministries"} />

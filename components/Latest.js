@@ -17,10 +17,10 @@ const Latest = () => {
                     {
                         lists.map(list => (
                             <div key={list} className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-xl bg-[white] space-x-1 md:space-x-0
-                            md:py-0 md:px-0 px-1 py-2 shadow-lg md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
+                            md:py-0 md:px-0 px-1 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
                                 <div className="w-[100px] h-[80px] md:w-full md:h-[170px] rounded-lg md:rounded-b-none md:rounded-t-xl relative">
                                     <Image src="/img/study.jpg"
-                                        className="object-cover w-full h-full rounded-lg md:rounded-t-xl"
+                                        className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-xl"
                                         layout="fill"
                                         blurDataURL="data:..."
                                         placeholder="blur"
@@ -30,10 +30,10 @@ const Latest = () => {
                                     </div>
                                 </div>
                                 <div className="w-full md:p-5 space-y-3">
-                                    <h1 className="text-xs uppercase font-light">Sermon</h1>
+                                    <h1 className="md:hidden text-xs uppercase font-light">Sermon</h1>
                                     <h1 className="">Finishing Strong, Finishing Well</h1>
                                     <h1 className="text-sm font-light">9th Febuary, 2022</h1>
-                                    <p className="hidden md:block text-sm font-light  text-left ">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                                    <p className="hidden md:block text-sm font-light  text-justify ">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
                                     <div className="flex items-center !mt-5 md:!mt-10 space-x-2">
                                         <div className="h-[25px] w-[25px] md:w-[30px] md:h-[30px] rounded-full relative">
                                             <Image src="/img/eleazar.jpg"

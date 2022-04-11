@@ -1,7 +1,11 @@
+import Hero from "./Hero"
+import List from "./List"
+
 const Series = () => {
     return (
-        <div>
-            
+        <div className="!mb-40  w-full">
+            <Hero />
+            <List />
         </div>
     )
 }
