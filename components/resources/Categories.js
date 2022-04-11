@@ -6,26 +6,31 @@ const Categories = () => {
     const lists = [
         {
             name: "sermons",
+            link: "sermons",
             image: "/img/sermons.jpg",
             id: 1
         },
         {
-            name: "series",
+            name: "preaching series",
+            link: "series",
             image: "/img/series.jpg",
             id: 2
         },
         {
-            name: "conference-messages",
+            name: "conference messages",
+            link: "conference",
             image: "/img/conference.jpg",
             id: 3
         },
         {
             name: "articles",
+            link: "articles",
             image: "/img/article.jpg",
             id: 4
         },
         {
             name: "bible study",
+            link: "biblestudy",
             image: "/img/bible.jpg",
             id: 5
         },
@@ -56,7 +61,7 @@ const Categories = () => {
                                 </h1>
                                 <p className="text-sm text-justify font-light text-secondary-black/90">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
                                 <hr className="border-primary-dark !mt-16"></hr>
-                                <Link href={`/resources/${list.name}`}>
+                                <Link href={`/resources/${list.link}`}>
                                     <a>
                                         <h2 className="text-center !mt-5 text-primary-dark text-sm ">Veiw All</h2>
                                     </a>

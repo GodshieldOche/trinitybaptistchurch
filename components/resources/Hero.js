@@ -2,7 +2,7 @@ import Image from "next/image"
 
 const Hero = () => {
     return (
-        <div className="bg-[#eee]/40 sm:!pt-28 !pt-[60px]  pb-8">
+        <div className="bg-[#eee]/60 sm:!pt-28 !pt-[60px]  pb-8">
             <div className="container lg:px-[2rem]  space-y-5">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:items-center">
                     <div className="order-last !mt-5 lg:!mt-0 lg:order-first space-y-3 px-2 md:px-0 lg:max-w-md md:max-w-xl lg:mx-0 md:mx-auto ">
