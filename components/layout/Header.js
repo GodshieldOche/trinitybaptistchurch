@@ -21,7 +21,7 @@ const Header = ({ menuState }) => {
                     <SearchIcon className="!md:text-3xl" />
                     <input className="w-full px-4 py-2 
                     text-sm md:text-base md:px-8 md:py-4 bg-transparent focus:outline-none focus:bg-transparent" type="text" placeholder="Search Resources" />
-                    <CloseIcon onClick={() => setToggleSearch(!toggleSearch)} />
+                    <CloseIcon onClick={() => setToggleSearch(!toggleSearch)} className="cursor-pointer" />
                 </div>
             </div>
 
@@ -46,7 +46,7 @@ const Header = ({ menuState }) => {
                     <div className="hidden lg:block lg:ml-28 ">
                         <SearchIcon
                             onClick={() => setToggleSearch(!toggleSearch)}
-                            className="!md:text-3xl" />
+                            className="!md:text-3xl cursor-pointer" />
                     </div>
                     <div className="flex lg:hidden items-center !space-x-5">
                         <SearchIcon
