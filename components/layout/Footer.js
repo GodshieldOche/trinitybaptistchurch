@@ -18,7 +18,7 @@ const Footer = () => {
                     <div className="flex flex-col space-y-1">
                         <h1 className="uppercase text-xs lg:text-sm">New Resources in your inbox</h1>
                         <div className="flex ">
-                            <input type="text" className="border bg-gradient-to-r from-primary-dark to-primary-light md:bg-none md:!bg-primary-light  py-1
+                            <input type="text" className="border bg-transparent  py-1
                         text-sm lg:text-base !w-full h-9 px-3 lg:px-5  outline-none text-white " placeholder="Email Address" />
                             <button className="border py-1 px-3 md:px-4 uppercase
                         text-xs w-28 lg:text-sm bg-white text-black rounded-r-xl ">Submit</button>

@@ -8,7 +8,7 @@ const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
 
-    const lists = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    const lists = [1, 2, 3, 4, 5]
     return (
         <div className={` md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
@@ -22,7 +22,7 @@ const List = () => {
                                     <div key={list} className="w-full flex flex-row-reverse items-center md:rounded-md md:flex-col bg-[white] space-x-1 md:space-x-0
                             md:py-0 md:px-0 px-2 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
                                         <div className="w-[100px] h-[80px] md:w-full md:h-[170px] md:rounded-t-md rounded-lg  relative">
-                                            <Image src="/img/series.jpg"
+                                            <Image src="/img/conference.jpg"
                                                 className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md "
                                                 layout="fill"
                                                 blurDataURL="data:..."
@@ -33,10 +33,10 @@ const List = () => {
                                             <div className="flex space-x-3">
                                                 <GraphicEqIcon className="text-[orange] !text-base" />
                                                 <OndemandVideoIcon className="text-[red]/80 !text-base" />
-                                                <h1 className="text-xs font-light uppercase">| 10 Sermons</h1>
+                                                <h1 className="text-xs font-light uppercase">| 5 Sermons</h1>
 
                                             </div>
-                                            <h1 className="capitalize !mt-5">The Ancient Paths</h1>
+                                            <h1 className="capitalize !mt-5">The Sovereignty of God</h1>
                                             <div className="flex items-center !mt-5 space-x-2">
                                                 <div className="h-[25px] w-[25px]  rounded-full relative">
                                                     <Image src="/img/eleazar.jpg"

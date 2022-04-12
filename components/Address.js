@@ -2,7 +2,7 @@ import Image from "next/image"
 
 const Address = () => {
     return (
-        <div className="container !mt-5 !mb-20 py-5 lg:px-[2rem] shadow-md ">
+        <div className="container !mt-5 py-5 lg:px-[2rem] shadow-md ">
             <div className="">
                 <div className="w-full rounded-2xl h-[250px] md:h-[500px] relative">
                     <Image src="/img/tbcmap.png"

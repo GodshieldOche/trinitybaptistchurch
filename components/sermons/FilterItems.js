@@ -93,7 +93,7 @@ const FilterItems = () => {
             </div>
 
             <div className="scriptues flex-col space-y-2 text-sm">
-                <h1 className="uppercase font-medium">Topics</h1>
+                <h1 className="uppercase font-medium">Scriptures</h1>
                 <div className="ml-4 flex-col space-y-2">
                     {
                         scriptures.map(item => (

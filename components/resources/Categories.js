@@ -23,16 +23,16 @@ const Categories = () => {
             id: 3
         },
         {
-            name: "articles",
-            link: "articles",
-            image: "/img/article.jpg",
-            id: 4
-        },
-        {
             name: "bible study",
             link: "biblestudy",
             image: "/img/bible.jpg",
             id: 5
+        },
+        {
+            name: "articles",
+            link: "articles",
+            image: "/img/article.jpg",
+            id: 4
         },
     ]
     return (
@@ -45,9 +45,9 @@ const Categories = () => {
                 {
                     lists.map(list => (
                       
-                        <Link href={`/resources/${list.link}`} key={list.id}>
-                            <a>
-                                <div className="w-full flex flex-col bg-[white]
+                        <Link href={`/resources/${list.link}`} key={list.id} className="selection:bg-fuchsia-300">
+                            <a className="selection:bg-fuchsia-300">
+                                <div className="w-full flex flex-col bg-[white] 
                             rounded-md shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
                                     <div className="w-full h-[170px] rounded-t-md   relative">
                                         <Image src={list.image}

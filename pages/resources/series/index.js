@@ -7,7 +7,7 @@ export default function SeriesPage() {
     return (
         <div >
             <Head>
-                <title>TBC || Preaching Series</title>
+                <title>TBC | Preaching Series</title>
             </Head>
             <Series />
         </div>

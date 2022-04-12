@@ -1,5 +1,7 @@
 import Image from "next/image"
 import Link from "next/link";
+import GraphicEqIcon from '@mui/icons-material/GraphicEq';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 
 const Latest = () => {
 
@@ -25,12 +27,20 @@ const Latest = () => {
                                         blurDataURL="data:..."
                                         placeholder="blur"
                                         alt="logo" />
-                                    <div className=" hidden md:block uppercase text-xs absolute py-1 px-4 top-3 left-3 text-[white]/80 bg-primary-black/60">
-                                        Sermon
+                                    <div className=" hidden md:block uppercase text-xs absolute py-1 px-4 top-3 left-3  bg-white/70">
+                                        <div className="flex space-x-3">
+                                            <GraphicEqIcon className="text-[orange] !text-base" />
+                                            <OndemandVideoIcon className="text-[red]/80 !text-base" />
+                                            <h1 className="text-xs font-light uppercase">| Sermon</h1>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="w-full md:p-5 space-y-3">
-                                    <h1 className="md:hidden text-xs uppercase font-light">Sermon</h1>
+                                <div className="w-full md:p-5 space-y-2">
+                                    <div className="flex md:hidden space-x-3">
+                                        <GraphicEqIcon className="text-[orange] !text-base" />
+                                        <OndemandVideoIcon className="text-[red]/80 !text-base" />
+                                        <h1 className="text-xs font-light uppercase">| Sermon</h1>
+                                    </div>
                                     <h1 className="">Finishing Strong, Finishing Well</h1>
                                     <h1 className="text-sm font-light">9th Febuary, 2022</h1>
                                     <p className="hidden md:block text-sm font-light  text-justify ">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
