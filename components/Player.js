@@ -24,7 +24,7 @@ const Player = () => {
         audioPlayer.current.addEventListener('loadedmetadata', () => {
             setDuration(Math.floor(audioPlayer.current.duration));
         })
-        
+
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
 
     const calculateTime = (sec) => {
@@ -64,7 +64,7 @@ const Player = () => {
                         <div className="flex  items-center justify-center w-[200px] h-[150px] md:w-[250px] md:h-[150px]  bg-primary-dark">
                             <h1 className="text-center  uppercase font-medium px-1 text-lg md:text-2xl">The King Who Restores The Sinner</h1>
                         </div>
-                        <audio ref={audioPlayer} src="https://awss30258.s3.amazonaws.com/next-s3-uploads/725a6702-3f66-4c7e-85b0-06bb0f995ff0/Turn_Your_Eyes_Reprise_%5BLive%5D(128k).mp3"></audio>
+                        <audio ref={audioPlayer} src="https://awss30258.s3.amazonaws.com/next-s3-uploads/11+He+Turned+It.m4a"></audio>
                         <div className="absolute w-full max-w-lg mx-auto flex items-center justify-between px-3 md:px-0">
                             <button
                                 onClick={() => back()}
@@ -78,11 +78,11 @@ const Player = () => {
                                     isPlaying ?
                                         <PauseCircleOutlineIcon
                                             onClick={handlePlay}
-                                            className="  cursor-pointer text-gray-700/70  !text-6xl" />
+                                            className="  cursor-pointer text-gray-600/70 md:text-gray-700/70  !text-6xl" />
                                         :
                                         <PlayCircleOutlineIcon
                                             onClick={handlePlay}
-                                            className="  cursor-pointer text-gray-700/70  !text-6xl" />
+                                            className="  cursor-pointer text-gray-600/70 md:text-gray-700/70  !text-6xl" />
                                 }
                             </div>
                             <button
