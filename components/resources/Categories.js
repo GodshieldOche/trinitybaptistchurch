@@ -28,12 +28,6 @@ const Categories = () => {
             image: "/img/bible.jpg",
             id: 5
         },
-        {
-            name: "articles",
-            link: "articles",
-            image: "/img/article.jpg",
-            id: 4
-        },
     ]
     return (
         <div className="container lg:px-[2rem] space-y-5">
