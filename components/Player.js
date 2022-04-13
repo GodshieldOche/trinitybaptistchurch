@@ -10,7 +10,7 @@ const Player = () => {
                         <div className="flex  items-center justify-center w-[200px] h-[150px] md:w-[250px] md:h-[150px]  bg-primary-dark">
                             <h1 className="text-center  uppercase font-medium px-1 text-lg md:text-2xl">The King Who Restores The Sinner</h1>
                         </div>
-                        <PlayCircleOutlineIcon className=" absolute cursor-pointer text-gray-700/70  text-6xl" />
+                        <PlayCircleOutlineIcon className=" absolute cursor-pointer text-gray-700/70  !text-6xl" />
                         <div className="absolute bottom-3 md:bottom-5 px-2 md:px-0 max-w-lg flex w-full items-center space-x-2 md:space-x-4">
                             <div className="flex !items-center w-full space-x-1 ">
                                 <h1 className="text-xs font-light">0:00</h1>
@@ -31,7 +31,7 @@ const Player = () => {
 
                     <div className="flex items-center justify-center w-full cursor-pointer space-x-1">
                         <h1 className="uppercase text-sm">Download</h1>
-                        <CloudDownloadIcon className="text-xl" />
+                        <CloudDownloadIcon className="!text-xl" />
                     </div>
                 </div>
             </div>
