@@ -18,15 +18,16 @@ module.exports = {
         'secondary-one': '#B8FEB8',
         'secondary-two': '#6EFEFE',
       },
+      fontFamily: {
+        Poppins: ["Poppins, sans-serif"],
+        Montserrat: ["Montserrat, sans-serif"],
+        Mecury: ["Mercury Text G2, Times New Roman, sans-serif"],
+        Segeo: ["Segoe UI, Arial, sans-serif"],
+      }
     },
     container: {
       center: true,
     },
-    fontFamily: {
-      Poppins: ["Poppins, sans-serif"],
-      Montserrat: ["Montserrat, sans-serif"],
-      Mecury: ["Mercury Text G2, Times New Roman, sans-serif"],
-    }
   },
   plugins: [],
 }

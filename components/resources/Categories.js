@@ -58,7 +58,7 @@ const Categories = () => {
                                             alt="logo" />
                                     </div>
                                     <div className="w-full p-5 space-y-5">
-                                        <h1 className=" !mt-4 !mb-5 text-base text-center uppercase">
+                                        <h1 className=" !mt-4 !mb-5 text-base font-medium text-center uppercase">
                                             {list.name}
                                         </h1>
                                         <p className="text-sm text-justify font-light text-secondary-black/90">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>

@@ -41,9 +41,9 @@ const Latest = () => {
                                         <OndemandVideoIcon className="text-[red]/80 !text-base" />
                                         <h1 className="text-xs font-light uppercase">| Sermon</h1>
                                     </div>
-                                    <h1 className="">Finishing Strong, Finishing Well</h1>
-                                    <h1 className="text-sm font-light">9th Febuary, 2022</h1>
-                                    <p className="hidden md:block text-sm font-light  text-justify ">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                                    <h1 className="font-medium ">Finishing Strong, Finishing Well</h1>
+                                    <h1 className="text-sm  font-normal">9th Febuary, 2022</h1>
+                                    <p className="hidden md:block  text-sm font-light  text-justify ">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
                                     <div className="flex items-center !mt-5 md:!mt-10 space-x-2">
                                         <div className="h-[25px] w-[25px] md:w-[30px] md:h-[30px] rounded-full relative">
                                             <Image src="/img/eleazar.jpg"
@@ -53,7 +53,7 @@ const Latest = () => {
                                                 placeholder="blur"
                                                 alt="logo" />
                                         </div>
-                                        <h1 className="text-sm  font-light md:text-base">Eleazar Maduka</h1>
+                                        <h1 className="text-sm  font-normal md:text-base">Eleazar Maduka</h1>
                                     </div>
                                 </div>
                             </div>

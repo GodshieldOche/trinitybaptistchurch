@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
     const dispatch = useDispatch()
 
     return (
-        <div className="font-Poppins ">
+        <div className="font-Poppins text-gray-800 ">
             <Menu menuState={menuState} />
             <div className={`${menuState ? " overflow-y-hidden  " : "w-full"} `}
                 onClick={() => menuState && dispatch(setMenuState(false))}>
