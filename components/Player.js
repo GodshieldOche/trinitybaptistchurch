@@ -103,7 +103,7 @@ const Player = () => {
                                     min={0}
                                     step={1}
                                     max={duration}
-                                    className="text-gray-300"
+                                    className="!text-gray-300"
                                     onChange={(_, value) => {
                                         setPosition(value)
                                         audioPlayer.current.currentTime = value;
