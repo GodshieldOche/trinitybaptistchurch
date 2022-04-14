@@ -29,6 +29,15 @@ const Audio = () => {
 
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
 
+    useEffect(() => {
+        if (currentTime == duration) {
+            handlePlay();
+            audioPlayer.current.currentTime = 0
+            setPosition(0)
+
+        }
+    }, [currentTime, duration]);
+
     const calculateTime = (sec) => {
         let min = Math.floor(sec / 60);
         let secs = sec % 60;
@@ -60,7 +69,7 @@ const Audio = () => {
 
 
     return (
-        <div className="w-full h-[350px] relative text-white/90 bg-black flex items-center justify-center">
+        <div className="w-full h-[300px] md:h-[350px] relative text-white/90 bg-black flex items-center justify-center">
             <div className="flex  items-center justify-center w-[200px] h-[150px] md:w-[250px] md:h-[150px]  bg-primary-dark">
                 <h1 className="text-center  uppercase font-medium px-1 text-lg md:text-2xl">The King Who Restores The Sinner</h1>
             </div>
