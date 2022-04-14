@@ -30,13 +30,16 @@ const Audio = () => {
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
 
     useEffect(() => {
-        if (currentTime == duration) {
+        
+        if (currentTime !== 0 && currentTime ==  duration) {
             handlePlay();
             audioPlayer.current.currentTime = 0
             setPosition(0)
 
         }
-    }, [currentTime, duration]);
+    }, [currentTime]);
+
+    
 
     const calculateTime = (sec) => {
         let min = Math.floor(sec / 60);

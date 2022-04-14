@@ -16,7 +16,7 @@ const Player = () => {
                     </div>
 
                     <div className="flex items-center justify-center w-full ">
-                        <a href="https://awss30258.s3.amazonaws.com/next-s3-uploads/11+He+Turned+It.m4a" download>
+                        <a href="https://awss30258.s3.amazonaws.com/next-s3-uploads/11+He+Turned+It.m4a" download="he turned it">
                             <div className="flex items-center cursor-pointer space-x-1">
                                     <h1 className="uppercase text-sm">Download</h1>
                                     <CloudDownloadIcon className="!text-xl" /> 
