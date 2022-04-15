@@ -15,7 +15,7 @@ const Body = () => {
                     </div>
                     <div className="flex items-center space-x-2 justify-center">
                         <h1 className=" ">Speaker:</h1>
-                        <h1>Eleazar Maduka</h1>
+                        <h1>Pastor Joshua Bolaji</h1>
                     </div>
                 </div>
                 
@@ -35,7 +35,7 @@ const Body = () => {
                                 placeholder="blur"
                                 alt="logo" />
                         </div>
-                        <p className="md:text-base text-sm md:leading-8 font-light text-justify px-1">We call it serious joy not only because it coexists in the same heart, at the same time, with the gravity of reverence and the groaning of sin, but also because it is not peripheral but central — serious in the sense of centrally important. It is not the negligible caboose at the end of the train, but belongs to the very fuel that runs the engine.</p>
+                        <p className="text-base md:leading-8 font-light text-justify px-1">We call it serious joy not only because it coexists in the same heart, at the same time, with the gravity of reverence and the groaning of sin, but also because it is not peripheral but central — serious in the sense of centrally important. It is not the negligible caboose at the end of the train, but belongs to the very fuel that runs the engine.</p>
                     </div>
                 </div>
                
