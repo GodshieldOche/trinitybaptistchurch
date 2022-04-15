@@ -17,16 +17,16 @@ const Body = ({ series, changeCurrent, current, scrollToTop }) => {
                 <div className="lg:col-span-7 px-2 md:px-0">
                     <div className="flex flex-col space-y-3 w-full">
                         <h1 className="text-xs text-center lg:text-left font-light uppercase">9th Febuary 2022</h1>
-                        <h1 className="text-xl md:text-3xl font-medium text-center lg:text-left uppercase">The King who restores the sinner</h1>
+                        <h1 className="text-xl md:text-3xl font-medium text-center lg:text-left uppercase">{ current.title }</h1>
 
                         <div>
                             <div className="flex items-center space-x-2 justify-center lg:justify-start">
                                 <h1 className=" ">Scripture:</h1>
-                                <h1 className=" ">Mark 4:1-12</h1>
+                                <h1 className="capitalize ">{current.scripture}</h1>
                             </div>
                             <div className="flex items-center space-x-2 justify-center lg:justify-start">
                                 <h1 className=" ">Speaker:</h1>
-                                <h1>Pastor Joshua Bolaji</h1>
+                                <h1 className="capitalize ">{current.preacher}</h1>
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@ const Body = ({ series, changeCurrent, current, scrollToTop }) => {
                                 series.map((list, index) => (
                                     <div
                                         onClick={() => changeCurrent(index)}
-                                        key={list.id} className={`${current === list.id ? "bg-gray-800 text-gray-200" : "bg-none"} flex py-3 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
+                                        key={list.id} className={`${current.id === list.id ? "bg-gray-800 text-gray-200" : "bg-none"} flex py-3 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
                                         <div className="flex flex-col space-y-2">
                                             <div className="flex space-x-3">
                                                 <GraphicEqIcon className="text-[orange] !text-base" />

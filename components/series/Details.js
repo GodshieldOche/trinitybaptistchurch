@@ -52,7 +52,7 @@ const Details = () => {
         <div className={` !mb-20 w-full space-y-3`}>
             <Player resource={current} />
             <Body series={series} scrollToTop={scrollToTop}
-                current={current.id} changeCurrent={changeCurrent} />
+                current={current} changeCurrent={changeCurrent} />
         </div>
     )
 }
