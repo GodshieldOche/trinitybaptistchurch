@@ -1,20 +1,31 @@
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import { useState } from 'react';
 import Audio from './Audio';
+import Video from './Video';
 
 const Player = () => {
+
+    const [isVideo, setIsVideo] = useState(false);
     
     return (
         <div className="bg-[#eee]/60 sm:!pt-24 !pt-[60px]  pb-5">
             <div className="max-w-screen-sm mx-auto ">
                 <div className="flex flex-col justify-center items-center space-y-5">
-                    <Audio />
+                    <div className="flex w-full">
+                        <Audio isVideo={isVideo} />
+                        <Video isVideo={isVideo} />
+                    </div>
+                    
                     <div className="flex items-center justify-center w-full">
                         <div className="flex items-center">
-                            <h1 className="uppercase text-sm text-white bg-primary-dark cursor-pointer py-1 px-10 border border-primary-dark ">Audio</h1>
-                            <h1 className="uppercase text-sm py-1 px-10 border cursor-pointer border-primary-dark ">Video</h1>
+                            <h1
+                                onClick={() => setIsVideo(false)}
+                                className={` ${isVideo ? "bg-none text-primary-dark" : "text-white bg-primary-dark"} uppercase text-sm  cursor-pointer py-1 px-10 border border-primary-dark `}>Audio</h1>
+                            <h1
+                                onClick={() => setIsVideo(true)}
+                                className={` ${isVideo ? "text-white bg-primary-dark" : "bg-none text-primary-dark"} uppercase text-sm py-1 px-10 border cursor-pointer border-primary-dark `}>Video</h1>
                         </div>
                     </div>
-
                     <div className="flex items-center justify-center w-full ">
                         <a href="https://awss30258.s3.amazonaws.com/next-s3-uploads/11+He+Turned+It.m4a" download="he turned it">
                             <div className="flex items-center cursor-pointer space-x-1">
