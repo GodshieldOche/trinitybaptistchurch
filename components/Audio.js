@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 
 
-const Audio = ({isVideo}) => {
+const Audio = ({ isVideo, audioLink, title }) => {
 
     const [position, setPosition] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -76,9 +76,9 @@ const Audio = ({isVideo}) => {
     return (
         <div className={` ${isVideo ? "hidden" : "block"} w-full h-[300px] md:h-[350px] relative text-white/90 bg-black flex items-center justify-center`}>
             <div className="flex  items-center justify-center w-[200px] h-[150px] md:w-[250px] md:h-[150px]  bg-primary-dark">
-                <h1 className="text-center  uppercase font-medium px-1 text-lg md:text-2xl">The King Who Restores The Sinner</h1>
+                <h1 className="text-center  uppercase font-medium px-1 text-lg md:text-2xl">{title}</h1>
             </div>
-            <audio ref={audioPlayer} src="https://awss30258.s3.amazonaws.com/next-s3-uploads/The_King_Who_Restores_the_Sinner__Mark_140-217__Pastor_Joshua_Bolaji(128k).m4a"
+            <audio ref={audioPlayer} src={audioLink}
                 onCanPlay={() => {
                     setIsLoading(prev => prev = false)
                     console.log('can play')

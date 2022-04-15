@@ -19,13 +19,20 @@ const Body = () => {
                     </div>
                 </div>
                 
-                <div className="flex flex-col !mt-7 space-y-3">
+                <div className="flex flex-col !mt-10 space-y-3">
+                    <div className="flex items-center space-x-1">
+                        <span className="w-5 h-[2.5px] bg-primary-dark"></span>
+                        <h1 className="text-sm lg:text-base font-medium capitalize">About the message</h1>
+                    </div>
                     <p className="md:text-lg md:leading-8 font-light text-justify px-1">
                         We call it serious joy not only because it coexists in the same heart, at the same time, with the gravity of reverence and the groaning of sin, but also because it is not peripheral but central — serious in the sense of centrally important. It is not the negligible caboose at the end of the train, but belongs to the very fuel that runs the engine. And when I say centrally important, I mean central to God’s very being — central to God’s ultimate purpose in creating the world — and therefore also central to God-glorifying Christian living.
                     </p>
                 </div>
                 <div className="flex flex-col w-full space-y-4 !mt-10">
-                    <h1 className="text-center uppercase">About the Speaker</h1>
+                    <div className="flex items-center space-x-1">
+                        <span className="w-5 h-[2.5px] bg-primary-dark"></span>
+                        <h1 className="text-sm lg:text-base font-medium capitalize">About the Speaker</h1>
+                    </div>
                     <div className="items-center">
                         <div className="w-[60px] md:w-[70px] h-[60px] md:h-[70px] rounded-full float-left mr-2  relative ">
                             <Image src="/img/eleazar.jpg"

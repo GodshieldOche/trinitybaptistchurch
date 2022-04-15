@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Audio from './Audio';
 import Video from './Video';
 
-const Player = () => {
+const Player = ({ resource }) => {
 
     const [isVideo, setIsVideo] = useState(false);
     
@@ -12,8 +12,8 @@ const Player = () => {
             <div className="max-w-screen-sm mx-auto ">
                 <div className="flex flex-col justify-center items-center space-y-5">
                     <div className="flex w-full">
-                        <Audio isVideo={isVideo} />
-                        <Video isVideo={isVideo} />
+                        <Audio audioLink={resource.audioLink} title={resource.title} isVideo={isVideo} />
+                        <Video videoLink={resource.videoLink} isVideo={isVideo} />
                     </div>
                     
                     <div className="flex items-center justify-center w-full">

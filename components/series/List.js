@@ -3,6 +3,7 @@ import Image from "next/image"
 import { useState } from "react"
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import Link from "next/link"
 
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
@@ -19,37 +20,41 @@ const List = () => {
                         <div className="grid gap-5 grid-cols-1 md:grid-cols-2 ">
                             {
                                 lists.map(list => (
-                                    <div key={list} className="w-full flex flex-row-reverse items-center md:rounded-md md:flex-col bg-[white] space-x-1 md:space-x-0
-                            md:py-0 md:px-0 px-2 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
-                                        <div className="w-[100px] h-[80px] md:w-full md:h-[170px] md:rounded-t-md rounded-lg  relative">
-                                            <Image src="/img/series.jpg"
-                                                className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md "
-                                                layout="fill"
-                                                blurDataURL="data:..."
-                                                placeholder="blur"
-                                                alt="logo" />
-                                        </div>
-                                        <div className="w-full md:p-5 space-y-2">
-                                            <div className="flex space-x-3">
-                                                <GraphicEqIcon className="text-[orange] !text-base" />
-                                                <OndemandVideoIcon className="text-[red]/80 !text-base" />
-                                                <h1 className="text-xs font-light uppercase">| 10 Sermons</h1>
-
-                                            </div>
-                                            <h1 className="capitalize !mt-5">The Ancient Paths</h1>
-                                            <div className="flex items-center !mt-5 space-x-2">
-                                                <div className="h-[25px] w-[25px]  rounded-full relative">
-                                                    <Image src="/img/eleazar.jpg"
-                                                        className="object-cover w-full h-full rounded-full"
+                                     <Link href={`/resources/series/${list}`} key={list} >
+                                        <a>
+                                            <div className="w-full flex flex-row-reverse items-center md:rounded-md md:flex-col bg-[white] space-x-1 md:space-x-0
+                                                    md:py-0 md:px-0 px-2 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
+                                                <div className="w-[100px] h-[80px] md:w-full md:h-[170px] md:rounded-t-md rounded-lg  relative">
+                                                    <Image src="/img/series.jpg"
+                                                        className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md "
                                                         layout="fill"
                                                         blurDataURL="data:..."
                                                         placeholder="blur"
                                                         alt="logo" />
                                                 </div>
-                                                <h1 className="text-sm  font-light ">Abutu Joshua</h1>
+                                                <div className="w-full md:p-5 space-y-2">
+                                                    <div className="flex space-x-3">
+                                                        <GraphicEqIcon className="text-[orange] !text-base" />
+                                                        <OndemandVideoIcon className="text-[red]/80 !text-base" />
+                                                        <h1 className="text-xs font-light uppercase">| 10 Sermons</h1>
+
+                                                    </div>
+                                                    <h1 className="capitalize !mt-5">The Ancient Paths</h1>
+                                                    <div className="flex items-center !mt-5 space-x-2">
+                                                        <div className="h-[25px] w-[25px]  rounded-full relative">
+                                                            <Image src="/img/eleazar.jpg"
+                                                                className="object-cover w-full h-full rounded-full"
+                                                                layout="fill"
+                                                                blurDataURL="data:..."
+                                                                placeholder="blur"
+                                                                alt="logo" />
+                                                        </div>
+                                                        <h1 className="text-sm  font-light ">Abutu Joshua</h1>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </a>
+                                    </Link>
                                 ))
                             }
                         </div>
