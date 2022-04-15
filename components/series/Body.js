@@ -62,7 +62,7 @@ const Body = ({ series, changeCurrent, current, scrollToTop }) => {
                 </div>
 
                 {/* second grid */}
-                <div className={` lg:col-span-5 lg:h-[300px] h-full   px-0 md:px-2 py-3 pb-10
+                <div className={` lg:col-span-5  h-full   px-0 md:px-2 py-3 pb-10
                     bg-[#f5f5f5]  overflow-y-auto`}>
                     <div className="flex flex-col  md:mt-5 !space-y-3  ">
                         <h1 className="text-center uppercase">the ancient path</h1>
