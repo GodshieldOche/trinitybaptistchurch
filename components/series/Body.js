@@ -1,14 +1,20 @@
 import Image from "next/image"
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
+import CloseIcon from '@mui/icons-material/Close';
 
-const Body = ({series}) => {
+const Body = ({ series, changeCurrent, current, scrollToTop }) => {
     return (
-        <div className="container container lg:px-[2rem]  px-2 md:px-0">
+        <div className="container container lg:px-[2rem]  ">
+            <div className="flex lg:hidden justify-center items-center mb-3">
+                <h1
+                    className="text-xs uppercase bg-black text-white px-5 rounded-lg py-2"><a href="#all">View All from this series</a></h1>
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 ">
 
                 {/* first grid */}
-                <div className="lg:col-span-7">
+                <div className="lg:col-span-7 px-2 md:px-0">
                     <div className="flex flex-col space-y-3 w-full">
                         <h1 className="text-xs text-center lg:text-left font-light uppercase">9th Febuary 2022</h1>
                         <h1 className="text-xl md:text-3xl font-medium text-center lg:text-left uppercase">The King who restores the sinner</h1>
@@ -52,49 +58,52 @@ const Body = ({series}) => {
                         </div>
 
                     </div>
+                    <a id="all"></a>
                 </div>
 
                 {/* second grid */}
-                <div className=" lg:col-span-5">
-                    <div className="flex flex-col !mt-2 md:mt-5 !space-y-3 max-h-[400px] !overflow-y-auto">
-                        {
-                            series.map((list, index) => (
-                                <div key={list.id} className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10">
-                                    <div className="flex flex-col space-y-2">
-                                        <div className="flex space-x-3">
-                                            <GraphicEqIcon className="text-[orange] !text-base" />
-                                            <OndemandVideoIcon className="text-[red]/80 !text-base" />
-                                            <h1 className="text-xs font-light uppercase">| 9th Feb 2022</h1>
-                                        </div>
-                                        <h1 className=" text-base md:text-lg capitalize ">{`${index + 1}. ${list.title} `}</h1>
-                                        <h1 className="font-light text-sm ">{ list.scripture }</h1>
-                                        <div className="flex items-center !mt-3 space-x-2">
-                                            <div className="h-[25px] w-[25px] rounded-full relative">
-                                                <Image src="/img/eleazar.jpg"
-                                                    className="object-cover w-full h-full rounded-full"
-                                                    layout="fill"
-                                                    blurDataURL="data:..."
-                                                    placeholder="blur"
-                                                    alt="logo" />
+                <div className={` lg:col-span-5 lg:h-[300px] h-full   px-0 md:px-2 py-3 pb-10
+                    bg-[#f5f5f5]  overflow-y-auto`}>
+                    <div className="flex flex-col  md:mt-5 !space-y-3  ">
+                        <h1 className="text-center uppercase">the ancient path</h1>
+                            {
+                                series.map((list, index) => (
+                                    <div
+                                        onClick={() => changeCurrent(index)}
+                                        key={list.id} className={`${current === list.id ? "bg-gray-800 text-gray-200" : "bg-none"} flex py-3 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
+                                        <div className="flex flex-col space-y-2">
+                                            <div className="flex space-x-3">
+                                                <GraphicEqIcon className="text-[orange] !text-base" />
+                                                <OndemandVideoIcon className="text-[red]/80 !text-base" />
+                                                <h1 className="text-xs font-light uppercase">| 9th Feb 2022</h1>
                                             </div>
-                                            <h1 className="text-sm  font-light capitalize">{ list.preacher }</h1>
+                                            <h1 className=" text-base md:text-lg capitalize ">{`${index + 1}. ${list.title} `}</h1>
+                                            <h1 className="font-light text-sm ">{list.scripture}</h1>
+                                            <div className="flex items-center !mt-3 space-x-2">
+                                                <div className="h-[25px] w-[25px] rounded-full relative">
+                                                    <Image src="/img/eleazar.jpg"
+                                                        className="object-cover w-full h-full rounded-full"
+                                                        layout="fill"
+                                                        blurDataURL="data:..."
+                                                        placeholder="blur"
+                                                        alt="logo" />
+                                                </div>
+                                                <h1 className="text-sm  font-light capitalize">{list.preacher}</h1>
+                                            </div>
                                         </div>
+                                        <div className="w-[70px] h-[75px] rounded-lg  relative">
+                                            <Image src="/img/sermons.jpg"
+                                                className="object-cover rounded-lg w-full h-full "
+                                                layout="fill"
+                                                blurDataURL="data:..."
+                                                placeholder="blur"
+                                                alt="logo" />
+                                        </div>
+
                                     </div>
-                                    <div className="w-[70px] h-[75px] rounded-lg  relative">
-                                        <Image src="/img/sermons.jpg"
-                                            className="object-cover rounded-lg w-full h-full "
-                                            layout="fill"
-                                            blurDataURL="data:..."
-                                            placeholder="blur"
-                                            alt="logo" />
-                                    </div>
-
-                                </div>
-                            ))
-                        }
-
-                    </div>
-
+                                ))
+                            }
+                        </div>
                 </div>
             </div>
         </div>
