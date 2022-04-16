@@ -17,7 +17,7 @@ const Sermon = () => {
     return (
         <div className="!mb-20  w-full space-y-5">
             <Player resource={sermon} />
-            <Body />
+            <Body resource={sermon} />
         </div>
     )
 }
