@@ -1,12 +1,12 @@
 import Image from "next/image"
 
 
-const Body = () => {
+const Body = ({ resource }) => {
     return (
         <div className="max-w-screen-sm mx-auto px-2 md:px-0 ">
             <div className="flex flex-col space-y-3 w-full">
                 <h1 className="text-xs text-center font-light uppercase">9th Febuary 2022</h1>
-                <h1 className="text-xl md:text-3xl font-medium text-center uppercase">The King who restores the sinner</h1>
+                <h1 className="text-xl md:text-3xl font-medium text-center uppercase">{ resource.title }</h1>
                 
                 <div>
                     <div className="flex items-center space-x-2 justify-center">
@@ -15,7 +15,7 @@ const Body = () => {
                     </div>
                     <div className="flex items-center space-x-2 justify-center">
                         <h1 className=" ">Speaker:</h1>
-                        <h1>Pastor Joshua Bolaji</h1>
+                        <h1 className="capitalize ">{resource.preacher}</h1>
                     </div>
                 </div>
                 

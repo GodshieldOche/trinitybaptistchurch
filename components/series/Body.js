@@ -4,12 +4,13 @@ import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
 import CloseIcon from '@mui/icons-material/Close';
 
-const Body = ({ series, changeCurrent, current, scrollToTop }) => {
+const Body = ({ series, changeCurrent, current, scrollToTop, scrollToAll }) => {
     return (
         <div className="container container lg:px-[2rem]  ">
             <div className="flex lg:hidden justify-center items-center mb-3">
                 <h1
-                    className="text-xs uppercase bg-black text-white px-5 rounded-lg py-2"><a href="#all">View All from this series</a></h1>
+                    onClick={() => scrollToAll()}
+                    className="text-xs uppercase bg-gray-900 text-white px-5 rounded-md py-2"><a>View All from this series</a></h1>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 ">
 
@@ -62,15 +63,16 @@ const Body = ({ series, changeCurrent, current, scrollToTop }) => {
                 </div>
 
                 {/* second grid */}
-                <div className={` lg:col-span-5  h-full   px-0 md:px-2 py-3 pb-10
-                    bg-[#f5f5f5]  overflow-y-auto`}>
+                <div className={` lg:col-span-5  h-[500px]   px-0 md:px-2 py-3 pb-10
+                    bg-gray-800 text-gray-200  overflow-y-auto`}>
                     <div className="flex flex-col  md:mt-5 !space-y-3  ">
+                        <h1 className="text-center uppercase">Series</h1>
                         <h1 className="text-center uppercase">the ancient path</h1>
                             {
                                 series.map((list, index) => (
                                     <div
                                         onClick={() => changeCurrent(index)}
-                                        key={list.id} className={`${current.id === list.id ? "bg-gray-800 text-gray-200" : "bg-none"} flex py-3 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
+                                        key={list.id} className={`${current.id === list.id ? "bg-gray-900 text-gray-200" : "bg-none"} flex py-3 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
                                         <div className="flex flex-col space-y-2">
                                             <div className="flex space-x-3">
                                                 <GraphicEqIcon className="text-[orange] !text-base" />
