@@ -63,7 +63,7 @@ const Body = ({ series, changeCurrent, current, scrollToTop, scrollToAll }) => {
                 </div>
 
                 {/* second grid */}
-                <div className={` lg:col-span-5  h-[500px]   px-0 md:px-2 py-3 pb-10
+                <div className={` lg:col-span-5  h-[500px]   px-0 md:px-2 pt-3
                     bg-gray-800 text-gray-200  overflow-y-auto`}>
                     <div className="flex flex-col  md:mt-5 !space-y-3  ">
                         <h1 className="text-center uppercase">Series</h1>
@@ -72,7 +72,7 @@ const Body = ({ series, changeCurrent, current, scrollToTop, scrollToAll }) => {
                                 series.map((list, index) => (
                                     <div
                                         onClick={() => changeCurrent(index)}
-                                        key={list.id} className={`${current.id === list.id ? "bg-gray-900 text-gray-200" : "bg-none"} flex py-3 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
+                                        key={list.id} className={`${current.id === list.id ? "bg-gray-900 text-gray-200" : "bg-none"} flex py-3 cursor-pointer hover:bg-gray-700 items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
                                         <div className="flex flex-col space-y-2">
                                             <div className="flex space-x-3">
                                                 <GraphicEqIcon className="text-[orange] !text-base" />
