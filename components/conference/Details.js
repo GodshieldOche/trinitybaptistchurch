@@ -36,7 +36,7 @@ const series = [
         scripture: "Deutronomy 8:2",
         videoLink: "https://www.youtube.com/embed/2hhSos41ms0",
         audioLink: "https://awss30258.s3.amazonaws.com/next-s3-uploads/725a6702-3f66-4c7e-85b0-06bb0f995ff0/Turn_Your_Eyes_Reprise_%5BLive%5D(128k).mp3",
-        id: 3
+        id: 4
     },
     {
         title: "Ouestion and Answer session",
@@ -44,7 +44,7 @@ const series = [
         scripture: "Deutronomy 8:2",
         videoLink: "https://www.youtube.com/embed/uIIzoerpW-Q",
         audioLink: "https://awss30258.s3.amazonaws.com/next-s3-uploads/The_King_Who_Restores_the_Sinner__Mark_140-217__Pastor_Joshua_Bolaji(128k).m4a",
-        id: 3
+        id: 5
     },
 ]
 
@@ -73,7 +73,7 @@ const Details = () => {
     };
 
     return (
-        <div className={` !mb-20 w-full space-y-5`}>
+        <div className={` !mb-20 w-full space-y-2`}>
             <Player resource={current} />
             <Body series={series} scrollToTop={scrollToTop} scrollToAll={scrollToAll}
                 current={current} changeCurrent={changeCurrent} />

@@ -55,7 +55,7 @@ const Details = () => {
     };
    
     return (
-        <div className={` !mb-20 w-full space-y-5`}>
+        <div className={` !mb-20 w-full space-y-2`}>
             <Player resource={current} />
             <Body series={series} scrollToTop={scrollToTop} scrollToAll={scrollToAll}
                 current={current} changeCurrent={changeCurrent} />

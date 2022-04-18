@@ -30,7 +30,7 @@ const Header = ({ menuState }) => {
                 <div className="search">
 
                 </div>
-                <nav className="flex justify-between items-center container px-1 md:px-0 relative">
+                <nav className="flex justify-between items-center container px-1 md:px-0 xl:px-[2rem] lg:px-[1rem  relative">
                     <div className="flex items-center">
                         <Image src="/logo.png" width={50} height={50} alt="logo" />
                         <Link href="/"><a className="text-sm lg:text-base">Trinity Baptist Church</a></Link>
