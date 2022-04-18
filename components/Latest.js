@@ -18,11 +18,11 @@ const Latest = () => {
                 <div className="max-w-screen-lg mx-auto grid gap-2 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {
                         lists.map(list => (
-                            <div key={list} className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-xl bg-[white] space-x-1 md:space-x-0
+                            <div key={list} className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-md bg-[white] space-x-1 md:space-x-0
                             md:py-0 md:px-0 px-1 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
-                                <div className="w-[100px] h-[80px] md:w-full md:h-[170px] rounded-lg md:rounded-b-none md:rounded-t-xl relative">
+                                <div className="w-[100px] h-[80px] md:w-full md:h-[170px] rounded-lg md:rounded-b-none md:rounded-t-md relative">
                                     <Image src="/img/study.jpg"
-                                        className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-xl"
+                                        className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md"
                                         layout="fill"
                                         blurDataURL="data:..."
                                         placeholder="blur"
