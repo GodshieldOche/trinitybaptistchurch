@@ -5,18 +5,29 @@ import { setMenuState } from "../redux/features/menu"
 import { useDispatch } from "react-redux"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useEffect } from "react"
 import { useState } from "react"
 
 const MenuLinks = ({ title }) => {
     const [ministries, setMinistries] = useState(false)
+    const [active, setActive] = useState()
     const router = useRouter()
     const { menuState } = useSelector(state => state.menu)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (title !== "events & news") {
+            setActive(title)
+        } else {
+            setActive("events")
+        }
+    }, [title])
     
     const handleClick = () => {
-        router.push(`/${title}`)
+        router.push(`/${active}`)
         dispatch(setMenuState(false))
-     }
+    }
+    
 
      
 
@@ -33,7 +44,7 @@ const MenuLinks = ({ title }) => {
                 }}
             >
 
-                <h1 className={`${router.pathname.split("/")[1] === title ? "font-medium" : "font-light"} text-xl md:hover:font-medium capitalize cursor-pointer`}>
+                <h1 className={`${router.pathname.split("/")[1] === active ? "font-medium" : "font-light"} text-xl md:hover:font-medium capitalize cursor-pointer`}>
                     {title}
                 </h1>
                 
