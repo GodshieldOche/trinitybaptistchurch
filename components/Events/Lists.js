@@ -40,7 +40,7 @@ const Lists = () => {
         <div className={` md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
                 <h1 onClick={() => setToggleDate(!toggleDate)}
-                    className="max-w-md lg:hidden mx-auto text-center bg-primary-dark text-base text-white py-2  uppercase mt-5">Filter by date</h1>
+                    className="max-w-xs lg:hidden mx-auto text-center bg-primary-dark text-base text-white py-2  uppercase mt-5">Filter by date</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-20 ">
                     <div className="col-span-8">
                         <div className="flex flex-col w-full mt-2 md:mt-5 space-y-5">
