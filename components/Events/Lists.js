@@ -57,7 +57,7 @@ const Lists = () => {
                                         <a>
                                             <div  className="flex flex-col w-full md:flex-row items-center space-y-3 md:space-y-0 md:space-x-3 h-fit bg-gray-100 py-3 px-3 cursor-pointer">
                                                 <div className="flex items-center justify-center w-full h-[200px]  md:w-[170px] md:h-[120px]  relative">
-                                                    <Image src="/img/study.jpg"
+                                                    <Image src="/img/conference.jpg"
                                                         className="object-cover w-full h-full "
                                                         layout="fill"
                                                         blurDataURL="data:..."
