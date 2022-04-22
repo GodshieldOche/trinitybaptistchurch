@@ -1,7 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
+import LiveStream from "./LiveStream"
+import Upcoming from "./Upcoming"
 
 const Hero = () => {
+    const [isLiveStream, setIsLiveStream] = useState(false)
+
     return (
         <div className="container xl:px-[2rem] lg:px-[1rem] grid gap-5 xl:gap-20 mb-5  grid-cols-1 lg:grid-cols-12 items-center w-full overflow-hidden">
         {/* col 1 */}
@@ -25,51 +30,20 @@ const Hero = () => {
                 </div>
                 <div className="!mt-20 md:!mt-0 space-y-2">
                     <div className="grid grid-cols-2 mb-3 items-center border-b border-b-primary-dark">
-                        <div className="w-full bg-primary-dark py-3">
-                            <Link href="/">
-                                <a>
-                                    <h1 className="text-center text-sm uppercase text-[#fff]">Upcoming Events</h1>
-                                </a>
-                            </Link>
+                        <div
+                            onClick={() => setIsLiveStream(false)}
+                            className={`${!isLiveStream ? "bg-primary-dark text-[#fff]" : "hover:bg-primary-dark/10"} cursor-pointer w-full  py-3`}>
+                            <h1 className="text-center text-sm uppercase ">Upcoming Events</h1>
                         </div>
-                        <div className="w-full hover:bg-primary-dark/10 py-3">
-                            <Link href="/">
-                                <a>
-                                    <h1 className="text-sm uppercase text-center">Live Stream Service</h1>
-                                </a>
-                            </Link>
+                        <div
+                            onClick={() => setIsLiveStream(true)}
+                            className={` ${isLiveStream ? "bg-primary-dark text-[#fff]" : "hover:bg-primary-dark/10"} w-full  py-3 cursor-pointer`}>
+                            <h1 className="text-sm uppercase text-center ">Live Stream Service</h1>
                         </div>
                     </div>
-                    <div className="grid grid-cols-12 gap-2 px-2 md:px-0 ">
-                        <div className="order-last md:order-first col-span-5 sm:col-span-6 w-full sm:h-full h-[120px] relative ">
-                            <Image src="/event.jpg"
-                                className="object-cover w-full h-full"
-                                layout="fill"
-                                blurDataURL="data:..."
-                                placeholder="blur"
-                                alt="logo" />
-                        </div>
-                        <div className="col-span-7 sm:col-span-6 flex flex-col sm:ml-3">
-                            <div className="space-y-2">
-                                <h1 className="uppercase text-xs font-light !mb-3 ">Conference</h1>
-                                <h1 className="font-medium text-base  ">The Sovereignty of God</h1>
-                                <h1 className=" text-xs ">9th October 2022</h1>
-
-                                <h1 className=" text-xs !mt-8 !mb-3 ">Would be attending?</h1>
-
-                                <div className="flex items-center space-x-3">
-                                    <h1 className=" text-xs  py-[6px] px-3
-                                    border border-primary-light text-[white]
-                                    bg-primary-light cursor-pointer
-                                    lg:bg-[white] lg:text-primary-light
-                                    hover:lg:bg-primary-light hover:lg:text-[#fff]
-                                    uppercase
-                                    ">Learn more</h1>
-                                    <h1 className=" text-xs md:text-xs hover:text-sm border-b border-b-primary-black cursor-pointer">See all</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        isLiveStream ? <LiveStream /> : <Upcoming />
+                    }
                 </div>
                 
             </div>
