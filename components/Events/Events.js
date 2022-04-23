@@ -3,7 +3,7 @@ import Lists from "./Lists"
 
 const Events = () => {
     return (
-        <div className="!mb-40  w-full">
+        <div className="!mb-20  w-full">
             <Hero />
             <Lists />
         </div>

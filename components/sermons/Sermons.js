@@ -7,7 +7,7 @@ const Sermons = () => {
     const router = useRouter()
 
     return (
-        <div className="!mb-40  w-full">
+        <div className="!mb-20  w-full">
             <Hero />
             <List />
         </div>
