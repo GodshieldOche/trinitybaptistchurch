@@ -16,7 +16,7 @@ const Hero = () => {
                     <h1 className="text-primary-dark text-sm text-center lg:text-left">GOD-FOCUSED, CHRIST-CENTERED, GOSPEL-DRIVEN CHURCH LOCATED AT THE HEART OF ABUJA</h1>
                 </div>
                 <div className="flex justify-center !my-10 lg:justify-start items-center">
-                    <Link href="/">
+                    <Link href="/about">
                         <a>
                             <h1 className="uppercase border
                             border-primary-light px-4 md:px-5 py-2 bg-primary-light

@@ -4,7 +4,7 @@ import Image from 'next/image'
 const LiveStream = () => {
     return (
         <div className="grid grid-cols-12 gap-2 items-center px-2 md:px-0 ">
-            <div className="order-last md:order-first col-span-5 sm:col-span-6 w-full sm:h-full h-[calc(100%-30px)] relative ">
+            <div className="order-last md:order-first col-span-4 sm:col-span-5 w-full sm:h-full h-[calc(100%-30px)] relative ">
                 <Image src="/img/bible.jpg"
                     className="object-cover w-full h-full"
                     layout="fill"
@@ -12,7 +12,7 @@ const LiveStream = () => {
                     placeholder="blur"
                     alt="logo" />
             </div>
-            <div className="col-span-7 sm:col-span-6 flex flex-col sm:ml-3">
+            <div className="col-span-8 sm:col-span-7 flex flex-col sm:ml-3">
                 <div className="space-y-2">
                     <h1 className="uppercase text-xs font-light !mb-3 ">Sunday morning service</h1>
                     <h1 className="font-medium text-base uppercase  ">The King who restores the sinner</h1>
