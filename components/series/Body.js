@@ -9,7 +9,9 @@ const Body = ({ series, changeCurrent, current, scrollToTop, scrollToAll }) => {
         <div className="container container lg:px-[2rem]  ">
 
             <div className="flex flex-col justify-center items-center space-y-3 mb-3">
-                <h1 onClick={() => scrollToAll()} className="text-xs lg:hidden uppercase bg-gray-800 text-white px-5 py-2 lg:py-0"><a>View All from this series</a></h1>
+                <h1
+                    // onClick={() => scrollToAll()}
+                    className="text-xs lg:hidden uppercase bg-gray-800 text-white px-5 py-2 lg:py-0"><a href="#all">View All from this series</a></h1>
                 <h1 className="text-xs text-center lg:text-left font-light uppercase">9th Febuary 2022</h1>
                 <h1 className="text-xl md:text-3xl font-medium text-center lg:text-left uppercase">{current.title}</h1>
 
@@ -59,11 +61,10 @@ const Body = ({ series, changeCurrent, current, scrollToTop, scrollToAll }) => {
                         </div>
 
                     </div>
-                    <a id="all"></a>
                 </div>
 
                 {/* second grid */}
-                <div className={` lg:col-span-5 h-full  lg:h-[500px]   px-0 md:px-2 pt-3 bg-gray-200 overflow-y-auto overscroll-contain`}>
+                <div id="all" className={` lg:col-span-5 h-full  lg:h-[500px]   px-0 md:px-2 pt-3 bg-gray-200 overflow-y-auto overscroll-contain`}>
                     <div className="flex flex-col  md:mt-5 !space-y-3  ">
                         <h1 className="text-center text-sm uppercase">Part of a Series</h1>
                         <h1 className="text-center uppercase">the ancient path</h1>
@@ -71,7 +72,7 @@ const Body = ({ series, changeCurrent, current, scrollToTop, scrollToAll }) => {
                                 series.map((list, index) => (
                                     <div
                                         onClick={() => changeCurrent(index)}
-                                        key={list.id} className={`${current.id === list.id ? "bg-gray-800 text-gray-200" : "bg-none"} flex py-3 cursor-pointer lg:hover:bg-gray-300 lg:hover:text-gray-800 items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
+                                        key={list.id} className={`${current.id === list.id ? "bg-gray-800 text-gray-200" : "lg:hover:bg-gray-300 lg:hover:text-gray-800"} flex py-3 cursor-pointer  items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
                                         <div className="flex flex-col space-y-2">
                                             <div className="flex space-x-3">
                                                 <GraphicEqIcon className="text-[orange] !text-base" />
