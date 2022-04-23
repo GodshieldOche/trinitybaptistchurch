@@ -9,7 +9,7 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html className="scroll-smooth !scroll-pt-[80px]">
+            <Html className="scroll-smooth !scroll-pt-[60px]">
                 <Head>
                     <link rel="icon" href="/logo.png" />
                 </Head>
