@@ -18,7 +18,7 @@ const Footer = () => {
         }   
     };
     return (
-        <div>
+        <div className={`${router.route === '/admin/dashboard' ? "hidden" : "block"} `}>
             <div className="flex  w-full mb-1">
                 <div
                     onClick={scrollToTop}
