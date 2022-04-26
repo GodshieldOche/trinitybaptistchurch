@@ -44,7 +44,7 @@ const Header = ({ menuState }) => {
                     <div className="hidden lg:flex space-x-5 items-center lg:ml-28 ">
                         <Link href="/admin/dashboard">
                             <a>
-                                <PersonIcon className="!text-3xl cursor-pointer" />
+                                <PersonIcon className=" cursor-pointer" />
                             </a>
                         </Link>
                         <SearchIcon

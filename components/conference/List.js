@@ -9,6 +9,7 @@ const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
 
+    const speakers = [1, 2, 3]
     const lists = [1, 2, 3, 4, 5]
     return (
         <div className={` md:mt-10`} >
@@ -40,16 +41,25 @@ const List = () => {
 
                                                     </div>
                                                     <h1 className="capitalize !mt-5">The Sovereignty of God</h1>
-                                                    <div className="flex items-center !mt-5 space-x-2">
-                                                        <div className="h-[25px] w-[25px]  rounded-full relative">
-                                                            <Image src="/img/eleazar.jpg"
-                                                                className="object-cover w-full h-full rounded-full"
-                                                                layout="fill"
-                                                                blurDataURL="data:..."
-                                                                placeholder="blur"
-                                                                alt="logo" />
+                                                    <div className="flex items-center justify-between pr-5 md:pr-0">
+                                                        <div className="flex items-center ml-[6px]">
+                                                            {
+                                                                speakers.map((speaker, index) => (
+                                                                    <div key={speaker} className={`ml-[-6px] h-[30px] w-[30px] border-2 border-white  rounded-full relative`}>
+                                                                        <Image src="/img/eleazar.jpg"
+                                                                            className="object-cover w-full h-full rounded-full"
+                                                                            layout="fill"
+                                                                            blurDataURL="data:..."
+                                                                            placeholder="blur"
+                                                                            alt="logo" />
+                                                                    </div>
+                                                                ))
+                                                            }
                                                         </div>
-                                                        <h1 className="text-sm  font-light ">Abutu Joshua</h1>
+
+                                                        <h1 className="text-xs uppercase ">
+                                                            June 11th, 2022
+                                                        </h1>
                                                     </div>
                                                 </div>
                                             </div>
