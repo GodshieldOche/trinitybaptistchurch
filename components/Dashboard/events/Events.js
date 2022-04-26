@@ -1,36 +1,30 @@
-import List from "./sermon/List"
 import { useState } from "react"
-import BibleStudy from "./biblestudy/BibleStudy"
-import Conference from "./conference/Conference"
-import Series from "./series/Series"
+import News from "./news/News"
+import Services from "./services/Services"
+import Upcoming from "./upcoming/Upcoming"
 
 
 const grid = [
     {
-        topic: "sermon",
+        topic: "upcoming events",
         number: 15,
         id: 1
     },
     {
-        topic: "preaching series",
+        topic: "news",
         number: 20,
         id: 2
     },
     {
-        topic: "conference messages",
-        number: 30,
+        topic: "services",
+        number: 2,
         id: 3
-    },
-    {
-        topic: "bible study",
-        number: 40,
-        id: 4
     },
 ]
 
 
-const Resources = () => {
-    const [active, setActive] = useState("sermon")
+const Events = () => {
+    const [active, setActive] = useState("upcoming events")
     return (
         <div className="flex w-full flex-col space-y-10 mb-3 p-4">
             <div className="flex justify-between items-center">
@@ -47,19 +41,17 @@ const Resources = () => {
                 }
             </div>
             {
-                active === "sermon" && <List />
+                active === "upcoming events" && <Upcoming />
             }
             {
-                active === "bible study" && <BibleStudy />
+                active === "news" && <News />
             }
             {
-                active === "conference messages" && <Conference />
+                active === "services" && <Services />
             }
-            {
-                active === "preaching series" && <Series />
-            }
+            
         </div>
     )
 }
 
-export default Resources
+export default Events

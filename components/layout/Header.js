@@ -7,6 +7,7 @@ import { setMenuState } from "../../redux/features/menu";
 import Links from "./Links";
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
+import PersonIcon from '@mui/icons-material/Person';
 
 const Header = ({ menuState }) => {
 
@@ -17,7 +18,7 @@ const Header = ({ menuState }) => {
         <div>
             <div className={` ${toggleSearch ? "h-[60px] md:h-[68px] py-1 md:py-2 " : "h-0"} transition-all duration-200 ease-in-out
             bg-white w-full shadow-sm fixed top-0 left-0 right-0  !z-50 `}>
-                <div className={`${!toggleSearch ? "hidden" : "flex"} container px-2 md:px-0  w-full h-full justify-between items-center`}>
+                <div className={`${!toggleSearch ? "hidden" : "flex"} container px-2 md:px-0 xl:px-[2rem] lg:px-[1rem]  w-full h-full justify-between items-center`}>
                     <SearchIcon className="!md:text-3xl" />
                     <input className="w-full px-4 py-2 
                     text-sm md:text-base md:px-8 md:py-4 bg-transparent focus:outline-none focus:bg-transparent" type="text" placeholder="Search Resources" />
@@ -27,9 +28,6 @@ const Header = ({ menuState }) => {
 
             
             <header className={` bg-[#fff] shadow-md fixed top-0 left-0 right-0  !z-40 py-1 md:py-2 `}>
-                <div className="search">
-
-                </div>
                 <nav className="flex justify-between items-center h-[50px] container px-1 md:px-0 xl:px-[2rem] lg:px-[1rem]  relative">
                     <div className="flex items-center">
                         <Image src="/logo.png" width={45} height={45} alt="logo" />
@@ -43,7 +41,12 @@ const Header = ({ menuState }) => {
                         <Links title={"give"} />
                     </div>
 
-                    <div className="hidden lg:block lg:ml-28 ">
+                    <div className="hidden lg:flex space-x-5 items-center lg:ml-28 ">
+                        <Link href="/admin/dashboard">
+                            <a>
+                                <PersonIcon className="!text-3xl cursor-pointer" />
+                            </a>
+                        </Link>
                         <SearchIcon
                             onClick={() => setToggleSearch(!toggleSearch)}
                             className="!md:text-3xl cursor-pointer" />
