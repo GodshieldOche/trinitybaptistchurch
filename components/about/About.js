@@ -23,7 +23,10 @@ const About = () => {
         });
     };
 
-    window.addEventListener('scroll', toggleVisible);
+    if (typeof window !== "undefined") {
+        window.addEventListener('scroll', toggleVisible);
+    }
+    
 
     return (
         <div className=" w-full space-y-4 relative">
