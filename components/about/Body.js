@@ -85,17 +85,17 @@ const Body = () => {
                                 placeholder="blur"
                                 alt="logo" />
                         </div>
-                        <p className="font-Georgia  font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">On July 1, 1956, Grace Community Church of the Valley conducted its first public services. Founded as a nondenominational church, its emphasis was on the basics of Christianity. The fledgling church called Dr. Don Householder, one of the great preachers of his generation, to be its founding pastor. Worship services were conducted in the two main rooms of the converted town house, where a wall had been taken down to enable Dr. Householder to see his entire congregation while preaching. </p>
+                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">On July 1, 1956, Grace Community Church of the Valley conducted its first public services. Founded as a nondenominational church, its emphasis was on the basics of Christianity. The fledgling church called Dr. Don Householder, one of the great preachers of his generation, to be its founding pastor. Worship services were conducted in the two main rooms of the converted town house, where a wall had been taken down to enable Dr. Householder to see his entire congregation while preaching. </p>
 
-                        <p className="font-Georgia  font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
+                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
                             In 1957, services were moved to the newly built chapel at the present location on Roscoe Boulevard. Less than two years later, two services were being conducted on Sunday mornings, the first education building was built to house Sunday school classes, and Grace Church became known as "the fastest growing church in Los Angeles."
 
                             Dr. Householder died in April 1965, and in 1966, Dr. Richard Elvee was called to be pastor. Dr. Elvee had become known as a church builder. Grace Church continued to grow under Dr. Elvee's leadership until he passed away in September 1968. </p>
-                        <p className="font-Georgia  font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
+                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
                             John MacArthur assumed the pastorate of Grace in February 1969. Prior to this, John had been assistant pastor in the church his father led in Burbank; he had also traveled widely as a conference speaker and representative for Talbot Theological Seminary, from which he graduated with honors. </p>
-                        <p className="font-Georgia  font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
+                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
                             During those early days of John's ministry, the church doubled in size every two years. We moved from meeting in the Chapel to the newly built Family Center (now the Gymnasium) in 1971, and from there into the current Worship Center in 1977. Since then, additional buildings for teaching and fellowship use have been erected, filling a campus that never sleeps. Truly, the Lord has blessed us with exceptional growth in terms of both people and ministries. </p>
-                        <p className="font-Georgia  font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
+                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
                             More important than numbers, programs, and structures, however, is the foundation for the spiritual life of Grace Community Church that has been built. This foundation includes sound doctrine, spiritual leadership, and active service. We are convinced that God's legacy of faithfulness to us will continue in the future if we remain faithful to Him and His Word.</p>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ const Ministers = () => {
                 <table className="min-w-full table-auto border-collapse ">
                     <thead className="bg-gray-800 text-gray-200 ">
                         <tr className="">
-                            <th scope="col" className="text-sm font-medium uppercase px-4 py-4 text-left">
+                            <th scope="col" className="text-sm font-medium uppercase pl-4 py-4 text-left">
                                 #
                             </th>
                             <th scope="col" className="text-sm font-medium uppercase px-3 py-4 text-left">
@@ -39,7 +39,7 @@ const Ministers = () => {
                             lists.map((item, index) => (
                                 <tr key={item} className={` transition duration-300 ease-in-out border-b border-b-gray-200`}>
 
-                                    <td className="px-4 py-4 whitespace-nowrap text-sm  ">
+                                    <td className="pl-4 py-4 whitespace-nowrap text-sm  ">
                                         <h1>{index + 1}</h1>
                                     </td>
                                     <td className="text-sm  px-3 py-4 whitespace-nowrap ">

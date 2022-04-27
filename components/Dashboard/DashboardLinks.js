@@ -22,7 +22,7 @@ const DashboardLinks = ({active, toggleActive}) => {
                         <Links Icon={DashboardCustomizeIcon} path={"/resources/sermon"}  color={"!text-yellow-500"} name={ "resources" }/>
                         <Links Icon={EventNoteIcon} path={"/events/upcoming"} color={"!text-green-700"} name={ "events & news" }/>
                         <Links Icon={SupervisorAccountIcon} path={"/ministers"} color={"!text-orange-600"} name={ "ministers" }/>
-                        <Links Icon={AppRegistrationIcon} path={"/register"} color={"!text-indigo-700"} name={ "register" }/>
+                        <Links Icon={AppRegistrationIcon} path={"/register/emails"} color={"!text-indigo-700"} name={ "register" }/>
                     </div>
 
                     <div className="absolute bottom-0 w-full">
