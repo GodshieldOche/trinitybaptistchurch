@@ -42,11 +42,10 @@ const formats = [
     'video',
 ]
 
-console.log(ReactQuill)
 
-const Quill = () => {
+const Quill = ({ setData }) => {
     return (
-        <ReactQuill modules={modules} formats={formats} theme="snow" />
+        <ReactQuill modules={modules} formats={formats} onChange={setData} theme="snow" />
     )
 }
 

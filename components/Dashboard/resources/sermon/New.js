@@ -1,10 +1,10 @@
 import { useState, useEffect, } from 'react';
 import Editor from '../../../../components/Editor';
-import Quill from '../../../../components/Quill';
-import dynamic from "next/dynamic";
 import parse from 'html-react-parser';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 
 const categories = [
@@ -47,11 +47,16 @@ const New = () => {
     const [editorLoaded, setEditorLoaded] = useState(false);
     const [data, setData] = useState("");
     const [startDate, setStartDate] = useState(new Date());
+    const [image, setImage] = useState('')
+    const [imagePreview, setImagePreview] = useState('')
 
 
     useEffect(() => {
         setEditorLoaded(true);
     }, []);
+
+    const router = useRouter();
+
 
 
 
@@ -73,6 +78,17 @@ const New = () => {
         }
     }
 
+
+    const onChange = (e) => {
+        const reader = new FileReader()
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setImage(reader.result)
+                setImagePreview(reader.result)
+            }
+        }
+        reader.readAsDataURL(e.target.files[0])
+    }
 
 
     return (
@@ -184,21 +200,37 @@ const New = () => {
                             {/* Description */}
                             <div className="w-full space-y-2">
                                 <label htmlFor="description" className="ml-2 text-sm uppercase">description</label>
-                                <Quill />
+                                <Editor
+                                    name="description"
+                                    onChange={(data) => {
+                                        setData(data);
+                                    }}
+                                    editorLoaded={editorLoaded}
+                                />
+                                {parse(data)}
                             </div>
                         </div>
                         <div className="col-span-5 space-y-5 w-full text-gray-700 ">
                             {/* image upload */}
                             <div className="space-y-3 w-full">
                                 <h1 className=" uppercase text-sm">Image</h1>
-                                <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 capitalize">Click to select</p>
-                                        <p className="text-xs text-gray-500 dark:text-gray-400">PNG or JPG </p>
-                                        <input id="dropzone-file" type="file" className="hidden" />
-                                    </div>
+                                <label htmlFor="dropzone-file" className="relative flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                    {
+                                        imagePreview ?
+                                            <Image src={imagePreview} className="object-cover w-1/2 h-1/2 "
+                                                layout="fill"
+                                                blurDataURL="data:..."
+                                                placeholder="blur"
+                                                alt="preview" />
+                                            :
+                                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 capitalize">Click to select</p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400">PNG or JPG </p>
+                                        </div>
+                                    }
+                                    <input onChange={onChange} id="dropzone-file" type="file" className="hidden" />
                                 </label>
-                                <button className="text-center w-full py-2 text-white text-sm uppercase bg-violet-700 rounded-lg">Upload video</button>
+                                <h1 className="text-center cursor-pointer w-full py-2 text-white text-sm uppercase bg-violet-700 rounded-lg">Upload Image</h1>
                             </div>
                             {/* youtube video link */}
                             <div className="space-y-2 w-full">
@@ -224,14 +256,16 @@ const New = () => {
                             file:bg-gray-100 file:text-violet-700
                             hover:file:bg-violet-100
                             "/>
-                                <button className="text-center w-full py-2 text-white text-sm uppercase bg-violet-700 rounded-lg">Upload audio</button>
+                                <h1 className="cursor-pointer text-center w-full py-2 text-white text-sm uppercase bg-violet-700 rounded-lg">Upload audio</h1>
                             </div>
                         </div>
                     </div>
                     <div className="flex items-center justify-between w-full !mt-8 !mb-5">
-                        <button className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-red-700">
+                        <h1
+                            onClick={() => {router.back()}}
+                            className="cursor-pointer text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-red-700">
                             cancel
-                        </button>
+                        </h1>
                         <button className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-primary-light">
                             create
                         </button>
