@@ -10,7 +10,6 @@ const Links = ({ Icon, name, color, path }) => {
     useEffect(() => {
         const route = router.pathname.split("/admin")[1]
         setActive(route)
-        console.log(route)
     }, [])
     return (
         <Link href={`/admin${path}`}>
