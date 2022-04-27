@@ -23,8 +23,8 @@ const Sections = () => {
                         <div className=" flex  !mt-10 mb-5">
                             <h1 className="uppercase text-sm md:text-base
                             max-w-[230px] md:max-w-[300px] px-3 py-2
-                            bg-primary-light text-[white] cursor-pointer hover:scale-105 hover:shadow-xl
-                               ">Read about Tbc Abuja</h1>
+                            bg-primary-light text-[white] cursor-pointer hover:scale-105 hover:shadow-xl rounded-md
+                               ">Read about Tbca</h1>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@ const Sections = () => {
                         </p>
                         <div className="flex !mt-10 space-x-3  ">
                             <h1 className="uppercase text-sm md:text-base  px-5 py-2 text-center
-                            bg-primary-light text-[white] cursor-pointer hover:scale-105 hover:shadow-xl ">Read More</h1>
-                            <h1 className="uppercase text-sm md:text-base  px-5 py-2 text-center
+                            bg-primary-light text-[white] cursor-pointer hover:scale-105 hover:shadow-xl rounded-md ">Read More</h1>
+                            <h1 className="uppercase text-sm md:text-base  px-5 py-2 text-center rounded-md
                             bg-primary-dark text-[white] cursor-pointer hover:scale-105 hover:shadow-xl">Give</h1>
                         </div>
                     </div>

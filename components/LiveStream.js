@@ -28,7 +28,7 @@ const LiveStream = () => {
                                             bg-primary-light cursor-pointer
                                             lg:bg-[white] lg:text-primary-light
                                             hover:lg:bg-primary-light hover:lg:text-[#fff]
-                                            uppercase
+                                            uppercase rounded-md
                                             ">Join live</h1>
                             </a>
                         </Link>
