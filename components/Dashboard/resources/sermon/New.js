@@ -1,5 +1,7 @@
 import { useState, useEffect, } from 'react';
 import Editor from '../../../../components/Editor';
+import Quill from '../../../../components/Quill';
+import dynamic from "next/dynamic";
 import parse from 'html-react-parser';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -182,14 +184,7 @@ const New = () => {
                             {/* Description */}
                             <div className="w-full space-y-2">
                                 <label htmlFor="description" className="ml-2 text-sm uppercase">description</label>
-                                <Editor
-                                    name="description"
-                                    onChange={(data) => {
-                                        setData(data);
-                                    }}
-                                    editorLoaded={editorLoaded}
-                                />
-                                {parse(data)}
+                                <Quill />
                             </div>
                         </div>
                         <div className="col-span-5 space-y-5 w-full text-gray-700 ">
