@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Link from "./Link"
+import Links from "./Links"
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
@@ -19,10 +19,10 @@ const DashboardLinks = ({active, toggleActive}) => {
                     </div>
 
                     <div className="flex flex-col space-y-2 ml-4">
-                        <Link Icon={DashboardCustomizeIcon} toggleActive={toggleActive} active={active} color={"!text-yellow-500"} name={ "resources" }/>
-                        <Link Icon={EventNoteIcon} toggleActive={toggleActive} active={active} color={"!text-green-700"} name={ "events & news" }/>
-                        <Link Icon={SupervisorAccountIcon} toggleActive={toggleActive} active={active} color={"!text-orange-600"} name={ "ministers" }/>
-                        <Link Icon={AppRegistrationIcon} toggleActive={toggleActive} active={active} color={"!text-indigo-700"} name={ "register" }/>
+                        <Links Icon={DashboardCustomizeIcon} path={"/resources/sermon"}  color={"!text-yellow-500"} name={ "resources" }/>
+                        <Links Icon={EventNoteIcon} path={"/events/upcoming"} color={"!text-green-700"} name={ "events & news" }/>
+                        <Links Icon={SupervisorAccountIcon} path={"/ministers"} color={"!text-orange-600"} name={ "ministers" }/>
+                        <Links Icon={AppRegistrationIcon} path={"/register"} color={"!text-indigo-700"} name={ "register" }/>
                     </div>
 
                     <div className="absolute bottom-0 w-full">
