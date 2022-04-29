@@ -1,8 +1,12 @@
 import DashboardLinks from "./DashboardLinks"
 import { useState } from "react"
+import { useSelector } from "react-redux"
+import Modal from "./Modal"
 
 const DashboardLayout = ({ children }) => {
     const [active, setActive] = useState('resources')
+
+    const { modalState } = useSelector(state => state.menu)
 
     const toggleActive = (name) => {
         if (active !== name) {
@@ -18,6 +22,10 @@ const DashboardLayout = ({ children }) => {
                    { children }
                 </div>
             </div>
+            {
+                modalState && <Modal />
+            }
+
         </div>
     )
 }

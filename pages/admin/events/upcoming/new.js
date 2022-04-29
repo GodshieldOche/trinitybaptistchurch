@@ -1,6 +1,6 @@
 import Head from "next/head";
-import DashboardLayout from "../../../components/Dashboard/DashboardLayout";
-import Events from "../../../components/Dashboard/events/Events";
+import DashboardLayout from "../../../../components/Dashboard/DashboardLayout";
+import New from "../../../../components/Dashboard/events/upcoming/New";
 
 
 export default function AdminDashboard() {
@@ -10,7 +10,7 @@ export default function AdminDashboard() {
                 <title>TBC || Admin Dashboard</title>
             </Head>
             <DashboardLayout>
-                <Events />
+                <New />
             </DashboardLayout>
         </div>
     )

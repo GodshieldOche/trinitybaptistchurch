@@ -6,20 +6,21 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useRouter } from 'next/router';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useDispatch } from "react-redux"
+import { setModalState } from '../../../../redux/features/menu';
 
+const lists = [1]
 
-
-const lists = []
-
-
-const New = ({ name }) => {
+const New = () => {
     const [image, setImage] = useState('')
     const [imagePreview, setImagePreview] = useState('')
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        
+
     }, []);
 
     const router = useRouter();
@@ -42,62 +43,72 @@ const New = ({ name }) => {
         setImagePreview(URL.createObjectURL(droppedFile[0]));
     }
 
-    
+
 
     return (
         <div className="flex  w-full min-h-screen  my-2  mx-2 rounded-2xl bg-white">
-            <div className="w-full flex flex-col space-y-7  h-fit items-center  pt-5 px-3">
-                <h1 className="uppercase text-lg text-primary-dark font-medium">{`create New ${name}`}</h1>
+            <div className="w-full flex flex-col space-y-7 h-fit items-center  pt-5 px-3">
+                <h1 className="uppercase text-lg text-primary-dark font-medium">Add upcoming event</h1>
                 <form className="w-full">
                     <div className="w-full h-full grid grid-cols-12 gap-5">
                         <div className="col-span-7 space-y-5 w-full text-gray-700 ">
                             {/* title */}
-                            <div className="space-y-2">
-                                <label htmlFor="title" className="ml-2 text-sm uppercase">{`${name} title`}</label>
-                                <input
-                                    type="title"
-                                    name="title"
-                                    className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                    required
-                                // value={name}
-                                // onChange={(e) => { setName(e.target.value) }}
-                                />
+                            <div className="grid grid-cols-12  w-full items-center gap-2">
+                                <div className="col-span-5 space-y-2">
+                                    <label htmlFor="title" className="ml-2 text-sm uppercase">Event Type</label>
+                                    <input
+                                        type="title"
+                                        name="title"
+                                        className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                        required
+                                    // value={name}
+                                    // onChange={(e) => { setName(e.target.value) }}
+                                    />
+                                </div>
+                                <div className="col-span-7 space-y-2">
+                                    <label htmlFor="title" className="ml-2 text-sm uppercase">Event title</label>
+                                    <input
+                                        type="title"
+                                        name="title"
+                                        className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                        required
+                                    // value={name}
+                                    // onChange={(e) => { setName(e.target.value) }}
+                                    />
+                                </div>
                             </div>
+                            
                             {/* Description */}
                             <div className="w-full space-y-2">
-                                <label htmlFor="description" className="ml-2 text-sm uppercase">{`${name} description`}</label>
+                                <label htmlFor="description" className="ml-2 text-sm uppercase">event description</label>
                                 <textarea
                                     className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                    rows={`${name === "series" ? "8" : "10"}`}
-                                    // value={description}
-                                    // onChange={(e) => { setDescription(e.target.value) }}
+                                    rows= "10"
+                                // value={description}
+                                // onChange={(e) => { setDescription(e.target.value) }}
                                 >
                                 </textarea>
                             </div>
                         </div>
                         <div className="col-span-5 space-y-5 w-full text-gray-700 ">
                             {/* date pickker */}
-                            {
-                                name === "conference"
-                                &&
-                                <div className="space-y-2 w-full">
-                                    <label htmlFor="name" className="ml-2 text-sm uppercase">Conference Date</label>
-                                    <DatePicker
-                                        selectsRange={true}
-                                        startDate={startDate}
-                                        endDate={endDate}
-                                        className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                        onChange={(update) => {
-                                            setDateRange(update);
-                                        }}
-                                        isClearable={true}
-                                    />
-                                </div>
-                            }
-                            
+                            <div className="space-y-2 w-full">
+                                <label htmlFor="name" className="ml-2 text-sm uppercase">Event Date</label>
+                                <DatePicker
+                                    selectsRange={true}
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                    onChange={(update) => {
+                                        setDateRange(update);
+                                    }}
+                                    isClearable={true}
+                                />
+                            </div>
+
                             {/* image upload */}
                             <div className="space-y-4 w-full">
-                                <h1 className=" uppercase text-sm">{`${name} Image`}</h1>
+                                <h1 className=" uppercase text-sm">Event Image</h1>
                                 <label
                                     onDragOver={e => {
                                         e.preventDefault();
@@ -109,7 +120,7 @@ const New = ({ name }) => {
                                         e.preventDefault();
                                         onDrop(e)
                                     }}
-                                    htmlFor="dropzone-file" className={`${name === "series" ? "h-52" : "h-44"} relative flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100`}>
+                                    htmlFor="dropzone-file" className={`h-44 relative flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100`}>
                                     {
                                         imagePreview ?
                                             <Image src={imagePreview} className="object-cover w-1/2 h-1/2 "
@@ -131,19 +142,42 @@ const New = ({ name }) => {
                         </div>
                     </div>
                 </form>
+                <div className="w-full flex items-center space-x-4 ">
+                    <h1 className="text-sm uppercase">Number of Days: <span className="font-medium">0</span></h1>
+                    <select
+                        type="text"
+                        name="day"
+                        className="capitalize text-gray-500 !px-3 py-1 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                    // value={category}
+                    // onChange={(e) => {
+                    //     setCategory(e.target.value)
+                    //     handleTopic(e.target.value)
+                    // }}
+                    >
+                        {
+                            ["select day", "day 1", "day 2"].map(day => (
+                                <option className="capitalize" key={day} value={day}>{day}</option>
+                            ))
+                        }
+                    </select>
+                    <h1
+                        onClick={() => { dispatch(setModalState(true)) }}
+                        className="uppercase cursor-pointer text-xs rounded bg-primary-light text-white  py-1 px-3">Add schedule</h1>
+                </div>
                 <div className="w-full flex flex-col space-y-7 items-center justify-center">
-                    <div className="w-full flex items-center justify-between px-3">
-                        <h1 className="uppercase text-lg font-medium">{`${name} sermons`}</h1>
+                    <h1 className="uppercase text-lg font-medium">{`Event Scheldule`}</h1>
+                    {/* <div className="w-full flex items-center justify-between px-3">
+                        <h1 className="uppercase text-lg font-medium">{`Event sermons`}</h1>
                         <h1
                             onClick={() => {
-                                if (name === "series") {
-                                    router.push('/admin/resources/series/sermon')
-                                } else {
-                                    router.push('/admin/resources/conference/sermon')
-                                }
+                                // if (name === "series") {
+                                //     router.push('/admin/resources/series/sermon')
+                                // } else {
+                                //     router.push('/admin/resources/conference/sermon')
+                                // }
                             }}
                             className="uppercase cursor-pointer text-sm text-white rounded-md py-2 px-4 bg-primary-dark">Add sermon</h1>
-                    </div>                
+                    </div> */}
                     <table className="w-full max-w-full table-auto border-collapse ">
                         <thead className="bg-gray-800 text-gray-200 ">
                             <tr className="">
@@ -151,13 +185,16 @@ const New = ({ name }) => {
                                     #
                                 </th>
                                 <th scope="col" className="text-sm font-medium uppercase px-3 py-4 text-left">
-                                    Title
+                                    Session
+                                </th>
+                                <th scope="col" className="text-sm font-medium uppercase px-3 py-4 text-left">
+                                    Topic
                                 </th>
                                 <th scope="col" className="text-sm font-medium uppercase px-3 py-4 text-left">
                                     Preacher
                                 </th>
                                 <th scope="col" className="text-sm font-medium uppercase px-3 py-4 text-left">
-                                    Date
+                                    Day
                                 </th>
                                 <th scope="col" className="text-sm font-medium uppercase px-3 py-4 text-left">
                                     Actions
@@ -173,13 +210,20 @@ const New = ({ name }) => {
                                             <h1>{index + 1}</h1>
                                         </td>
                                         <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                            <h1>Our Dependence on God</h1>
+                                            <div className="flex flex-col space-y-2">
+                                                <h1>8:00AM-10:00AM</h1>
+                                            </div>
+                                        </td>
+                                        <td className="text-sm  px-3 py-4 whitespace-nowrap ">
+                                            <h1 className="capitalize">Sovereingty of God defined</h1>
                                         </td>
                                         <td className="text-sm  px-3 py-4 whitespace-nowrap ">
                                             <h1>Damilare Sobanjo</h1>
                                         </td>
                                         <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                            <h1>Feb. 13th, 2022</h1>
+                                            <div className="flex flex-col space-y-2">
+                                                <h1>Day 1</h1>
+                                            </div>
                                         </td>
                                         <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
                                             <div className="flex space-x-2 items-center">

@@ -6,18 +6,18 @@ const menuSlice = createSlice({
     name: 'menu',
     initialState: {
         menuState: false,
-        menuType: "dropIn"
+        modalState: false
     },
     reducers: {
         setMenuState: (state, { payload }) => {
             state.menuState = payload
         },
-        setMenuType: (state, { payload }) => {
-            state.menuType = payload
+        setModalState: (state, { payload }) => {
+            state.modalState = payload
         },
     },
 })
 
 
-export const { setMenuState, setMenuType } = menuSlice.actions
+export const { setMenuState, setModalState } = menuSlice.actions
 export default menuSlice.reducer
