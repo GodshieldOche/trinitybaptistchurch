@@ -1,6 +1,4 @@
 import { useState, useEffect, } from 'react';
-import Editor from '../../../../components/Editor';
-import parse from 'html-react-parser';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Image from 'next/image';
@@ -41,18 +39,16 @@ const worldView = [
 
 
 
-const New = () => {
+const New = ({name}) => {
     const [topic, setTopic] = useState([])
     const [category, setCategory] = useState("")
-    const [editorLoaded, setEditorLoaded] = useState(false);
-    const [data, setData] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [image, setImage] = useState('')
     const [imagePreview, setImagePreview] = useState('')
 
 
     useEffect(() => {
-        setEditorLoaded(true);
+
     }, []);
 
     const router = useRouter();
@@ -90,12 +86,18 @@ const New = () => {
         reader.readAsDataURL(e.target.files[0])
     }
 
+    const onDrop = (e) => {
+        const droppedFile = Array.from(e.dataTransfer.files);
+        setImage(droppedFile[0]);
+        setImagePreview(URL.createObjectURL(droppedFile[0]));
+    }
+
 
     return (
-        <div className="flex  w-full h-full  py-2  px-2">
-            <div className="w-full flex flex-col space-y-4 items-center h-full pt-5 px-3 rounded-2xl bg-white">
-                <h1 className="uppercase text-lg text-primary-dark font-medium">New sermon</h1>
-                <form className="w-full">
+        <div className="flex  w-full min-h-screen  my-2  mx-2 rounded-2xl bg-white">
+            <div className="w-full flex flex-col h-fit space-y-4 items-center  pt-5 px-3 ">
+                <h1 className="uppercase text-lg text-primary-dark font-medium">{`new ${name} `}</h1>
+                <form className="w-full space-y-8">
                     <div className="w-full h-full grid grid-cols-12 gap-5">
                         <div className="col-span-7 space-y-5 w-full text-gray-700 ">
                             {/* sermon title */}
@@ -110,46 +112,60 @@ const New = () => {
                                 // onChange={(e) => { setName(e.target.value) }}
                                 />
                             </div>
-                            {/* sermon category/topic */}
-                            <div className="space-y-2">
-
-                                <div className="flex space-x-2 w-full items-center">
-                                    <div className="space-y-2 w-full">
-                                        <label htmlFor="name" className="ml-2 text-sm uppercase">Category</label>
-                                        <select
-                                            type="text"
-                                            name="category"
-                                            className="w-full capitalize text-gray-500 !px-1 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                            value={category}
-                                            onChange={(e) => {
-                                                setCategory(e.target.value)
-                                                handleTopic(e.target.value)
-                                            }}
-                                        >
-                                            {
-                                                categories.map(category => (
-                                                    <option className="capitalize" key={category} value={category}>{category}</option>
-                                                ))
-                                            }
-                                        </select>
-                                    </div>
-                                    <div className="space-y-2 w-full">
-                                        <label htmlFor="name" className="ml-2 text-sm uppercase">Topic</label>
-                                        <select
-                                            type="text"
-                                            name="category"
-                                            className="w-full capitalize text-gray-500 !px-1 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                        >
-                                            {
-                                                topic.map(item => (
-                                                    <option className="capitalize" key={item} value={item}>{item}</option>
-                                                ))
-                                            }
-                                        </select>
-                                    </div>
+                            
+                            {
+                                name === "bible study"
+                                ?
+                                    <div className="space-y-2">
+                                    <label htmlFor="topic" className="ml-2 text-sm uppercase">Study Topic</label>
+                                    <input
+                                        type="topic"
+                                        name="topic"
+                                        className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                        required
+                                    // value={name}
+                                    // onChange={(e) => { setName(e.target.value) }}
+                                    />
                                 </div>
-
-                            </div>
+                                :
+                                    < div className="space-y-2">
+                                        <div className="flex space-x-2 w-full items-center">
+                                            <div className="space-y-2 w-full">
+                                                <label htmlFor="name" className="ml-2 text-sm uppercase">Category</label>
+                                                <select
+                                                    type="text"
+                                                    name="category"
+                                                    className="w-full capitalize text-gray-500 !px-1 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                                    value={category}
+                                                    onChange={(e) => {
+                                                        setCategory(e.target.value)
+                                                        handleTopic(e.target.value)
+                                                    }}
+                                                >
+                                                    {
+                                                        categories.map(category => (
+                                                            <option className="capitalize" key={category} value={category}>{category}</option>
+                                                        ))
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div className="space-y-2 w-full">
+                                                <label htmlFor="name" className="ml-2 text-sm uppercase">Topic</label>
+                                                <select
+                                                    type="text"
+                                                    name="category"
+                                                    className="w-full capitalize text-gray-500 !px-1 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                                >
+                                                    {
+                                                        topic.map(item => (
+                                                            <option className="capitalize" key={item} value={item}>{item}</option>
+                                                        ))
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
 
                             {/* Preacher */}
                             <div className="space-y-2">
@@ -200,21 +216,31 @@ const New = () => {
                             {/* Description */}
                             <div className="w-full space-y-2">
                                 <label htmlFor="description" className="ml-2 text-sm uppercase">description</label>
-                                <Editor
-                                    name="description"
-                                    onChange={(data) => {
-                                        setData(data);
-                                    }}
-                                    editorLoaded={editorLoaded}
-                                />
-                                {parse(data)}
+                                <textarea
+                                    className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                    rows="4"
+                                // value={description}
+                                // onChange={(e) => { setDescription(e.target.value) }}
+                                >
+                                </textarea>
                             </div>
                         </div>
                         <div className="col-span-5 space-y-5 w-full text-gray-700 ">
                             {/* image upload */}
                             <div className="space-y-3 w-full">
-                                <h1 className=" uppercase text-sm">Image</h1>
-                                <label htmlFor="dropzone-file" className="relative flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                <h1 className=" uppercase text-sm">Image <span className="capitalize text-primary-dark text-xs font-light">(optional)</span></h1>
+                                <label
+                                    onDragOver={e => {
+                                        e.preventDefault();
+                                    }}
+                                    onDragLeave={e => {
+                                        e.preventDefault();
+                                    }}
+                                    onDrop={e => {
+                                        e.preventDefault();
+                                        onDrop(e)
+                                    }}
+                                    htmlFor="dropzone-file" className="relative flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                                     {
                                         imagePreview ?
                                             <Image src={imagePreview} className="object-cover w-1/2 h-1/2 "
@@ -224,7 +250,8 @@ const New = () => {
                                                 alt="preview" />
                                             :
                                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 capitalize">Click to select</p>
+                                            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 font-medium capitalize">Drag 'n' Drop</p>
+                                            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 capitalize">or Click to select</p>
                                             <p className="text-xs text-gray-500 dark:text-gray-400">PNG or JPG </p>
                                         </div>
                                     }
@@ -235,7 +262,9 @@ const New = () => {
                             {/* youtube video link */}
                             <div className="space-y-2 w-full">
                                 <div className="space-y-2">
-                                    <label htmlFor="title" className="ml-2 text-sm uppercase">Youtube video link</label>
+                                    <label htmlFor="title" className="ml-2 text-sm uppercase">
+                                        Youtube video link <span className="capitalize text-primary-dark text-xs font-light">(optional)</span>
+                                    </label>
                                     <input
                                         type="link"
                                         name="link"
@@ -247,7 +276,7 @@ const New = () => {
                                 </div>
                             </div>
                             {/* audio upload */}
-                            <div className="space-y-3 w-full">
+                            <div className="space-y-4 w-full">
                                 <h1 className="ml-2 text-sm uppercase">audio file</h1>
                                 <input type="file" className="block w-full text-sm text-slate-500
                             file:mr-4 file:py-2 file:px-4
@@ -260,13 +289,13 @@ const New = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center justify-between w-full !mt-8 !mb-5">
+                    <div className="flex items-center justify-between w-full !mt-5 mb-3">
                         <h1
                             onClick={() => {router.back()}}
                             className="cursor-pointer text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-red-700">
                             cancel
                         </h1>
-                        <button className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-primary-light">
+                        <button className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
                             create
                         </button>
                     </div>

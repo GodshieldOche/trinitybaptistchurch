@@ -19,7 +19,7 @@ const List = () => {
                     </a>
                 </Link>
             </div>
-            <table className="min-w-full table-auto border-collapse ">
+            <table className="w-full max-w-full table-auto border-collapse ">
                 <thead className="bg-gray-800 text-gray-200 ">
                     <tr className="">
                         <th scope="col" className="text-sm font-medium uppercase px-4 py-4 text-left">
