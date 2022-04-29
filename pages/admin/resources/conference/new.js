@@ -10,7 +10,7 @@ export default function AdminDashboard() {
                 <title>TBC || Admin Dashboard</title>
             </Head>
             <DashboardLayout>
-                <New name={"series"} />
+                <New name={"conference"} />
             </DashboardLayout>
         </div>
     )

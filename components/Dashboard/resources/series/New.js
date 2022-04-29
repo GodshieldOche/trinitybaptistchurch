@@ -4,15 +4,19 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useRouter } from 'next/router';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 
 const lists = []
 
 
-const New = () => {
+const New = ({ name }) => {
     const [image, setImage] = useState('')
     const [imagePreview, setImagePreview] = useState('')
+    const [dateRange, setDateRange] = useState([null, null]);
+    const [startDate, endDate] = dateRange;
 
     useEffect(() => {
         
@@ -43,13 +47,13 @@ const New = () => {
     return (
         <div className="flex  w-full min-h-screen  my-2  mx-2 rounded-2xl bg-white">
             <div className="w-full flex flex-col space-y-7 h-fit items-center  pt-5 px-3">
-                <h1 className="uppercase text-lg text-primary-dark font-medium">create New series</h1>
+                <h1 className="uppercase text-lg text-primary-dark font-medium">{`create New ${name}`}</h1>
                 <form className="w-full">
                     <div className="w-full h-full grid grid-cols-12 gap-5">
                         <div className="col-span-7 space-y-5 w-full text-gray-700 ">
                             {/* title */}
                             <div className="space-y-2">
-                                <label htmlFor="title" className="ml-2 text-sm uppercase">series title</label>
+                                <label htmlFor="title" className="ml-2 text-sm uppercase">{`${name} title`}</label>
                                 <input
                                     type="title"
                                     name="title"
@@ -61,10 +65,10 @@ const New = () => {
                             </div>
                             {/* Description */}
                             <div className="w-full space-y-2">
-                                <label htmlFor="description" className="ml-2 text-sm uppercase">series description</label>
+                                <label htmlFor="description" className="ml-2 text-sm uppercase">{`${name} description`}</label>
                                 <textarea
                                     className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                    rows="8"
+                                    rows={`${name === "series" ? "8" : "10"}`}
                                     // value={description}
                                     // onChange={(e) => { setDescription(e.target.value) }}
                                 >
@@ -72,9 +76,28 @@ const New = () => {
                             </div>
                         </div>
                         <div className="col-span-5 space-y-5 w-full text-gray-700 ">
+                            {/* date pickker */}
+                            {
+                                name === "conference"
+                                &&
+                                <div className="space-y-2 w-full">
+                                    <label htmlFor="name" className="ml-2 text-sm uppercase">Conference Date</label>
+                                    <DatePicker
+                                        selectsRange={true}
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                        onChange={(update) => {
+                                            setDateRange(update);
+                                        }}
+                                        isClearable={true}
+                                    />
+                                </div>
+                            }
+                            
                             {/* image upload */}
                             <div className="space-y-4 w-full">
-                                <h1 className=" uppercase text-sm">series Image</h1>
+                                <h1 className=" uppercase text-sm">{`${name} Image`}</h1>
                                 <label
                                     onDragOver={e => {
                                         e.preventDefault();
@@ -86,7 +109,7 @@ const New = () => {
                                         e.preventDefault();
                                         onDrop(e)
                                     }}
-                                    htmlFor="dropzone-file" className="relative flex flex-col items-center justify-center w-full h-52 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                    htmlFor="dropzone-file" className={`${name === "series" ? "h-52" : "h-44"} relative flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100`}>
                                     {
                                         imagePreview ?
                                             <Image src={imagePreview} className="object-cover w-1/2 h-1/2 "
@@ -109,8 +132,8 @@ const New = () => {
                     </div>
                 </form>
                 <div className="w-full flex flex-col space-y-7 items-center justify-center">
-                    <div className="w-full flex items-center justify-between">
-                        <h1 className="uppercase text-lg font-medium">series sermons</h1>
+                    <div className="w-full flex items-center justify-between px-3">
+                        <h1 className="uppercase text-lg font-medium">{`${name} sermons`}</h1>
                         <h1
                             onClick={() => {
                                 router.push('/admin/resources/series/sermon')
