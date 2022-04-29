@@ -136,7 +136,11 @@ const New = ({ name }) => {
                         <h1 className="uppercase text-lg font-medium">{`${name} sermons`}</h1>
                         <h1
                             onClick={() => {
-                                router.push('/admin/resources/series/sermon')
+                                if (name === "series") {
+                                    router.push('/admin/resources/series/sermon')
+                                } else {
+                                    router.push('/admin/resources/conference/sermon')
+                                }
                             }}
                             className="uppercase cursor-pointer text-sm text-white rounded-md py-2 px-4 bg-primary-dark">Add sermon</h1>
                     </div>                
