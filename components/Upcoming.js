@@ -28,7 +28,7 @@ const Upcoming = () => {
                                             bg-primary-light cursor-pointer
                                             lg:bg-[white] lg:text-primary-light
                                             hover:lg:bg-primary-light hover:lg:text-[#fff]
-                                            uppercase rounded-md
+                                            uppercase
                                             ">Learn more</h1>
                             </a>
                         </Link>
