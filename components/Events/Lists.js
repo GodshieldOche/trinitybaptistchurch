@@ -2,9 +2,6 @@ import Image from "next/image"
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from 'react';
-import { format } from 'date-fns';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
 import Link from 'next/link'
 
 const events = [
@@ -34,13 +31,6 @@ const Lists = () => {
     const speakers = [1, 2, 3]
     const [startDate, setStartDate] = useState(new Date());
     const [toggleDate, setToggleDate] = useState(false);
-
-    const [selected, setSelected] = useState();
-
-    let footer = <p>Please pick a day.</p>;
-    if (selected) {
-        footer = <p>You picked {format(selected, 'PP')}.</p>;
-    }
 
    
     return (
@@ -78,7 +68,7 @@ const Lists = () => {
                                                         <div className="flex items-center ml-[6px]">
                                                             {
                                                                 speakers.map((speaker, index) => (
-                                                                    <div key={speaker} className={`ml-[-6px] h-[35px] w-[35px] border-2 border-white  rounded-full relative`}>
+                                                                    <div key={speaker} className={`ml-[-6px] h-[30px] w-[30px] border-2 border-white  rounded-full relative`}>
                                                                         <Image src="/img/eleazar.jpg"
                                                                             className="object-cover w-full h-full rounded-full"
                                                                             layout="fill"
@@ -105,13 +95,13 @@ const Lists = () => {
                             
                         </div>
                     </div>
-                    <div className={` ${toggleDate ? "" : "hidden lg:block"} lg:col-span-4  w-full order-first lg:order-last flex flex-col justify-center `}>
-                        <div className="flex !mt-3 flex-col w-full items-center justify-center">
-                            <DayPicker
-                                mode="single"
-                                selected={selected}
-                                onSelect={setSelected}
-                                footer={footer}
+                    <div className={` ${toggleDate ? "" : "hidden lg:block"} lg:!mt-4 lg:col-span-4  w-full order-first lg:order-last flex flex-col justify-center `}>
+                        <h1 className="hidden lg:block text-center font-medium uppercase ">Filter by date</h1>
+                        <div className="flex !mt-5 flex-col w-full items-center justify-center">
+                            <DatePicker
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                inline
                             />
                         </div>
                         
