@@ -20,7 +20,7 @@ const Body = () => {
                 <div className="max-w-screen-sm mx-auto ">
                     <div className="flex flex-col space-y-3 w-full">
                         <div className="w-full h-[250px] sm:h-[300px] relative">
-                            <Image src="/img/conference.jpg"
+                            <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg"
                                 className="object-cover w-full h-full"
                                 layout="fill"
                                 blurDataURL="data:..."
