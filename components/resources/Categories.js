@@ -7,25 +7,25 @@ const Categories = () => {
         {
             name: "sermons",
             link: "sermons",
-            image: "/img/sermons.jpg",
+            image: "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307278/Global/sermons_nbw4cx.jpg",
             id: 1
         },
         {
             name: "preaching series",
             link: "series",
-            image: "/img/series.jpg",
+            image: "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307274/Global/series_yvd6gq.jpg",
             id: 2
         },
         {
             name: "conference messages",
             link: "conference",
-            image: "/img/conference.jpg",
+            image: "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg",
             id: 3
         },
         {
             name: "bible study",
             link: "biblestudy",
-            image: "/img/bible.jpg",
+            image: "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307276/Global/bible_beofqt.jpg",
             id: 5
         },
     ]

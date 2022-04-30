@@ -44,7 +44,7 @@ const List = () => {
                                                     </div>
                                                 </div>
                                                 <div className="w-[70px] h-[75px] rounded-lg  relative">
-                                                    <Image src="/img/bible.jpg"
+                                                    <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307276/Global/bible_beofqt.jpg"
                                                         className="object-cover rounded-lg w-full h-full "
                                                         layout="fill"
                                                         blurDataURL="data:..."

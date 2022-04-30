@@ -94,7 +94,7 @@ const Body = ({ series, changeCurrent, current, scrollToTop, scrollToAll }) => {
                                             </div>
                                         </div>
                                         <div className="w-[70px] h-[75px] rounded-lg  relative">
-                                            <Image src="/img/sermons.jpg"
+                                            <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307274/Global/series_yvd6gq.jpg"
                                                 className="object-cover rounded-lg w-full h-full "
                                                 layout="fill"
                                                 blurDataURL="data:..."

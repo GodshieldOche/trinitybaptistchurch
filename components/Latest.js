@@ -21,7 +21,7 @@ const Latest = () => {
                             <div key={list} className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-md bg-[white] space-x-1 md:space-x-0
                             md:py-0 md:px-0 px-1 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
                                 <div className="w-[100px] h-[80px] md:w-full md:h-[170px] rounded-lg md:rounded-b-none md:rounded-t-md relative">
-                                    <Image src="/img/study.jpg"
+                                    <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651306705/Global/study_yhfri9.jpg"
                                         className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md"
                                         layout="fill"
                                         blurDataURL="data:..."

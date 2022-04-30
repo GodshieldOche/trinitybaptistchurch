@@ -11,7 +11,7 @@ const Hero = () => {
                     </div>
                     <div>
                         <div className="w-full h-[250px] sm:h-[400px] relative">
-                            <Image src="/img/study.jpg"
+                            <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651306705/Global/study_yhfri9.jpg"
                                 className="object-cover w-full h-full"
                                 layout="fill"
                                 blurDataURL="data:..."

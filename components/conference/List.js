@@ -26,7 +26,7 @@ const List = () => {
                                             <div className="w-full flex flex-row-reverse items-center md:rounded-md md:flex-col bg-[white] space-x-1 md:space-x-0
                                                 md:py-0 md:px-0 px-2 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
                                                 <div className="w-[100px] h-[80px] md:w-full md:h-[170px] md:rounded-t-md rounded-lg  relative">
-                                                    <Image src="/img/conference.jpg"
+                                                    <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg"
                                                         className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md "
                                                         layout="fill"
                                                         blurDataURL="data:..."

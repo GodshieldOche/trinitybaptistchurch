@@ -7,7 +7,7 @@ const Sections = () => {
                 <div className="grid lg:gap-20 gap-5 grid-cols-1 md:grid-cols-2 items-center">
                     <div>
                         <div className="w-full h-[300px] md:h-[500px] relative">
-                            <Image src="/img/mission.jpg"
+                            <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651306706/Global/mission_c2loub.jpg"
                                 className="object-cover w-full h-full"
                                 layout="fill"
                                 blurDataURL="data:..."
@@ -31,7 +31,7 @@ const Sections = () => {
                 <div className="grid lg:gap-20 gap-5 grid-cols-1 md:grid-cols-2 items-center">
                     <div className="order-first md:order-last">
                         <div className="w-full h-[300px] md:h-[500px] relative">
-                            <Image src="/img/give.jpg"
+                            <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651306708/Global/give_vj04h7.jpg"
                                 className="object-cover w-full h-full"
                                 layout="fill"
                                 blurDataURL="data:..."

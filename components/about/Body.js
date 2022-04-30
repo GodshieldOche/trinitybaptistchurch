@@ -78,7 +78,7 @@ const Body = () => {
                     <div className="flex flex-col  space-y-4">
                         <h1 className="text-center text-2xl uppercase font-medium ">Our History</h1>
                         <div className="w-full h-[300px] md:h-[400px] relative">
-                            <Image src="/img/church.jpg"
+                            <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651306708/Global/church_zl8zsz.jpg"
                                 className="object-cover w-full h-full"
                                 layout="fill"
                                 blurDataURL="data:..."
@@ -130,7 +130,7 @@ const Body = () => {
                     <div className="grid gap-5 grid-cols-1 md:grid-cols-2 items-center">
                         <div>
                             <div className="w-full h-[300px] md:h-[500px] relative">
-                                <Image src="/img/mission.jpg"
+                                <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651306706/Global/mission_c2loub.jpg"
                                     className="object-cover w-full h-full"
                                     layout="fill"
                                     blurDataURL="data:..."
