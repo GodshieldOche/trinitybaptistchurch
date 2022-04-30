@@ -97,7 +97,7 @@ const New = ({name}) => {
         <div className="flex  w-full min-h-screen  my-2  mx-2 rounded-2xl bg-white">
             <div className="w-full flex flex-col h-fit space-y-4 items-center  pt-5 px-3 ">
                 <h1 className="uppercase text-lg text-primary-dark font-medium">{`new ${name} `}</h1>
-                <form className="w-full space-y-8">
+                <form className="w-full space-y-8" autoComplete="off">
                     <div className="w-full h-full grid grid-cols-12 gap-5">
                         <div className="col-span-7 space-y-5 w-full text-gray-700 ">
                             {/* sermon title */}

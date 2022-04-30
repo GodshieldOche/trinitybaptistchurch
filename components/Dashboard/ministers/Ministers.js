@@ -2,6 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from 'next/image'
+import Link from 'next/link';
 
 const lists = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -11,11 +12,16 @@ const Ministers = () => {
         <div className="flex w-full flex-col space-y-10 mb-3 p-4">
             <div className="space-y-5">
                 <div className="flex justify-center">
-                    <button className=" flex items-center justify-center space-x-2 hover:scale-105 hover:shadow-2xl
-                bg-primary-light rounded-md shadow-md text-gray-100 px-4 py-2">
-                        <h1 className=" uppercase text-sm">Add New Minister</h1>
-                        <AddIcon />
-                    </button>
+                    <Link href="/admin/ministers/new">
+                        <a>
+                            <button className=" flex items-center justify-center space-x-2 hover:scale-105 hover:shadow-2xl
+                                bg-primary-light rounded-md shadow-md text-gray-100 px-4 py-2">
+                                <h1 className=" uppercase text-sm">Add New Minister</h1>
+                                <AddIcon />
+                            </button>
+                        </a>
+                    </Link>
+                    
                 </div>
                 <table className="min-w-full table-auto border-collapse ">
                     <thead className="bg-gray-800 text-gray-200 ">
