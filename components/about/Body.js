@@ -162,7 +162,7 @@ const Body = () => {
                                             placeholder="blur"
                                             alt="logo" />
                                     </div>
-                                    <div className="py-3 flex flex-col space-y-2">
+                                    <div className="py-3 px-2 flex flex-col space-y-2">
                                         <h1 className="text-center text-sm font-medium uppercase">Abutu Peter Joshua</h1>
                                         <h2 className="text-center text-xs uppercase">Pastor/Teacher</h2>
                                     </div>

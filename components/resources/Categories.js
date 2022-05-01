@@ -35,7 +35,7 @@ const Categories = () => {
                 <span className="w-7 h-[2.5px] bg-primary-dark"></span>
                 <h1 className="text-base lg:text-lg font-medium uppercase">resources</h1>
             </div>
-            <div className="max-w-screen-lg mx-auto grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-5 md:px-0">
+            <div className="max-w-screen-lg 2xl:max-w-screen-xl mx-auto grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-5 md:px-0">
                 {
                     lists.map(list => (
                       

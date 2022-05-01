@@ -15,7 +15,7 @@ const Latest = () => {
                 </div>
                 
                 {/* resource card list */}
-                <div className="max-w-screen-lg mx-auto grid gap-2 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div className="max-w-screen-lg 2xl:max-w-screen-xl  mx-auto grid gap-2 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {
                         lists.map(list => (
                             <div key={list} className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-md bg-[white] space-x-1 md:space-x-0

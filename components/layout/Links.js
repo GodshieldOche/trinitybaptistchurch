@@ -6,6 +6,7 @@ import { useState } from "react"
 const Links = ({ title }) => {
     const router = useRouter()
     const [active, setActive] = useState()
+    const [toggleMinistries, setToggleMinistries] = useState(false)
 
     useEffect(() => {
         if (title !== "events & news") {
@@ -16,11 +17,50 @@ const Links = ({ title }) => {
     }, [title])
 
     return (
-        <div className="relative">
-            <Link href={`/${active}`} ><a className={`${router.pathname.split("/")[1] === active ? "font-medium" : "font-light"} hover:font-normal hover:text-[black]/70 capitalize `}>{title}</a></Link>
-            <div className={` ${router.pathname.split("/")[1] === active ? "h-1" : "h-0"} w-full rounded-md   bg-primary-dark/80 absolute -bottom-[22.5px]  `}></div>
-        </div>
-        
+        <div>
+            <div
+                onMouseOver={() => {
+                    if(title === "ministries") {
+                        setToggleMinistries(true)
+                    }
+                }}
+                onMouseOut={() => {
+                    if(title === "ministries") {
+                        setToggleMinistries(false)
+                    }
+                }}
+                className="relative">
+                <Link href={`/${title !== "ministries" ? active : ""}`} >
+                    <a className={`${router.pathname.split("/")[1] === active ? "font-medium" : "font-light"} hover:font-normal hover:text-[black]/70 capitalize `}>
+                        {title}
+                    </a>
+                </Link>
+                <div className={` ${router.pathname.split("/")[1] === active ? "h-1" : "h-0"} w-full rounded-md   bg-primary-dark/80 absolute -bottom-[22.5px]  `}></div>
+            </div>
+            {
+                title === "ministries" && toggleMinistries &&
+                <div
+                    onMouseOver={() => {
+                        if (title === "ministries") {
+                            setToggleMinistries(true)
+                        }
+                    }}
+                    onMouseOut={() => {
+                        if (title === "ministries") {
+                            setToggleMinistries(false)
+                        }
+                    }}
+                    className="absolute w-20 h-[500]">
+                    <div className="-ml-10 mt-6 w-[500px] rounded-xl flex items-center justify-around h-16 shadow-xl bg-white">
+                        <h1 className="text-sm uppercase font-light text-primary-dark cursor-pointer">Men</h1>
+                        <h1 className="text-sm uppercase font-light text-primary-dark cursor-pointer">Women</h1>
+                        <h1 className="text-sm uppercase font-light text-primary-dark cursor-pointer">Children</h1>
+                        <h1 className="text-sm uppercase font-light text-primary-dark cursor-pointer">Outreach</h1>
+                    </div>
+                </div>
+            }
+            
+        </div> 
     )
 }
 

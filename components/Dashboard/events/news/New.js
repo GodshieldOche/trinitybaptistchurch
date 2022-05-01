@@ -37,7 +37,7 @@ const New = () => {
         <div className="flex  w-full min-h-screen  my-2  mx-2 rounded-2xl bg-white">
             <div className="w-full flex flex-col space-y-7 h-fit items-center  pt-5 px-3">
                 <h1 className="uppercase text-lg text-primary-dark font-medium">Add News</h1>
-                <form className="w-full space-y-4" autoComplete="off">
+                <form className="w-full flex flex-col space-y-4" autoComplete="off">
                     <div className="w-full h-full grid grid-cols-12 items-center gap-5">
                         <div className="col-span-7 space-y-5 w-full text-gray-700 ">
                             {/* Title */}
