@@ -55,7 +55,7 @@ const Header = ({ menuState }) => {
 
                     <div className="hidden lg:flex space-x-5 items-center lg:ml-28 ">
                         {
-                            user && <Link href="/admin/resources/sermon">
+                            user && user.role === "admin" && <Link href="/admin/resources/sermon">
                                 <a>
                                     <PersonIcon className=" cursor-pointer" />
                                 </a>

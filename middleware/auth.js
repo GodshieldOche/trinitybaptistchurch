@@ -16,7 +16,22 @@ const isAuthenticatedUser = async (req, res, next) => {
 
 }
 
+const authorizeRoles = (...roles) => {
+    try {
+        return (req, res, next) => {
+            if (!roles.includes(req.user.role)) {
+                throw new Error(`Role (${req.user.role}) is not allowed to access this resource`)
+            }
+            next()
+        }
+    } catch (error) {
+        next(error)
+    }
+
+}
+
 
 export {
     isAuthenticatedUser,
+    authorizeRoles
 }
