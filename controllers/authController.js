@@ -21,6 +21,20 @@ const register = async (req, res) => {
 }
 
 
+const currentUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id)
+        res.status(200).json({
+            success: 'true',
+            user
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 export {
-    register
+    register,
+    currentUser
 }

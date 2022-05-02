@@ -4,15 +4,27 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Link from "next/link"
 import { useDispatch } from "react-redux"
 import { setMenuState } from "../../redux/features/menu";
+import { getSession } from 'next-auth/react'
 import Links from "./Links";
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PersonIcon from '@mui/icons-material/Person';
+import { useSelector } from "react-redux";
+import { loadUser } from "../../redux/features/currentUser";
 
 const Header = ({ menuState }) => {
 
     const [toggleSearch, setToggleSearch] = useState(false);
     const dispatch = useDispatch()
+
+    const { loading, user, message } = useSelector(state => state.currentUser)
+
+    useEffect(() => {
+        dispatch(loadUser())
+    }, [])
+
+
+    
 
     return (
         <div>
@@ -42,11 +54,13 @@ const Header = ({ menuState }) => {
                     </div>
 
                     <div className="hidden lg:flex space-x-5 items-center lg:ml-28 ">
-                        <Link href="/admin/resources/sermon">
-                            <a>
-                                <PersonIcon className=" cursor-pointer" />
-                            </a>
-                        </Link>
+                        {
+                            user && <Link href="/admin/resources/sermon">
+                                <a>
+                                    <PersonIcon className=" cursor-pointer" />
+                                </a>
+                            </Link>
+                        }
                         <SearchIcon
                             onClick={() => setToggleSearch(!toggleSearch)}
                             className="!md:text-3xl cursor-pointer" />
