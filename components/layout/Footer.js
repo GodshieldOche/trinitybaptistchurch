@@ -1,7 +1,8 @@
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
+import Link from "next/link"
 
 const Footer = () => {
     const router = useRouter()
@@ -18,7 +19,7 @@ const Footer = () => {
         }   
     };
     return (
-        <div className={`${router.pathname.includes("admin") ? "hidden" : "block"} `}>
+        <div className={`${router.pathname.includes("admin") || router.pathname.includes("sign")  ? "hidden" : "block"} `}>
             <div className="flex  w-full mb-1">
                 <div
                     onClick={scrollToTop}
@@ -77,6 +78,11 @@ const Footer = () => {
                             <h2 className="text-xs lg:text-sm uppercase">M-F 8AM - 5PM</h2>
                             <h2 className="text-xs lg:text-sm ">+234 902 999 829</h2>
                             <h2 className="text-xs lg:text-sm ">+234 817 562 828</h2>
+                            <Link href="/signin">
+                                <a>
+                                    <h2 className="text-xs cursor-pointer uppercase lg:text-sm ">Admin signin</h2>
+                                </a>
+                            </Link>
                         </div>
                     </div>
                     <h1 className="text-center text-xs md:text-sm !mt-4">Copyright © 2022 Trinity Baptist Church. All Rights Reserved.</h1>

@@ -8,7 +8,7 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 const DashboardLinks = ({active, toggleActive}) => {
     return (
         <div>
-            <div className=" fixed top-[73px] bottom-1 rounded-2xl w-[270px] bg-gray-900">
+            <div className=" fixed top-[73px] bottom-5 rounded-2xl w-[270px] bg-gray-900">
                 <div className="flex flex-col py-5 space-y-5 h-full text-gray-100 relative ">
                     <div className="flex flex-col space-y-5 border-b border-b-gray-600 ml-2 px-2 pb-5">
                         <h1 className="uppercase font-semi-bold text-center text-gray-200 ">admin Dashboard</h1>
