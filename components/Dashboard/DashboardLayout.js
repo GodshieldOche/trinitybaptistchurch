@@ -2,10 +2,11 @@ import DashboardLinks from "./DashboardLinks"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import Modal from "./Modal"
+import DeleteModal from "./DeleteModal"
 
 const DashboardLayout = ({ children }) => {
 
-    const { modalState } = useSelector(state => state.menu)
+    const { modalState, deletModalState } = useSelector(state => state.menu)
 
     return (
         <div>
@@ -18,6 +19,9 @@ const DashboardLayout = ({ children }) => {
             </div>
             {
                 modalState && <Modal />
+            }
+            {
+                deletModalState && <DeleteModal />
             }
 
         </div>

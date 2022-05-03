@@ -6,8 +6,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminMinisters } from '../../../redux/features/getMinisters';
-
-const lists = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+import { setDeletModalState, setDeleteModalData } from '../../../redux/features/menu'
 
 
 const Ministers = () => {
@@ -92,7 +91,12 @@ const Ministers = () => {
                                             <div className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
                                                 <EditIcon className="!text-white !text-base" />
                                             </div>
-                                            <div className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
+                                            <div 
+                                            onClick={() => {
+                                                dispatch(setDeleteModalData({minister, index}))
+                                                dispatch(setDeletModalState(true))
+                                            }}
+                                            className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
                                                 <DeleteIcon className="!text-white !text-base" />
                                             </div>
                                         </div>

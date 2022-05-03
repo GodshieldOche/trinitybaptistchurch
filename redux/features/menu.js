@@ -6,7 +6,9 @@ const menuSlice = createSlice({
     name: 'menu',
     initialState: {
         menuState: false,
-        modalState: false
+        modalState: false,
+        deletModalState: false,
+        deleteModalData: {}
     },
     reducers: {
         setMenuState: (state, { payload }) => {
@@ -15,9 +17,15 @@ const menuSlice = createSlice({
         setModalState: (state, { payload }) => {
             state.modalState = payload
         },
+        setDeletModalState: (state, { payload }) => {
+            state.deletModalState = payload
+        },
+        setDeleteModalData: (state, { payload }) => {
+            state.deleteModalData = payload
+        },
     },
 })
 
 
-export const { setMenuState, setModalState } = menuSlice.actions
+export const { setMenuState, setModalState, setDeleteModalData, setDeletModalState } = menuSlice.actions
 export default menuSlice.reducer

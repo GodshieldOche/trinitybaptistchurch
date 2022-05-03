@@ -16,6 +16,22 @@ export const getAdminMinisters = createAsyncThunk(
 )
 
 
+export const postDeleteMinister = createAsyncThunk(
+    `ministers/postDeleteMinister`,
+    async ({ id, index }, { dispatch, rejectWithValue }) => {
+        try {
+            const { data } = await axios.delete(`/api/ministers/${id}`)
+            dispatch(deleteOne(index))
+            return data
+        } catch (error) {
+            console.log(rejectWithValue(error))
+            return rejectWithValue(error.response.data.message)
+        }
+
+    }
+)
+
+
 const ministersSlice = createSlice({
     name: 'ministers',
     initialState: {
@@ -23,8 +39,10 @@ const ministersSlice = createSlice({
         ministers: [],
         message: null,
     },
-    reducers: {
-
+   reducers: {
+        deleteOne: (state, { payload }) => {
+            state.ministers.splice(payload, 1)
+        },
     },
     extraReducers: {
         [getAdminMinisters.pending]: (state) => {
@@ -38,9 +56,19 @@ const ministersSlice = createSlice({
             state.loading = false
             state.message = payload
         },
+        [postDeleteMinister.pending]: (state) => {
+            state.loading = true
+        },
+        [postDeleteMinister.fulfilled]: (state, { payload }) => {
+            state.loading = false
+        },
+        [postDeleteMinister.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.message = payload
+        },
     }
 })
 
 
-// export const { deleteOne, addProduct } = ministersSlice.actions
+export const { deleteOne } = ministersSlice.actions
 export default ministersSlice.reducer

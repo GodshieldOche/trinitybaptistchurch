@@ -39,10 +39,33 @@ const getMinisters = async (req, res) => {
 
 
 
+// Delete Minister
+// Delete => api/ministers/:id
+const deleteMinister = async (req, res) => {
+    try {
+        const minister = await Minister.findById(req.query.id)
+
+        if(!minister) {
+             throw new Error('Order not found')
+        } else {
+            await minister.remove()
+            res.status(200).json({
+            success: true,
+            message: "minister Deleted"
+            })
+        } 
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+
 
 
 
 export {
     addMinister,
-    getMinisters
+    getMinisters,
+    deleteMinister
 }
