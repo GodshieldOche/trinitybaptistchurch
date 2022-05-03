@@ -2,6 +2,8 @@ import { configureStore, combineReducers, createReducer } from '@reduxjs/toolkit
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import menuReducer from './features/menu'
 import currentUserReducer from './features/currentUser'
+import addMinisterReducer from './features/addMinister'
+import ministersReducer from './features/getMinisters'
 
 
 
@@ -9,6 +11,8 @@ import currentUserReducer from './features/currentUser'
 const combinedReducers = combineReducers({
     menu: menuReducer,
     currentUser: currentUserReducer,
+    addMinister: addMinisterReducer,
+    ministers: ministersReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {
