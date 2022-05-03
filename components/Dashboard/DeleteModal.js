@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { setDeletModalState } from "../../redux/features/menu"
 import { useState, useEffect } from "react"
 import { postDeleteMinister } from "../../redux/features/getMinisters"
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
+import ButtonLoader from "../common/ButtonLoader"
+
 
 const DeleteModal = () => {
     const [name, setName] = useState('')
@@ -61,7 +63,7 @@ const DeleteModal = () => {
                         onClick={() => handleDelete(deleteModalData.minister._id, deleteModalData.index)}
                          disabled={name !== deleteModalData.minister.name } className="text-center text-white py-1.5 rounded-md text-sm disabled:bg-red-400  px-7 uppercase bg-red-600">
                             {
-                                loading ? 'loading...' : "delete"
+                                loading ? <ButtonLoader /> : "delete"
                             }
                         </button>
                     </div>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postAddMinister } from '../../../redux/features/addMinister';
 import { toast } from 'react-toastify';
 import ImageUploader from '../../common/ImageUploader';
+import BeatLoader from "react-spinners/BeatLoader";
 
 const New = () => {
     const [imageUrl, setImageUrl] = useState('')
@@ -97,7 +98,7 @@ const New = () => {
                         </h1>
                         <button onClick={hadleSubmit} className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
                             {
-                                loading ? "loading..." : "create"
+                                loading ? <BeatLoader color="#ffffff" loading={loading} size={10} /> : "create"
                             }
                         </button>
                     </div>

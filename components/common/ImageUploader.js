@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
+import ButtonLoader from './ButtonLoader'
 
 const ImageUploader = ({
     setImageUrl,
@@ -41,7 +42,8 @@ const ImageUploader = ({
                 data.append("upload_preset", "codexx")
                 data.append("cloud_name", "dk6uhtgvo")
                 const res = await axios.post("https://api.cloudinary.com/v1_1/dk6uhtgvo/image/upload", data)
-                setImageUrl(res.data.url)
+                const {url, public_id} = res.data
+                setImageUrl({ public_id, url,})
                 setImageLoader(false)
             } catch (err) {
                 console.log(err)
@@ -79,9 +81,9 @@ const ImageUploader = ({
                 }
                 <input onChange={onChange} id="dropzone-file" type="file" className="hidden" />
             </label>
-            <button onClick={uploadImage} disabled={imageUrl} className="text-center w-full py-2 text-white text-sm uppercase bg-violet-700 rounded-lg">
+            <button onClick={uploadImage} disabled={imageUrl} className="text-center w-full py-2 text-white text-sm uppercase disabled:bg-violet-500 bg-violet-700 rounded-lg">
                 {
-                    imageUrl ? "uploaded" : imageLoader ? "uploading..." : "Upload Image"
+                    imageUrl ? "uploaded" : imageLoader ? <ButtonLoader /> : "Upload Image"
                 }
             </button>
         </div>

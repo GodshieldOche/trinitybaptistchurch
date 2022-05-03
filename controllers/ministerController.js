@@ -1,4 +1,12 @@
 import Minister from '../models/Ministers'
+import cloudinary from "cloudinary"
+
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
 // Create Minister
 // post => api/ministers
@@ -48,6 +56,9 @@ const deleteMinister = async (req, res) => {
         if(!minister) {
              throw new Error('Order not found')
         } else {
+
+            await cloudinary.v2.uploader.destroy(minister.imageUrl.public_id)
+
             await minister.remove()
             res.status(200).json({
             success: true,
