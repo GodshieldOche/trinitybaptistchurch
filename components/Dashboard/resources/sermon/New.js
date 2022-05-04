@@ -45,7 +45,6 @@ const New = ({ name }) => {
                 preacher = minister._id
             }
         })
-        console.log({title, category, topic, preacher, book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink})
         setLoading(true)
         dispatch(postCreateSermon({
             title, category, topic, preacher,
