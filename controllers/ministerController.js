@@ -10,7 +10,7 @@ cloudinary.config({
 
 // Create Minister
 // post => api/ministers
-const addMinister = async (req, res) => {
+const addMinister = async (req, res, next) => {
     const { name, about, role, imageUrl } = req.body
 
     try {
@@ -22,7 +22,7 @@ const addMinister = async (req, res) => {
         })
 
         res.status(200).json({
-            success: true,
+            success: "true",
             message: "Added new minister"
         })
     } catch (error) {
@@ -32,12 +32,12 @@ const addMinister = async (req, res) => {
 
 // Get all Ministers
 // get => api/ministers
-const getMinisters = async (req, res) => {
+const getMinisters = async (req, res, next) => {
     try {
         const ministers = await Minister.find()
 
         res.status(200).json({
-            success: true,
+            success: "true",
             ministers
         })
     } catch (error) {
@@ -49,7 +49,7 @@ const getMinisters = async (req, res) => {
 
 // Delete Minister
 // Delete => api/ministers/:id
-const deleteMinister = async (req, res) => {
+const deleteMinister = async (req, res, next) => {
     try {
         const minister = await Minister.findById(req.query.id)
 
@@ -61,7 +61,7 @@ const deleteMinister = async (req, res) => {
 
             await minister.remove()
             res.status(200).json({
-            success: true,
+            success: "true",
             message: "minister Deleted"
             })
         } 
@@ -73,7 +73,7 @@ const deleteMinister = async (req, res) => {
 
 // get Minister
 // get => api/ministers/:id
-const getMinister = async (req, res) => {
+const getMinister = async (req, res, next) => {
     try {
         const minister = await Minister.findById(req.query.id)
 
@@ -82,7 +82,7 @@ const getMinister = async (req, res) => {
         } else {
 
             res.status(200).json({
-                success: true,
+                success: "true",
                 minister
             })
         }
@@ -94,7 +94,7 @@ const getMinister = async (req, res) => {
 
 // update Minister
 // put => api/ministers/:id
-const updateMinister = async (req, res) => {
+const updateMinister = async (req, res, next) => {
     try {
         const minister = await Minister.findById(req.query.id)
 
@@ -116,7 +116,7 @@ const updateMinister = async (req, res) => {
 
 
             res.status(200).json({
-                success: true,
+                success: "true",
             })
         }
     } catch (error) {

@@ -5,6 +5,7 @@ import currentUserReducer from './features/currentUser'
 import addMinisterReducer from './features/addMinister'
 import ministersReducer from './features/getMinisters'
 import ministerReducer from './features/getMinister'
+import addSermonReducer from './features/addSermon'
 
 
 
@@ -15,6 +16,7 @@ const combinedReducers = combineReducers({
     addMinister: addMinisterReducer,
     ministers: ministersReducer,
     minister: ministerReducer,
+    addSermon: addSermonReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {

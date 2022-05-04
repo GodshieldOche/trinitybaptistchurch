@@ -53,7 +53,7 @@ const ImageUploader = ({
         }
     }
     return (
-        <div className="space-y-4 w-full">
+        <div className="space-y-3 w-full">
             <h1 className=" uppercase text-sm">Image</h1>
             <label
                 onDragOver={e => {
@@ -83,7 +83,7 @@ const ImageUploader = ({
                 }
                 <input onChange={onChange} id="dropzone-file" type="file" className="hidden" />
             </label>
-            <button onClick={uploadImage} disabled={imageUrl} className="text-center w-full py-2 text-white text-sm uppercase disabled:bg-violet-500 bg-violet-700 rounded-lg">
+            <button onClick={uploadImage} disabled={imageUrl} className="text-center w-full py-2 text-white text-sm uppercase disabled:bg-gray-500 bg-violet-700 rounded-lg">
                 {
                     imageUrl ? "uploaded" : imageLoader ? <ButtonLoader /> : "Upload Image"
                 }
