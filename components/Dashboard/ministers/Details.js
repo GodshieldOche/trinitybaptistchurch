@@ -1,54 +1,69 @@
 import { useState, useEffect, } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { postAddMinister } from '../../../redux/features/addMinister';
 import { toast } from 'react-toastify';
 import ImageUploader from '../../common/ImageUploader';
 import BeatLoader from "react-spinners/BeatLoader";
+import { getMinisterDetails, updateMinister } from '../../../redux/features/getMinister';
 
-const New = () => {
+
+
+const Details = () => {
     const [imageUrl, setImageUrl] = useState('')
     const [name, setName] = useState('')
     const [role, setRole] = useState('')
     const [about, setAbout] = useState('')
-    const [loading, setLoading] = useState(false)
     const [imagePreview, setImagePreview] = useState('')
+    const [loading, setLoading] = useState(false)
 
+    const { loading:minsterLoader } = useSelector(state => state.minister)
     const dispatch = useDispatch()
-
-    useEffect(() => {
-
-    }, []);
-
     const router = useRouter();
 
-    
+    const { id } = router.query;
 
-    const hadleSubmit = (e) => {
+
+    useEffect(() => {
+        dispatch(getMinisterDetails(id)).then((result) => {
+            if (!result.error) {
+                console.log(result)
+                const { name, role, about, imageUrl } = result.payload.minister
+                setName(name)
+                setRole(role)
+                setAbout(about)
+                setImageUrl(imageUrl)
+                setImagePreview(imageUrl.url)
+            } else {
+                console.log(result.error)
+            }
+        })
+    }, []);
+
+
+    const handleSubmit = (e) => {
         e.preventDefault()
-        if (imageUrl && name && role && about) {
-            setLoading(true)
-            dispatch(postAddMinister({ name, role, imageUrl, about })).then(result => {
-                if (!result.error) {
-                    setLoading(false)
-                    toast.success("Minister Added Successfully")
-                    router.push("/admin/ministers")
-                } else {
-                    console.log(result.error)
-                }
-            })
-        } else {
-            toast.error("Please fill all the fields")
-        }
+        setLoading(true)
+        dispatch(updateMinister({ id, name, role, imageUrl, about })).then(result => {
+            if (!result.error) {
+                setLoading(false)
+                toast.success("Minister updated Successfully")
+                router.push("/admin/ministers")
+            } else {
+                console.log(result.error)
+            }
+        })
+       
 
-        
+
     }
+
+    
 
 
     return (
         <div className="flex  w-full min-h-screen  my-2  mx-2 rounded-2xl bg-white">
             <div className="w-full flex flex-col space-y-7 h-fit items-center  pt-5 px-3">
-                <h1 className="uppercase text-lg text-primary-dark font-medium">Add minister</h1>
+                <h1 className="uppercase text-lg text-primary-dark font-medium">Edit minister</h1>
                 <form className="w-full space-y-5 " autoComplete="off">
                     <div className="w-full h-full grid grid-cols-12 items-center gap-5">
                         <div className="col-span-7 space-y-5 w-full text-gray-700 ">
@@ -88,7 +103,7 @@ const New = () => {
                             </div>
                         </div>
                         <div className="col-span-5 space-y-5 w-full text-gray-700 ">
-                            <ImageUploader imagePreview={imagePreview} setImagePreview={setImagePreview} setImageUrl={setImageUrl} imageUrl={imageUrl} height={"h-52"} />
+                            <ImageUploader setImageUrl={setImageUrl} imagePreview={imagePreview} setImagePreview={setImagePreview} imageUrl={imageUrl} height={"h-52"} />
                         </div>
                     </div>
                     <div className="flex items-center justify-between w-full !mt-10 !mb-3">
@@ -97,17 +112,17 @@ const New = () => {
                             className="cursor-pointer text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-red-700">
                             cancel
                         </h1>
-                        <button onClick={hadleSubmit} className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
+                        <button onClick={handleSubmit} className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
                             {
-                                loading ? <BeatLoader color="#ffffff" loading={loading} size={10} /> : "create"
+                                loading ? <BeatLoader color="#ffffff" loading={loading} size={10} /> : "update"
                             }
                         </button>
                     </div>
                 </form>
             </div>
-            
+
         </div>
     )
 }
 
-export default New
+export default Details

@@ -8,12 +8,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAdminMinisters } from '../../../redux/features/getMinisters';
 import { setDeletModalState, setDeleteModalData } from '../../../redux/features/menu'
 import Loader from '../../common/Loader';
+import { useRouter } from 'next/router';
 
 
 
 const Ministers = () => {
     const { loading, ministers, message } = useSelector(state => state.ministers)
     const dispatch = useDispatch()
+    const router = useRouter()
 
     useEffect(() => {
         dispatch(getAdminMinisters()).then((result) => {
@@ -92,7 +94,11 @@ const Ministers = () => {
                                             </td>
                                             <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
                                                 <div className="flex space-x-2 items-center">
-                                                    <div className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
+                                                    <div
+                                                        onClick={() => {
+                                                            router.push(`/admin/ministers/${minister._id}`)
+                                                        }}
+                                                        className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
                                                         <EditIcon className="!text-white !text-base" />
                                                     </div>
                                                     <div

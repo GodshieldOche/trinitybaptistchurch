@@ -54,7 +54,7 @@ const deleteMinister = async (req, res) => {
         const minister = await Minister.findById(req.query.id)
 
         if(!minister) {
-             throw new Error('Order not found')
+             throw new Error('Minister not found')
         } else {
 
             await cloudinary.v2.uploader.destroy(minister.imageUrl.public_id)
@@ -71,6 +71,58 @@ const deleteMinister = async (req, res) => {
 }
 
 
+// get Minister
+// get => api/ministers/:id
+const getMinister = async (req, res) => {
+    try {
+        const minister = await Minister.findById(req.query.id)
+
+        if (!minister) {
+            throw new Error('Minister not found')
+        } else {
+
+            res.status(200).json({
+                success: true,
+                minister
+            })
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+// update Minister
+// put => api/ministers/:id
+const updateMinister = async (req, res) => {
+    try {
+        const minister = await Minister.findById(req.query.id)
+
+        if (!minister) {
+            throw new Error('Minister not found')
+        } else {
+            const { name, about, role, imageUrl } = req.body
+
+            minister.name = name
+            minister.about = about
+            minister.role = role
+
+            if (minister.imageUrl.public_id !== imageUrl.public_id) {
+                await cloudinary.v2.uploader.destroy(minister.imageUrl.public_id)
+                minister.imageUrl = imageUrl
+            }
+
+            await minister.save({validateBeforeSave: false})
+
+
+            res.status(200).json({
+                success: true,
+            })
+        }
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 
@@ -78,5 +130,7 @@ const deleteMinister = async (req, res) => {
 export {
     addMinister,
     getMinisters,
-    deleteMinister
+    deleteMinister,
+    getMinister,
+    updateMinister
 }

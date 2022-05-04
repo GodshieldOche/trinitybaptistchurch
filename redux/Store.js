@@ -4,6 +4,7 @@ import menuReducer from './features/menu'
 import currentUserReducer from './features/currentUser'
 import addMinisterReducer from './features/addMinister'
 import ministersReducer from './features/getMinisters'
+import ministerReducer from './features/getMinister'
 
 
 
@@ -13,6 +14,7 @@ const combinedReducers = combineReducers({
     currentUser: currentUserReducer,
     addMinister: addMinisterReducer,
     ministers: ministersReducer,
+    minister: ministerReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {

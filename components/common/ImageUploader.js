@@ -6,12 +6,14 @@ import ButtonLoader from './ButtonLoader'
 const ImageUploader = ({
     setImageUrl,
     imageUrl,
+    imagePreview,
+    setImagePreview,
     height,
 }) => {
 
     const [imageLoader, setImageLoader] = useState(false)
     const [image, setImage] = useState('')
-    const [imagePreview, setImagePreview] = useState('')
+    
 
     const onChange = (e) => {
         setImageUrl('')
