@@ -11,9 +11,11 @@ import TopicInputs from '../../../common/TopicInputs';
 import { toast } from 'react-toastify';
 import ButtonLoader from '../../../common/ButtonLoader';
 import { getSermonDetails, updateSermon } from '../../../../redux/features/sermon';
+import { getBibleStudyDetails, updateBibleStudy } from '../../../../redux/features/bibleStudy';
 
 const Details = ({name}) => {
     const [imagePreview, setImagePreview] = useState('')
+    const [studyTopic, setStudyTopic] = useState('')
     const [title, setTitle] = useState('')
     const [topic, setTopic] = useState([])
     const [category, setCategory] = useState('')
@@ -29,7 +31,8 @@ const Details = ({name}) => {
     const [loading, setLoading] = useState(false);
 
     const { ministers } = useSelector(state => state.ministers)
-    const { message } = useSelector(state => state.sermon)
+    
+    const { message } = useSelector(state => name === "sermon Details" ? state.sermon : state.bibleStudy)
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -37,7 +40,9 @@ const Details = ({name}) => {
 
     useEffect(() => {
         dispatch(getAdminMinisters())
-        dispatch(getSermonDetails(id)).then((result) => {
+
+        // sermon
+        name === "sermon Details" && dispatch(getSermonDetails(id)).then((result) => {
             if (!result.error) {
                 const { title, category, topic, preacher, book, chapter, verse,
                     date, description, imageUrl, audioUrl, youtubeLink } = result.payload.sermon
@@ -57,10 +62,31 @@ const Details = ({name}) => {
             }
         })
 
+        // bible study
+        name === "bible study details" && dispatch(getBibleStudyDetails(id)).then((result) => {
+            if (!result.error) {
+                const { title, topic, preacher, book, chapter, verse,
+                    date, description, imageUrl, audioUrl, youtubeLink } = result.payload.bibleStudy
+                setTitle(title)
+                setStudyTopic(topic)
+                setPreacherName(preacher?.name)
+                setBook(book)
+                setChapter(chapter)
+                setVerse(verse)
+                setDate(new Date(date))
+                setDescription(description)
+                setImagePreview(imageUrl?.url || '')
+                setImageUrl(imageUrl)
+                setAudioUrl(audioUrl)
+                setYoutubeLink(youtubeLink)
+            }
+        })
+
+
         if (message) {
             toast.error(message)
         }
-    }, []);
+    }, [id, name]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -70,18 +96,31 @@ const Details = ({name}) => {
                 preacher = minister._id
             }
         })
-        console.log({
-            title, category, topic, preacher,
-            book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
-        })
+        
         setLoading(true)
-        dispatch(updateSermon({
+
+        name === "sermon Details" && dispatch(updateSermon({
             id, title, category, topic, preacher,
             book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
         })).then(result => {
             if (!result.error) {
                 setLoading(false)
                 toast.success('Sermon Updated successfully')
+                router.back()
+            } else {
+                setLoading(false)
+                console.log(result.error)
+            }
+
+        })
+
+        name === "bible study details" && dispatch(updateBibleStudy({
+            id, title, topic: studyTopic, preacher,
+            book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
+        })).then(result => {
+            if (!result.error) {
+                setLoading(false)
+                toast.success('Bible Study Updated successfully')
                 router.back()
             } else {
                 setLoading(false)
@@ -112,7 +151,7 @@ const Details = ({name}) => {
                           </div>
 
                           {
-                              name === "bible study"
+                              name === "bible study details"
                                   ?
                                   <div className="space-y-2">
                                       <label htmlFor="topic" className="ml-2 text-sm uppercase">Study Topic</label>
@@ -121,8 +160,8 @@ const Details = ({name}) => {
                                           name="topic"
                                           className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
                                           required
-                                      // value={name}
-                                      // onChange={(e) => { setName(e.target.value) }}
+                                          value={studyTopic}
+                                          onChange={(e) => { setStudyTopic(e.target.value) }}
                                       />
                                   </div>
                                   :

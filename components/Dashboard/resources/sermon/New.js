@@ -10,12 +10,14 @@ import { postCreateSermon } from '../../../../redux/features/addSermon';
 import TopicInputs from '../../../common/TopicInputs';
 import { toast } from 'react-toastify'; 
 import ButtonLoader from '../../../common/ButtonLoader';
+import { postAddBibleStudy } from '../../../../redux/features/addBibleStudy';
 
 
 
 
 const New = ({ name }) => {
     const [imagePreview, setImagePreview] = useState('')
+    const [studyTopic, setStudyTopic] = useState('')
     const [title, setTitle] = useState('')
     const [topic, setTopic] = useState([])
     const [category, setCategory] = useState('')
@@ -41,31 +43,62 @@ const New = ({ name }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (title && topic && category && date && preacherName && book && chapter && verse && description && audioUrl) { 
-            let preacher = ''
-            ministers.forEach(minister => {
-                if (minister.name === preacherName) {
-                    preacher = minister._id
-                }
-            })
-            setLoading(true)
-            dispatch(postCreateSermon({
-                title, category, topic, preacher,
-                book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
-            })).then(result => {
-                if (!result.error) {
-                    setLoading(false)
-                    toast.success('Sermon Added successfully')
-                    router.back()
-                } else {
-                    setLoading(false)
-                    console.log(result.error)
-                }
+        if (name === 'sermon') {
+            if (title && topic && category && date && preacherName && book && chapter && verse && description && audioUrl) {
+                let preacher = ''
+                ministers.forEach(minister => {
+                    if (minister.name === preacherName) {
+                        preacher = minister._id
+                    }
+                })
+                setLoading(true)
+                dispatch(postCreateSermon({
+                    title, category, topic, preacher,
+                    book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
+                })).then(result => {
+                    if (!result.error) {
+                        setLoading(false)
+                        toast.success('Sermon Added successfully')
+                        router.back()
+                    } else {
+                        setLoading(false)
+                        console.log(result.error)
+                    }
 
-            })
-        } else {
-            toast.error('Please fill all the required fields')
+                })
+            } else {
+                toast.error('Please fill all the required fields')
+            }
         }
+
+        if (name === "bible study") {
+            if (title && studyTopic && date && preacherName && book && chapter && verse && description && audioUrl) {
+                let preacher = ''
+                ministers.forEach(minister => {
+                    if (minister.name === preacherName) {
+                        preacher = minister._id
+                    }
+                })
+                setLoading(true)
+                dispatch(postAddBibleStudy({
+                    title, topic: studyTopic, preacher,
+                    book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
+                })).then(result => {
+                    if (!result.error) {
+                        setLoading(false)
+                        toast.success('Bible Study Added successfully')
+                        router.back()
+                    } else {
+                        setLoading(false)
+                        console.log(result.error)
+                    }
+
+                })
+            } else {
+                toast.error('Please fill all the required fields')
+            }
+        }
+        
         
     }
 
@@ -100,8 +133,8 @@ const New = ({ name }) => {
                                         name="topic"
                                         className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
                                         required
-                                    // value={name}
-                                    // onChange={(e) => { setName(e.target.value) }}
+                                        value={studyTopic}
+                                        onChange={(e) => { setStudyTopic(e.target.value.toLowerCase()) }}
                                     />
                                 </div>
                                 :

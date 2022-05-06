@@ -5,6 +5,7 @@ import { postDeleteMinister } from "../../redux/features/getMinisters"
 import { postDeleteSermon } from "../../redux/features/sermons"
 import { toast } from "react-toastify"
 import ButtonLoader from "../common/ButtonLoader"
+import { postDeleteBibleStudy } from "../../redux/features/bibleStudies"
 
 
 const DeleteModal = () => {
@@ -15,15 +16,21 @@ const DeleteModal = () => {
     const { deleteModalData } = useSelector(state => state.menu)
 
     useEffect(() => {
+        // minister
         deleteModalData.minister && setDataName(deleteModalData.minister.name)
         deleteModalData.minister && setData(deleteModalData.minister)
+        // sermon
         deleteModalData.sermon && setDataName(deleteModalData.sermon.title)
         deleteModalData.sermon && setData(deleteModalData.sermon)
+        // bible study
+        deleteModalData.study && setDataName(deleteModalData.study.title)
+        deleteModalData.study && setData(deleteModalData.study)
     }, [])
     const dispatch = useDispatch()
 
     const handleDelete = (id, index) => {
         setLoading(true)
+        // minister
         if (deleteModalData.minister) { 
             dispatch(postDeleteMinister({ id, index })).then(result => {
                 if (!result.error) {
@@ -35,9 +42,23 @@ const DeleteModal = () => {
                 }
             })
         }
-
+        
+        // sermon
         if (deleteModalData.sermon) {
             dispatch(postDeleteSermon({ id, index })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("successfully deleted")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+        // study
+        if (deleteModalData.study) {
+            dispatch(postDeleteBibleStudy({ id, index })).then(result => {
                 if (!result.error) {
                     setLoading(false)
                     toast.success("successfully deleted")

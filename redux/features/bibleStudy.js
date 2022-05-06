@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
-export const getSermonDetails = createAsyncThunk(
-    `sermon/getSermonDetails`,
+export const getBibleStudyDetails = createAsyncThunk(
+    `bibleStudy/getBibleStudyDetails`,
     async (id, { rejectWithValue }) => {
         try {
-            const { data } = await axios.get(`/api/admin/sermons/${id}`)
+            const { data } = await axios.get(`/api/admin/biblestudy/${id}`)
             return data
         } catch (error) {
             console.log(rejectWithValue(error))
@@ -16,13 +16,13 @@ export const getSermonDetails = createAsyncThunk(
     }
 )
 
-export const updateSermon = createAsyncThunk(
-    `sermon/updateSermon`,
-    async ({ id, title, category, topic, preacher, book, chapter, verse, date,
+export const updateBibleStudy = createAsyncThunk(
+    `bibleStudy/updateBibleStudy`,
+    async ({ id, title, topic, preacher, book, chapter, verse, date,
         description, imageUrl, audioUrl, youtubeLink }, { rejectWithValue }) => {
         try {
-            const { data } = await axios.put(`/api/admin/sermons/${id}`, {
-                title, category, topic, preacher, book, chapter, verse, date,
+            const { data } = await axios.put(`/api/admin/biblestudy/${id}`, {
+                title, topic, preacher, book, chapter, verse, date,
                 description, imageUrl, audioUrl, youtubeLink
             }, {
                 headers: {
@@ -38,35 +38,35 @@ export const updateSermon = createAsyncThunk(
 )
 
 
-const sermonSlice = createSlice({
-    name: 'sermon',
+const bibleStudySlice = createSlice({
+    name: 'bibleStudy',
     initialState: {
         loading: false,
-        sermon: null,
+        bibleStudy: null,
         message: null,
     },
     reducers: {
 
     },
     extraReducers: {
-        [getSermonDetails.pending]: (state) => {
+        [getBibleStudyDetails.pending]: (state) => {
             state.loading = true
         },
-        [getSermonDetails.fulfilled]: (state, { payload }) => {
+        [getBibleStudyDetails.fulfilled]: (state, { payload }) => {
             state.loading = false
-            state.sermon = payload.sermon
+            state.bibleStudy = payload.bibleStudy
         },
-        [getSermonDetails.rejected]: (state, { payload }) => {
+        [getBibleStudyDetails.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },
-        [updateSermon.pending]: (state) => {
+        [updateBibleStudy.pending]: (state) => {
             state.loading = true
         },
-        [updateSermon.fulfilled]: (state) => {
+        [updateBibleStudy.fulfilled]: (state) => {
             state.loading = false
         },
-        [updateSermon.rejected]: (state, { payload }) => {
+        [updateBibleStudy.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },
@@ -74,5 +74,5 @@ const sermonSlice = createSlice({
 })
 
 
-// export const { deleteOne, addsermon } = sermonSlice.actions
-export default sermonSlice.reducer
+// export const { deleteOne, addbibleStudy } = bibleStudySlice.actions
+export default bibleStudySlice.reducer

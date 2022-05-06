@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
-export const getAdminSermons = createAsyncThunk(
-    `sermons/getAdminSermons`,
+export const getAdminBibleStudies = createAsyncThunk(
+    `bibleStudies/getAdminBibleStudies`,
     async (obj, { rejectWithValue }) => {
         try {
-            const { data } = await axios.get(`/api/admin/sermons`)
+            const { data } = await axios.get(`/api/admin/biblestudy`)
             return data
         } catch (error) {
             return rejectWithValue(error.response.data.message)
@@ -16,11 +16,11 @@ export const getAdminSermons = createAsyncThunk(
 )
 
 
-export const postDeleteSermon = createAsyncThunk(
-    `sermons/postDeleteSermon`,
+export const postDeleteBibleStudy = createAsyncThunk(
+    `bibleStudies/postDeleteBibleStudy`,
     async ({ id, index }, { dispatch, rejectWithValue }) => {
         try {
-            const { data } = await axios.delete(`/api/admin/sermons/${id}`)
+            const { data } = await axios.delete(`/api/admin/biblestudy/${id}`)
             dispatch(deleteOne(index))
             return data
         } catch (error) {
@@ -31,37 +31,37 @@ export const postDeleteSermon = createAsyncThunk(
 )
 
 
-const sermonsSlice = createSlice({
-    name: 'sermons',
+const bibleStudiesSlice = createSlice({
+    name: 'bibleStudies',
     initialState: {
         loading: false,
-        sermons: [],
+        bibleStudies: [],
         message: null,
     },
     reducers: {
         deleteOne: (state, { payload }) => {
-            state.sermons.splice(payload, 1)
+            state.bibleStudies.splice(payload, 1)
         },
     },
     extraReducers: {
-        [getAdminSermons.pending]: (state) => {
+        [getAdminBibleStudies.pending]: (state) => {
             state.loading = true
         },
-        [getAdminSermons.fulfilled]: (state, { payload }) => {
+        [getAdminBibleStudies.fulfilled]: (state, { payload }) => {
             state.loading = false
-            state.sermons = payload.sermons
+            state.bibleStudies = payload.bibleStudies
         },
-        [getAdminSermons.rejected]: (state, { payload }) => {
+        [getAdminBibleStudies.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },
-        [postDeleteSermon.pending]: (state) => {
+        [postDeleteBibleStudy.pending]: (state) => {
             state.loading = true
         },
-        [postDeleteSermon.fulfilled]: (state) => {
+        [postDeleteBibleStudy.fulfilled]: (state) => {
             state.loading = false
         },
-        [postDeleteSermon.rejected]: (state, { payload }) => {
+        [postDeleteBibleStudy.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },
@@ -69,5 +69,5 @@ const sermonsSlice = createSlice({
 })
 
 
-export const { deleteOne } = sermonsSlice.actions
-export default sermonsSlice.reducer
+export const { deleteOne } = bibleStudiesSlice.actions
+export default bibleStudiesSlice.reducer
