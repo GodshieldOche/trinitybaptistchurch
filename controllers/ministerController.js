@@ -1,5 +1,7 @@
 import Minister from '../models/Ministers'
 import cloudinary from "cloudinary"
+import asyncHandler from "express-async-handler";
+import ErrorHandler from "../middleware/errorHandler"
 
 
 cloudinary.config({
@@ -10,120 +12,106 @@ cloudinary.config({
 
 // Create Minister
 // post => api/ministers
-const addMinister = async (req, res, next) => {
+const addMinister = asyncHandler(async (req, res, next) => {
     const { name, about, role, imageUrl } = req.body
 
-    try {
-        const minister = await Minister.create({
-            name,
-            about,
-            role,
-            imageUrl
-        })
+    
+    const minister = await Minister.create({
+        name,
+        about,
+        role,
+        imageUrl
+    })
 
-        res.status(200).json({
-            success: "true",
-            message: "Added new minister"
-        })
-    } catch (error) {
-        next(error)
-    }
-}
+    res.status(200).json({
+        success: "true",
+        message: "Added new minister"
+    })
+
+})
 
 // Get all Ministers
 // get => api/ministers
-const getMinisters = async (req, res, next) => {
-    try {
-        const ministers = await Minister.find()
+const getMinisters = asyncHandler(async (req, res, next) => {
+    
+    const ministers = await Minister.find()
 
-        res.status(200).json({
-            success: "true",
-            ministers
-        })
-    } catch (error) {
-        next(error)
-    }
-}
+    res.status(200).json({
+        success: "true",
+        ministers
+    }) 
+}) 
 
 
 
 // Delete Minister
 // Delete => api/ministers/:id
-const deleteMinister = async (req, res, next) => {
-    try {
-        const minister = await Minister.findById(req.query.id)
+const deleteMinister = asyncHandler(async (req, res, next) => {
+   
+    const minister = await Minister.findById(req.query.id)
 
-        if(!minister) {
-             throw new Error('Minister not found')
-        } else {
+    if (!minister) {
+       return next(new ErrorHandler('Sermon not found with this ID', 404))
+    } else {
 
-            await cloudinary.v2.uploader.destroy(minister.imageUrl.public_id)
+        await cloudinary.v2.uploader.destroy(minister.imageUrl.public_id)
 
-            await minister.remove()
-            res.status(200).json({
+        await minister.remove()
+        res.status(200).json({
             success: "true",
             message: "minister Deleted"
-            })
-        } 
-    } catch (error) {
-        next(error)
+        })
     }
-}
+}) 
 
 
 // get Minister
 // get => api/ministers/:id
-const getMinister = async (req, res, next) => {
-    try {
-        const minister = await Minister.findById(req.query.id)
+const getMinister = asyncHandler(async (req, res, next) => {
 
-        if (!minister) {
-            throw new Error('Minister not found')
-        } else {
+    const minister = await Minister.findById(req.query.id)
 
-            res.status(200).json({
-                success: "true",
-                minister
-            })
-        }
-    } catch (error) {
-        next(error)
+    if (!minister) {
+       return next(new ErrorHandler('Sermon not found with this ID', 404))
+    } else {
+
+        res.status(200).json({
+            success: "true",
+            minister
+        })
     }
-}
+}) 
 
 
 // update Minister
 // put => api/ministers/:id
-const updateMinister = async (req, res, next) => {
-    try {
-        const minister = await Minister.findById(req.query.id)
+const updateMinister = asyncHandler(async (req, res, next) => {
+    
+    const minister = await Minister.findById(req.query.id)
 
-        if (!minister) {
-            throw new Error('Minister not found')
-        } else {
-            const { name, about, role, imageUrl } = req.body
+    if (!minister) {
+       return next(new ErrorHandler('Sermon not found with this ID', 404))
+    } else {
+        const { name, about, role, imageUrl } = req.body
 
-            minister.name = name
-            minister.about = about
-            minister.role = role
+        minister.name = name
+        minister.about = about
+        minister.role = role
 
-            if (minister.imageUrl.public_id !== imageUrl.public_id) {
-                await cloudinary.v2.uploader.destroy(minister.imageUrl.public_id)
-                minister.imageUrl = imageUrl
-            }
-
-            await minister.save({validateBeforeSave: false})
-
-
-            res.status(200).json({
-                success: "true",
-            })
+        if (minister.imageUrl.public_id !== imageUrl.public_id) {
+            await cloudinary.v2.uploader.destroy(minister.imageUrl.public_id)
+            minister.imageUrl = imageUrl
         }
-    } catch (error) {
-        next(error)
-    }
-}
 
+        await minister.save({ validateBeforeSave: false })
+
+
+        res.status(200).json({
+            success: "true",
+        })
+    }
+
+}) 
 
 
 

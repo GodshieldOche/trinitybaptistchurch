@@ -1,37 +1,31 @@
 import User from "../models/User";
+import asyncHandler from "express-async-handler";
 
 
-const register = async (req, res) => {
+const register = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body
+    const user = await User.create({
+        name,
+        email,
+        password
+    })
 
-    try {
-        const user = await User.create({
-            name,
-            email,
-            password
-        })
-
-        res.status(200).json({
-            success: true,
-            message: "registered User"
-        })
-    } catch (error) {
-        next(error)
-    }
-}
+    res.status(200).json({
+        success: true,
+        message: "registered User"
+    })
+}) 
 
 
-const currentUser = async (req, res) => {
-    try {
-        const user = await User.findById(req.user._id)
-        res.status(200).json({
-            success: 'true',
-            user
-        })
-    } catch (error) {
-        next(error)
-    }
-}
+const currentUser = asyncHandler(async (req, res) => {
+
+    const user = await User.findById(req.user._id)
+    res.status(200).json({
+        success: 'true',
+        user
+    })
+
+}) 
 
 
 export {

@@ -8,6 +8,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import { getAdminMinisters } from '../../../../redux/features/getMinisters';
 import { postCreateSermon } from '../../../../redux/features/addSermon';
 import TopicInputs from '../../../common/TopicInputs';
+import { toast } from 'react-toastify'; 
+import ButtonLoader from '../../../common/ButtonLoader';
 
 
 
@@ -39,26 +41,32 @@ const New = ({ name }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let preacher = ''
-        ministers.forEach(minister => {
-            if (minister.name === preacherName) {
-                preacher = minister._id
-            }
-        })
-        setLoading(true)
-        dispatch(postCreateSermon({
-            title, category, topic, preacher,
-            book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
-        })).then(result => {
-            if (!result.error) {
-                setLoading(false)
-                console.log("created")
-            } else {
-                setLoading(false)
-                console.log(result.error)
-            }
-            
-        })
+        if (title && topic && category && date && preacherName && book && chapter && verse && description && audioUrl) { 
+            let preacher = ''
+            ministers.forEach(minister => {
+                if (minister.name === preacherName) {
+                    preacher = minister._id
+                }
+            })
+            setLoading(true)
+            dispatch(postCreateSermon({
+                title, category, topic, preacher,
+                book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
+            })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success('Sermon Added successfully')
+                    router.back()
+                } else {
+                    setLoading(false)
+                    console.log(result.error)
+                }
+
+            })
+        } else {
+            toast.error('Please fill all the required fields')
+        }
+        
     }
 
 
@@ -78,7 +86,7 @@ const New = ({ name }) => {
                                     className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
                                     required
                                     value={title}
-                                    onChange={(e) => { setTitle(e.target.value) }}
+                                    onChange={(e) => { setTitle(e.target.value.toLowerCase()) }}
                                 />
                             </div>
                             
@@ -110,7 +118,7 @@ const New = ({ name }) => {
                                         className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
                                         required
                                         value={book}
-                                        onChange={(e) => { setBook(e.target.value) }}
+                                        onChange={(e) => { setBook(e.target.value.toLowerCase()) }}
                                     />
                                 </div>
                                 <div className="col-span-3 space-y-2">
@@ -121,7 +129,7 @@ const New = ({ name }) => {
                                         className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
                                         required
                                         value={chapter}
-                                        onChange={(e) => { setChapter(e.target.value) }}
+                                        onChange={(e) => { setChapter(e.target.value.toLowerCase()) }}
                                     />
                                 </div>
                                 <div className="col-span-3 space-y-2">
@@ -132,7 +140,7 @@ const New = ({ name }) => {
                                         className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
                                         required
                                         value={verse}
-                                        onChange={(e) => { setVerse(e.target.value) }}
+                                        onChange={(e) => { setVerse(e.target.value.toLowerCase()) }}
                                     />
                                 </div>
                             </div>
@@ -196,7 +204,6 @@ const New = ({ name }) => {
                                         type="link"
                                         name="link"
                                         className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                        required
                                         value={youtubeLink}
                                         onChange={(e) => { setYoutubeLink(e.target.value) }}
                                     />
@@ -214,7 +221,7 @@ const New = ({ name }) => {
                         </h1>
                         <button type="submit" className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
                             {
-                                loading ? "loading..." :  "create"
+                                loading ? <ButtonLoader /> :  "create"
                             }
                         </button>
                     </div>

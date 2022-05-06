@@ -16,7 +16,7 @@ const sermonSchema = new mongoose.Schema({
     preacher: {
         type: mongoose.Schema.ObjectId,
         required: true,
-        ref: 'Minister'
+        ref: 'minister'
     },
     book: {
         type: String,

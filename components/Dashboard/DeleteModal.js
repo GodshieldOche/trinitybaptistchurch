@@ -2,31 +2,52 @@ import { useDispatch, useSelector } from "react-redux"
 import { setDeletModalState } from "../../redux/features/menu"
 import { useState, useEffect } from "react"
 import { postDeleteMinister } from "../../redux/features/getMinisters"
+import { postDeleteSermon } from "../../redux/features/sermons"
 import { toast } from "react-toastify"
 import ButtonLoader from "../common/ButtonLoader"
 
 
 const DeleteModal = () => {
     const [name, setName] = useState('')
+    const [data, setData] = useState('')
+    const [dataName, setDataName] = useState('')
     const [loading, setLoading] = useState(false)
     const { deleteModalData } = useSelector(state => state.menu)
 
-    // useEffect(() => {
-    //     console.log(deleteModalData)
-    // }, [])
+    useEffect(() => {
+        deleteModalData.minister && setDataName(deleteModalData.minister.name)
+        deleteModalData.minister && setData(deleteModalData.minister)
+        deleteModalData.sermon && setDataName(deleteModalData.sermon.title)
+        deleteModalData.sermon && setData(deleteModalData.sermon)
+    }, [])
     const dispatch = useDispatch()
 
     const handleDelete = (id, index) => {
         setLoading(true)
-        dispatch(postDeleteMinister({id, index})).then(result => {
-            if(!result.error) {
-                setLoading(false)
-                toast.success("successfully deleted")
-                dispatch(setDeletModalState(false))
-            } else {
-                console.log(result.error)
-            }
-        })
+        if (deleteModalData.minister) { 
+            dispatch(postDeleteMinister({ id, index })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("successfully deleted")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+        if (deleteModalData.sermon) {
+            dispatch(postDeleteSermon({ id, index })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("successfully deleted")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+       
     }   
 
 
@@ -40,7 +61,7 @@ const DeleteModal = () => {
                 className="flex flex-col space-y-5 max-w-screen-sm mx-auto h-[280px] w-full !px-5 !py-5 relative rounded-2xl bg-white">
                     <h1 className="uppercase text-xl font-semibold text-red-700 text-center">delete</h1>
                     <form autoComplete="off" className="flex flex-col space-y-4 w-full items-center justify-start">
-                        <h1> Are you sure you want to delete <span className="font-bold">{`${deleteModalData.minister.name}`}</span>?  </h1>
+                        <h1> Are you sure you want to delete <span className="font-bold">{`${dataName}`}</span>?  </h1>
                         <div className=" w-full flex flex-col space-y-5">
                                 <label htmlFor="title" className="w-full font-medium text-center  text-sm uppercase">Enter Name to Confirm</label>
                                 <input
@@ -60,8 +81,8 @@ const DeleteModal = () => {
                             cancel
                         </h1>
                         <button
-                        onClick={() => handleDelete(deleteModalData.minister._id, deleteModalData.index)}
-                         disabled={name !== deleteModalData.minister.name } className="text-center text-white py-1.5 rounded-md text-sm disabled:bg-red-400  px-7 uppercase bg-red-600">
+                        onClick={() => handleDelete(data._id, deleteModalData.index)}
+                            disabled={name !== dataName } className="text-center text-white py-1.5 rounded-md text-sm disabled:bg-red-400  px-7 uppercase bg-red-600">
                             {
                                 loading ? <ButtonLoader /> : "delete"
                             }

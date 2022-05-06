@@ -26,7 +26,6 @@ const Details = () => {
     useEffect(() => {
         dispatch(getMinisterDetails(id)).then((result) => {
             if (!result.error) {
-                console.log(result)
                 const { name, role, about, imageUrl } = result.payload.minister
                 setName(name)
                 setRole(role)
@@ -37,7 +36,7 @@ const Details = () => {
                 console.log(result.error)
             }
         })
-    }, []);
+    }, [id]);
 
 
     const handleSubmit = (e) => {

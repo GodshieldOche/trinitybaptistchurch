@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 const categories = [
@@ -34,6 +34,27 @@ const worldView = [
 
 const TopicInputs = ({ setCategory, category, topic, setTopic}) => {
     const [selectTopic, setSelectTopic] = useState(['select topic'])
+    const [hereCategory, setHereCategory] = useState('')
+    const [hereTopic, setHereTopic] = useState('')
+
+
+    useEffect(() => {
+        if (category) {
+            categories.map(cat => {
+                if (cat === category) {
+                    handleTopic(cat)
+                   setHereCategory(cat)
+               }
+           })
+        }
+        if (topic) {
+            selectTopic.map(top => {
+                if(top === topic) {
+                    setHereTopic(top)
+                }
+            })
+        }
+    }, [category, selectTopic])
 
 
     const handleTopic = (value) => {
@@ -57,6 +78,8 @@ const TopicInputs = ({ setCategory, category, topic, setTopic}) => {
 
 
 
+
+
     return (
         <div className="space-y-2">
             <div className="flex space-x-2 w-full items-center">
@@ -66,9 +89,10 @@ const TopicInputs = ({ setCategory, category, topic, setTopic}) => {
                         type="text"
                         name="category"
                         className="w-full capitalize text-gray-500 !px-1 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                        value={category || []}
+                        value={hereCategory}
                         onChange={(e) => {
                             setCategory(e.target.value)
+                            setHereCategory(e.target.value)
                             handleTopic(e.target.value)
                         }}
                     >
@@ -85,8 +109,11 @@ const TopicInputs = ({ setCategory, category, topic, setTopic}) => {
                         type="text"
                         name="topic"
                         className="w-full capitalize text-gray-500 !px-1 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                        value={topic}
-                        onChange={(e) => setTopic(e.target.value)}
+                        value={hereTopic}
+                        onChange={(e) => {
+                            setHereTopic(e.target.value)
+                            setTopic(e.target.value)
+                        }}
                     >
                         {
                             selectTopic.map(item => (

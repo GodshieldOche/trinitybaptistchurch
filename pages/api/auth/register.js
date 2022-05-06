@@ -1,8 +1,9 @@
 import nc from 'next-connect'
 import dbConnect from '../../../utils/dbConnect'
 import { register } from '../../../controllers/authController'
+import onError from '../../../middleware/errorHandler'
 
-const handler = nc()
+const handler = nc({ onError })
 
 dbConnect()
 
