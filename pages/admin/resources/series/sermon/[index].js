@@ -11,7 +11,7 @@ export default function AdminDashboard() {
                 <title>TBC || Admin Dashboard</title>
             </Head>
             <DashboardLayout>
-                <Adder name={"add series sermon"} />
+                <Adder name={"series sermon Details"} />
             </DashboardLayout>
         </div>
     )

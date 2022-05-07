@@ -259,8 +259,7 @@ const New = ({ name }) => {
                         </button>
                     </div>
                 </form>
-            </div>
-            
+            </div>  
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import Head from "next/head";
-import DashboardLayout from "../../../../../components/Dashboard/DashboardLayout";
+import DashboardLayout from "../../../../components/Dashboard/DashboardLayout";
 import { getSession } from 'next-auth/react'
-import Adder from "../../../../../components/Dashboard/resources/series/Adder";
+import Details from "../../../../components/Dashboard/resources/series/Details";
 
 
 export default function AdminDashboard() {
@@ -11,7 +11,7 @@ export default function AdminDashboard() {
                 <title>TBC || Admin Dashboard</title>
             </Head>
             <DashboardLayout>
-                <Adder name={"add series sermon"} />
+                <Details name="series details" />
             </DashboardLayout>
         </div>
     )
