@@ -10,8 +10,6 @@ import { format } from 'date-fns'
 import { setDeleteModalData, setDeletModalState } from '../../../../redux/features/menu'
 import { getAdminSeries } from '../../../../redux/features/series';
 
-const lists = [1, 2, 3, 4, 5,]
-
 const Series = () => {
 
     const { loading, series, message } = useSelector(state => state.series)
@@ -24,7 +22,22 @@ const Series = () => {
                 console.log(result.error)
             }
         })
-    }, [])
+    }, [dispatch])
+
+    const lister = (index) => {
+        const dp = []
+
+        series[index].sermons.map(sermon => {
+            dp.push(sermon.preacher.name)
+        })
+        let preachers = [...new Set(dp)];
+
+        return preachers.map(preacher => (
+            <h1 key={preacher}>{preacher}</h1>
+        ))
+
+    }
+
 
     return (
         <div className="space-y-5">
@@ -77,10 +90,7 @@ const Series = () => {
                                         <td className="text-sm px-3 py-4 whitespace-nowrap">
                                             <div className="flex flex-col space-y-2">
                                                 {
-                                                    !serie?.sermons?.length ? <h1>0 sermon 0 preacher</h1> :
-                                                        serie?.sermons?.map((sermon, index) => (
-                                                            <h1 key={sermon.preacher.id}>{sermon.preacher.name}</h1>
-                                                        ))
+                                                    lister(index)
                                                 }
                                             </div>
                                         </td>
@@ -96,7 +106,12 @@ const Series = () => {
                                                     className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
                                                     <EditIcon className="!text-white !text-base" />
                                                 </div>
-                                                <div className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
+                                                <div
+                                                    onClick={() => {
+                                                        dispatch(setDeleteModalData({ serie, index }))
+                                                        dispatch(setDeletModalState(true))
+                                                    }}
+                                                    className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
                                                     <DeleteIcon className="!text-white !text-base" />
                                                 </div>
                                             </div>

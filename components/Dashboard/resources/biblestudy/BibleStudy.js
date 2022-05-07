@@ -24,7 +24,7 @@ const BibleStudy = () => {
                 console.log(result.error)
             }
         })
-    }, [])
+    }, [dispatch])
 
 
     return (

@@ -23,7 +23,7 @@ const List = () => {
                 console.log(result.error)
             }
         })
-    }, [])
+    }, [dispatch])
 
 
     return (

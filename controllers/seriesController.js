@@ -46,6 +46,12 @@ const deleteSeries = asyncHandler(async (req, res, next) => {
         
         await cloudinary.v2.uploader.destroy(series.imageUrl.public_id)
 
+        series.sermons.forEach( async (sermon) => {
+            if (sermon.imageUrl?.public_id) { 
+                await cloudinary.v2.uploader.destroy(sermon.imageUrl?.public_id)
+            }
+        })
+
         await series.remove()
         res.status(200).json({
             success: "true",

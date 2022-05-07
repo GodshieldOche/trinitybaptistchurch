@@ -168,13 +168,13 @@ const Details = ({ name }) => {
                                                   <h1>{index + 1}</h1>
                                               </td>
                                               <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                                  <h1>{ sermon.title }</h1>
+                                                  <h1 className="capitalize">{ sermon.title }</h1>
                                               </td>
                                               <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                                  <h1>{sermon.preacher.name}</h1>
+                                                  <h1 className="capitalize">{sermon.preacher.name}</h1>
                                               </td>
                                               <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                                  <h1>Feb. 13th, 2022</h1>
+                                                  <h1 className="capitalize">Feb. 13th, 2022</h1>
                                               </td>
                                               <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
                                                   <div className="flex space-x-2 items-center">

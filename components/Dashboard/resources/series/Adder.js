@@ -89,27 +89,29 @@ const Adder = ({ name }) => {
 
             })
 
+            if (name === "series sermon Details") {
+                const sermon = seriesDetails.sermons[index]
 
-            const sermon = seriesDetails.sermons[index]
-
-            if (title !== sermon.title || category !== sermon.category || topic !== sermon.topic || preacherName !== sermon.preacher?.name || book !== sermon.book || chapter !== sermon.chapter || verse !== sermon.verse || date !== sermon.date || description !== sermon.description || imageUrl !== sermon.imageUrl || audioUrl !== sermon.audioUrl || youtubeLink !== sermon.youtubeLink) { 
-                name === "series sermon Details" && dispatch(postUpdateSeriesSermon({
-                    id, sermonId: sermon._id, title, category, topic, preacher,
-                    book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
-                })).then(result => {
-                    if (!result.error) { 
-                        setLoading(false)
-                        toast.success('Sermon Updated successfully')
-                        router.back()
-                    } else {
-                        setLoading(false)
-                        console.log(result.error)
-                    }
-                })
-            } else {
-                setLoading(false)
-                toast.info('Nothing to update')
+                if (title !== sermon.title || category !== sermon.category || topic !== sermon.topic || preacherName !== sermon.preacher?.name || book !== sermon.book || chapter !== sermon.chapter || verse !== sermon.verse || date !== sermon.date || description !== sermon.description || imageUrl !== sermon.imageUrl || audioUrl !== sermon.audioUrl || youtubeLink !== sermon.youtubeLink) {
+                    dispatch(postUpdateSeriesSermon({
+                        id, sermonId: sermon._id, title, category, topic, preacher,
+                        book, chapter, verse, date, description, imageUrl, audioUrl, youtubeLink
+                    })).then(result => {
+                        if (!result.error) {
+                            setLoading(false)
+                            toast.success('Sermon Updated successfully')
+                            router.back()
+                        } else {
+                            setLoading(false)
+                            console.log(result.error)
+                        }
+                    })
+                } else {
+                    setLoading(false)
+                    toast.info('Nothing to update')
+                }
             }
+            
         } else {
             toast.error('Please fill all the required fields')
         }
