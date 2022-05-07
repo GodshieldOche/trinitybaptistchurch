@@ -106,6 +106,9 @@ const Adder = ({ name }) => {
                         console.log(result.error)
                     }
                 })
+            } else {
+                setLoading(false)
+                toast.info('Nothing to update')
             }
         } else {
             toast.error('Please fill all the required fields')
@@ -250,7 +253,7 @@ const Adder = ({ name }) => {
                       </h1>
                       <button type="submit" className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
                           {
-                              loading ? <ButtonLoader /> : "create"
+                              loading ? <ButtonLoader /> : name === "add series sermon" ? "create" : "update"
                           }
                       </button>
                   </div>

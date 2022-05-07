@@ -60,6 +60,8 @@ const Details = ({ name }) => {
                         console.log(result.error)
                     }
                 })
+            } else {
+                toast.info('Nothing to update')
             }
         }
         
@@ -72,7 +74,7 @@ const Details = ({ name }) => {
   return (
       <div className="flex  w-full min-h-screen  my-2  mx-2 rounded-2xl bg-white">
           <div className="w-full flex flex-col space-y-7  h-fit items-center  pt-5 px-3">
-              <h1 className="uppercase text-lg text-primary-dark font-medium">{`create New ${name}`}</h1>
+              <h1 className="uppercase text-lg text-primary-dark font-medium">{`${name}`}</h1>
               <form className="w-full" autoComplete="off">
                   <div className="w-full h-full grid grid-cols-12 items-center gap-5">
                       <div className="col-span-7 space-y-5 w-full text-gray-700 ">
@@ -204,7 +206,7 @@ const Details = ({ name }) => {
                   </h1>
                   <button onClick={handleSubmit} className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
                       {
-                          buttonLoad ? <ButtonLoader /> : "create"
+                          buttonLoad ? <ButtonLoader /> : "update"
                       }
                   </button>
               </div>
