@@ -32,7 +32,7 @@ const Details = ({name}) => {
 
     const { ministers } = useSelector(state => state.ministers)
     
-    const { message } = useSelector(state => name === "sermon Details" ? state.sermon : state.bibleStudy)
+    const { message } = useSelector(state =>  state.sermon )
     const dispatch = useDispatch();
     const router = useRouter();
 

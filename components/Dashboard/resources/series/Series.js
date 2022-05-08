@@ -90,7 +90,7 @@ const Series = () => {
                                         <td className="text-sm px-3 py-4 whitespace-nowrap">
                                             <div className="flex flex-col space-y-2">
                                                 {
-                                                    lister(index)
+                                                    !serie.sermons[index]?.preacher ? <h1 className="capitalize">0 preacher</h1> : lister(index)
                                                 }
                                             </div>
                                         </td>

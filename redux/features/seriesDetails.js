@@ -78,6 +78,21 @@ export const postUpdateSeriesSermon = createAsyncThunk(
 )
 
 
+export const postDeleteSeriesSermon = createAsyncThunk(
+    `series/postDeleteSeriesSermon`,
+    async ({ id, sermonId, index }, { dispatch, rejectWithValue }) => {
+        try {
+            const { data } = await axios.delete(`/api/admin/series?id=${id}&sermonId=${sermonId}`)
+            dispatch(deleteOne(index))
+            return data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message)
+        }
+
+    }
+)
+
+
 const seriesDetailsSlice = createSlice({
     name: 'seriesDetails',
     initialState: {
@@ -86,7 +101,9 @@ const seriesDetailsSlice = createSlice({
         message: null,
     },
     reducers: {
-
+        deleteOne: (state, { payload }) => {
+            state.seriesDetails.sermons?.splice(payload, 1)
+        },
     },
     extraReducers: {
         [getSeriesDetails.pending]: (state) => {
@@ -130,9 +147,19 @@ const seriesDetailsSlice = createSlice({
             state.loading = false
             state.message = payload
         },
+        [postDeleteSeriesSermon.pending]: (state) => {
+            state.loading = true
+        },
+        [postDeleteSeriesSermon.fulfilled]: (state) => {
+            state.loading = false
+        },
+        [postDeleteSeriesSermon.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.message = payload
+        },
     }
 })
 
 
-// export const { deleteOne, addseriesDetails } = seriesDetailsSlice.actions
+export const { deleteOne} = seriesDetailsSlice.actions
 export default seriesDetailsSlice.reducer

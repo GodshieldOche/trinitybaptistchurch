@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 import ButtonLoader from "../common/ButtonLoader"
 import { postDeleteBibleStudy } from "../../redux/features/bibleStudies"
 import { postDeleteSeries } from "../../redux/features/series"
+import { postDeleteSeriesSermon } from "../../redux/features/seriesDetails"
 
 
 const DeleteModal = () => {
@@ -30,6 +31,10 @@ const DeleteModal = () => {
         // sermon series main
         deleteModalData.serie && setDataName(deleteModalData.serie.title)
         deleteModalData.serie && setData(deleteModalData.serie)
+
+        // series sermon main
+        deleteModalData.serm && setDataName(deleteModalData.serm.title)
+        deleteModalData.serm && setData(deleteModalData.serm)
     }, [])
     const dispatch = useDispatch()
 
@@ -80,6 +85,19 @@ const DeleteModal = () => {
                 if (!result.error) {
                     setLoading(false)
                     toast.success("successfully deleted")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+
+        if (deleteModalData.serm) {
+            dispatch(postDeleteSeriesSermon({ sermonId: id, index, id:deleteModalData.id })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("successfully deleted series sermon")
                     dispatch(setDeletModalState(false))
                 } else {
                     console.log(result.error)

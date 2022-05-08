@@ -61,6 +61,40 @@ const deleteSeries = asyncHandler(async (req, res, next) => {
 }) 
 
 
+// Delete Series sermon
+// Delete => api/admin/Series/:id
+const deleteSeriesSermon = asyncHandler(async (req, res, next) => {
+
+    const {sermonId, id} = req.query
+
+    const series = await Series.findById(id)
+
+    if (!series) {
+        return next(new ErrorHandler('Series not found with this ID', 404))
+    } else {
+
+        series.sermons.forEach( async (sermon) => {
+            if (sermon._id.toString() === sermonId.toString()) {
+                if (sermon.imageUrl?.public_id) { 
+                    await cloudinary.v2.uploader.destroy(sermon.imageUrl?.public_id)
+                }
+            }
+        })
+
+        const updatedSermonSeries = series.sermons.filter(sermon => sermon._id.toString() !== sermonId.toString())
+
+        series.sermons = updatedSermonSeries
+
+        await series.save()
+
+        res.status(200).json({
+            success: "true",
+            message: "Series Sermon Deleted"
+        })
+    }
+}) 
+
+
 // get Series
 // get => api/Series/:id
 const getSeries = asyncHandler(async (req, res, next) => {
@@ -197,5 +231,6 @@ export {
     getSeries,
     seriesSermons,
     updateSeries,
-    updateSeriesSermon
+    updateSeriesSermon,
+    deleteSeriesSermon
 }

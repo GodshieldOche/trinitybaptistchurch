@@ -11,8 +11,12 @@ const conferenceSchema = new mongoose.Schema({
         required: true
     },
     imageUrl: {
-        type: String,
-        required: true
+        public_id: {
+            type: String,
+        },
+        url: {
+            type: String,
+        }
     },
     startDate: {
         type: Date,

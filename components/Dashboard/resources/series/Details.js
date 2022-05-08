@@ -12,6 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ImageUploader from '../../../common/ImageUploader';
 import ButtonLoader from '../../../common/ButtonLoader';
 import { getSeriesDetails, updateSeries } from '../../../../redux/features/seriesDetails';
+import { setDeleteModalData, setDeletModalState } from '../../../../redux/features/menu'
 
 
 const Details = ({ name }) => {
@@ -161,17 +162,17 @@ const Details = ({ name }) => {
                               </thead>
                               <tbody className="bg-white  ">
                                   {
-                                      seriesDetails?.sermons?.map((sermon, index) => (
-                                          <tr key={sermon._id} className={` transition duration-300 ease-in-out border-b border-b-gray-200`}>
+                                      seriesDetails?.sermons?.map((serm, index) => (
+                                          <tr key={serm._id} className={` transition duration-300 ease-in-out border-b border-b-gray-200`}>
 
                                               <td className="px-4 py-4 whitespace-nowrap text-sm  ">
                                                   <h1>{index + 1}</h1>
                                               </td>
                                               <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                                  <h1 className="capitalize">{ sermon.title }</h1>
+                                                  <h1 className="capitalize">{ serm.title }</h1>
                                               </td>
                                               <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                                  <h1 className="capitalize">{sermon.preacher.name}</h1>
+                                                  <h1 className="capitalize">{serm.preacher.name}</h1>
                                               </td>
                                               <td className="text-sm  px-3 py-4 whitespace-nowrap ">
                                                   <h1 className="capitalize">Feb. 13th, 2022</h1>
@@ -185,7 +186,12 @@ const Details = ({ name }) => {
                                                           className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
                                                           <EditIcon className="!text-white !text-base" />
                                                       </div>
-                                                      <div className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
+                                                      <div
+                                                          onClick={() => {
+                                                              dispatch(setDeleteModalData({ serm, id, index }))
+                                                              dispatch(setDeletModalState(true))
+                                                          }}
+                                                          className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
                                                           <DeleteIcon className="!text-white !text-base" />
                                                       </div>
                                                   </div>
