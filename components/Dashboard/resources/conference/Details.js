@@ -180,7 +180,7 @@ const Details = ({name}) => {
                                                   <div className="flex space-x-2 items-center">
                                                       <div
                                                           onClick={() => {
-                                                              router.push(`/admin/resources/conference/sermcon/${index}?id=${id}`)
+                                                              router.push(`/admin/resources/conference/sermon/${index}?id=${id}`)
                                                           }}
                                                           className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
                                                           <EditIcon className="!text-white !text-base" />
