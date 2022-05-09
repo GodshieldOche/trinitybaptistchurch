@@ -11,11 +11,12 @@ export default function AdminDashboard() {
                 <title>TBC || Admin Dashboard</title>
             </Head>
             <DashboardLayout>
-                <Adder name={"add conference sermon"} />
+                <Adder name={"conference sermon Details"} />
             </DashboardLayout>
         </div>
     )
 }
+
 
 export async function getServerSideProps(context) {
     const { req } = context

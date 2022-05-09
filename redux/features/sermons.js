@@ -34,7 +34,7 @@ export const postDeleteSermon = createAsyncThunk(
 const sermonsSlice = createSlice({
     name: 'sermons',
     initialState: {
-        loading: false,
+        loading: true,
         sermons: [],
         message: null,
     },

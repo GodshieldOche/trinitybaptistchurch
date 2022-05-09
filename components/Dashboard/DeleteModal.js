@@ -8,6 +8,8 @@ import ButtonLoader from "../common/ButtonLoader"
 import { postDeleteBibleStudy } from "../../redux/features/bibleStudies"
 import { postDeleteSeries } from "../../redux/features/series"
 import { postDeleteSeriesSermon } from "../../redux/features/seriesDetails"
+import { postDeleteConferenceSermon } from "../../redux/features/conference"
+import { postDeleteConference } from "../../redux/features/conferences"
 
 
 const DeleteModal = () => {
@@ -28,13 +30,21 @@ const DeleteModal = () => {
         deleteModalData.study && setDataName(deleteModalData.study.title)
         deleteModalData.study && setData(deleteModalData.study)
 
-        // sermon series main
+        // sermon series 
         deleteModalData.serie && setDataName(deleteModalData.serie.title)
         deleteModalData.serie && setData(deleteModalData.serie)
 
-        // series sermon main
+        // series sermon
         deleteModalData.serm && setDataName(deleteModalData.serm.title)
         deleteModalData.serm && setData(deleteModalData.serm)
+
+        // conference sermon 
+        deleteModalData.sermc && setDataName(deleteModalData.sermc.title)
+        deleteModalData.sermc && setData(deleteModalData.sermc)
+
+        // conference
+        deleteModalData.conference && setDataName(deleteModalData.conference.title)
+        deleteModalData.conference && setData(deleteModalData.conference)
     }, [])
     const dispatch = useDispatch()
 
@@ -92,12 +102,38 @@ const DeleteModal = () => {
             })
         }
 
-
+        // series sermon
         if (deleteModalData.serm) {
             dispatch(postDeleteSeriesSermon({ sermonId: id, index, id:deleteModalData.id })).then(result => {
                 if (!result.error) {
                     setLoading(false)
                     toast.success("successfully deleted series sermon")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+        // conference sermon
+        if (deleteModalData.sermc) {
+            dispatch(postDeleteConferenceSermon({ sermonId: id, index, id:deleteModalData.id })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("successfully deleted conference sermon")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+        // conference sermon
+        if (deleteModalData.conference) {
+            dispatch(postDeleteConference({ id, index })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("successfully deleted")
                     dispatch(setDeletModalState(false))
                 } else {
                     console.log(result.error)

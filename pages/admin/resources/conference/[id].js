@@ -1,7 +1,7 @@
 import Head from "next/head";
-import DashboardLayout from "../../../../../components/Dashboard/DashboardLayout";
+import DashboardLayout from "../../../../components/Dashboard/DashboardLayout";
 import { getSession } from 'next-auth/react'
-import Adder from "../../../../../components/Dashboard/resources/conference/Adder";
+import Details from "../../../../components/Dashboard/resources/conference/Details";
 
 
 export default function AdminDashboard() {
@@ -11,11 +11,12 @@ export default function AdminDashboard() {
                 <title>TBC || Admin Dashboard</title>
             </Head>
             <DashboardLayout>
-                <Adder name={"add conference sermon"} />
+                <Details name="confernece details" />
             </DashboardLayout>
         </div>
     )
 }
+
 
 export async function getServerSideProps(context) {
     const { req } = context

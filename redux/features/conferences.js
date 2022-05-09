@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
-export const getAdminBibleStudies = createAsyncThunk(
-    `bibleStudies/getAdminBibleStudies`,
+export const getAdminConference = createAsyncThunk(
+    `conference/getAdminConference`,
     async (obj, { rejectWithValue }) => {
         try {
-            const { data } = await axios.get(`/api/admin/biblestudy`)
+            const { data } = await axios.get(`/api/admin/conference`)
             return data
         } catch (error) {
             return rejectWithValue(error.response.data.message)
@@ -16,11 +16,11 @@ export const getAdminBibleStudies = createAsyncThunk(
 )
 
 
-export const postDeleteBibleStudy = createAsyncThunk(
-    `bibleStudies/postDeleteBibleStudy`,
+export const postDeleteConference = createAsyncThunk(
+    `conference/postDeleteConference`,
     async ({ id, index }, { dispatch, rejectWithValue }) => {
         try {
-            const { data } = await axios.delete(`/api/admin/biblestudy/${id}`)
+            const { data } = await axios.delete(`/api/admin/conference/${id}`)
             dispatch(deleteOne(index))
             return data
         } catch (error) {
@@ -31,37 +31,37 @@ export const postDeleteBibleStudy = createAsyncThunk(
 )
 
 
-const bibleStudiesSlice = createSlice({
-    name: 'bibleStudies',
+const conferenceSlice = createSlice({
+    name: 'conference',
     initialState: {
         loading: true,
-        bibleStudies: [],
+        conferences: [],
         message: null,
     },
     reducers: {
         deleteOne: (state, { payload }) => {
-            state.bibleStudies.splice(payload, 1)
+            state.conferences.splice(payload, 1)
         },
     },
     extraReducers: {
-        [getAdminBibleStudies.pending]: (state) => {
+        [getAdminConference.pending]: (state) => {
             state.loading = true
         },
-        [getAdminBibleStudies.fulfilled]: (state, { payload }) => {
+        [getAdminConference.fulfilled]: (state, { payload }) => {
             state.loading = false
-            state.bibleStudies = payload.bibleStudies
+            state.conferences = payload.conferences
         },
-        [getAdminBibleStudies.rejected]: (state, { payload }) => {
+        [getAdminConference.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },
-        [postDeleteBibleStudy.pending]: (state) => {
+        [postDeleteConference.pending]: (state) => {
             state.loading = true
         },
-        [postDeleteBibleStudy.fulfilled]: (state) => {
+        [postDeleteConference.fulfilled]: (state) => {
             state.loading = false
         },
-        [postDeleteBibleStudy.rejected]: (state, { payload }) => {
+        [postDeleteConference.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },
@@ -69,5 +69,5 @@ const bibleStudiesSlice = createSlice({
 })
 
 
-export const { deleteOne } = bibleStudiesSlice.actions
-export default bibleStudiesSlice.reducer
+export const { deleteOne } = conferenceSlice.actions
+export default conferenceSlice.reducer

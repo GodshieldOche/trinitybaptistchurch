@@ -14,6 +14,10 @@ import bibleStudyReducer from './features/bibleStudy'
 import addSeriesReducer from './features/addSeries'
 import seriesReducer from './features/series'
 import seriesDetailsReducer from './features/seriesDetails'
+import addConferenceReducer from './features/addConference'
+import conferencesReducer from './features/conferences'
+import conferenceReducer from './features/conference'
+
 
 
 
@@ -33,6 +37,9 @@ const combinedReducers = combineReducers({
     addSeries: addSeriesReducer,
     series: seriesReducer,
     seriesDetails: seriesDetailsReducer,
+    addConference: addConferenceReducer,
+    conferences: conferencesReducer,
+    conference: conferenceReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {

@@ -9,8 +9,9 @@ import { toast } from 'react-toastify';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ImageUploader from '../../../common/ImageUploader';
-import { postAddSeries } from '../../../..//redux/features/addSeries'
+import { postAddSeries } from '../../../../redux/features/addSeries'
 import ButtonLoader from '../../../common/ButtonLoader';
+import { postAddConference } from '../../../../redux/features/addConference'
 
 
 
@@ -22,8 +23,8 @@ const New = ({ name }) => {
     const [imagePreview, setImagePreview] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [dateRange, setDateRange] = useState([null, null]);
-    const [startDate, endDate] = dateRange;
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -36,22 +37,42 @@ const New = ({ name }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (title, description, imageUrl) {
-            setLoading(true)
-            console.log({ title, description, imageUrl })
-            dispatch(postAddSeries({ title, description, imageUrl })).then(result => {
-                if (!result.error) {
-                    setLoading(false)
-                    toast.success('Series Created Successfully')
-                    router.back()
-                } else {
-                    setLoading(false)
-                    console.log(result.error)
-                }
-            })
-        } else {
-            toast.error('Please fill all the required fields')
+        if (name === 'series') {
+            if (title, description, imageUrl) {
+                setLoading(true)
+                dispatch(postAddSeries({ title, description, imageUrl })).then(result => {
+                    if (!result.error) {
+                        setLoading(false)
+                        toast.success('Series Created Successfully')
+                        router.back()
+                    } else {
+                        setLoading(false)
+                        console.log(result.error)
+                    }
+                })
+            } else {
+                toast.info('Please fill all the required fields')
+            }
         }
+
+        if (name === 'conference') {
+            if (title, description, imageUrl, startDate, endDate) { 
+                setLoading(true)
+                dispatch(postAddConference({ title, description, imageUrl, startDate, endDate })).then(result => {
+                    if (!result.error) {
+                        setLoading(false)
+                        toast.success('Conference Created Successfully')
+                        router.back()
+                    } else {
+                        setLoading(false)
+                        console.log(result.error)
+                    }
+                })
+            } else {
+                toast.info('Please fill all the required fields')
+            }
+        }
+        
         
     }
 
@@ -98,11 +119,14 @@ const New = ({ name }) => {
                                     <label htmlFor="name" className="ml-2 text-sm uppercase">Conference Date</label>
                                     <DatePicker
                                         selectsRange={true}
+                                        selected={startDate}
                                         startDate={startDate}
                                         endDate={endDate}
                                         className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                        onChange={(update) => {
-                                            setDateRange(update);
+                                        onChange={(dates) => {
+                                            const [startDate, endDate] = dates
+                                            setStartDate(startDate)
+                                            setEndDate(endDate)
                                         }}
                                         isClearable={true}
                                     />

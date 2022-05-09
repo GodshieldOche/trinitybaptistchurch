@@ -12,30 +12,31 @@ import "react-datepicker/dist/react-datepicker.css";
 import ImageUploader from '../../../common/ImageUploader';
 import ButtonLoader from '../../../common/ButtonLoader';
 import { format } from 'date-fns'
-import { getSeriesDetails, updateSeries } from '../../../../redux/features/seriesDetails';
 import { setDeleteModalData, setDeletModalState } from '../../../../redux/features/menu'
+import { getConferenceDetails, updateConference } from '../../../../redux/features/conference';
 
-
-const Details = ({ name }) => {
+const Details = ({name}) => {
     const [imageUrl, setImageUrl] = useState('')
     const [imagePreview, setImagePreview] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [dateRange, setDateRange] = useState([null, null]);
-    const [startDate, endDate] = dateRange;
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
     const [buttonLoad, setButtonLoad] = useState(false)
 
     const router = useRouter();
-    const { loading, seriesDetails, message } = useSelector(state => state.seriesDetails)
+    const { loading, conference, message } = useSelector(state => state.conference)
     const dispatch = useDispatch();
     const { id } = router.query;
 
     useEffect(() => {
-        dispatch(getSeriesDetails(id)).then(result => {
+        dispatch(getConferenceDetails(id)).then(result => {
             if (!result.error) {
-                const { title, description, imageUrl } = result.payload.series
+                const { title, description, imageUrl, startDate, endDate } = result.payload.conference
                 setTitle(title)
                 setDescription(description)
+                setStartDate(new Date(startDate))
+                setEndDate(new Date(endDate))
                 setImageUrl(imageUrl)
                 setImagePreview(imageUrl.url)
             } else {
@@ -48,13 +49,14 @@ const Details = ({ name }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (title && description && imageUrl) { 
-            if (title !== seriesDetails.title || description !== seriesDetails.description || imageUrl !== seriesDetails.imageUrl) {
+        if (title && description && imageUrl) {
+            if (title !== conference.title || description !== conference.description || imageUrl !== conference.imageUrl
+                || startDate !== conference.startDate || endDate !== conference.endDate) {
                 setButtonLoad(true)
-                dispatch(updateSeries({id, title, description, imageUrl })).then(result => {
-                    if (!result.error) { 
+                dispatch(updateConference({ id, title, description, imageUrl, startDate, endDate })).then(result => {
+                    if (!result.error) {
                         setButtonLoad(false)
-                        toast.success('Series updated successfully')
+                        toast.success('Conference updated successfully')
                         router.back()
                     } else {
                         setButtonLoad(false)
@@ -66,12 +68,9 @@ const Details = ({ name }) => {
                 toast.info('Nothing to update')
             }
         }
-        
-       
+
+
     }
-
-    
-
 
   return (
       <div className="flex  w-full min-h-screen  my-2  mx-2 rounded-2xl bg-white">
@@ -105,8 +104,26 @@ const Details = ({ name }) => {
                           </div>
                       </div>
                       <div className="col-span-5 space-y-5 w-full text-gray-700 ">
+                          {/* date pickker */}
+                            <div className="space-y-2 w-full">
+                                <label htmlFor="name" className="ml-2 text-sm uppercase">Conference Date</label>
+                                <DatePicker
+                                    selectsRange={true}
+                                    selected={startDate}
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                    onChange={(dates) => {
+                                        const [startDate, endDate] = dates
+                                        setStartDate(startDate)
+                                        setEndDate(endDate)
+                                    }}
+                                    isClearable={true}
+                                />
+                            </div>
+
                           {/* image upload */}
-                          <ImageUploader imagePreview={imagePreview} setImagePreview={setImagePreview} setImageUrl={setImageUrl} imageUrl={imageUrl} height={"h-52"} />
+                          <ImageUploader imagePreview={imagePreview} setImagePreview={setImagePreview} setImageUrl={setImageUrl} imageUrl={imageUrl} height={"h-44"} />
                       </div>
                   </div>
               </form>
@@ -115,9 +132,9 @@ const Details = ({ name }) => {
                       <h1 className="uppercase text-lg font-medium">{`${name} sermons`}</h1>
                       <button
                           onClick={() => {
-                              router.push(`/admin/resources/series/sermon?id=${id}`)
+                              router.push(`/admin/resources/conference/sermon?id=${id}`)
                           }}
-                        className="uppercase  text-sm text-white rounded-md py-2 px-4 bg-primary-dark">Add sermon</button>
+                          className="uppercase  text-sm text-white rounded-md py-2 px-4 bg-primary-dark">Add sermon</button>
                   </div>
                   {
                       loading ? <Loader />
@@ -144,33 +161,33 @@ const Details = ({ name }) => {
                               </thead>
                               <tbody className="bg-white  ">
                                   {
-                                      seriesDetails?.sermons?.map((serm, index) => (
-                                          <tr key={serm._id} className={` transition duration-300 ease-in-out border-b border-b-gray-200`}>
+                                      conference?.sermons?.map((sermc, index) => (
+                                          <tr key={sermc._id} className={` transition duration-300 ease-in-out border-b border-b-gray-200`}>
 
                                               <td className="px-4 py-4 whitespace-nowrap text-sm  ">
                                                   <h1>{index + 1}</h1>
                                               </td>
                                               <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                                  <h1 className="capitalize">{ serm.title }</h1>
+                                                  <h1 className="capitalize">{sermc.title}</h1>
                                               </td>
                                               <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                                  <h1 className="capitalize">{serm.preacher.name}</h1>
+                                                  <h1 className="capitalize">{sermc.preacher.name}</h1>
                                               </td>
                                               <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                                  <h1 className="capitalize">{format(new Date(serm.date), 'MMM, do, yyyy')}</h1>
+                                                  <h1 className="capitalize">{format(new Date(sermc.date), 'MMM, do, yyyy')}</h1>
                                               </td>
                                               <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
                                                   <div className="flex space-x-2 items-center">
                                                       <div
                                                           onClick={() => {
-                                                              router.push(`/admin/resources/series/sermon/${index}?id=${id}`)
+                                                              router.push(`/admin/resources/conference/sermcon/${index}?id=${id}`)
                                                           }}
                                                           className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
                                                           <EditIcon className="!text-white !text-base" />
                                                       </div>
                                                       <div
                                                           onClick={() => {
-                                                              dispatch(setDeleteModalData({ serm, id, index }))
+                                                              dispatch(setDeleteModalData({ sermc, id, index }))
                                                               dispatch(setDeletModalState(true))
                                                           }}
                                                           className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
@@ -184,7 +201,7 @@ const Details = ({ name }) => {
                                   }
                               </tbody>
                           </table>
-                  }   
+                  }
               </div>
               <div className="flex items-center justify-between w-full !mb-3">
                   <h1
