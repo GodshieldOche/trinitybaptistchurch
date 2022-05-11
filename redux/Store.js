@@ -17,6 +17,9 @@ import seriesDetailsReducer from './features/seriesDetails'
 import addConferenceReducer from './features/addConference'
 import conferencesReducer from './features/conferences'
 import conferenceReducer from './features/conference'
+import addEventReducer from './features/addEvent'
+import eventsReducer from './features/events'
+import eventReducer from './features/event'
 
 
 
@@ -40,6 +43,9 @@ const combinedReducers = combineReducers({
     addConference: addConferenceReducer,
     conferences: conferencesReducer,
     conference: conferenceReducer,
+    addEvent: addEventReducer,
+    events: eventsReducer,
+    event: eventReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {
@@ -51,6 +57,10 @@ const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (bu
 const initStore = () => {
     const store = configureStore({
         reducer: rootReducer,
+        middleware: getDefaultMiddleware =>
+            getDefaultMiddleware({
+                serializableCheck: false,
+            }),
     })
     return store
 }

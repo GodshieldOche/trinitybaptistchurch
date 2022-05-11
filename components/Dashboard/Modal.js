@@ -1,13 +1,47 @@
-import { useDispatch } from "react-redux"
-import { setModalState } from "../../redux/features/menu"
-import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setModalState, setSessions } from "../../redux/features/menu"
+import { useState, useEffect } from "react"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { getAdminMinisters } from "../../redux/features/getMinisters";
+import ButtonLoader from "../common/ButtonLoader";
 
 const Modal = () => {
-    const [startTime1, setStartTime1] = useState(new Date());
-    const [startTime2, setStartTime2] = useState(new Date());
+    const [startTime, setStartTime] = useState(new Date());
+    const [endTime, setEndTime] = useState(new Date());
+    const [topic, setTopic] = useState('');
+    const [preacherName, setPreacherName] = useState('');
+    const [description, setDescription] = useState('');
+    const [loading, setLoading] = useState('');
     const dispatch = useDispatch()
+
+    const { modalData } = useSelector(state => state.menu)
+    const { ministers } = useSelector(state => state.ministers)
+
+    useEffect(() => { 
+        dispatch(getAdminMinisters())
+    }, [])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setLoading(true)
+        let preacher = ''
+        ministers.forEach(minister => {
+            if (minister.name === preacherName) {
+                preacher = minister._id
+            }
+        })
+        const session = {
+            day: modalData,
+            topic,
+            preacher,
+            description,
+            startTime,
+            endTime,
+        }
+        dispatch(setSessions(session))
+        dispatch(setModalState(false))
+    }
 
     return (
         <div
@@ -18,7 +52,7 @@ const Modal = () => {
                 onClick={(e) => e.stopPropagation()}
                 className="flex w-full h-full justify-center items-center">
                 <div className="flex flex-col space-y-5 max-w-screen-md mx-auto h-[500px] w-full !px-5 !py-5 relative rounded-2xl bg-white">
-                    <h1 className="uppercase font-medium text-primary-dark text-center">Day 1, June 11th 2022</h1>
+                    <h1 className="uppercase font-medium text-primary-dark text-center">{modalData}</h1>
                     <form className="flex flex-col space-y-4 w-full items-center justify-start">
                         <div className="grid grid-cols-12 w-full items-center gap-3">
                             <div className="col-span-6 w-full space-y-2">
@@ -28,34 +62,30 @@ const Modal = () => {
                                     name="title"
                                     className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
                                     required
-                                // value={name}
-                                // onChange={(e) => { setName(e.target.value) }}
+                                    value={topic}
+                                    onChange={(e) => { setTopic(e.target.value) }}
                                 />
                             </div>
                             <div className="col-span-3 w-full space-y-2">
                                 <label htmlFor="title" className="ml-2 text-sm uppercase">Starts</label>
                                 <DatePicker
-                                    selected={startTime1}
-                                    onChange={(date) => setStartTime1(date)}
+                                    selected={startTime}
+                                    onChange={(date) => setStartTime(date)}
                                     className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                    showTimeSelect
-                                    showTimeSelectOnly
-                                    timeIntervals={15}
-                                    timeCaption="Time"
-                                    dateFormat="h:mm aa"
+                                    timeInputLabel="Time:"
+                                    dateFormat="MM/dd/yyyy h:mm aa"
+                                    showTimeInput
                                 />
                             </div>
                             <div className="col-span-3 w-full space-y-2">
                                 <label htmlFor="title" className="ml-2 text-sm uppercase">Ends</label>
                                 <DatePicker
-                                    selected={startTime2}
-                                    onChange={(date) => setStartTime2(date)}
+                                    selected={endTime}
+                                    onChange={(date) => setEndTime(date)}
                                     className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                    showTimeSelect
-                                    showTimeSelectOnly
-                                    timeIntervals={15}
-                                    timeCaption="Time"
-                                    dateFormat="h:mm aa"
+                                    timeInputLabel="Time:"
+                                    dateFormat="MM/dd/yyyy h:mm aa"
+                                    showTimeInput
                                 />
                             </div>
                         </div>
@@ -64,30 +94,28 @@ const Modal = () => {
                             <label htmlFor="name" className="ml-2 text-sm uppercase">Preacher</label>
                             <select
                                 type="text"
-                                name="category"
+                                name="preacher"
                                 className="w-full capitalize text-gray-500 !px-1 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                            // value={category}
-                            // onChange={(e) => {
-                            //     setCategory(e.target.value)
-                            //     handleTopic(e.target.value)
-                            // }}
+                                value={preacherName}
+                                onChange={(e) => {
+                                    setPreacherName(e.target.value)
+                                }}
                             >
                                 {
-                                    ["select preacher", "abutu peter joshua", "eleazar maduka", "oche chidi"].map(preacher => (
-                                        <option className="capitalize" key={preacher} value={preacher}>{preacher}</option>
+                                    ministers && [{ name: "select preacher", _id: 1 }, ...ministers].map(minister => (
+                                        <option className="capitalize" key={minister._id} value={minister.name}>{minister.name}</option>
                                     ))
                                 }
                             </select>
                         </div>
                         {/* description */}
-                        {/* Description */}
                         <div className="w-full space-y-2">
                             <label htmlFor="description" className="ml-2 text-sm uppercase">description</label>
                             <textarea
                                 className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
                                 rows="4"
-                            // value={description}
-                            // onChange={(e) => { setDescription(e.target.value) }}
+                                value={description}
+                                onChange={(e) => { setDescription(e.target.value) }}
                             >
                             </textarea>
                         </div>
@@ -98,8 +126,11 @@ const Modal = () => {
                             className="cursor-pointer text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-red-700">
                             cancel
                         </h1>
-                        <button className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
-                            add session
+                        <button onClick={handleSubmit} className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
+                            {
+                                loading ? <ButtonLoader /> : "add session"
+                            }
+                            
                         </button>
                     </div>
                 </div>

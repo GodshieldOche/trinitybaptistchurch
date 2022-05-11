@@ -7,6 +7,8 @@ const menuSlice = createSlice({
     initialState: {
         menuState: false,
         modalState: false,
+        modalData: '',
+        sessions: [],
         deletModalState: false,
         deleteModalData: {}
     },
@@ -23,9 +25,15 @@ const menuSlice = createSlice({
         setDeleteModalData: (state, { payload }) => {
             state.deleteModalData = payload
         },
+        setModalData: (state, { payload }) => {
+            state.modalData = payload
+        },
+        setSessions: (state, { payload }) => {
+            state.sessions.push(payload)
+        },
     },
 })
 
 
-export const { setMenuState, setModalState, setDeleteModalData, setDeletModalState } = menuSlice.actions
+export const { setMenuState, setModalState, setDeleteModalData, setDeletModalState, setModalData, setSessions } = menuSlice.actions
 export default menuSlice.reducer
