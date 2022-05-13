@@ -33,6 +33,20 @@ export const updateEvent = createAsyncThunk(
     }
 )
 
+export const postDeleteEventSession = createAsyncThunk(
+    `series/postDeleteEventSession`,
+    async ({ id, sessionId, index }, { dispatch, rejectWithValue }) => {
+        try {
+            const { data } = await axios.delete(`/api/admin/event?id=${id}&sessionId=${sessionId}`)
+            dispatch(deleteOne(index))
+            return data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message)
+        }
+
+    }
+)
+
 
 const eventSlice = createSlice({
     name: 'event',
@@ -42,6 +56,9 @@ const eventSlice = createSlice({
         message: null,
     },
     reducers: {
+        deleteOne: (state, { payload }) => {
+            state.event.sessions?.splice(payload, 1)
+        },
         setEventSessions: (state, { payload }) => {
             const inArray = state.event?.sessions?.find(session => session._id === payload._id)
             if (inArray) {
@@ -81,9 +98,19 @@ const eventSlice = createSlice({
             state.loading = false
             state.message = payload
         },
+        [postDeleteEventSession.pending]: (state) => {
+            state.loading = true
+        },
+        [postDeleteEventSession.fulfilled]: (state) => {
+            state.loading = false
+        },
+        [postDeleteEventSession.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.message = payload
+        },
     }
 })
 
 
-export const { setEventSessions } = eventSlice.actions
+export const { setEventSessions, deleteOne } = eventSlice.actions
 export default eventSlice.reducer

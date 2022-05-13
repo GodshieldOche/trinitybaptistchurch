@@ -112,11 +112,40 @@ const updateEvent = asyncHandler(async (req, res, next) => {
 
 
 
+// Delete Event sermon
+// Delete => api/admin/event/:id
+const deleteEventSession = asyncHandler(async (req, res, next) => {
+
+    const { sessionId, id } = req.query
+
+    const event = await Event.findById(id)
+
+    if (!event) {
+        return next(new ErrorHandler('Event not found with this ID', 404))
+    } else {
+
+        
+        const updatedEventSessions = event.sessions.filter(session => session._id.toString() !== sessionId.toString())
+
+        event.sessions = updatedEventSessions
+
+        await event.save()
+
+        res.status(200).json({
+            success: "true",
+            message: "Event Session Deleted"
+        })
+    }
+}) 
+
+
+
 
 export {
     createEvent,
     getAdminEvent,
     deleteEvent,
     getEvent,
-    updateEvent
+    updateEvent,
+    deleteEventSession
 }

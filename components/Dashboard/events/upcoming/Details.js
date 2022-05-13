@@ -10,6 +10,7 @@ import { clearSessions, setModalData, setModalState } from '../../../../redux/fe
 import ImageUploader from '../../../common/ImageUploader';
 import ButtonLoader from '../../../common/ButtonLoader';
 import { getEvent, updateEvent } from '../../../../redux/features/event';
+import { setDeleteModalData, setDeletModalState } from '../../../../redux/features/menu'
 
 const Details = () => {
 
@@ -212,7 +213,12 @@ const Details = () => {
                                                   className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
                                                   <EditIcon className="!text-white !text-base" />
                                               </div>
-                                              <div className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
+                                              <div
+                                                  onClick={() => {
+                                                      dispatch(setDeleteModalData({ eve, id, index }))
+                                                      dispatch(setDeletModalState(true))
+                                                  }}
+                                                  className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
                                                   <DeleteIcon className="!text-white !text-base" />
                                               </div>
                                           </div>
