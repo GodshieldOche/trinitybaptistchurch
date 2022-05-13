@@ -12,6 +12,7 @@ import { postDeleteConferenceSermon } from "../../redux/features/conference"
 import { postDeleteConference } from "../../redux/features/conferences"
 import { postDeleteEvent } from "../../redux/features/events"
 import { postDeleteEventSession } from "../../redux/features/event"
+import { postDeleteService } from "../../redux/features/services"
 
 
 const DeleteModal = () => {
@@ -55,6 +56,10 @@ const DeleteModal = () => {
         // event session
         deleteModalData.eve && setDataName(deleteModalData.eve.topic)
         deleteModalData.eve && setData(deleteModalData.eve)
+
+        // service
+        deleteModalData.service && setDataName(deleteModalData.service.service)
+        deleteModalData.service && setData(deleteModalData.service)
     }, [])
     const dispatch = useDispatch()
 
@@ -170,6 +175,18 @@ const DeleteModal = () => {
                 if (!result.error) {
                     setLoading(false)
                     toast.success("successfully deleted Event Session")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+        if (deleteModalData.service) {
+            dispatch(postDeleteService({ id, index })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("successfully deleted")
                     dispatch(setDeletModalState(false))
                 } else {
                     console.log(result.error)

@@ -4,6 +4,12 @@ import asyncHandler from "express-async-handler";
 import cloudinary from "cloudinary"
 import ErrorHandler from "../middleware/errorHandler"
 
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
 // create series
 // post =>  /api/admin/series
 const createSeries = asyncHandler(async (req, res, next) => {

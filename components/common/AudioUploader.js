@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useS3Upload } from "next-s3-upload";
 import ButtonLoader from "./ButtonLoader"
 
-const AudioUploader = ({ audioUrl, setAudioUrl }) => {
+const AudioUploader = ({ audioUrl, setAudioUrl, name }) => {
     const [loading, setLoading] = useState(false);
     const [audio, setAudio] = useState();
     const { uploadToS3, files } = useS3Upload();
@@ -14,7 +14,6 @@ const AudioUploader = ({ audioUrl, setAudioUrl }) => {
             const { url } = await uploadToS3(audio);
 
             setAudioUrl(url);
-            console.log(url);
             setLoading(false)
         }  
     };
@@ -22,13 +21,15 @@ const AudioUploader = ({ audioUrl, setAudioUrl }) => {
 
     return (
         <div className="space-y-4 w-full">
-            <h1 className="ml-2 text-sm uppercase">audio file</h1>
+            <h1 className="ml-2 text-sm uppercase">{`${ name ? name : "audio" } file`}</h1>
             <input
                 onChange={(e) => {
                     setAudio(e.target.files[0])
                     setAudioUrl('')
                     }}
-                type="file" className="block w-full text-sm text-slate-500
+                type="file"
+                accept="audio/*,.pdf"
+                className="block w-full text-sm text-slate-500
                             file:mr-4 file:py-2 file:px-4
                             file:rounded-full file:border-0
                             file:text-sm file:font-semibold
@@ -53,7 +54,7 @@ const AudioUploader = ({ audioUrl, setAudioUrl }) => {
                                 })
                             }
                         </div>
-                        : "Upload audio"
+                        : name ? "upload bulletin" : "Upload audio"
                 }
             </button>
         </div>

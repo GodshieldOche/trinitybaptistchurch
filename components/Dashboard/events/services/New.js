@@ -3,36 +3,48 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ImageUploader from '../../../common/ImageUploader';
+import AudioUploader from '../../../common/AudioUploader';
+import { useDispatch } from 'react-redux'
+import { postCreateService } from '../../../../redux/features/addService'
+import { toast } from 'react-toastify'
+import ButtonLoader from '../../../common/ButtonLoader'
 
 
 const New = () => {
-    const [image, setImage] = useState('')
+    const [imageUrl, setImageUrl] = useState('')
     const [imagePreview, setImagePreview] = useState('')
-    const [startDate, setStartDate] = useState(new Date());
-    const [startTime, setStartTime] = useState(new Date());
+    const [service, setService] = useState('')
+    const [topic, setTopic] = useState('')
+    const [audioUrl, setAudioUrl] = useState();
+    const [date, setDate] = useState(new Date());
+    const [loading, setLoading] = useState(false)
+
+    const router = useRouter();
+    const dispatch = useDispatch()
 
     useEffect(() => {
 
     }, []);
 
-    const router = useRouter();
 
-
-    const onChange = (e) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setImage(reader.result)
-                setImagePreview(reader.result)
-            }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (audioUrl && date && topic &&  imageUrl && service) {
+            setLoading(true)
+            dispatch(postCreateService({ service, date, topic, imageUrl, bulletin: audioUrl })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success('Service Created Successfully')
+                    router.back()
+                } else {
+                    setLoading(false)
+                    console.log(result.error)
+                }
+            })
+        } else {
+            toast.info('Please fill all the fields')
         }
-        reader.readAsDataURL(e.target.files[0])
-    }
-
-    const onDrop = (e) => {
-        const droppedFile = Array.from(e.dataTransfer.files);
-        setImage(droppedFile[0]);
-        setImagePreview(URL.createObjectURL(droppedFile[0]));
     }
 
     return (
@@ -42,88 +54,43 @@ const New = () => {
                 <form className="w-full space-y-5" autoComplete="off">
                     <div className="w-full h-full grid grid-cols-12 items-center gap-5">
                         <div className="col-span-7 space-y-5 w-full text-gray-700 ">
-                            <div className="grid grid-cols-12  w-full items-center gap-2">
-                                <div className="col-span-8 space-y-2">
-                                    <label htmlFor="title" className="ml-2 text-sm uppercase">Service</label>
-                                    <input
-                                        type="title"
-                                        name="title"
-                                        className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                        required
-                                    // value={name}
-                                    // onChange={(e) => { setName(e.target.value) }}
-                                    />
-                                </div>
-                                <div className="col-span-4 space-y-2">
-                                    <label htmlFor="title" className="ml-2 text-sm uppercase">Date</label>
-                                    <DatePicker
-                                        closeOnScroll={true}
-                                        selected={startDate}
-                                        className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                        onChange={(date) => setStartDate(date)}
-                                    />
-                                </div>
+                            <div className="w-full space-y-2">
+                                <label htmlFor="service" className="ml-2 text-sm uppercase">Service</label>
+                                <input
+                                    type="text"
+                                    name="service"
+                                    className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                    required
+                                    value={service}
+                                    onChange={(e) => { setService(e.target.value) }}
+                                />
                             </div>
-                            <div className="grid grid-cols-12  w-full items-center gap-2">
-                                <div className="col-span-8 space-y-2">
-                                    <label htmlFor="title" className="ml-2 text-sm uppercase">Topic</label>
-                                    <input
-                                        type="title"
-                                        name="title"
-                                        className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                        required
-                                    // value={name}
-                                    // onChange={(e) => { setName(e.target.value) }}
-                                    />
-                                </div>
-                                <div className="col-span-4 space-y-2">
-                                    <label htmlFor="title" className="ml-2 text-sm uppercase">Time</label>
-                                    <DatePicker
-                                        selected={startTime}
-                                        onChange={(date) => setStartTime(date)}
-                                        className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                        showTimeSelect
-                                        showTimeSelectOnly
-                                        timeIntervals={15}
-                                        timeCaption="Time"
-                                        dateFormat="h:mm aa"
-                                    />
-                                </div>
+                            <div className="w-full space-y-2">
+                                <label htmlFor="topic" className="ml-2 text-sm uppercase">Topic</label>
+                                <input
+                                    type="text"
+                                    name="topic"
+                                    className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                    required
+                                    value={topic}
+                                    onChange={(e) => { setTopic(e.target.value) }}
+                                />
+                            </div>
+                            <div className="w-full space-y-2">
+                                <label htmlFor="title" className="ml-2 text-sm uppercase">Time</label>
+                                <DatePicker
+                                    selected={date}
+                                    onChange={(date) => setDate(date)}
+                                    className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                    timeInputLabel="Time:"
+                                    dateFormat="MM/dd/yyyy h:mm aa"
+                                    showTimeInput
+                                />
                             </div>
                         </div>
                         <div className="col-span-5 space-y-5 w-full text-gray-700 ">
-                            <div className="space-y-4 w-full">
-                                <h1 className=" uppercase text-sm">Image</h1>
-                                <label
-                                    onDragOver={e => {
-                                        e.preventDefault();
-                                    }}
-                                    onDragLeave={e => {
-                                        e.preventDefault();
-                                    }}
-                                    onDrop={e => {
-                                        e.preventDefault();
-                                        onDrop(e)
-                                    }}
-                                    htmlFor="dropzone-file" className={`h-44 relative flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100`}>
-                                    {
-                                        imagePreview ?
-                                            <Image src={imagePreview} className="object-cover w-1/2 h-1/2 "
-                                                layout="fill"
-                                                blurDataURL="data:..."
-                                                placeholder="blur"
-                                                alt="preview" />
-                                            :
-                                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 font-medium capitalize">Drag 'n' Drop</p>
-                                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 capitalize">or Click to select</p>
-                                                <p className="text-xs text-gray-500 dark:text-gray-400">PNG or JPG </p>
-                                            </div>
-                                    }
-                                    <input onChange={onChange} id="dropzone-file" type="file" className="hidden" />
-                                </label>
-                                <h1 className="text-center cursor-pointer w-full py-2 text-white text-sm uppercase bg-violet-700 rounded-lg">Upload Image</h1>
-                            </div>
+                            <ImageUploader imagePreview={imagePreview} setImagePreview={setImagePreview} setImageUrl={setImageUrl} imageUrl={imageUrl} height={"h-44"} />
+                            <AudioUploader audioUrl={audioUrl} setAudioUrl={setAudioUrl} name="bulletin" />
                         </div>
                     </div>
                     <div className="flex items-center justify-between w-full !mt-10 !mb-3">
@@ -132,8 +99,10 @@ const New = () => {
                             className="cursor-pointer text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-red-700">
                             cancel
                         </h1>
-                        <button className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
-                            create
+                        <button onClick={handleSubmit} className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
+                            {
+                                loading ? <ButtonLoader /> : 'create'
+                            }
                         </button>
                     </div>
                 </form>

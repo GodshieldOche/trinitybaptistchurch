@@ -20,6 +20,10 @@ import conferenceReducer from './features/conference'
 import addEventReducer from './features/addEvent'
 import eventsReducer from './features/events'
 import eventReducer from './features/event'
+import addServiceReducer from './features/addService'
+import servicesReducer from './features/services'
+import serviceReducer from './features/service'
+
 
 
 
@@ -46,6 +50,9 @@ const combinedReducers = combineReducers({
     addEvent: addEventReducer,
     events: eventsReducer,
     event: eventReducer,
+    addService: addServiceReducer,
+    services: servicesReducer,
+    service: serviceReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {
