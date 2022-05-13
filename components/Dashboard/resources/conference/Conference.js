@@ -97,7 +97,7 @@ const Conference = () => {
                                         <td className="text-sm px-3 py-4 whitespace-nowrap">
                                             <div className="flex flex-col space-y-2">
                                                 {
-                                                    !conference.sermons[index]?.preacher ? <h1 className="capitalize">0 preacher</h1> : lister(index)
+                                                    !conference.sermons ? <h1 className="capitalize">0 preacher</h1> : lister(index)
                                                 }
                                             </div>
                                         </td>

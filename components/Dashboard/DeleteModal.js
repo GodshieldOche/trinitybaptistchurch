@@ -10,6 +10,7 @@ import { postDeleteSeries } from "../../redux/features/series"
 import { postDeleteSeriesSermon } from "../../redux/features/seriesDetails"
 import { postDeleteConferenceSermon } from "../../redux/features/conference"
 import { postDeleteConference } from "../../redux/features/conferences"
+import { postDeleteEvent } from "../../redux/features/events"
 
 
 const DeleteModal = () => {
@@ -45,6 +46,10 @@ const DeleteModal = () => {
         // conference
         deleteModalData.conference && setDataName(deleteModalData.conference.title)
         deleteModalData.conference && setData(deleteModalData.conference)
+
+        // event
+        deleteModalData.event && setDataName(deleteModalData.event.title)
+        deleteModalData.event && setData(deleteModalData.event)
     }, [])
     const dispatch = useDispatch()
 
@@ -128,9 +133,22 @@ const DeleteModal = () => {
             })
         }
 
-        // conference sermon
+        // conference
         if (deleteModalData.conference) {
             dispatch(postDeleteConference({ id, index })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("successfully deleted")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+        // event
+        if (deleteModalData.event) {
+            dispatch(postDeleteEvent({ id, index })).then(result => {
                 if (!result.error) {
                     setLoading(false)
                     toast.success("successfully deleted")

@@ -18,13 +18,9 @@ export const getEvent = createAsyncThunk(
 
 export const updateEvent = createAsyncThunk(
     `event/updateEvent`,
-    async ({ id, title, category, topic, preacher, book, chapter, verse, date,
-        description, imageUrl, audioUrl, youtubeLink }, { rejectWithValue }) => {
+    async ({ id, title, type, description, startDate, endDate, imageUrl, sessions }, { rejectWithValue }) => {
         try {
-            const { data } = await axios.put(`/api/admin/event/${id}`, {
-                title, category, topic, preacher, book, chapter, verse, date,
-                description, imageUrl, audioUrl, youtubeLink
-            }, {
+            const { data } = await axios.put(`/api/admin/event/${id}`, { title, type, description, startDate, endDate, imageUrl, sessions }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -46,7 +42,22 @@ const eventSlice = createSlice({
         message: null,
     },
     reducers: {
-
+        setEventSessions: (state, { payload }) => {
+            const inArray = state.event?.sessions?.find(session => session._id === payload._id)
+            if (inArray) {
+                state.event?.sessions?.map(session => {
+                    if (session._id === payload._id) {
+                        session.topic = payload.topic
+                        session.preacher._id = payload.preacher
+                        session.description = payload.description
+                        session.startTime = payload.startTime
+                        session.endTime = payload.endTime
+                    }
+                })
+            } else {
+                state.event?.sessions?.push(payload)
+            }
+        },
     },
     extraReducers: {
         [getEvent.pending]: (state) => {
@@ -74,5 +85,5 @@ const eventSlice = createSlice({
 })
 
 
-// export const { deleteOne, addevent } = eventSlice.actions
+export const { setEventSessions } = eventSlice.actions
 export default eventSlice.reducer

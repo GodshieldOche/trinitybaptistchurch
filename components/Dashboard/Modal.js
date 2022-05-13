@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getAdminMinisters } from "../../redux/features/getMinisters";
 import ButtonLoader from "../common/ButtonLoader";
+import { setEventSessions } from '../../redux/features/event'
 
 const Modal = () => {
     const [startTime, setStartTime] = useState(new Date());
@@ -12,6 +13,7 @@ const Modal = () => {
     const [topic, setTopic] = useState('');
     const [preacherName, setPreacherName] = useState('');
     const [description, setDescription] = useState('');
+    const [id, setId] = useState(Math.random());
     const [loading, setLoading] = useState('');
     const dispatch = useDispatch()
 
@@ -20,6 +22,36 @@ const Modal = () => {
 
     useEffect(() => { 
         dispatch(getAdminMinisters())
+        const { startTime, endTime, topic, description, preacher, id } = modalData
+
+        if (modalData._id) {
+            ministers.map(minister => {
+                if (minister._id === preacher._id) {
+                    setPreacherName(minister.name)
+                }
+            })
+            if (startTime, endTime, topic, description) {
+                setStartTime(new Date(startTime))
+                setEndTime(new Date(endTime))
+                setTopic(topic)
+                setDescription(description)
+                setId(id)
+            }
+        } else {
+            ministers.map(minister => {
+                if (minister._id === preacher) {
+                    setPreacherName(minister.name)
+                }
+            })
+            if (startTime, endTime, topic, description, id) {
+                setStartTime(startTime)
+                setEndTime(endTime)
+                setTopic(topic)
+                setDescription(description)
+                setId(id)
+            }
+        }
+        
     }, [])
 
     const handleSubmit = (e) => {
@@ -31,16 +63,34 @@ const Modal = () => {
                 preacher = minister._id
             }
         })
-        const session = {
-            day: modalData,
-            topic,
-            preacher,
-            description,
-            startTime,
-            endTime,
+        
+        if (modalData._id) {
+            const session = {
+                _id: modalData._id,
+                topic,
+                preacher,
+                description,
+                startTime,
+                endTime,
+            }
+
+            dispatch(setEventSessions(session))
+            dispatch(setModalState(false))
+        } else {
+            
+            const session = {
+                day: modalData.day ? modalData.day : modalData,
+                topic,
+                preacher,
+                description,
+                startTime,
+                endTime,
+                id
+            }
+            dispatch(setSessions(session))
+            dispatch(setModalState(false))
         }
-        dispatch(setSessions(session))
-        dispatch(setModalState(false))
+        
     }
 
     return (
@@ -52,7 +102,7 @@ const Modal = () => {
                 onClick={(e) => e.stopPropagation()}
                 className="flex w-full h-full justify-center items-center">
                 <div className="flex flex-col space-y-5 max-w-screen-md mx-auto h-[500px] w-full !px-5 !py-5 relative rounded-2xl bg-white">
-                    <h1 className="uppercase font-medium text-primary-dark text-center">{modalData}</h1>
+                    <h1 className="uppercase font-medium text-primary-dark text-center">{modalData.day ? modalData.day : modalData}</h1>
                     <form className="flex flex-col space-y-4 w-full items-center justify-start">
                         <div className="grid grid-cols-12 w-full items-center gap-3">
                             <div className="col-span-6 w-full space-y-2">
@@ -128,7 +178,7 @@ const Modal = () => {
                         </h1>
                         <button onClick={handleSubmit} className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
                             {
-                                loading ? <ButtonLoader /> : "add session"
+                                loading ? <ButtonLoader /> : modalData._id ? "upadte session" : "add session"
                             }
                             
                         </button>

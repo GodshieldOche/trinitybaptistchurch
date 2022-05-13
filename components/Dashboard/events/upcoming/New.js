@@ -7,12 +7,10 @@ import { useRouter } from 'next/router';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux"
-import { setModalData, setModalState } from '../../../../redux/features/menu';
+import { clearSessions, setModalData, setModalState } from '../../../../redux/features/menu';
 import { postCreateEvent } from '../../../../redux/features/addEvent'
 import ImageUploader from '../../../common/ImageUploader';
 import ButtonLoader from '../../../common/ButtonLoader';
-
-const lists = [1]
 
 const New = () => {
     const [imagePreview, setImagePreview] = useState('')
@@ -29,10 +27,14 @@ const New = () => {
     
     const dispatch = useDispatch()
     const { sessions } = useSelector(state => state.menu)
+    const { ministers } = useSelector(state => state.ministers)
 
     useEffect(() => {
         for (let i = 1; i <= days; i++) {
             setArr( prev => [...prev, `Day ${i}`])
+        }
+        return () => {
+            dispatch(clearSessions())
         }
     }, [days]);
 
@@ -44,13 +46,16 @@ const New = () => {
         if (sessions && imageUrl && title && type && description && startDate && endDate) {
             dispatch(postCreateEvent({ title, type, description, startDate, endDate, imageUrl, sessions })).then(res => {
                 if (!res.error) {
+                    dispatch(clearSessions())
+                    setLoading(false)
                     toast.success('Event created successfully')
                     router.back()
                 } else {
                     console.log(res.error)
+                    setLoading(false)
                 }
             })
-            setLoading(false)
+            
         } else {
             toast.info('Please fill all the fields')
             setLoading(false)
@@ -187,8 +192,8 @@ const New = () => {
                         </thead>
                         <tbody className="bg-white  ">
                             {
-                                lists.map((item, index) => (
-                                    <tr key={item} className={` transition duration-300 ease-in-out border-b border-b-gray-200`}>
+                                sessions && sessions.map((item, index) => (
+                                    <tr key={item.id} className={` transition duration-300 ease-in-out border-b border-b-gray-200`}>
 
                                         <td className="px-4 py-4 whitespace-nowrap text-sm  ">
                                             <h1>{index + 1}</h1>
@@ -199,10 +204,18 @@ const New = () => {
                                             </div>
                                         </td>
                                         <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                            <h1 className="capitalize">Sovereingty of God defined</h1>
+                                            <h1 className="capitalize">{item.topic}</h1>
                                         </td>
                                         <td className="text-sm  px-3 py-4 whitespace-nowrap ">
-                                            <h1>Damilare Sobanjo</h1>
+                                            <h1>
+                                                {
+                                                    ministers.map(minister => {
+                                                        if (minister._id === item.preacher) {
+                                                            return minister.name
+                                                        }
+                                                    })
+                                                }
+                                            </h1>
                                         </td>
                                         <td className="text-sm  px-3 py-4 whitespace-nowrap ">
                                             <div className="flex flex-col space-y-2">
@@ -211,7 +224,12 @@ const New = () => {
                                         </td>
                                         <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
                                             <div className="flex space-x-2 items-center">
-                                                <div className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
+                                                <div
+                                                    onClick={() => {
+                                                        dispatch(setModalState(true))
+                                                        dispatch(setModalData(item))
+                                                    }}
+                                                    className="flex justify-center items-center cursor-pointer hover:bg-primary-dark bg-primary-dark/90 w-7 h-7 rounded-full">
                                                     <EditIcon className="!text-white !text-base" />
                                                 </div>
                                                 <div className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">

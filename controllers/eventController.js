@@ -58,7 +58,7 @@ const deleteEvent = asyncHandler(async (req, res, next) => {
 })
 
 // get Event
-// get => api/events/:id
+// get => api/event/:id
 const getEvent = asyncHandler(async (req, res, next) => {
 
     const event = await Event.findById(req.query.id).populate({
@@ -87,20 +87,14 @@ const updateEvent = asyncHandler(async (req, res, next) => {
     if (!event) {
         return next(new ErrorHandler('Event not found with this ID', 404))
     } else {
-        const { title, type, description, startDate, endDate, imageUrl,
-            day, topic, preacher, description2, startTime, endTime,} = req.body
+        const { title, type, description, startDate, endDate, imageUrl, sessions } = req.body
 
         event.title = title
         event.type = type
         event.description = description
         event.startDate = startDate
         event.endDate = endDate
-        event.day = day
-        event.topic = topic
-        event.preacher = preacher
-        event.description2 = description2
-        event.startTime = startTime
-        event.endTime = endTime
+        event.sessions = sessions
 
         if (event.imageUrl.public_id && event.imageUrl.public_id !== imageUrl.public_id) {
             await cloudinary.v2.uploader.destroy(event.imageUrl.public_id)

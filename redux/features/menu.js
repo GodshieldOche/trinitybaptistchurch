@@ -7,7 +7,7 @@ const menuSlice = createSlice({
     initialState: {
         menuState: false,
         modalState: false,
-        modalData: '',
+        modalData: {},
         sessions: [],
         deletModalState: false,
         deleteModalData: {}
@@ -29,11 +29,27 @@ const menuSlice = createSlice({
             state.modalData = payload
         },
         setSessions: (state, { payload }) => {
-            state.sessions.push(payload)
+            const inArray = state.sessions.find(session => session.id === payload.id)
+            if (inArray) {
+                state.sessions.map(session => { 
+                    if (session.id === payload.id) { 
+                        session.topic = payload.topic
+                        session.preacher = payload.preacher
+                        session.description = payload.description
+                        session.startTime = payload.startTime
+                        session.endTime = payload.endTime
+                    }
+                })
+            } else {
+                state.sessions.push(payload)
+            }
+        },
+        clearSessions: (state) => {
+            state.sessions = []
         },
     },
 })
 
 
-export const { setMenuState, setModalState, setDeleteModalData, setDeletModalState, setModalData, setSessions } = menuSlice.actions
+export const { setMenuState, setModalState, setDeleteModalData, setDeletModalState, setModalData, setSessions, clearSessions } = menuSlice.actions
 export default menuSlice.reducer
