@@ -23,6 +23,7 @@ import eventReducer from './features/event'
 import addServiceReducer from './features/addService'
 import servicesReducer from './features/services'
 import serviceReducer from './features/service'
+import clientSermonsReducer from './features/client/sermons'
 
 
 
@@ -53,6 +54,7 @@ const combinedReducers = combineReducers({
     addService: addServiceReducer,
     services: servicesReducer,
     service: serviceReducer,
+    clientSermons: clientSermonsReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {

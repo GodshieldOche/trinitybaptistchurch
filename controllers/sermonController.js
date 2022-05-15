@@ -11,6 +11,24 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
+
+// get client sermons
+// get => /api/client/sermons
+const getSermons = asyncHandler(async (req, res, next) => {
+
+    const sermons = await Sermon.find({}).populate({
+        path: 'preacher',
+        select: "name imageUrl",
+        model: Minister
+    })
+
+    res.status(200).json({
+        success: "true",
+        sermons
+    })
+
+})
+
 // create sermon
 // post =>  /api/admin/sermons
 const createSermon = asyncHandler(async (req, res, next) => {
@@ -139,5 +157,6 @@ export {
     getAdminSermons,
     deleteSermon,
     getSermon,
-    updateSermon
+    updateSermon,
+    getSermons
 }

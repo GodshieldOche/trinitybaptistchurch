@@ -116,6 +116,7 @@ const New = () => {
                         <Editor name="description"
                             onChange={(data) => {
                                 setData(data);
+                                console.log(data)
                             }}
                             editorLoaded={editorLoaded}/>
                     </div>

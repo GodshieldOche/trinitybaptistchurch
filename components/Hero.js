@@ -3,6 +3,7 @@ import Link from "next/link"
 import { useState } from "react"
 import LiveStream from "./LiveStream"
 import Upcoming from "./Upcoming"
+import blur from './common/blur'
 
 const Hero = () => {
     const [isLiveStream, setIsLiveStream] = useState(false)
@@ -55,7 +56,7 @@ const Hero = () => {
                     <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651308450/Global/hero_p9ln3m.jpg"
                         className="object-cover w-full h-full"
                         layout="fill"
-                        blurDataURL="data:..."
+                        blurDataURL={blur}
                         placeholder="blur"
                         alt="logo" />
                 </div>
