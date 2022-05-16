@@ -24,12 +24,12 @@ const Footer = () => {
                 <div
                     onClick={scrollToTop}
                     className="w-full cursor-pointer h-8 flex items-center justify-center bg-gray-600">
-                    <button className="text-center text-sm uppercase text-gray-100">Scroll to top</button>
+                    <button className="text-center text-xs uppercase text-gray-100">Scroll to top</button>
                 </div>
                 <div
                     onClick={goHome}
                     className={`${router.route === '/' ? "cursor-not-allowed" : "cursor-pointer"} w-full  h-8 flex items-center justify-center bg-gray-300`}>
-                    <button disabled={router.route === '/'} className={`${router.route === '/' ? "text-gray-500" : "text-gray-800"} text-center text-sm uppercase `}>Go home</button>
+                    <button disabled={router.route === '/'} className={`${router.route === '/' ? "text-gray-500" : "text-gray-800"} text-xs text-center uppercase `}>Go home</button>
                 </div>
             </div>
             <div className="bg-gradient-to-r from-primary-dark to-primary-light text-[white]  pt-2">

@@ -16,7 +16,7 @@ const ImageUploader = ({
     
 
     const onChange = (e) => {
-        setImageUrl('')
+        setImageUrl()
         setImage(e.target.files[0])
         const reader = new FileReader()
         reader.onload = () => {
@@ -28,7 +28,7 @@ const ImageUploader = ({
     }
 
     const onDrop = (e) => {
-        setImageUrl('')
+        setImageUrl()
         const droppedFile = Array.from(e.dataTransfer.files);
         setImage(droppedFile[0])
         setImagePreview(URL.createObjectURL(droppedFile[0]));
@@ -89,6 +89,7 @@ const ImageUploader = ({
                 }
             </button>
         </div>
+
     )
 }
 

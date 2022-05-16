@@ -136,6 +136,8 @@ const updateSermon = asyncHandler(async (req, res, next) => {
                 sermon.imageUrl = imageUrl
             }
 
+        } else {
+            sermon.imageUrl = imageUrl
         }
 
         await sermon.save({ validateBeforeSave: false })

@@ -42,7 +42,7 @@ const List = () => {
                                                         <h1 className="text-xs font-light ">{'|  ' + format(new Date(sermon.date), 'do, MMM yyyy')}</h1>
                                                     </div>
                                                     <h1 className=" text-base md:text-lg capitalize ">{sermon.title}</h1>
-                                                    <h1 className="font-light text-sm ">Mark 4:1-12</h1>
+                                                    <h1 className="font-light text-sm capitalize ">{`${sermon.book} ${sermon.chapter}:${sermon.verse}`}</h1>
                                                     <div className="flex items-center !mt-3 space-x-2">
                                                         <div className="h-[25px] w-[25px] rounded-full relative">
                                                             <Image src={sermon.preacher.imageUrl.url}
@@ -56,7 +56,7 @@ const List = () => {
                                                     </div>
                                                 </div>
                                                 <div className="w-[70px] h-[75px] rounded-lg  relative">
-                                                    <Image src={sermon.imageUrl.url ? sermon.imageUrl.url : defaultImage }
+                                                    <Image src={sermon?.imageUrl?.url ? sermon.imageUrl.url : defaultImage }
                                                         className="object-cover rounded-lg w-full h-full "
                                                         layout="fill"
                                                         blurDataURL={blur}
