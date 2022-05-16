@@ -27,6 +27,10 @@ import clientSermonsReducer from './features/client/sermons'
 import clientSermonReducer from './features/client/sermon'
 import clientBibleStudiesReducer from './features/client/bibleStudies'
 import clientBibleStudyReducer from './features/client/bibleStudy'
+import clientSeriesReducer from './features/client/series'
+import clientSeriesDetailsReducer from './features/client/seriesDetails'
+import clientConferencesReducer from './features/client/conferences'
+import clientConferenceReducer from './features/client/conference'
 
 
 
@@ -61,6 +65,10 @@ const combinedReducers = combineReducers({
     clientSermon: clientSermonReducer,
     clientBibleStudies: clientBibleStudiesReducer,
     clientBibleStudy: clientBibleStudyReducer,
+    clientSeries: clientSeriesReducer,
+    clientSeriesDetails: clientSeriesDetailsReducer,
+    clientConferences: clientConferencesReducer,
+    clientConference: clientConferenceReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {

@@ -1,5 +1,7 @@
 import Head from "next/head";
 import Details from "../../../components/series/Details";
+import { getClientSeriesDetails } from "../../../redux/features/client/seriesDetails";
+import { wrapper } from "../../../redux/Store";
 
 export default function SermonPage() {
     return (
@@ -11,3 +13,9 @@ export default function SermonPage() {
         </div>
     )
 }
+
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, params }) => {
+    const id = params.id
+    await store.dispatch(getClientSeriesDetails({ req, id }))
+})

@@ -14,7 +14,7 @@ const About = ({ preacher }) => {
                   placeholder="blur"
                   alt="logo" />
           </div>
-          <h1 className="text-sm uppercase">{ preacher.name }</h1>
+          <h1 className="text-sm font-light uppercase">{ preacher.name }</h1>
           <p className="text-sm md:text-base text-gray-300 md:leading-8 font-light text-justify md:px-1">
               {preacher.about}
           </p>

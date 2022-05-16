@@ -4,61 +4,80 @@ import { useState } from "react"
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Link from "next/link"
+import { useSelector } from "react-redux"
+import blur from '../common/blur'
+import { format } from 'date-fns'
 
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
 
-    const speakers = [1, 2, 3]
-    const lists = [1, 2, 3, 4, 5]
+    const { conferences } = useSelector(state => state.clientConferences)
+
+    const lister = (index) => {
+        const dp = []
+
+        conferences[index].sermons.map(sermon => {
+            dp.push(sermon.preacher.imageUrl.url)
+        })
+        let images = [...new Set(dp)];
+
+        return images.map(image => (
+            <div key={image} className="!ml-[-6px] h-[35px] w-[35px] border-2 border-gray-300  rounded-full relative">
+                <Image src={image}
+                    className="object-cover w-full h-full rounded-full"
+                    layout="fill"
+                    blurDataURL={blur}
+                    placeholder="blur"
+                    alt="logo" />
+            </div>
+        ))
+
+    }
+
     return (
         <div className={` md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
-                <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">20 Results - Page 1</h1>
+                <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">
+                    {`${conferences.length > 1 ? conferences.length + " Results" : conferences.length + " Result"} - Page 1`}
+                </h1>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-20 ">
-                    <h1 className="lg:hidden text-center uppercase text-xs font-light ">20 Results - Page 1</h1>
+                    <h1 className="lg:hidden text-center uppercase text-xs font-light ">
+                        {`${conferences.length > 1 ? conferences.length + " Results" : conferences.length + " Result"} - Page 1`}
+                    </h1>
                     <div className="lg:col-span-7 lg:!mt-10">
                         <div className="grid gap-5 grid-cols-1 md:grid-cols-2 ">
                             {
-                                lists.map(list => (
-                                     <Link href={`/resources/conference/${list}`} key={list} >
+                                conferences.map((conference, index) => (
+                                     <Link href={`/resources/conference/${conference._id}`} key={conference._id} >
                                         <a>
                                             <div className="w-full flex flex-row-reverse items-center md:rounded-md md:flex-col bg-[white] space-x-1 md:space-x-0
                                                 md:py-0 md:px-0 px-2 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
                                                 <div className="w-[100px] h-[80px] md:w-full md:h-[170px] md:rounded-t-md rounded-lg  relative">
-                                                    <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg"
+                                                    <Image src={conference.imageUrl.url}
                                                         className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md "
                                                         layout="fill"
-                                                        blurDataURL="data:..."
+                                                        blurDataURL={blur}
                                                         placeholder="blur"
                                                         alt="logo" />
                                                 </div>
                                                 <div className="w-full md:p-5 space-y-2">
-                                                    <div className="flex space-x-3">
+                                                    <div className="flex space-x-1">
                                                         <GraphicEqIcon className="text-[orange] !text-base" />
                                                         <OndemandVideoIcon className="text-[red]/80 !text-base" />
-                                                        <h1 className="text-xs font-light uppercase">| 5 Sermons</h1>
+                                                        <h1 className="text-xs font-light uppercase">
+                                                            {`| ${conference.sermons.length > 1 ? conference.sermons.length + " sermons" : conference.sermons.length + " sermon"}`}
+                                                        </h1>
 
                                                     </div>
-                                                    <h1 className="capitalize !mt-5">The Sovereignty of God</h1>
+                                                    <h1 className="capitalize !mt-5">{conference.title}</h1>
                                                     <div className="flex items-center justify-between pr-5 md:pr-0">
                                                         <div className="flex items-center ml-[6px]">
-                                                            {
-                                                                speakers.map((speaker, index) => (
-                                                                    <div key={speaker} className={`ml-[-6px] h-[30px] w-[30px] border-2 border-white  rounded-full relative`}>
-                                                                        <Image src="/img/eleazar.jpg"
-                                                                            className="object-cover w-full h-full rounded-full"
-                                                                            layout="fill"
-                                                                            blurDataURL="data:..."
-                                                                            placeholder="blur"
-                                                                            alt="logo" />
-                                                                    </div>
-                                                                ))
-                                                            }
+                                                            {lister(index)}
                                                         </div>
 
-                                                        <h1 className="text-xs uppercase ">
-                                                            June 11th, 2022
+                                                        <h1 className="text-xs tracking-wider uppercase ">
+                                                            {format(new Date(conference.startDate), 'MMM, do yyyy')}
                                                         </h1>
                                                     </div>
                                                 </div>

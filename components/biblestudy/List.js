@@ -20,9 +20,13 @@ const List = () => {
     return (
         <div className={` md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
-                <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">20 Results - Page 1</h1>
+                <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">
+                    {`${bibleStudies.length > 1 ? bibleStudies.length + " Results" : bibleStudies.length + " Result"} - Page 1`}
+                </h1>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-20 ">
-                    <h1 className="lg:hidden text-center uppercase text-xs font-light ">20 Results - Page 1</h1>
+                    <h1 className="lg:hidden text-center uppercase text-xs font-light ">
+                        {`${bibleStudies.length > 1 ? bibleStudies.length + " Results" : bibleStudies.length + " Result"} - Page 1`}
+                    </h1>
                     <div className="lg:col-span-7">
                         <div className="flex flex-col mt-2 md:mt-5 space-y-3">
                             {

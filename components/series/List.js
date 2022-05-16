@@ -4,52 +4,81 @@ import { useState } from "react"
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Link from "next/link"
+import { useSelector } from "react-redux"
+import blur from '../common/blur'
 
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
 
-    const lists = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    const { series } = useSelector(state => state.clientSeries)
+
+    const lister = (index) => {
+        const dp = []
+
+        series[index].sermons.map(sermon => {
+            dp.push(sermon.preacher.imageUrl.url)
+        })
+        let images = [...new Set(dp)];
+
+        return images.map(image => (
+            <div key={image} className="!ml-[-6px] h-[35px] w-[35px] border-2 border-gray-300  rounded-full relative">
+                <Image src={image}
+                    className="object-cover w-full h-full rounded-full"
+                    layout="fill"
+                    blurDataURL={blur}
+                    placeholder="blur"
+                    alt="logo" />
+            </div>
+        ))
+
+    }
+
+    
     return (
         <div className={` md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
-                <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">20 Results - Page 1</h1>
+                <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">
+                    {`${series.length > 1 ? series.length + " Results" : series.length + " Result"} - Page 1`}
+                </h1>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-20 ">
-                    <h1 className="lg:hidden text-center uppercase text-xs font-light ">20 Results - Page 1</h1>
+                    <h1 className="lg:hidden text-center uppercase text-xs font-light ">
+                        {`${series.length > 1 ? series.length + " Results" : series.length + " Result"} - Page 1`}
+                    </h1>
                     <div className="lg:col-span-7 lg:!mt-10">
                         <div className="grid gap-5 grid-cols-1 md:grid-cols-2 ">
                             {
-                                lists.map(list => (
-                                     <Link href={`/resources/series/${list}`} key={list} >
+                                series.map((serie, index) => (
+                                     <Link href={`/resources/series/${serie._id}`} key={serie._id} >
                                         <a>
                                             <div className="w-full flex flex-row-reverse items-center md:rounded-md md:flex-col bg-[white] space-x-1 md:space-x-0
                                                     md:py-0 md:px-0 px-2 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
                                                 <div className="w-[100px] h-[80px] md:w-full md:h-[170px] md:rounded-t-md rounded-lg  relative">
-                                                    <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307274/Global/series_yvd6gq.jpg"
+                                                    <Image src={serie.imageUrl.url}
                                                         className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md "
                                                         layout="fill"
-                                                        blurDataURL="data:..."
+                                                        blurDataURL={blur}
                                                         placeholder="blur"
                                                         alt="logo" />
                                                 </div>
-                                                <div className="w-full md:p-5 space-y-2">
-                                                    <div className="flex space-x-3">
+                                                <div className="w-full  md:p-5 space-y-2">
+                                                    <div className="flex space-x-1">
                                                         <GraphicEqIcon className="text-[orange] !text-base" />
                                                         <OndemandVideoIcon className="text-[red]/80 !text-base" />
-                                                        <h1 className="text-xs font-light uppercase">| 10 Sermons</h1>
-
+                                                        <h1 className="text-xs font-light uppercase">
+                                                            {`| ${serie.sermons.length > 1 ? serie.sermons.length + " sermons" : serie.sermons.length + " sermon"}`}
+                                                        </h1>
                                                     </div>
-                                                    <h1 className="capitalize !mt-5">The Ancient Paths</h1>
-                                                    <div className="flex items-center !mt-5 space-x-2">
-                                                        <div className="h-[25px] w-[25px]  rounded-full relative">
-                                                            <Image src="/img/eleazar.jpg"
-                                                                className="object-cover w-full h-full rounded-full"
-                                                                layout="fill"
-                                                                blurDataURL="data:..."
-                                                                placeholder="blur"
-                                                                alt="logo" />
-                                                        </div>
-                                                        <h1 className="text-sm  font-light ">Abutu Joshua</h1>
+                                                    <h1 className="capitalize !mt-5">{ serie.title }</h1>
+                                                    <div className="flex items-center ml-[6px] !mt-5 space-x-2">
+                                                        {lister(index)}
+                                                        {
+                                                            serie.sermons.length === 1 &&
+                                                            <h1 className="text-sm  font-light ">
+                                                                {serie.sermons[0].preacher.name}
+                                                            </h1>
+                                                        }
+                                                        
                                                     </div>
                                                 </div>
                                             </div>

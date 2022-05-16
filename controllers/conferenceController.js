@@ -10,6 +10,45 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
+
+// get client conference
+// get => /api/client/conference
+const getClientConference = asyncHandler(async (req, res, next) => {
+
+    const conferences = await Conference.find({}).populate({
+        path: 'sermons.preacher',
+        select: "name imageUrl",
+        model: Minister
+    })
+
+    res.status(200).json({
+        success: "true",
+        conferences
+    })
+
+})
+
+
+// get client conference detail
+// get => /api/client/conference/:id
+const getConferenceDetails = asyncHandler(async (req, res, next) => {
+
+    const conference = await Conference.findById(req.query.id).populate({
+        path: 'sermons.preacher',
+        select: "name about imageUrl",
+        model: Minister
+    })
+
+    res.status(200).json({
+        success: "true",
+        conference
+    })
+
+})
+
+
+
+
 // create conference
 // post =>  /api/admin/conference
 const createConference = asyncHandler(async (req, res, next) => {
@@ -248,5 +287,7 @@ export {
     getConference,
     conferenceSermons,
     updateConference,
-    updateConferenceSermon
+    updateConferenceSermon,
+    getConferenceDetails,
+    getClientConference
 }

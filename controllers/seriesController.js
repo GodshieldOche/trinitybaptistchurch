@@ -10,6 +10,43 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
+
+// get client series
+// get => /api/client/series
+const getClientSeries = asyncHandler(async (req, res, next) => {
+
+    const series = await Series.find({}).populate({
+        path: 'sermons.preacher',
+        select: "name imageUrl",
+        model: Minister
+    })
+
+    res.status(200).json({
+        success: "true",
+        series
+    })
+
+})
+
+
+// get client series detail
+// get => /api/client/series/:id
+const getSeriesDetails = asyncHandler(async (req, res, next) => {
+
+    const series = await Series.findById(req.query.id).populate({
+        path: 'sermons.preacher',
+        select: "name about imageUrl",
+        model: Minister
+    })
+
+    res.status(200).json({
+        success: "true",
+        series
+    })
+
+})
+
+
 // create series
 // post =>  /api/admin/series
 const createSeries = asyncHandler(async (req, res, next) => {
@@ -238,5 +275,7 @@ export {
     seriesSermons,
     updateSeries,
     updateSeriesSermon,
-    deleteSeriesSermon
+    deleteSeriesSermon,
+    getClientSeries,
+    getSeriesDetails
 }
