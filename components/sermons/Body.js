@@ -10,12 +10,11 @@ const Body = ({ resource }) => {
                 <h1 className="text-xs text-center font-light uppercase">{format(new Date(resource.date), 'do MMM yyyy')}</h1>
                 <h1 className="text-xl md:text-3xl font-medium text-center uppercase">{ resource.title }</h1>
                 
-                <div className="flex font-light uppercase text-sm space-x-2 justify-center">
+                <div className="flex flex-col font-light uppercase text-sm space-y-2 justify-center">
                     <div className="flex items-center space-x-2 justify-center">
                         <h1 className=" ">Scripture:</h1>
                         <h1 className=" ">{`${resource.book} ${resource.chapter}:${resource.verse}`}</h1>
                     </div>
-                    <span>|</span>
                     <div className="flex items-center space-x-2 justify-center">
                         <h1 className=" ">Speaker:</h1>
                         <h1 className=" ">{resource.preacher.name}</h1>
