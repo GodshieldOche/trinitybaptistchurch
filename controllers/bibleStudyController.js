@@ -10,6 +10,41 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
+// get client bibleStudy
+// get => /api/client/biblestudy
+const getBibleStudies = asyncHandler(async (req, res, next) => {
+
+    const bibleStudies = await BibleStudy.find({}).populate({
+        path: 'preacher',
+        select: "name imageUrl",
+        model: Minister
+    })
+
+    res.status(200).json({
+        success: "true",
+        bibleStudies
+    })
+
+})
+
+
+// get client biblestudy detail
+// get => /api/client/biblestudy/:id
+const getBibleStudyDetails = asyncHandler(async (req, res, next) => {
+
+    const bibleStudy = await BibleStudy.findById(req.query.id).populate({
+        path: 'preacher',
+        select: "name about imageUrl",
+        model: Minister
+    })
+
+    res.status(200).json({
+        success: "true",
+        bibleStudy
+    })
+
+})
+
 
 // create BibleStudy
 // post =>  /api/admin/BibleStudy
@@ -138,5 +173,7 @@ export {
     getAdminBibleStudies,
     deleteBibleStudy,
     getBibleStudy,
-    updateBibleStudy
+    updateBibleStudy,
+    getBibleStudies,
+    getBibleStudyDetails
 }

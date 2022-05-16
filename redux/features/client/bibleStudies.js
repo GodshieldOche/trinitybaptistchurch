@@ -3,12 +3,12 @@ import axios from 'axios'
 import absoluteUrl from 'next-absolute-url'
 
 
-export const getClientSermonDetails = createAsyncThunk(
-    `sermon/getClientSermonDetails`,
-    async ({ req, id }, { rejectWithValue }) => {
+export const getClientBibleStudies = createAsyncThunk(
+    `bibleStudies/getClientBibleStudies`,
+    async ({ req }, { rejectWithValue }) => {
         const { origin } = absoluteUrl(req)
         try {
-            const { data } = await axios.get(`${origin}/api/client/sermon/${id}`)
+            const { data } = await axios.get(`${origin}/api/client/biblestudy`)
             return data
         } catch (error) {
             return rejectWithValue(error.response.data.message)
@@ -19,25 +19,25 @@ export const getClientSermonDetails = createAsyncThunk(
 
 
 
-const sermonSlice = createSlice({
-    name: 'sermon',
+const bibleStudiesSlice = createSlice({
+    name: 'bibleStudies',
     initialState: {
         loading: true,
-        sermon: {},
+        bibleStudies: [],
         message: null,
     },
     reducers: {
 
     },
     extraReducers: {
-        [getClientSermonDetails.pending]: (state) => {
+        [getClientBibleStudies.pending]: (state) => {
             state.loading = true
         },
-        [getClientSermonDetails.fulfilled]: (state, { payload }) => {
+        [getClientBibleStudies.fulfilled]: (state, { payload }) => {
             state.loading = false
-            state.sermon = payload.sermon
+            state.bibleStudies = payload.bibleStudies
         },
-        [getClientSermonDetails.rejected]: (state, { payload }) => {
+        [getClientBibleStudies.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },
@@ -45,4 +45,4 @@ const sermonSlice = createSlice({
 })
 
 
-export default sermonSlice.reducer
+export default bibleStudiesSlice.reducer

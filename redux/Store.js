@@ -25,6 +25,8 @@ import servicesReducer from './features/services'
 import serviceReducer from './features/service'
 import clientSermonsReducer from './features/client/sermons'
 import clientSermonReducer from './features/client/sermon'
+import clientBibleStudiesReducer from './features/client/bibleStudies'
+import clientBibleStudyReducer from './features/client/bibleStudy'
 
 
 
@@ -57,6 +59,8 @@ const combinedReducers = combineReducers({
     service: serviceReducer,
     clientSermons: clientSermonsReducer,
     clientSermon: clientSermonReducer,
+    clientBibleStudies: clientBibleStudiesReducer,
+    clientBibleStudy: clientBibleStudyReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {
