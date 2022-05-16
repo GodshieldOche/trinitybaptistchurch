@@ -29,6 +29,24 @@ const getSermons = asyncHandler(async (req, res, next) => {
 
 })
 
+
+// get client sermon detail
+// get => /api/client/sermon/:id
+const getSermonDetails = asyncHandler(async (req, res, next) => {
+
+    const sermon = await Sermon.findById(req.query.id).populate({
+        path: 'preacher',
+        select: "name about imageUrl",
+        model: Minister
+    })
+
+    res.status(200).json({
+        success: "true",
+        sermon
+    })
+
+})
+
 // create sermon
 // post =>  /api/admin/sermons
 const createSermon = asyncHandler(async (req, res, next) => {
@@ -160,5 +178,6 @@ export {
     deleteSermon,
     getSermon,
     updateSermon,
-    getSermons
+    getSermons,
+    getSermonDetails
 }

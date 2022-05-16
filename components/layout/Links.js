@@ -30,7 +30,7 @@ const Links = ({ title }) => {
                     }
                 }}
                 className="relative">
-                <Link href={`/${title !== "ministries" ? active : ""}`} >
+                <Link href={`${title !== "ministries" ? "/" + active : "#"}`} >
                     <a className={`${router.pathname.split("/")[1] === active ? "font-medium" : "font-light"} hover:font-normal hover:text-[black]/70 capitalize `}>
                         {title}
                     </a>
@@ -51,11 +51,11 @@ const Links = ({ title }) => {
                         }
                     }}
                     className="absolute w-20 h-[500]">
-                    <div className="-ml-10 mt-6 w-[500px] rounded-xl flex items-center justify-around h-16 shadow-xl bg-white">
-                        <h1 className="text-sm uppercase font-light text-primary-dark cursor-pointer">Men</h1>
-                        <h1 className="text-sm uppercase font-light text-primary-dark cursor-pointer">Women</h1>
-                        <h1 className="text-sm uppercase font-light text-primary-dark cursor-pointer">Children</h1>
-                        <h1 className="text-sm uppercase font-light text-primary-dark cursor-pointer">Outreach</h1>
+                    <div className="-ml-10 mt-6 p-5 space-y-5 rounded-xl flex flex-col h-full shadow-xl bg-white">
+                        <h1 className="text-sm capitalize font-light text-primary-dark cursor-pointer">Men</h1>
+                        <h1 className="text-sm capitalize font-light text-primary-dark cursor-pointer">Women</h1>
+                        <h1 className="text-sm capitalize font-light text-primary-dark cursor-pointer">Children</h1>
+                        <h1 className="text-sm capitalize font-light text-primary-dark cursor-pointer">Outreach</h1>
                     </div>
                 </div>
             }

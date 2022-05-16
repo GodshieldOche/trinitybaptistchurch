@@ -12,8 +12,8 @@ const Player = ({ resource }) => {
             <div className="max-w-screen-sm mx-auto ">
                 <div className="flex flex-col justify-center items-center space-y-5">
                     <div className="flex w-full">
-                        <Audio audioLink={resource.audioLink} title={resource.title} isVideo={isVideo} />
-                        <Video videoLink={resource.videoLink} isVideo={isVideo} />
+                        <Audio audioLink={resource.audioUrl} title={resource.title} isVideo={isVideo} />
+                        <Video videoLink={resource.youtubeLink} isVideo={isVideo} />
                     </div>
                     
                     <div className="flex items-center justify-center w-full">
@@ -21,9 +21,13 @@ const Player = ({ resource }) => {
                             <h1
                                 onClick={() => setIsVideo(false)}
                                 className={` ${isVideo ? "bg-none text-primary-dark" : "text-white bg-primary-dark"} uppercase text-sm  cursor-pointer py-1 px-10 border border-primary-dark `}>Audio</h1>
-                            <h1
-                                onClick={() => setIsVideo(true)}
-                                className={` ${isVideo ? "text-white bg-primary-dark" : "bg-none text-primary-dark"} uppercase text-sm py-1 px-10 border cursor-pointer border-primary-dark `}>Video</h1>
+                            {
+                                resource.youtubeLink &&
+                                <h1
+                                    onClick={() => setIsVideo(true)}
+                                    className={` ${isVideo ? "text-white bg-primary-dark" : "bg-none text-primary-dark"} uppercase text-sm py-1 px-10 border cursor-pointer border-primary-dark `}>Video</h1>
+                            }
+                                
                         </div>
                     </div>
                     <div className="flex items-center justify-center w-full ">

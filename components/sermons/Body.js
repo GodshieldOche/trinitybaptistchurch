@@ -1,50 +1,34 @@
 import Image from "next/image"
+import { format } from 'date-fns'
+import About from "../common/About"
 
 
 const Body = ({ resource }) => {
     return (
         <div className="max-w-screen-sm mx-auto px-2 md:px-0 ">
             <div className="flex flex-col space-y-3 w-full">
-                <h1 className="text-xs text-center font-light uppercase">9th Febuary 2022</h1>
+                <h1 className="text-xs text-center font-light uppercase">{format(new Date(resource.date), 'do MMM yyyy')}</h1>
                 <h1 className="text-xl md:text-3xl font-medium text-center uppercase">{ resource.title }</h1>
                 
-                <div>
+                <div className="flex font-light uppercase text-sm space-x-2 justify-center">
                     <div className="flex items-center space-x-2 justify-center">
                         <h1 className=" ">Scripture:</h1>
-                        <h1 className=" ">Mark 4:1-12</h1>
+                        <h1 className=" ">{`${resource.book} ${resource.chapter}:${resource.verse}`}</h1>
                     </div>
+                    <span>|</span>
                     <div className="flex items-center space-x-2 justify-center">
                         <h1 className=" ">Speaker:</h1>
-                        <h1 className="capitalize ">{resource.preacher}</h1>
+                        <h1 className=" ">{resource.preacher.name}</h1>
                     </div>
                 </div>
                 
-                <div className="flex flex-col !mt-10 space-y-3">
-                    <div className="flex items-center space-x-1">
-                        <span className="w-3 h-[2.5px] bg-primary-dark"></span>
-                        <h1 className="text-sm lg:text-base font-medium uppercase">About the message</h1>
-                    </div>
-                    <p className="md:text-lg md:leading-8 font-light text-justify px-1">
-                        We call it serious joy not only because it coexists in the same heart, at the same time, with the gravity of reverence and the groaning of sin, but also because it is not peripheral but central — serious in the sense of centrally important. It is not the negligible caboose at the end of the train, but belongs to the very fuel that runs the engine. And when I say centrally important, I mean central to God’s very being — central to God’s ultimate purpose in creating the world — and therefore also central to God-glorifying Christian living.
+                <div className="flex flex-col !mt-10 !mb-12 space-y-3">
+                    <h1 className="mx-1 text-sm lg:text-base uppercase">About the message</h1>
+                    <p className="md:text-lg md:leading-8 text-gray-700 font-light text-justify px-1">
+                        {resource.description}
                     </p>
                 </div>
-                <div className="flex flex-col w-full space-y-4 !mt-10">
-                    <div className="flex items-center space-x-1">
-                        <span className="w-3 h-[2.5px] bg-primary-dark"></span>
-                        <h1 className="text-sm lg:text-base font-medium uppercase">About the Speaker</h1>
-                    </div>
-                    <div className="items-center">
-                        <div className="w-[60px] md:w-[70px] h-[60px] md:h-[70px] rounded-full float-left mr-2  relative ">
-                            <Image src="/img/eleazar.jpg"
-                                className="object-cover rounded-full w-full h-full "
-                                layout="fill"
-                                blurDataURL="data:..."
-                                placeholder="blur"
-                                alt="logo" />
-                        </div>
-                        <p className="text-base md:leading-8 font-light text-justify px-1">We call it serious joy not only because it coexists in the same heart, at the same time, with the gravity of reverence and the groaning of sin, but also because it is not peripheral but central — serious in the sense of centrally important. It is not the negligible caboose at the end of the train, but belongs to the very fuel that runs the engine.</p>
-                    </div>
-                </div>
+                <About preacher={resource.preacher} />
                
             </div>
         </div>

@@ -81,7 +81,6 @@ const Audio = ({ isVideo, audioLink, title }) => {
             <audio ref={audioPlayer} src={audioLink}
                 onCanPlay={() => {
                     setIsLoading(prev => prev = false)
-                    console.log('can play')
                 }}></audio>
             <div className="absolute w-full max-w-lg mx-auto flex items-center justify-between px-3 md:px-0">
                 <button

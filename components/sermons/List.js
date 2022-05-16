@@ -36,10 +36,10 @@ const List = () => {
                                         <a>
                                             <div  className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10">
                                                 <div className="flex flex-col space-y-2">
-                                                    <div className="flex space-x-3">
+                                                    <div className="flex space-x-1">
                                                         <GraphicEqIcon className="text-[orange] !text-base" />
                                                         <OndemandVideoIcon className="text-[red]/80 !text-base" />
-                                                        <h1 className="text-xs font-light ">{'|  ' + format(new Date(sermon.date), 'do, MMM yyyy')}</h1>
+                                                        <h1 className="text-xs uppercase font-light ">{'|  ' + format(new Date(sermon.date), 'do MMM yyyy')}</h1>
                                                     </div>
                                                     <h1 className=" text-base md:text-lg capitalize ">{sermon.title}</h1>
                                                     <h1 className="font-light text-sm capitalize ">{`${sermon.book} ${sermon.chapter}:${sermon.verse}`}</h1>
