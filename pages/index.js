@@ -1,5 +1,7 @@
 import Home from "../components/Home";
 import Head from "next/head";
+// import { wrapper } from "../redux/Store";
+// import { loadUser } from "../redux/features/currentUser";
 
 
 export default function HomePage() {

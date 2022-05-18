@@ -22,7 +22,7 @@ const List = () => {
         let images = [...new Set(dp)];
 
         return images.map(image => (
-            <div key={image} className="!ml-[-6px] h-[35px] w-[35px] border-2 border-gray-300  rounded-full relative">
+            <div key={image} className="!ml-[-6px] h-[25px] w-[25px] md:h-[35px] md:w-[35px] border-2 border-gray-300  rounded-full relative">
                 <Image src={image}
                     className="object-cover w-full h-full rounded-full"
                     layout="fill"

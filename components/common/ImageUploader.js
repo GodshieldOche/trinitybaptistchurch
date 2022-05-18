@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
 import ButtonLoader from './ButtonLoader'
+import blur from './blur'
 
 const ImageUploader = ({
     setImageUrl,
@@ -71,7 +72,7 @@ const ImageUploader = ({
                     imagePreview ?
                         <Image src={imagePreview} className="object-cover w-1/2 h-1/2 "
                             layout="fill"
-                            blurDataURL="data:..."
+                            blurDataURL={blur}
                             placeholder="blur"
                             alt="preview" />
                         :

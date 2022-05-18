@@ -21,6 +21,9 @@ const Details = () => {
     const [imageUrl, setImageUrl] = useState()
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
+    const [day, setDay] = useState('');
+    const [days, setDays] = useState(0);
+    const [arr, setArr] = useState(['select day']);
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch()
@@ -28,6 +31,12 @@ const Details = () => {
     const { ministers } = useSelector(state => state.ministers)
     const router = useRouter();
     const { id } = router.query;
+
+    useEffect(() => {
+        for (let i = 1; i <= days; i++) {
+            setArr(prev => [...prev, `Day ${i}`])
+        }
+    }, [days])
 
     useEffect(() => {
         dispatch(getEvent(id)).then(result => {
@@ -40,6 +49,14 @@ const Details = () => {
                 setStartDate(new Date(startDate))
                 setEndDate(new Date(endDate))
                 setImagePreview(imageUrl.url)
+
+                if (startDate && endDate) {
+                    const e = new Date(endDate)
+                    const s = new Date(startDate)
+                    const diff = e.getTime() - s.getTime()
+                    const days = Math.round(diff / (1000 * 60 * 60 * 24))
+                    setDays(days + 1)
+                }
 
             } else {
                 console.log(result.error)
@@ -54,7 +71,6 @@ const Details = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
-        console.log(event.sessions)
         if (event?.sessions && imageUrl && title && type && description && startDate && endDate) {
             dispatch(updateEvent({ id, title, type, description, startDate, endDate, imageUrl, sessions : event?.sessions })).then(res => {
                 if (!res.error) {
@@ -136,6 +152,13 @@ const Details = () => {
                                       const [startDate, endDate] = dates
                                       setStartDate(startDate)
                                       setEndDate(endDate)
+                                      setArr(['select day'])
+                                      setDays(0)
+                                      if (startDate && endDate) {
+                                          const diff = endDate.getTime() - startDate.getTime()
+                                          const days = Math.round(diff / (1000 * 60 * 60 * 24))
+                                          setDays(days + 1)
+                                      }
                                   }}
                                   isClearable={true}
                               />
@@ -146,6 +169,31 @@ const Details = () => {
                       </div>
                   </div>
               </form>
+              <div className="w-full flex items-center space-x-4 ">
+                  <h1 className="text-sm uppercase">Number of Days: <span className="font-medium">{days}</span></h1>
+                  <select
+                      type="text"
+                      name="day"
+                      className="capitalize text-gray-500 !px-3 py-1 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                      value={day}
+                      onChange={(e) => {
+                          setDay(e.target.value)
+                      }}
+                  >
+                      {
+                          arr.map(day => (
+                              <option className="capitalize" key={day} value={day}>{day}</option>
+                          ))
+                      }
+                  </select>
+                  <button
+                      disabled={day === 'select day' || day === ''}
+                      onClick={() => {
+                          dispatch(setModalState(true))
+                          dispatch(setModalData(day))
+                      }}
+                      className="disabled:bg-gray-500 uppercase text-xs rounded bg-primary-light text-white  py-1 px-3">Add schedule</button>
+              </div>
               <div className="w-full flex flex-col space-y-7 items-center justify-center">
                   <h1 className="uppercase text-lg font-medium">{`Event Scheldule`}</h1>
                   <table className="w-full max-w-full table-auto border-collapse ">

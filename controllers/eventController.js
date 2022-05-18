@@ -2,7 +2,7 @@ import Event from '../models/Event'
 import Minister from '../models/Ministers'
 import asyncHandler from "express-async-handler";
 import cloudinary from "cloudinary"
-import ErrorHandler from "../middleware/errorHandler"
+// import ErrorHandler from "../middleware/errorHandler"
 
 
 cloudinary.config({
@@ -10,6 +10,47 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
+
+
+// get client events
+// get => /api/client/events
+const getEvents = asyncHandler(async (req, res, next) => {
+
+    const allEvents = await Event.find({}).populate({
+        path: 'sessions.preacher',
+        select: "imageUrl",
+        model: Minister
+    })
+
+    console.log(new Date())
+    const events = allEvents.filter(event => new Date(event.endDate) > new Date())
+    
+
+    res.status(200).json({
+        success: "true",
+        events
+    })
+
+})
+
+
+// get client event detail
+// get => /api/client/event/:id
+const getEventDetails = asyncHandler(async (req, res, next) => {
+
+    const event = await Event.findById(req.query.id).populate({
+        path: 'sessions.preacher',
+        select: "name about imageUrl",
+        model: Minister
+    })
+
+    res.status(200).json({
+        success: "true",
+        event
+    })
+
+})
+
 
 // create event
 // post =>  /api/admin/event
@@ -23,6 +64,7 @@ const createEvent = asyncHandler(async (req, res, next) => {
     })
 
 })
+
 
 
 // get Event
@@ -51,7 +93,7 @@ const deleteEvent = asyncHandler(async (req, res, next) => {
     const event = await Event.findById(req.query.id)
 
     if (!event) {
-        return next(new ErrorHandler('Event not found with this ID', 404))
+        // return next(new ErrorHandler('Event not found with this ID', 404))
     } else {
             
         await cloudinary.v2.uploader.destroy(event.imageUrl.public_id)
@@ -75,7 +117,7 @@ const getEvent = asyncHandler(async (req, res, next) => {
     })
 
     if (!event) {
-        return next(new ErrorHandler('Event not found with this ID', 404))
+        // return next(new ErrorHandler('Event not found with this ID', 404))
     } else {
 
         res.status(200).json({
@@ -92,7 +134,7 @@ const updateEvent = asyncHandler(async (req, res, next) => {
     const event = await Event.findById(req.query.id)
 
     if (!event) {
-        return next(new ErrorHandler('Event not found with this ID', 404))
+        // return next(new ErrorHandler('Event not found with this ID', 404))
     } else {
         const { title, type, description, startDate, endDate, imageUrl, sessions } = req.body
 
@@ -128,7 +170,7 @@ const deleteEventSession = asyncHandler(async (req, res, next) => {
     const event = await Event.findById(id)
 
     if (!event) {
-        return next(new ErrorHandler('Event not found with this ID', 404))
+        // return next(new ErrorHandler('Event not found with this ID', 404))
     } else {
 
         
@@ -154,5 +196,7 @@ export {
     deleteEvent,
     getEvent,
     updateEvent,
-    deleteEventSession
+    deleteEventSession,
+    getEventDetails,
+    getEvents
 }

@@ -31,6 +31,8 @@ import clientSeriesReducer from './features/client/series'
 import clientSeriesDetailsReducer from './features/client/seriesDetails'
 import clientConferencesReducer from './features/client/conferences'
 import clientConferenceReducer from './features/client/conference'
+import clientEventsReducer from './features/client/events'
+import clientEventReducer from './features/client/event'
 
 
 
@@ -69,6 +71,8 @@ const combinedReducers = combineReducers({
     clientSeriesDetails: clientSeriesDetailsReducer,
     clientConferences: clientConferencesReducer,
     clientConference: clientConferenceReducer,
+    clientEvents: clientEventsReducer,
+    clientEvent: clientEventReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {

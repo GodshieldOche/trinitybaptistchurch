@@ -3,34 +3,59 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from 'react';
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
+import blur from '../common/blur'
+import { format } from 'date-fns'
 
-const events = [
-    {
-        title: "The New Life",
-        id: 1
-    },
-    {
-        title: "The New Birth",
-        id: 2
-    },
-    {
-        title: "The Sovereignty of God",
-        id: 3
-    },
-    {
-        title: "The Work of christ",
-        id: 4
-    },
-    {
-        title: "The Person of Christ",
-        id: 5
-    },
-]
+
+
+const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg"
 
 const Lists = () => {
     const speakers = [1, 2, 3]
     const [startDate, setStartDate] = useState(new Date());
     const [toggleDate, setToggleDate] = useState(false);
+
+    const {events} = useSelector(state => state.clientEvents)
+
+    const lister = (index) => {
+        const dp = []
+
+        events[index].sessions.map(session => {
+            dp.push(session.preacher.imageUrl.url)
+        })
+        let images = [...new Set(dp)];
+
+        return images.map(image => (
+            <div key={image} className="!ml-[-6px] h-[30px] w-[30px] border-2 border-white  rounded-full relative">
+                <Image src={image}
+                    className="object-cover w-full h-full rounded-full"
+                    layout="fill"
+                    blurDataURL={blur}
+                    placeholder="blur"
+                    alt="logo" />
+            </div>
+        ))
+
+    }
+
+
+    const date = (start, end) => {
+        if (start === end) {
+            return format(new Date(start), 'MMM, do yyyy')
+        } else {
+            return `${format(new Date(start), 'do')} - ${format(new Date(end), 'do MMM yyyy')}`
+        }
+    }
+
+    const truncate = (des) => {
+        if (des.length > 260) {
+            return des.substr(0, 257) + "..."
+        } else {
+            return des
+        }
+    }
+
 
    
     return (
@@ -42,41 +67,33 @@ const Lists = () => {
                     <div className="lg:col-span-8">
                         <div className="flex flex-col w-full mt-2 md:mt-5 space-y-5">
                             {
-                                events.map(event => (
-                                    <Link href={`/events/${event.id}`} key={event.id} >
+                                events.map((event, index) => (
+                                    <Link href={`/events/${event._id}`} key={event._id} >
                                         <a>
-                                            <div  className="flex flex-col w-full md:flex-row items-center space-y-3 md:space-y-0 md:space-x-3 h-fit bg-gray-100 py-3 px-3 cursor-pointer">
+                                            <div className="flex flex-col w-full md:flex-row items-center shadow-lg hover:scale-105 
+                                            hover:shadow-2xl space-y-3 md:space-y-0 md:space-x-3 h-fit bg-gray-100/50 py-3 px-3 cursor-pointer">
                                                 <div className="flex items-center justify-center w-full h-[200px]  md:w-[170px] md:h-[120px]  relative">
-                                                    <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg"
+                                                    <Image src={defaultImage}
                                                         className="object-cover w-full h-full "
                                                         layout="fill"
                                                         blurDataURL="data:..."
                                                         placeholder="blur"
                                                         alt="logo" />
-                                                    <h1 className="hidden md:block absolute text-xs uppercase font-medium px-2 py-1 bg-white/80">Conference</h1>
+                                                    <h1 className="hidden md:block absolute font-medium text-center text-[10px] uppercase px-1 py-2 text-white bg-gray-900">{event.type}</h1>
                                                 </div>
                                                 <div className="w-full flex flex-col space-y-2 px-3 md:px-0">
-                                                    <h1 className=" md:hidden text-xs text-center text-primary-dark uppercase font-medium ">Conference</h1>
+                                                    <h1 className=" md:hidden text-xs text-center text-primary-dark uppercase font-medium ">{event.type}</h1>
                                                     <div className="flex flex-col-reverse md:flex-row items-center md:justify-between">
                                                         <h1 className="uppercase font-medium">{event.title}</h1>
-                                                        <h1 className=" text-sm mb-2 md:mb-0">June 11th, 2022</h1>
+                                                        <h1 className=" text-sm mb-2 md:mb-0">{date(event.startDate, event.endDate)}</h1>
                                                     </div>
                                                     <p className="font-light text-sm text-justify">
-                                                        We call it serious joy not only because it coexists in the same heart, at the same time, with the gravity of reverence and the groaning of sin, but also because it is not peripheral but central...
+                                                        {truncate(event.description)}
                                                     </p>
                                                     <div className="flex items-center justify-between">
                                                         <div className="flex items-center ml-[6px]">
                                                             {
-                                                                speakers.map((speaker, index) => (
-                                                                    <div key={speaker} className={`ml-[-6px] h-[30px] w-[30px] border-2 border-white  rounded-full relative`}>
-                                                                        <Image src="/img/eleazar.jpg"
-                                                                            className="object-cover w-full h-full rounded-full"
-                                                                            layout="fill"
-                                                                            blurDataURL="data:..."
-                                                                            placeholder="blur"
-                                                                            alt="logo" />
-                                                                    </div>
-                                                                ))
+                                                                lister(index)
                                                             }
                                                         </div>
 

@@ -60,7 +60,7 @@ const eventSlice = createSlice({
             state.event.sessions?.splice(payload, 1)
         },
         setEventSessions: (state, { payload }) => {
-            const inArray = state.event?.sessions?.find(session => session._id === payload._id)
+            const inArray = state.event?.sessions?.find(session => session._id === payload?._id)
             if (inArray) {
                 state.event?.sessions?.map(session => {
                     if (session._id === payload._id) {

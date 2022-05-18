@@ -2,6 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from 'next/image'
+import blur from '../../common/blur'
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -79,7 +80,7 @@ const Ministers = () => {
                                                         <Image src={minister.imageUrl?.url}
                                                             className="object-cover w-full h-full rounded-full"
                                                             layout="fill"
-                                                            blurDataURL="data:..."
+                                                            blurDataURL={blur}
                                                             placeholder="blur"
                                                             alt="logo" />
                                                     </div>

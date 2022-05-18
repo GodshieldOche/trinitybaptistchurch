@@ -5,15 +5,31 @@ import Schedule from './Schedule'
 import Speakers from './Speakers'
 import { useState } from 'react'
 import Register from './Register'
+import { useSelector } from 'react-redux'
+import { format } from 'date-fns'
+
+
 
 const Body = () => {
     const [active, setActive] = useState('introduction')
+
+    const { event } = useSelector(state => state.clientEvent)
 
     const toggleActive = (name) => {
         if (active !== name) {
             setActive(name)
         }
     }
+
+    const date = (start, end) => {
+        if (start === end) {
+            return format(new Date(start), 'MMM, do yyyy')
+        } else {
+            return `${format(new Date(start), 'do')} - ${format(new Date(end), 'do MMM yyyy')}`
+        }
+    }
+
+    
     return (
         <div>
             <div className="bg-[#eee]/60 sm:!pt-20 !pt-[60px] !mb-3  !pb-5">
@@ -28,8 +44,8 @@ const Body = () => {
                                 alt="logo" />
                         </div>
                         <div className="flex flex-col space-y-2 items-center justify-center">
-                            <h1 className="text-sm">June 11th 2022</h1>
-                            <h1 className="text-xl md:text-3xl font-medium uppercase">The sovereignty of god</h1>
+                            <h1 className="text-sm">{date(event.startDate, event.endDate)}</h1>
+                            <h1 className="text-xl md:text-3xl font-medium uppercase">{event.title}</h1>
                             <h1 className="text-sm">8:00 AM - 4:00 PM</h1>
                         </div>
                     </div>
@@ -43,13 +59,13 @@ const Body = () => {
                     <NavLink name={"register"} toggleActive={toggleActive} active={active} />
                 </div>
                 {
-                    active === 'introduction' && <Introduction />
+                    active === 'introduction' && <Introduction int={event.description} />
                 }
                 {
-                    active === 'speakers' && <Speakers />
+                    active === 'speakers' && <Speakers speakers={event.sessions} />
                 }
                 {
-                    active === 'schedule' && <Schedule />
+                    active === 'schedule' && <Schedule speakers={event.sessions} />
                 }  
                 {
                     active === 'register' && <Register />

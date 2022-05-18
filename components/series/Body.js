@@ -29,7 +29,7 @@ const Body = ({ series, changeCurrent, current }) => {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-1 !mt-10 lg:grid-cols-12 items-start gap-5 ">
+            <div className="grid grid-cols-1 md:!mt-10 lg:grid-cols-12 items-start gap-5 ">
 
                 {/* first grid */}
                 <div className="lg:col-span-7 px-2 md:px-0">

@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getAdminMinisters } from "../../redux/features/getMinisters";
 import ButtonLoader from "../common/ButtonLoader";
 import { setEventSessions } from '../../redux/features/event'
+import { useRouter } from 'next/router'
 
 const Modal = () => {
     const [startTime, setStartTime] = useState(new Date());
@@ -15,10 +16,13 @@ const Modal = () => {
     const [description, setDescription] = useState('');
     const [id, setId] = useState(Math.random());
     const [loading, setLoading] = useState('');
-    const dispatch = useDispatch()
+    
 
     const { modalData } = useSelector(state => state.menu)
     const { ministers } = useSelector(state => state.ministers)
+    const dispatch = useDispatch()
+    const router = useRouter()
+
 
     useEffect(() => { 
         dispatch(getAdminMinisters())
@@ -58,13 +62,15 @@ const Modal = () => {
         e.preventDefault()
         setLoading(true)
         let preacher = ''
+        let name = ''
         ministers.forEach(minister => {
             if (minister.name === preacherName) {
                 preacher = minister._id
+                name = minister.name
             }
         })
         
-        if (modalData._id) {
+        if (modalData._id && router.query.id) {
             const session = {
                 _id: modalData._id,
                 topic,
@@ -72,6 +78,22 @@ const Modal = () => {
                 description,
                 startTime,
                 endTime,
+            }
+
+            dispatch(setEventSessions(session))
+            dispatch(setModalState(false))
+        } else if (!modalData._id && router.query.id) {
+            const session = {
+                day: modalData.day ? modalData.day : modalData,
+                topic,
+                preacher: {
+                    _id: preacher,
+                    name: name
+                },
+                description,
+                startTime,
+                endTime,
+                _id: id
             }
 
             dispatch(setEventSessions(session))
