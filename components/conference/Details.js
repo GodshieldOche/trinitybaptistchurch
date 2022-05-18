@@ -3,6 +3,8 @@ import { useState } from "react"
 import Player from "../Player"
 import Body from "../series/Body"
 import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux";
+import { loadUser } from "../../redux/features/currentUser";
 
 
 const Details = () => {
@@ -11,6 +13,10 @@ const Details = () => {
 
     const [current, setCurrent] = useState(conference.sermons[0])
 
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(loadUser())
+    }, [])
 
     const changeCurrent = (index) => {
         setCurrent(conference.sermons[index])

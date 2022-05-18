@@ -3,6 +3,8 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 import Player from "../Player"
 import Body from "./Body"
+import { useDispatch } from "react-redux";
+import { loadUser } from "../../redux/features/currentUser";
 
 
 
@@ -12,6 +14,10 @@ const Details = () => {
 
     const [current, setCurrent] = useState(series.sermons[0])
 
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(loadUser())
+    }, [])
 
 
     
