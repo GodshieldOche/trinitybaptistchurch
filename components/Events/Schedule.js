@@ -39,7 +39,7 @@ const Schedule = ({ sessions, startDate, endDate }) => {
             <div className=" px-2 md:px-0">
                 {
                     schedules.map((subArr, index) => (
-                        <div>
+                        <div key={index}>
                             <h1 className="text-center text-sm text-primary-light uppercase font-medium">{format(new Date(dates[index]), 'do MMM yyyy')}</h1>
                             {
                                 subArr.map((session, i) => (
