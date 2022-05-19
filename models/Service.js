@@ -23,7 +23,6 @@ const serviceSchema = new mongoose.Schema({
     },
     bulletin: {
         type: String,
-        required: true
     }
 })
 

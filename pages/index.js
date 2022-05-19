@@ -1,7 +1,7 @@
 import Home from "../components/Home";
 import Head from "next/head";
-// import { wrapper } from "../redux/Store";
-// import { loadUser } from "../redux/features/currentUser";
+import { wrapper } from "../redux/Store";
+import { getClientLatest } from "../redux/features/client/latest";
 
 
 export default function HomePage() {
@@ -14,3 +14,7 @@ export default function HomePage() {
     </div>
   )
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, query }) => {
+  await store.dispatch(getClientLatest({ req }))
+})

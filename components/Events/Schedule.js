@@ -11,18 +11,17 @@ const Schedule = ({ sessions, startDate, endDate }) => {
         const s = new Date(startDate)
         const diff = e.getTime() - s.getTime()
         const days = Math.round(diff / (1000 * 60 * 60 * 24) + 1)
-        console.log(days)
         const start = s.getTime()
         setDates([])
         for (let i = 0; i < days; i++) {
             setDates(prev => [ ...prev, new Date(start + (1000 * 60 * 60 * 24) * (i)) ])
         }
-        console.log(new Date(start + (1000 * 60 * 60 * 24) * (2 - 1)))
 
         let subArr = []
         for (let i = 1; i <= days; i++){
             subArr.push([])
         }
+        
         for (let i = 1; i <= days; i++) {
             sessions.map(session => {
                 if (session.day.includes(i.toString())) {
@@ -43,7 +42,7 @@ const Schedule = ({ sessions, startDate, endDate }) => {
                 {
                     schedules.map((subArr, index) => (
                         <div key={index}>
-                            <h1 className="text-center text-sm text-primary-light uppercase font-medium">{format(new Date(dates[index]), 'do MMM yyyy')}</h1>
+                            <h1 className="text-center text-primary-light uppercase font-medium">{`${format(new Date(dates[index]), 'do MMM yyyy')} - Day ${index + 1}`}</h1>
                             {
                                 subArr.map((session, i) => (
                                     <div key={session._id} className="!mb-5">
@@ -56,8 +55,10 @@ const Schedule = ({ sessions, startDate, endDate }) => {
                                                 <h1 className="font-medium uppercase">{session.topic}</h1>
                                                 <p className="font-light text-sm text-justify" >Matthew 16:18 promises that Jesus Christ is building His church and that the gates of hell will not prevail against it. Church history bears witness to this fact, as the saints in every age have stood for the gospel of God’s grace.</p>
                                             </div>
-                                            <h1 className="text-sm uppercase">{`Speaker:   ${session.preacher.name}`}</h1>
-
+                                            {
+                                                session.preacher.name && 
+                                                <h1 className="text-[13px] font-light uppercase">{`Speaker: ${session.preacher.name}`}</h1>
+                                            }
                                         </div>
                                     </div >
                                 ))

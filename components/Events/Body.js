@@ -45,9 +45,9 @@ const Body = () => {
                                 alt="logo" />
                         </div>
                         <div className="flex flex-col space-y-2 items-center justify-center">
-                            <h1 className="text-sm">{date(event.startDate, event.endDate)}</h1>
+                            <h1 className="text-xs uppercase">{event.type}</h1>
                             <h1 className="text-xl md:text-3xl font-medium uppercase">{event.title}</h1>
-                            <h1 className="text-sm">8:00 AM - 4:00 PM</h1>
+                            <h1 className="text-sm capitalize">{date(event.startDate, event.endDate)}</h1>
                         </div>
                     </div>
                 </div>

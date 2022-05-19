@@ -1,12 +1,11 @@
 import nc from 'next-connect'
+import { getLatestResources } from '../../controllers/allController'
 import dbConnect from '../../utils/dbConnect'
 
 const handler = nc()
 
-handler.get((req, res, next) => {
-    res.json({name: "john Doe ly"})
-})
-
 dbConnect()
+
+handler.get(getLatestResources)
 
 export default handler

@@ -41,7 +41,6 @@ const eventSchema = new mongoose.Schema({
             },
             preacher: {
                 type: mongoose.Schema.ObjectId,
-                required: true,
                 ref: 'minister'
             },
             description: {
