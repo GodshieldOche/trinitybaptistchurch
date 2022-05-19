@@ -76,7 +76,7 @@ const Lists = () => {
                                                     <Image src={defaultImage}
                                                         className="object-cover w-full h-full "
                                                         layout="fill"
-                                                        blurDataURL="data:..."
+                                                        blurDataURL={blur}
                                                         placeholder="blur"
                                                         alt="logo" />
                                                     <h1 className="hidden md:block absolute font-medium text-center text-[10px] uppercase px-1 py-2 text-white bg-gray-900">{event.type}</h1>

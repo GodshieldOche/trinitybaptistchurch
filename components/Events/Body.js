@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Register from './Register'
 import { useSelector } from 'react-redux'
 import { format } from 'date-fns'
+import blur from '../common/blur'
 
 
 
@@ -39,7 +40,7 @@ const Body = () => {
                             <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg"
                                 className="object-cover w-full h-full"
                                 layout="fill"
-                                blurDataURL="data:..."
+                                blurDataURL={blur}
                                 placeholder="blur"
                                 alt="logo" />
                         </div>
@@ -65,7 +66,7 @@ const Body = () => {
                     active === 'speakers' && <Speakers speakers={event.sessions} />
                 }
                 {
-                    active === 'schedule' && <Schedule speakers={event.sessions} />
+                    active === 'schedule' && <Schedule sessions={event.sessions} startDate={event.startDate} endDate={event.endDate} />
                 }  
                 {
                     active === 'register' && <Register />

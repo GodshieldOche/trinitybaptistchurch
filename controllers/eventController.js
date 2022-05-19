@@ -22,7 +22,6 @@ const getEvents = asyncHandler(async (req, res, next) => {
         model: Minister
     })
 
-    console.log(new Date())
     const events = allEvents.filter(event => new Date(event.endDate) > new Date())
     
 

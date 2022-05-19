@@ -1,6 +1,6 @@
 import Image from 'next/image'
+import blur from '../common/blur'
 
-const list = [1,2,3]
 const Speakers = ({speakers}) => {
 
     const lister = () => {
@@ -17,7 +17,7 @@ const Speakers = ({speakers}) => {
                     <Image src={preacher.imageUrl.url}
                         className="object-cover rounded-full w-full h-full"
                         layout="fill"
-                        blurDataURL="data:..."
+                        blurDataURL={blur}
                         placeholder="blur"
                         alt="logo" />
                 </div>
