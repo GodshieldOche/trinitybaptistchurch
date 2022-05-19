@@ -34,7 +34,7 @@ const addMinister = asyncHandler(async (req, res, next) => {
 // get => api/ministers
 const getMinisters = asyncHandler(async (req, res, next) => {
     
-    const ministers = await Minister.find()
+    const ministers = await Minister.find().sort({ createdAt: -1 })
 
     res.status(200).json({
         success: "true",

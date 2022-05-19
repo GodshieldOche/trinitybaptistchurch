@@ -16,7 +16,7 @@ cloudinary.config({
 // get => /api/client/sermons
 const getSermons = asyncHandler(async (req, res, next) => {
 
-    const sermons = await Sermon.find({}).populate({
+    const sermons = await Sermon.find({}).sort({ date: -1 }).populate({
         path: 'preacher',
         select: "name imageUrl",
         model: Minister
@@ -65,7 +65,7 @@ const createSermon = asyncHandler(async (req, res, next) => {
 // get =>  /api/admin/sermons
 const getAdminSermons = asyncHandler(async (req, res, next) => {
 
-    const sermons = await Sermon.find({}).populate({
+    const sermons = await Sermon.find({}).sort({ date: -1 }).populate({
         path: 'preacher',
         select: "name",
         model: Minister

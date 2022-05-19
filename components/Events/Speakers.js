@@ -3,13 +3,17 @@ import blur from '../common/blur'
 
 const Speakers = ({speakers}) => {
 
+
+
     const lister = () => {
-        const dp = []
+        const preachers = []
 
         speakers.map(session => {
-            dp.push(session.preacher)
+            const inArray = preachers.find(preacher => preacher._id === session.preacher._id)
+            if (!inArray) {
+                preachers.push(session.preacher)
+            }
         })
-        let preachers = [...new Set(dp)];
 
         return preachers.map(preacher => (
             <div key={preacher._id} className="flex flex-col md:flex-row md:justify-between space-y-3 md:space-y-0 items-center md:space-x-3">

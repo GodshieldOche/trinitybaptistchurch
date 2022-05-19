@@ -16,7 +16,7 @@ cloudinary.config({
 // get => /api/client/events
 const getEvents = asyncHandler(async (req, res, next) => {
 
-    const allEvents = await Event.find({}).populate({
+    const allEvents = await Event.find({}).sort({ startDate: 1 }).populate({
         path: 'sessions.preacher',
         select: "imageUrl",
         model: Minister
@@ -70,7 +70,7 @@ const createEvent = asyncHandler(async (req, res, next) => {
 // get =>  /api/admin/Event
 const getAdminEvent = asyncHandler(async (req, res, next) => {
 
-    const events = await Event.find({}).populate({
+    const events = await Event.find({}).sort({ startDate: 1 }).populate({
         path: 'sessions.preacher',
         select: "name",
         model: Minister

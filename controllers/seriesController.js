@@ -15,7 +15,7 @@ cloudinary.config({
 // get => /api/client/series
 const getClientSeries = asyncHandler(async (req, res, next) => {
 
-    const series = await Series.find({}).populate({
+    const series = await Series.find({}).sort({ createdAt: -1 }).populate({
         path: 'sermons.preacher',
         select: "name imageUrl",
         model: Minister
@@ -64,7 +64,7 @@ const createSeries = asyncHandler(async (req, res, next) => {
 // get =>  /api/admin/Series
 const getAdminSeries = asyncHandler(async (req, res, next) => {
 
-    const series = await Series.find({}).populate({
+    const series = await Series.find({}).sort({ createdAt: -1 }).populate({
         path: 'sermons.preacher',
         select: "name",
         model: Minister

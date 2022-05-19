@@ -15,7 +15,7 @@ cloudinary.config({
 // get => /api/client/conference
 const getClientConference = asyncHandler(async (req, res, next) => {
 
-    const conferences = await Conference.find({}).populate({
+    const conferences = await Conference.find({}).sort({ startDate: -1 }).populate({
         path: 'sermons.preacher',
         select: "name imageUrl",
         model: Minister
@@ -67,7 +67,7 @@ const createConference = asyncHandler(async (req, res, next) => {
 // get =>  /api/admin/conference
 const getAdminConferences = asyncHandler(async (req, res, next) => {
 
-    const conferences = await Conference.find({}).populate({
+    const conferences = await Conference.find({}).sort({ date: -1 }).populate({
         path: 'sermons.preacher',
         select: "name",
         model: Minister
