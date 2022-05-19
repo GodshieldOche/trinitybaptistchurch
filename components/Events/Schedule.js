@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import { format } from 'date-fns'
 
-const s = ({ sessions, startDate, endDate }) => {
+const Schedule = ({ sessions, startDate, endDate }) => {
     const [dates, setDates] = useState([])
     const [schedules, setSchedules] = useState([])
 
@@ -43,8 +43,8 @@ const s = ({ sessions, startDate, endDate }) => {
                             <h1 className="text-center text-sm text-primary-light uppercase font-medium">{format(new Date(dates[index]), 'do MMM yyyy')}</h1>
                             {
                                 subArr.map((session, i) => (
-                                    <div className="!mb-5">
-                                        <div key={session._id} className="flex flex-col space-y-3 py-5 border-b border-b-primary-light   ">
+                                    <div key={session._id} className="!mb-5">
+                                        <div className="flex flex-col space-y-3 py-5 border-b border-b-primary-light   ">
                                             <div className="flex space-x-1 items-center ">
                                                 <h1 className="text-sm font-medium uppercase">{`Session ${i + 1} :`}</h1>
                                                 <h1 className="text-sm uppercase">{`${format(new Date(session.startTime), 'h:mm a')} - ${format(new Date(session.endTime), 'h:mm a')} `}</h1>
@@ -127,4 +127,4 @@ const s = ({ sessions, startDate, endDate }) => {
     )
 }
 
-export default s
+export default Schedule
