@@ -1,7 +1,7 @@
 import FilterItems from "./FilterItems"
 import SortItems from "./SortItems"
 
-const Filter = ({ fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) => {
+const Filter = ({topics, preachers, scriptures, fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) => {
     return (
         <div>
             <div className={` ${fitlerToggle || sortToggle ? "pb-5 pt-1  w-full h-screen fixed top-0 right-0  !z-50 !overflow-y-scroll !overscroll-contain" : "mb-5"}
@@ -35,7 +35,7 @@ const Filter = ({ fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) =>
                 </div>
 
                 {
-                    fitlerToggle && <FilterItems />
+                    fitlerToggle && <FilterItems topics={topics} preachers={preachers} scriptures={scriptures} />
                 }
                 {
                     sortToggle && <SortItems />
@@ -43,6 +43,7 @@ const Filter = ({ fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) =>
             </div>
 
 
+            {/* Desktop Screen */}
             <div className="hidden lg:block bg-[white]">
                 <div className="grid grid-cols-2 items-center shadow-md">
                     <div className={`${!sortToggle ? "bg-primary-dark text-[white]" : "bg-[white] text-[black]"}
@@ -73,7 +74,7 @@ const Filter = ({ fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) =>
                 </div>
 
                 {
-                    fitlerToggle ? <FilterItems /> : sortToggle ? <SortItems /> : <FilterItems />
+                    fitlerToggle ? <FilterItems topics={topics} preachers={preachers} scriptures={scriptures} /> : sortToggle ? <SortItems /> : <FilterItems topics={topics} preachers={preachers} scriptures={scriptures} />
                 }
             </div>
         </div>

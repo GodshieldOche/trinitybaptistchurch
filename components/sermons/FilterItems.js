@@ -1,63 +1,25 @@
-const FilterItems = () => {
+import { useEffect, useState } from 'react';
 
-    const items = [
-        {
-            name: "The Person Of Christ",
-            id: 1
-        },
-        {
-            name: "Miracles",
-            id: 2
-        },
-        {
-            name: "The Parables",
-            id: 3
-        },
-        {
-            name: "The Atonement",
-            id: 4
-        },
-        {
-            name: "The Trinity",
-            id: 5
-        },
-    ]
-    const preachers = [
-        {
-            name: "Peter Abutu",
-            id: 1
-        },
-        {
-            name: "Eleazar Maduka",
-            id: 2
-        },
-        {
-            name: "Oche Chidi",
-            id: 3
-        },
-    ]
-    const scriptures = [
-        {
-            name: "John",
-            id: 1
-        },
-        {
-            name: "Romans",
-            id: 2
-        },
-        {
-            name: "1 John",
-            id: 3
-        },
-        {
-            name: "Jonah",
-            id: 4
-        },
-        {
-            name: "philippians",
-            id: 5
-        },
-    ]
+const FilterItems = ({ topics, preachers, scriptures }) => {
+
+    // useEffect(() => {
+    //     if (topics.length >= 1) {
+    //         toggleShowless(1, preachers.length, scriptures.length)
+    //     }
+    //     if (preachers.length >= 5) {
+    //         toggleShowless(topics.length, 5, scriptures.length)
+    //     }
+    //     if (scriptures.length >= 5) {
+    //         toggleShowless(topics.length, preachers.length, 5)
+    //     }
+    // }, [])
+
+    // const toggleShowless = (tValue, pValue, sValue) => { 
+    //     topics.splice(0, tValue);
+    //     preachers.splice(0, pValue);
+    //     scriptures.splice(0, sValue);
+    // }
+    
 
     return (
         <div className="flex ml-3 md:ml-5 mt-3 flex-col transition duration-500 ease-in-out space-y-5">
@@ -65,14 +27,16 @@ const FilterItems = () => {
                 <h1 className="uppercase font-medium">Topics</h1>
                 <div className="ml-4 flex-col space-y-2">
                     {
-                        items.map(item => (
-                            <div key={item.id} className="flex items-center space-x-1">
+                        topics.map((topic, index) => (
+                            <div key={index} className="flex items-center space-x-1">
                                 <div className="border cursor-pointer rounded w-4 h-4 border-primary-dark"></div>
-                                <h1 className="capitalize font-light">{ item.name }</h1>
+                                <h1 className="capitalize font-light">{ topic }</h1>
                             </div>
                         ))
                     }
-                    <h1 className="text-sm text-primary-dark">see more...</h1>
+                    {
+                        topics.length >= 5 && <h1 className="text-sm text-primary-dark">see more...</h1>
+                    }
                 </div>
             </div>
 
@@ -80,15 +44,16 @@ const FilterItems = () => {
                 <h1 className="uppercase font-medium">Preachers</h1>
                 <div className="ml-4 flex-col space-y-2">
                     {
-                        preachers.map(item => (
-                            <div key={item.id} className="flex items-center space-x-1">
+                        preachers.map((preacher, index) => (
+                            <div key={index} className="flex items-center space-x-1">
                                 <div className="border cursor-pointer rounded w-4 h-4 border-primary-dark"></div>
-                                <h1 className="capitalize font-light">{ item.name }</h1>
+                                <h1 className="capitalize font-light">{preacher }</h1>
                             </div>
                         ))
                     }
-                    
-                    
+                    {
+                        preachers.length >= 5 && <h1 className="text-sm text-primary-dark">see more...</h1>
+                    }
                 </div>
             </div>
 
@@ -96,14 +61,16 @@ const FilterItems = () => {
                 <h1 className="uppercase font-medium">Scriptures</h1>
                 <div className="ml-4 flex-col space-y-2">
                     {
-                        scriptures.map(item => (
-                            <div key={item.id} className="flex items-center space-x-1">
+                        scriptures.map((scripture, index) => (
+                            <div key={index} className="flex items-center space-x-1">
                                 <div className="border cursor-pointer rounded w-4 h-4 border-primary-dark"></div>
-                                <h1 className="capitalize font-light">{ item.name }</h1>
+                                <h1 className="capitalize font-light">{scripture}</h1>
                             </div>
                         ))
                     }
-                    <h1 className="text-sm text-primary-dark">see more...</h1>
+                    {
+                        scriptures.length >= 5 && <h1 className="text-sm text-primary-dark">see more...</h1>
+                    }
                 </div>
             </div>
 

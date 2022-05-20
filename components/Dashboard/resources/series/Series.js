@@ -95,7 +95,7 @@ const Series = () => {
                                             </div>
                                         </td>
                                         <td className="text-sm px-3 py-4 whitespace-nowrap">
-                                            <h1 className="capitalize">{`${serie.sermons.length} sermons`}</h1>
+                                            <h1 className="capitalize">{`${serie.sermons.length > 1 ? serie.sermons.length + " sermons" : serie.sermons.length + " sermon"} `}</h1>
                                         </td>
                                         <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
                                             <div className="flex space-x-2 items-center">

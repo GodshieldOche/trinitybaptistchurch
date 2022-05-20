@@ -14,11 +14,24 @@ const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
+    const [topics, setTopics] = useState([])
+    const [preachers, setPreachers] = useState([])
+    const [scriptures, setScriptures] = useState([])
 
     const { sermons } = useSelector(state => state.clientSermons)
 
     useEffect(() => {
-       
+        let topics = []
+        let preachers = []
+        let scriptures = []
+        sermons.map(sermon => {
+            topics.push(sermon.topic)
+            preachers.push(sermon.preacher.name)
+            scriptures.push(sermon.book)
+        })
+        setTopics([...new Set(topics)])
+        setPreachers([...new Set(preachers)])
+        setScriptures([...new Set(scriptures)])
     },[])
 
     return (
@@ -76,8 +89,14 @@ const List = () => {
                         </div>
                     </div>
                     <div className=" lg:col-span-5 lg:!mt-10 order-first lg:order-last">
-                        <Filter fitlerToggle={fitlerToggle} setFilterToggle={setFilterToggle}
-                            sortToggle={sortToggle} setSortToggle={setSortToggle} />
+                        <Filter
+                            topics={topics}
+                            preachers={preachers}
+                            scriptures={scriptures}
+                            fitlerToggle={fitlerToggle}
+                            setFilterToggle={setFilterToggle}
+                            sortToggle={sortToggle}
+                            setSortToggle={setSortToggle} />
                     </div>
                 </div>
             </div>

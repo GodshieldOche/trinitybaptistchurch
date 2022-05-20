@@ -102,7 +102,7 @@ const Conference = () => {
                                             </div>
                                         </td>
                                         <td className="text-sm px-3 py-4 whitespace-nowrap">
-                                            <h1 className="capitalize">{`${conference.sermons.length} sermons`}</h1>
+                                            <h1 className="capitalize">{`${conference.sermons.length > 1 ? conference.sermons.length + " sermons" : conference.sermons.length + " sermon"} `}</h1>
                                         </td>
                                         <td className="text-sm px-3 py-4 whitespace-nowrap">
                                             <h1 className="capitalize">{`${format(new Date(conference.startDate), 'MMM, do')}-${format(new Date(conference.endDate), 'do, yyyy')}`}</h1>

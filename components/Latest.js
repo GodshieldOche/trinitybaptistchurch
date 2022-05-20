@@ -24,7 +24,7 @@ const Latest = ({latest}) => {
         <div className="bg-[white] py-10 px-2 sm:px-0 ">
             <div className="container lg:px-[2rem] space-y-5">
                 <div className="flex items-center space-x-1">
-                    <span className="w-7 h-[2.5px] bg-primary-dark"></span>
+                    <span className="w-5 h-[2.5px] bg-primary-dark"></span>
                     <h1 className="text-base lg:text-lg font-medium uppercase">Latest Resources</h1>
                 </div>
                 
@@ -73,7 +73,7 @@ const Latest = ({latest}) => {
                                                 placeholder="blur"
                                                 alt="logo" />
                                         </div>
-                                        <h1 className="text-sm  font-light md:text-base">{list.preacher.name}</h1>
+                                        <h1 className="text-sm font-light md:text-base">{list.preacher.name}</h1>
                                     </div>
                                 </div>
                             </div>

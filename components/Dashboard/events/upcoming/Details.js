@@ -11,6 +11,8 @@ import ImageUploader from '../../../common/ImageUploader';
 import ButtonLoader from '../../../common/ButtonLoader';
 import { getEvent, updateEvent } from '../../../../redux/features/event';
 import { setDeleteModalData, setDeletModalState } from '../../../../redux/features/menu'
+import { getAdminMinisters } from '../../../../redux/features/getMinisters';
+import { format } from 'date-fns';
 
 const Details = () => {
 
@@ -39,6 +41,7 @@ const Details = () => {
     }, [days])
 
     useEffect(() => {
+        dispatch(getAdminMinisters())
         dispatch(getEvent(id)).then(result => {
             if (!result.error) {
                 const { type, title, description, imageUrl, startDate, endDate } = result.payload.event
@@ -62,10 +65,15 @@ const Details = () => {
                 console.log(result.error)
             }
         })
-        return () => {
-            dispatch(clearSessions())
-        }
+
+        
+        
     }, [dispatch, id]);
+
+    const date = (start, end) => {
+       
+        return `${format(new Date(start), 'h:mm a')} - ${format(new Date(end), 'h:mm a')}`
+    }
 
 
     const handleSubmit = (e) => {
@@ -90,6 +98,8 @@ const Details = () => {
         }
 
     }
+
+
 
     
   return (
@@ -229,7 +239,7 @@ const Details = () => {
                                       </td>
                                       <td className="text-sm  px-3 py-4 whitespace-nowrap ">
                                           <div className="flex flex-col space-y-2">
-                                              <h1>8:00AM-10:00AM</h1>
+                                              <h1>{date(eve.startTime, eve.endTime)}</h1>
                                           </div>
                                       </td>
                                       <td className="text-sm  px-3 py-4 whitespace-nowrap ">

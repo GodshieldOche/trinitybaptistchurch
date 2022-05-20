@@ -1,6 +1,6 @@
 import { useState, useEffect, } from 'react';
 import {toast} from 'react-toastify';
-import AddIcon from '@mui/icons-material/Add';
+import { format } from 'date-fns';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useRouter } from 'next/router';
@@ -39,6 +39,11 @@ const New = () => {
     }, [days]);
 
     const router = useRouter();
+
+    const date = (start, end) => {
+
+        return `${format(new Date(start), 'h:mm a')} - ${format(new Date(end), 'h:mm a')}`
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -200,7 +205,7 @@ const New = () => {
                                         </td>
                                         <td className="text-sm  px-3 py-4 whitespace-nowrap ">
                                             <div className="flex flex-col space-y-2">
-                                                <h1>8:00AM-10:00AM</h1>
+                                                <h1>{date(item.startTime, item.endTime)}</h1>
                                             </div>
                                         </td>
                                         <td className="text-sm  px-3 py-4 whitespace-nowrap ">
@@ -219,7 +224,7 @@ const New = () => {
                                         </td>
                                         <td className="text-sm  px-3 py-4 whitespace-nowrap ">
                                             <div className="flex flex-col space-y-2">
-                                                <h1>Day 1</h1>
+                                                <h1>{ item.day }</h1>
                                             </div>
                                         </td>
                                         <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
