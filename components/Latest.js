@@ -48,7 +48,7 @@ const Latest = ({latest}) => {
                                         placeholder="blur"
                                         alt="logo" />
                                     <div className=" hidden md:block uppercase text-xs absolute py-1 px-4 top-3 left-3  bg-white/70">
-                                        <div className="flex space-x-3">
+                                        <div className="flex space-x-1">
                                             <GraphicEqIcon className="text-[orange] !text-base" />
                                             <OndemandVideoIcon className="text-[red]/80 !text-base" />
                                             <h1 className="text-xs font-light uppercase">{`| ${list.category ? "Sermon" : "bible study"}`}</h1>
@@ -56,7 +56,7 @@ const Latest = ({latest}) => {
                                     </div>
                                 </div>
                                 <div className="w-full md:p-5 space-y-2">
-                                    <div className="flex md:hidden space-x-3">
+                                    <div className="flex md:hidden space-x-1">
                                         <GraphicEqIcon className="text-[orange] !text-base" />
                                         <OndemandVideoIcon className="text-[red]/80 !text-base" />
                                         <h1 className="text-xs font-light uppercase">{`| ${list.category ? "Sermon" : "bible study"}`}</h1>

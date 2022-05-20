@@ -55,7 +55,7 @@ const statements = [
     
 ]
 
-const leaders = [1,2,3,4]
+const leaders = [1,2,3,4,5,6,7]
 
 const Body = () => {
     return (
@@ -85,18 +85,9 @@ const Body = () => {
                                 placeholder="blur"
                                 alt="logo" />
                         </div>
-                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">On July 1, 1956, Grace Community Church of the Valley conducted its first public services. Founded as a nondenominational church, its emphasis was on the basics of Christianity. The fledgling church called Dr. Don Householder, one of the great preachers of his generation, to be its founding pastor. Worship services were conducted in the two main rooms of the converted town house, where a wall had been taken down to enable Dr. Householder to see his entire congregation while preaching. </p>
-
+                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">Trinity Baptist Church was birthed on the 9th of December 2018, this follows the ordination of the Missionary Pastor Peter Joshua Abutu on he 4th of March, the same year by the leadership of the sending Church, Kabwata Baptist Church, Lusaka Zambia.About eight persons gathered in Pastor Abutu’s living room on the 3rd of June 2018 for prayer and Bible study signalling the beginning of the work.In that meeting, intentions, missions and visions for the work were shared and prayers offered.We continued meeting every Sunday evening till the first Sunday morning service on the 9th of December 2018 at the Arcade. </p>
                         <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
-                            In 1957, services were moved to the newly built chapel at the present location on Roscoe Boulevard. Less than two years later, two services were being conducted on Sunday mornings, the first education building was built to house Sunday school classes, and Grace Church became known as "the fastest growing church in Los Angeles."
-
-                            Dr. Householder died in April 1965, and in 1966, Dr. Richard Elvee was called to be pastor. Dr. Elvee had become known as a church builder. Grace Church continued to grow under Dr. Elvee's leadership until he passed away in September 1968. </p>
-                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
-                            John MacArthur assumed the pastorate of Grace in February 1969. Prior to this, John had been assistant pastor in the church his father led in Burbank; he had also traveled widely as a conference speaker and representative for Talbot Theological Seminary, from which he graduated with honors. </p>
-                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
-                            During those early days of John's ministry, the church doubled in size every two years. We moved from meeting in the Chapel to the newly built Family Center (now the Gymnasium) in 1971, and from there into the current Worship Center in 1977. Since then, additional buildings for teaching and fellowship use have been erected, filling a campus that never sleeps. Truly, the Lord has blessed us with exceptional growth in terms of both people and ministries. </p>
-                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
-                            More important than numbers, programs, and structures, however, is the foundation for the spiritual life of Grace Community Church that has been built. This foundation includes sound doctrine, spiritual leadership, and active service. We are convinced that God's legacy of faithfulness to us will continue in the future if we remain faithful to Him and His Word.</p>
+                            TBCA now worship and operates from a rented facility at no 4 Juba street Suncity Estate Abuja-FCT, Nigeria.</p>
                     </div>
                 </div>
 
@@ -110,7 +101,9 @@ const Body = () => {
                 <div  className="max-w-screen-md mx-auto">
                     <div className="flex flex-col justify-center   space-y-3">
                         <h1 className="text-center text-2xl uppercase font-medium">Statement of faith</h1>
-                        <p className="pb-14 leading-relaxed text-sm text-center px-2 md:px-5" >Trinity Baptist Church adheres to the ancient statements of faith (the Apostles’ Creed, the Nicene Creed, and the Creed of Chalcedon) and affirms the historic Christian faith as expressed in the five solas of the Reformation and the consensus of the historic Reformed confessions (Westminster Standards, Three Forms of Unity, and 1689 London Baptist Confession of Faith).</p>
+                        <p className="pb-14 leading-relaxed text-sm text-center px-2 md:px-5" >TBCA is Reformed Baptist Church and does subscribes to the 1689 2nd London Baptist confessions of faith.
+                            We agree with T4G Affirmations and Denials
+                            We agree with 9Marks</p>
                     </div>
                     <div className="flex flex-col space-y-5 px-2 md:px-5">
                         {
@@ -141,7 +134,11 @@ const Body = () => {
                         <div className="flex flex-col px-2 md:px-0 space-y-2">
                             <h1 className="uppercase font-medium text-center md:text-left text-xl md:text-2xl">Our Mission</h1>
                             <p className="text-justify md:text-left font-light">
-                                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters as opposed to using Content here content here making it look like readable English Many desktop publishing packages and web page editors now use Lorem Ipsum
+                                We exist to glorify God by being gospel centred and driven; faithfully worshiping God joyfully, Evangelising sinners, Equipping the saints, Planting Churches, and promoting Biblical worldview.
+                            </p>
+                            <h1 className="uppercase !mt-8 font-medium text-center md:text-left text-xl md:text-2xl">Our Vision</h1>
+                            <p className="text-justify md:text-left font-light">
+                                To be a People zealous for God’s Holiness and Glory in a Joyful and loving society.
                             </p>
                         </div>
                     </div>

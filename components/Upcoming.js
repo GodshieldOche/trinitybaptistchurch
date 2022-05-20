@@ -1,29 +1,46 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import blur from './common/blur'
+import { format } from "date-fns"
 
-const Upcoming = () => {
+const Upcoming = ({event}) => {
+    const truncate = (des, val, lim) => {
+        if (des.length > val) {
+            return des.substr(0, lim) + "..."
+        } else {
+            return des
+        }
+    }
+
+    const date = (start, end) => {
+        if (start === end) {
+            return format(new Date(start), 'MMM, do yyyy')
+        } else {
+            return `${format(new Date(start), 'do')} - ${format(new Date(end), 'do MMM yyyy')}`
+        }
+    }
     return (
         <div className="grid grid-cols-12 gap-2 items-center px-2 md:px-0 ">
             <div className="order-last col-span-4 sm:col-span-5 w-full sm:h-full h-[calc(100%-30px)] relative ">
-                <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651308451/Global/event_exviqm.jpg"
+                <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg"
                     className="object-cover w-full h-full"
                     layout="fill"
-                    blurDataURL="data:..."
+                    blurDataURL={blur}
                     placeholder="blur"
                     alt="logo" />
             </div>
             <div className="col-span-8 sm:col-span-7 flex flex-col sm:ml-3">
                 <div className="space-y-2">
-                    <h1 className="uppercase text-xs font-light !mb-3 ">Conference</h1>
-                    <h1 className="font-medium text-base uppercase  ">The Sovereignty of God</h1>
-                    <h1 className=" text-xs ">9th October 2022</h1>
+                    <h1 className="uppercase text-xs font-light !mb-3 ">{event.type}</h1>
+                    <h1 className="font-medium text-base uppercase  ">{truncate(event.title, 25, 24) }</h1>
+                    <h1 className=" text-xs ">{date(event.startDate, event.endDate)}</h1>
 
                     <h1 className=" text-xs !mt-8 !mb-3 ">Would be attending?</h1>
 
                     <div className="flex items-center space-x-3">
-                        <Link href="/events/1">
+                        <Link href={`/events/${event._id}`}>
                             <a>
-                                <h1 className=" text-xs  py-1 px-3
+                                <h1 className="rounded-full text-xs  py-1 px-3
                                             border border-primary-light text-[white]
                                             bg-primary-light cursor-pointer
                                             lg:bg-[white] lg:text-primary-light
@@ -34,7 +51,7 @@ const Upcoming = () => {
                         </Link>
                         <Link href="/events" >
                             <a>
-                                <h1 className=" text-xs md:text-xs hover:text-sm border-b border-b-primary-black cursor-pointer">See all</h1>
+                                <h1 className=" text-xs md:text-xs hover:text-gray-500 border-b border-b-primary-black cursor-pointer">See all</h1>
                             </a>
                         </Link>
                     </div>

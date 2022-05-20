@@ -50,12 +50,16 @@ const Links = ({ title }) => {
                             setToggleMinistries(false)
                         }
                     }}
-                    className="absolute w-20 h-[500]">
-                    <div className="-ml-10 mt-6 p-5 space-y-5 rounded-xl flex flex-col h-full shadow-xl bg-white">
-                        <h1 className="text-sm capitalize font-light text-primary-dark cursor-pointer">Men</h1>
-                        <h1 className="text-sm capitalize font-light text-primary-dark cursor-pointer">Women</h1>
-                        <h1 className="text-sm capitalize font-light text-primary-dark cursor-pointer">Children</h1>
-                        <h1 className="text-sm capitalize font-light text-primary-dark cursor-pointer">Outreach</h1>
+                    className="absolute w-36 h-[500]">
+                    <div className="-ml-10 mt-6 p-5 space-y-5 rounded-xl flex flex-col h-full shadow-2xl bg-white">
+                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Men</h1>
+                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Women</h1>
+                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Children</h1>
+                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Sunday School</h1>
+                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Internship</h1>
+                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Conferences</h1>
+                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Books and Library</h1>
+                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Media</h1>
                     </div>
                 </div>
             }

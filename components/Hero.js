@@ -4,9 +4,11 @@ import { useState } from "react"
 import LiveStream from "./LiveStream"
 import Upcoming from "./Upcoming"
 import blur from './common/blur'
+import { useSelector } from "react-redux"
 
 const Hero = () => {
     const [isLiveStream, setIsLiveStream] = useState(false)
+    const { events } = useSelector(state => state.clientEvents)
 
     return (
         <div className="container xl:px-[2rem] lg:px-[1rem] grid gap-5 xl:gap-20 mb-5  grid-cols-1 lg:grid-cols-12 items-center w-full overflow-hidden">
@@ -43,7 +45,7 @@ const Hero = () => {
                         </div>
                     </div>
                     {
-                        isLiveStream ? <LiveStream /> : <Upcoming />
+                        isLiveStream ? <LiveStream /> : <Upcoming event={events[0]} />
                     }
                 </div>
                 
