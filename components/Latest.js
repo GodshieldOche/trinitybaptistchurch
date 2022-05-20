@@ -4,12 +4,14 @@ import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import blur from './common/blur'
 import { format } from 'date-fns'
+import { useRouter } from 'next/router'
 
 
 const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651306705/Global/study_yhfri9.jpg"
 
 const Latest = ({latest}) => {
 
+    const router = useRouter()
     const truncate = (des, val, lim) => {
         if (des.length > val) {
             return des.substr(0, lim) + "..."
@@ -30,7 +32,13 @@ const Latest = ({latest}) => {
                 <div className="max-w-screen-lg 2xl:max-w-screen-xl  mx-auto grid gap-2 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {
                         latest.map(list => (
-                            <div key={list._id} className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-md bg-[white] space-x-1 md:space-x-0
+                            <div key={list._id}
+                                onClick={() => {
+                                    list.category ? 
+                                        router.push(`/resources/sermons/${list._id}`) :
+                                        router.push(`/resources/biblestudy/${list._id}`)
+                                } }
+                                className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-md bg-[white] space-x-1 md:space-x-0
                             md:py-0 md:px-0 px-1 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
                                 <div className="w-[100px] h-[80px] md:w-full md:h-[170px] rounded-lg md:rounded-b-none md:rounded-t-md relative">
                                     <Image src={list.imageUrl?.url ? list.imageUrl?.url : defaultImage}
@@ -53,7 +61,7 @@ const Latest = ({latest}) => {
                                         <OndemandVideoIcon className="text-[red]/80 !text-base" />
                                         <h1 className="text-xs font-light uppercase">{`| ${list.category ? "Sermon" : "bible study"}`}</h1>
                                     </div>
-                                    <h1 className="capitalize ">{truncate(list.title, 34, 31)}</h1>
+                                    <h1 className="capitalize ">{truncate(list.title, 34, 27)}</h1>
                                     <h1 className="text-sm  font-light">{`${format(new Date(list.date), 'do MMM, yyyy')}`}</h1>
                                     <p className="hidden h-32 max-h-32 md:block  text-sm font-light  text-justify ">{truncate(list.description, 220, 217)}</p>
                                     <div className="flex items-center !mt-5 md:!mt-10 space-x-2">
