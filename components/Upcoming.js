@@ -40,7 +40,7 @@ const Upcoming = ({event}) => {
                     <div className="flex items-center space-x-3">
                         <Link href={`/events/${event._id}`}>
                             <a>
-                                <h1 className="rounded-full text-xs  py-1 px-3
+                                <h1 className="rounded-r-full text-xs  py-1 px-3
                                             border border-primary-light text-[white]
                                             bg-primary-light cursor-pointer
                                             lg:bg-[white] lg:text-primary-light

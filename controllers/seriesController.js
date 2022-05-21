@@ -15,7 +15,23 @@ cloudinary.config({
 // get => /api/client/series
 const getClientSeries = asyncHandler(async (req, res, next) => {
 
-    const series = await Series.find({}).sort({ createdAt: -1 }).populate({
+    const { topic, preacher, scripture } = req.query
+
+    const query = {}
+
+    // if (topic) {
+    //     query.sermon.topic = { $regex: topic, $options: 'i' }
+    // }
+    // if (preacher) {
+    //     query.sermon.preacher = preacher
+    // }
+    // if (scripture) {
+    //     query.sermon.book = { $regex: scripture, $options: 'i' }
+    // }
+
+    console.log(query)
+
+    const series = await Series.find({}).sort('-createdAt').populate({
         path: 'sermons.preacher',
         select: "name imageUrl",
         model: Minister

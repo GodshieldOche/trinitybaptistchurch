@@ -22,7 +22,7 @@ const LiveStream = () => {
             <div className="col-span-8 sm:col-span-7 flex flex-col sm:ml-3">
                 <div className="space-y-2">
                     <h1 className="uppercase text-xs font-light !mb-3 ">Sunday morning service</h1>
-                    <h1 className="font-medium text-base uppercase  ">{truncate("The King who restores the sinner", 25, 24)}</h1>
+                    <h1 className="font-medium text-base uppercase  ">{truncate("The King who restores the sinner", 21, 20)}</h1>
                     <h1 className=" text-xs ">9th October 2022</h1>
 
                     <h1 className=" text-xs !mt-8 !mb-3 ">Live stream isn't started</h1>
@@ -30,7 +30,7 @@ const LiveStream = () => {
                     <div className="flex items-center space-x-3">
                         <Link href="/events/1">
                             <a>
-                                <h1 className="rounded-full text-xs  py-1 px-3
+                                <h1 className="rounded-r-full text-xs  py-1 px-3
                                             border border-primary-light text-[white]
                                             bg-primary-light cursor-pointer
                                             lg:bg-[white] lg:text-primary-light

@@ -14,7 +14,22 @@ cloudinary.config({
 // get => /api/client/biblestudy
 const getBibleStudies = asyncHandler(async (req, res, next) => {
 
-    const bibleStudies = await BibleStudy.find({}).sort({ date: -1 }).populate({
+    const { topic, preacher, scripture } = req.query
+
+    const query = {}
+
+    if (topic) {
+        query.topic = { $regex: topic, $options: 'i' }
+    }
+    if (preacher) {
+        query.preacher = preacher
+    }
+    if (scripture) {
+        query.book = { $regex: scripture, $options: 'i' }
+    }
+
+
+    const bibleStudies = await BibleStudy.find(query).sort('-date').populate({
         path: 'preacher',
         select: "name imageUrl",
         model: Minister

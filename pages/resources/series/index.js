@@ -17,5 +17,6 @@ export default function SeriesPage() {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, query }) => {
-    await store.dispatch(getClientSeries({ req }))
+    const { topic, preacher, scripture } = query
+    await store.dispatch(getClientSeries({ req, topic, preacher, scripture }))
 })

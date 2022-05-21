@@ -1,24 +1,52 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAdminMinisters } from '../../redux/features/getMinisters';
 
 const FilterItems = ({ topics, preachers, scriptures }) => {
+    const [tValue, setTValue] = useState(5);
+    const [sValue, setSValue] = useState(5);
+    const [pValue, setPValue] = useState(5);
+    const [tSelect, setTSelect] = useState('');
+    const [pSelect, setPSelect] = useState('');
+    const [sSelect, setSSelect] = useState('');
 
-    // useEffect(() => {
-    //     if (topics.length >= 1) {
-    //         toggleShowless(1, preachers.length, scriptures.length)
-    //     }
-    //     if (preachers.length >= 5) {
-    //         toggleShowless(topics.length, 5, scriptures.length)
-    //     }
-    //     if (scriptures.length >= 5) {
-    //         toggleShowless(topics.length, preachers.length, 5)
-    //     }
-    // }, [])
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const { ministers } = useSelector(state => state.ministers);
 
-    // const toggleShowless = (tValue, pValue, sValue) => { 
-    //     topics.splice(0, tValue);
-    //     preachers.splice(0, pValue);
-    //     scriptures.splice(0, sValue);
-    // }
+    useEffect(() => {
+        dispatch(getAdminMinisters())
+    }, [])
+
+
+    const handleSubmit = (e) => { 
+        e.preventDefault()
+        let preacher = ''
+        let link = `${router.route}?sort=-date` 
+
+        if (pSelect) {
+            ministers.map(minister => {
+                if (minister.name === pSelect) {
+                    preacher = minister._id
+                }
+            })
+        }
+
+        if (tSelect) {
+            link = link.concat(`&topic=${tSelect}`)
+        }
+        if (preacher) { 
+            link = link.concat(`&preacher=${preacher}`)
+        }
+        if (sSelect) { 
+            link = link.concat(`&scripture=${sSelect}`)
+        }
+
+
+        
+        router.push(link)
+    }
     
 
     return (
@@ -27,15 +55,23 @@ const FilterItems = ({ topics, preachers, scriptures }) => {
                 <h1 className="uppercase font-medium">Topics</h1>
                 <div className="ml-4 flex-col space-y-2">
                     {
-                        topics.map((topic, index) => (
-                            <div key={index} className="flex items-center space-x-1">
-                                <div className="border cursor-pointer rounded w-4 h-4 border-primary-dark"></div>
+                        topics.slice(0, tValue ).map((topic, index) => (
+                            <div onClick={() => {
+                                if(tSelect !== topic){
+                                    setTSelect(topic)
+                                } else {
+                                    setTSelect('')
+                                }
+                                
+                            }} key={index} className="flex items-center space-x-1">
+                                <div className={`${tSelect === topic ? "bg-primary-dark" : ""} border cursor-pointer rounded w-4 h-4 border-primary-dark`}></div>
                                 <h1 className="capitalize font-light">{ topic }</h1>
                             </div>
                         ))
                     }
                     {
-                        topics.length >= 5 && <h1 className="text-sm text-primary-dark">see more...</h1>
+                        topics.length > tValue && <button onClick={() => setTValue(topics.length)}
+                            className="text-sm text-primary-dark">see more...</button >
                     }
                 </div>
             </div>
@@ -44,15 +80,22 @@ const FilterItems = ({ topics, preachers, scriptures }) => {
                 <h1 className="uppercase font-medium">Preachers</h1>
                 <div className="ml-4 flex-col space-y-2">
                     {
-                        preachers.map((preacher, index) => (
-                            <div key={index} className="flex items-center space-x-1">
-                                <div className="border cursor-pointer rounded w-4 h-4 border-primary-dark"></div>
+                        preachers.slice(0, pValue).map((preacher, index) => (
+                            <div onClick={() => {
+                                if (pSelect !== preacher) {
+                                    setPSelect(preacher)
+                                } else {
+                                    setPSelect('')
+                                }
+                            }} key={index} className="flex items-center space-x-1">
+                                <div className={`${pSelect === preacher ? "bg-primary-dark" : ""}  border cursor-pointer rounded w-4 h-4 border-primary-dark`}></div>
                                 <h1 className="capitalize font-light">{preacher }</h1>
                             </div>
                         ))
                     }
                     {
-                        preachers.length >= 5 && <h1 className="text-sm text-primary-dark">see more...</h1>
+                        preachers.length >= pValue && <h1 onClick={() => setPValue(preachers.length)}
+                            className="text-sm text-primary-dark">see more...</h1>
                     }
                 </div>
             </div>
@@ -61,23 +104,38 @@ const FilterItems = ({ topics, preachers, scriptures }) => {
                 <h1 className="uppercase font-medium">Scriptures</h1>
                 <div className="ml-4 flex-col space-y-2">
                     {
-                        scriptures.map((scripture, index) => (
-                            <div key={index} className="flex items-center space-x-1">
-                                <div className="border cursor-pointer rounded w-4 h-4 border-primary-dark"></div>
+                        scriptures.slice(0, sValue).map((scripture, index) => (
+                            <div onClick={() => {
+                                    if (sSelect !== scripture) {
+                                        setSSelect(scripture)
+                                    } else {
+                                        setSSelect('')
+                                    }
+                                }}     key={index} className="flex items-center space-x-1">
+                                <div className={`${sSelect === scripture ? "bg-primary-dark" : ""} border cursor-pointer rounded w-4 h-4 border-primary-dark`}></div>
                                 <h1 className="capitalize font-light">{scripture}</h1>
                             </div>
                         ))
                     }
                     {
-                        scriptures.length >= 5 && <h1 className="text-sm text-primary-dark">see more...</h1>
+                        scriptures.length >= sValue && <h1 onClick={() => setSValue(scriptures.length)}
+                            className="text-sm text-primary-dark">see more...</h1>
                     }
                 </div>
             </div>
 
             
             <div className="flex !mt-8 items-center space-x-3">
-                <button disabled={true} className="py-1 px-3 uppercase text-[white] text-xs  bg-primary-light/60">Reset</button>
-                <button className="py-1 px-3 uppercase text-[white]  text-xs  bg-primary-dark">Done</button>
+                <button
+                    onClick={() => {
+                        setTSelect('');
+                        setPSelect('');
+                        setSSelect('');
+                    }}
+                    disabled={tSelect == ''} className="py-1 px-3 uppercase text-[white] text-xs  bg-red-600 disabled:bg-red-300">Reset</button>
+                <button
+                    onClick={handleSubmit}
+                    className="py-1 px-3 uppercase text-[white]  text-xs  bg-primary-light disabled:bg-primary-dark/60">Done</button>
             </div>
         </div>
     )
