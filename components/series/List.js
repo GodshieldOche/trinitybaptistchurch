@@ -4,35 +4,21 @@ import { useState } from "react"
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Link from "next/link"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import blur from '../common/blur'
 import { useEffect } from "react"
+import { getAdminMinisters } from "../../redux/features/getMinisters"
 
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
-    const [topics, setTopics] = useState([])
-    const [preachers, setPreachers] = useState([])
-    const [scriptures, setScriptures] = useState([])
 
-    const { series } = useSelector(state => state.clientSeries)
+    const { series, topics, preachers, scriptures } = useSelector(state => state.clientSeries)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        let topics = []
-        let preachers = []
-        let scriptures = []
-        series.map(serie => {
-            serie.sermons.map(sermon => {
-                topics.push(sermon.topic)
-                preachers.push(sermon.preacher.name)
-                scriptures.push(sermon.book)
-            })
-        })
-        
-        setTopics([...new Set(topics)])
-        setPreachers([...new Set(preachers)])
-        setScriptures([...new Set(scriptures)])
-    }, [])
+        dispatch(getAdminMinisters())
+    }, [series])
 
 
     const lister = (index) => {

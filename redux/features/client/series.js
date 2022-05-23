@@ -31,12 +31,30 @@ export const getClientSeries = createAsyncThunk(
 )
 
 
+export const getSeriesFilters = createAsyncThunk(
+    `sermons/getSeriesFilters`,
+    async ({ req }, { rejectWithValue }) => {
+        const { origin } = absoluteUrl(req)
+        try {
+            const { data } = await axios.get(`${origin}/api/client/series/filters`)
+            return data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message)
+        }
+
+    }
+)
+
+
 
 const seriesSlice = createSlice({
     name: 'series',
     initialState: {
         loading: true,
         series: [],
+        preachers: [],
+        scriptures: [],
+        topics: [],
         message: null,
     },
     reducers: {
@@ -51,6 +69,19 @@ const seriesSlice = createSlice({
             state.series = payload.series
         },
         [getClientSeries.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.message = payload
+        },
+        [getSeriesFilters.pending]: (state) => {
+            state.loading = true
+        },
+        [getSeriesFilters.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.topics = payload.topics
+            state.preachers = payload.preachers
+            state.scriptures = payload.scriptures
+        },
+        [getSeriesFilters.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },

@@ -8,31 +8,23 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { format } from 'date-fns'
 import blur from '../common/blur'
+import { getAdminMinisters } from "../../redux/features/getMinisters"
 
 const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307278/Global/sermons_nbw4cx.jpg"
 
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
-    const [topics, setTopics] = useState([])
-    const [preachers, setPreachers] = useState([])
-    const [scriptures, setScriptures] = useState([])
 
     const { sermons } = useSelector(state => state.clientSermons)
 
+    const { topics, preachers, scriptures } = useSelector(state => state.clientSermons)
+
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        let topics = []
-        let preachers = []
-        let scriptures = []
-        sermons.map(sermon => {
-            topics.push(sermon.topic)
-            preachers.push(sermon.preacher.name)
-            scriptures.push(sermon.book)
-        })
-        setTopics([...new Set(topics)])
-        setPreachers([...new Set(preachers)])
-        setScriptures([...new Set(scriptures)])
-    },[])
+        dispatch(getAdminMinisters())
+    },[sermons])
 
     return (
         <div className={` md:mt-10`} >

@@ -11,27 +11,66 @@ cloudinary.config({
 })
 
 
+// get client sermons
+// get => /api/client/sermons
+const getSeriesFilters = asyncHandler(async (req, res, next) => {
+
+    const series = await Series.find({}).sort('-createdAt').populate({
+        path: 'sermons.preacher',
+        select: "name imageUrl",
+        model: Minister
+    })
+
+    let dt = []
+    let dp = []
+    let ds = []
+    series.map(serie => {
+        serie.sermons.map(sermon => {
+            dt.push(sermon.topic)
+            dp.push(sermon.preacher.name)
+            ds.push(sermon.book)
+        })
+    })
+   
+
+    const topics = [...new Set(dt)]
+    const preachers = [...new Set(dp)]
+    const scriptures = [...new Set(ds)]
+
+    res.status(200).json({
+        success: "true",
+        topics,
+        preachers,
+        scriptures
+    })
+
+})
+
+
 // get client series
 // get => /api/client/series
 const getClientSeries = asyncHandler(async (req, res, next) => {
 
     const { topic, preacher, scripture } = req.query
 
-    const query = {}
+    const query = {
+        "sermons": { $elemMatch: { } }
+    }
 
-    // if (topic) {
-    //     query.sermon.topic = { $regex: topic, $options: 'i' }
-    // }
-    // if (preacher) {
-    //     query.sermon.preacher = preacher
-    // }
-    // if (scripture) {
-    //     query.sermon.book = { $regex: scripture, $options: 'i' }
-    // }
+    if (topic) {
+        query.sermons.$elemMatch.topic = { $regex: topic, $options: 'i' }
+    }
+    if (preacher) {
+        query.sermons.$elemMatch.preacher = preacher
+    }
+    if (scripture) {
+        query.sermons.$elemMatch.book = { $regex: scripture, $options: 'i' }
+    }
 
-    console.log(query)
 
-    const series = await Series.find({}).sort('-createdAt').populate({
+    const series = await Series
+        .find(query)
+        .sort('-createdAt').populate({
         path: 'sermons.preacher',
         select: "name imageUrl",
         model: Minister
@@ -293,5 +332,6 @@ export {
     updateSeriesSermon,
     deleteSeriesSermon,
     getClientSeries,
-    getSeriesDetails
+    getSeriesDetails,
+    getSeriesFilters
 }

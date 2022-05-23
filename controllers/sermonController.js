@@ -44,6 +44,39 @@ const getSermons = asyncHandler(async (req, res, next) => {
 })
 
 
+// get client sermons
+// get => /api/client/sermons
+const getSermonFilters = asyncHandler(async (req, res, next) => {
+
+    const sermons = await Sermon.find({}).sort('-date').populate({
+        path: 'preacher',
+        select: "name imageUrl",
+        model: Minister
+    })
+
+    let dt = []
+    let dp = []
+    let ds = []
+    sermons.map(sermon => {
+        dt.push(sermon.topic)
+        dp.push(sermon.preacher.name)
+        ds.push(sermon.book)
+    })
+
+    const topics = [...new Set(dt)]
+    const preachers = [...new Set(dp)]
+    const scriptures = [...new Set(ds)]
+
+    res.status(200).json({
+        success: "true",
+        topics,
+        preachers,
+        scriptures
+    })
+
+})
+
+
 // get client sermon detail
 // get => /api/client/sermon/:id
 const getSermonDetails = asyncHandler(async (req, res, next) => {
@@ -193,5 +226,6 @@ export {
     getSermon,
     updateSermon,
     getSermons,
-    getSermonDetails
+    getSermonDetails,
+    getSermonFilters
 }

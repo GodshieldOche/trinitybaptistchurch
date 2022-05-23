@@ -11,11 +11,65 @@ cloudinary.config({
 })
 
 
+// get client sermons
+// get => /api/client/sermons
+const getConferenceFilters = asyncHandler(async (req, res, next) => {
+
+    const conferences = await Conference.find({}).sort('-startDate').populate({
+        path: 'sermons.preacher',
+        select: "name imageUrl",
+        model: Minister
+    })
+
+    let dt = []
+    let dp = []
+    let ds = []
+    conferences.map(conference => {
+        conference.sermons.map(sermon => {
+            dt.push(sermon.topic)
+            dp.push(sermon.preacher.name)
+            ds.push(sermon.book)
+        })
+    })
+
+
+    const topics = [...new Set(dt)]
+    const preachers = [...new Set(dp)]
+    const scriptures = [...new Set(ds)]
+
+    res.status(200).json({
+        success: "true",
+        topics,
+        preachers,
+        scriptures
+    })
+
+})
+
+
+
 // get client conference
 // get => /api/client/conference
 const getClientConference = asyncHandler(async (req, res, next) => {
 
-    const conferences = await Conference.find({}).sort({ startDate: -1 }).populate({
+    const { topic, preacher, scripture } = req.query
+
+    const query = {
+        "sermons": { $elemMatch: {} }
+    }
+
+    if (topic) {
+        query.sermons.$elemMatch.topic = { $regex: topic, $options: 'i' }
+    }
+    if (preacher) {
+        query.sermons.$elemMatch.preacher = preacher
+    }
+    if (scripture) {
+        query.sermons.$elemMatch.book = { $regex: scripture, $options: 'i' }
+    }
+
+
+    const conferences = await Conference.find(query).sort("-startDate").populate({
         path: 'sermons.preacher',
         select: "name imageUrl",
         model: Minister
@@ -289,5 +343,6 @@ export {
     updateConference,
     updateConferenceSermon,
     getConferenceDetails,
-    getClientConference
+    getClientConference,
+    getConferenceFilters
 }

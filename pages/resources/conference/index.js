@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Conference from "../../../components/conference/Conference";
-import { getClientConferences } from "../../../redux/features/client/conferences";
+import { getClientConferences, getConferenceFilters } from "../../../redux/features/client/conferences";
 import { wrapper } from "../../../redux/Store";
 
 
@@ -17,5 +17,7 @@ export default function ConferencePage() {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, query }) => {
-    await store.dispatch(getClientConferences({ req }))
+    const { topic, preacher, scripture } = query
+    await store.dispatch(getClientConferences({ req, topic, preacher, scripture  }))
+    await store.dispatch(getConferenceFilters({ req }))
 })

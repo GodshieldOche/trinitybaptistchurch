@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Series from "../../../components/series/Series";
 import Sermons from "../../../components/sermons/Sermons";
-import { getClientSeries } from "../../../redux/features/client/series";
+import { getClientSeries, getSeriesFilters } from "../../../redux/features/client/series";
 import { wrapper } from "../../../redux/Store";
 
 
@@ -19,4 +19,5 @@ export default function SeriesPage() {
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, query }) => {
     const { topic, preacher, scripture } = query
     await store.dispatch(getClientSeries({ req, topic, preacher, scripture }))
+    await store.dispatch(getSeriesFilters({ req }))
 })

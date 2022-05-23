@@ -35,7 +35,7 @@ const Filter = ({topics, preachers, scriptures, fitlerToggle, setFilterToggle, s
                 </div>
 
                 {
-                    fitlerToggle && <FilterItems topics={topics} preachers={preachers} scriptures={scriptures} />
+                    fitlerToggle && <FilterItems setFilterToggle={setFilterToggle} fitlerToggle={fitlerToggle} topics={topics} preachers={preachers} scriptures={scriptures} />
                 }
                 {
                     sortToggle && <SortItems />

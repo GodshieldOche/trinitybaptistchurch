@@ -30,12 +30,30 @@ export const getClientSermons = createAsyncThunk(
 )
 
 
+export const getSermonFilters = createAsyncThunk(
+    `sermons/getSermonFilters`,
+    async ({ req }, { rejectWithValue }) => {
+        const { origin } = absoluteUrl(req)
+        try {
+            const { data } = await axios.get(`${origin}/api/client/sermon/filters`)
+            return data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message)
+        }
+
+    }
+)
+
+
 
 const sermonsSlice = createSlice({
     name: 'sermons',
     initialState: {
         loading: true,
         sermons: [],
+        preachers: [],
+        scriptures: [],
+        topics: [],
         message: null,
     },
     reducers: {
@@ -50,6 +68,19 @@ const sermonsSlice = createSlice({
             state.sermons = payload.sermons
         },
         [getClientSermons.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.message = payload
+        },
+        [getSermonFilters.pending]: (state) => {
+            state.loading = true
+        },
+        [getSermonFilters.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.topics = payload.topics
+            state.preachers = payload.preachers
+            state.scriptures = payload.scriptures
+        },
+        [getSermonFilters.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },

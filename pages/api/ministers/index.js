@@ -10,6 +10,6 @@ dbConnect()
 
 handler.use(isAuthenticatedUser, authorizeRoles('admin')).post(addMinister)
 
-handler.use(isAuthenticatedUser, authorizeRoles('admin')).get(getMinisters)
+handler.get(getMinisters)
 
 export default handler

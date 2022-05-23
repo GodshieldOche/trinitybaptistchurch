@@ -3,25 +3,35 @@ import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAdminMinisters } from '../../redux/features/getMinisters';
 
-const FilterItems = ({ topics, preachers, scriptures }) => {
+const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptures }) => {
+    const dispatch = useDispatch();
+    const { ministers } = useSelector(state => state.ministers);
+    const router = useRouter();
+    let pState = '';
+
+
+
     const [tValue, setTValue] = useState(5);
     const [sValue, setSValue] = useState(5);
     const [pValue, setPValue] = useState(5);
-    const [tSelect, setTSelect] = useState('');
-    const [pSelect, setPSelect] = useState('');
-    const [sSelect, setSSelect] = useState('');
+    const [tSelect, setTSelect] = useState(router.query?.topic ? router.query.topic : "");
+    const [pSelect, setPSelect] = useState(router.query?.preacher ? pState : "");
+    const [sSelect, setSSelect] = useState(router.query?.scripture ? router.query.scripture : "");
 
-    const router = useRouter();
-    const dispatch = useDispatch();
-    const { ministers } = useSelector(state => state.ministers);
+    
+  
 
     useEffect(() => {
-        dispatch(getAdminMinisters())
+        ministers.map(minister => {
+            if (minister._id == router.query.preacher) {
+                console.log(minister.name)
+                pState = minister.name
+            }
+        })
     }, [])
 
 
-    const handleSubmit = (e) => { 
-        e.preventDefault()
+    const handleSubmit = (tSelect, pSelect, sSelect) => { 
         let preacher = ''
         let link = `${router.route}?sort=-date` 
 
@@ -43,9 +53,12 @@ const FilterItems = ({ topics, preachers, scriptures }) => {
             link = link.concat(`&scripture=${sSelect}`)
         }
 
-
-        
+        // console.log(preacher)
         router.push(link)
+
+        if (fitlerToggle) {
+            setFilterToggle(false)
+        }
     }
     
 
@@ -134,7 +147,7 @@ const FilterItems = ({ topics, preachers, scriptures }) => {
                     }}
                     disabled={tSelect == ''} className="py-1 px-3 uppercase text-[white] text-xs  bg-red-600 disabled:bg-red-300">Reset</button>
                 <button
-                    onClick={handleSubmit}
+                    onClick={() => { handleSubmit(tSelect, pSelect, sSelect) }}
                     className="py-1 px-3 uppercase text-[white]  text-xs  bg-primary-light disabled:bg-primary-dark/60">Done</button>
             </div>
         </div>
