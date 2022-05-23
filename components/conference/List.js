@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux"
 import blur from '../common/blur'
 import { format } from 'date-fns'
 import { useEffect } from "react"
-import { getAdminMinisters } from "../../redux/features/getMinisters"
+import { getClientMinisters } from "../../redux/features/client/ministers";
 
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
@@ -18,7 +18,7 @@ const List = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAdminMinisters())
+        dispatch(getClientMinisters())
     }, [conferences])
     const lister = (index) => {
         const dp = []

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Biblestudy from "../../../components/biblestudy/Biblestudy";
-import { getClientBibleStudies } from "../../../redux/features/client/bibleStudies";
+import { getBibleStudyFilters, getClientBibleStudies } from "../../../redux/features/client/bibleStudies";
 import { wrapper } from "../../../redux/Store";
 
 export default function ConferencePage() {
@@ -18,4 +18,5 @@ export default function ConferencePage() {
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, query }) => {
     const { topic, preacher, scripture } = query
     await store.dispatch(getClientBibleStudies({ req, topic, preacher, scripture }))
+    await store.dispatch(getBibleStudyFilters({ req }))
 })

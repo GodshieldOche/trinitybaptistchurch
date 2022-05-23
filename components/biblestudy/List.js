@@ -4,10 +4,11 @@ import { useState } from "react"
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Link from "next/link"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { format } from 'date-fns'
 import blur from '../common/blur'
 import { useEffect } from "react"
+import { getClientMinisters } from "../../redux/features/client/ministers";
 
 
 const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307276/Global/bible_beofqt.jpg"
@@ -15,25 +16,13 @@ const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
-    const [topics, setTopics] = useState([])
-    const [preachers, setPreachers] = useState([])
-    const [scriptures, setScriptures] = useState([])
 
-    const { bibleStudies } = useSelector(state => state.clientBibleStudies)
+    const { bibleStudies, topics, preachers, scriptures } = useSelector(state => state.clientBibleStudies)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        let topics = []
-        let preachers = []
-        let scriptures = []
-        bibleStudies.map(sermon => {
-            topics.push(sermon.topic)
-            preachers.push(sermon.preacher.name)
-            scriptures.push(sermon.book)
-        })
-        setTopics([...new Set(topics)])
-        setPreachers([...new Set(preachers)])
-        setScriptures([...new Set(scriptures)])
-    }, [])
+        dispatch(getClientMinisters())
+    }, [bibleStudies])
 
     return (
         <div className={` md:mt-10`} >
@@ -59,7 +48,7 @@ const List = () => {
                                                         <h1 className="text-xs font-light uppercase">{'|  ' + format(new Date(bibleStudy.date), 'do MMM yyyy')}</h1>
                                                     </div>
                                                     <h1 className=" text-base md:text-lg capitalize ">{bibleStudy.title}</h1>
-                                                    <h1 className="font-light text-sm ">{`${bibleStudy.book} ${bibleStudy.chapter}:${bibleStudy.verse}`}</h1>
+                                                    <h1 className="font-light capitalize text-sm ">{`${bibleStudy.book} ${bibleStudy.chapter}:${bibleStudy.verse}`}</h1>
                                                     <div className="flex items-center !mt-3 space-x-2">
                                                         <div className="h-[25px] w-[25px] rounded-full relative">
                                                             <Image src={bibleStudy.preacher.imageUrl.url}

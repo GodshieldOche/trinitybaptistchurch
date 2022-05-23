@@ -34,6 +34,7 @@ import clientConferenceReducer from './features/client/conference'
 import clientEventsReducer from './features/client/events'
 import clientEventReducer from './features/client/event'
 import latestReducer from './features/client/latest'
+import clientMinistersReducer from './features/client/ministers'
 
 
 
@@ -75,6 +76,7 @@ const combinedReducers = combineReducers({
     clientEvents: clientEventsReducer,
     clientEvent: clientEventReducer,
     latest: latestReducer,
+    clientMinisters: clientMinistersReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {

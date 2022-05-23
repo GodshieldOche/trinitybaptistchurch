@@ -43,6 +43,19 @@ const getMinisters = asyncHandler(async (req, res, next) => {
 }) 
 
 
+// Get all Ministers
+// get => api/ministers
+const getClientMinisters = asyncHandler(async (req, res, next) => {
+
+    const ministers = await Minister.find().sort('-createdAt')
+
+    res.status(200).json({
+        success: "true",
+        ministers
+    })
+}) 
+
+
 
 // Delete Minister
 // Delete => api/ministers/:id
@@ -120,5 +133,6 @@ export {
     getMinisters,
     deleteMinister,
     getMinister,
-    updateMinister
+    updateMinister,
+    getClientMinisters
 }

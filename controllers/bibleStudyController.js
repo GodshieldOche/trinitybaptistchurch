@@ -43,6 +43,40 @@ const getBibleStudies = asyncHandler(async (req, res, next) => {
 })
 
 
+// get client sermons
+// get => /api/client/sermons
+const getBibleStudyFilters = asyncHandler(async (req, res, next) => {
+
+    const biblestudies = await BibleStudy.find({}).sort('-date').populate({
+        path: 'preacher',
+        select: "name imageUrl",
+        model: Minister
+    })
+
+    let dt = []
+    let dp = []
+    let ds = []
+    biblestudies.map(sermon => {
+        dt.push(sermon.topic)
+        dp.push(sermon.preacher.name)
+        ds.push(sermon.book)
+    })
+
+    const topics = [...new Set(dt)]
+    const preachers = [...new Set(dp)]
+    const scriptures = [...new Set(ds)]
+
+    res.status(200).json({
+        success: "true",
+        topics,
+        preachers,
+        scriptures
+    })
+
+})
+
+
+
 // get client biblestudy detail
 // get => /api/client/biblestudy/:id
 const getBibleStudyDetails = asyncHandler(async (req, res, next) => {
@@ -190,5 +224,6 @@ export {
     getBibleStudy,
     updateBibleStudy,
     getBibleStudies,
-    getBibleStudyDetails
+    getBibleStudyDetails,
+    getBibleStudyFilters
 }

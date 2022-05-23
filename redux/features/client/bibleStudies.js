@@ -31,12 +31,30 @@ export const getClientBibleStudies = createAsyncThunk(
 )
 
 
+export const getBibleStudyFilters = createAsyncThunk(
+    `biblestudy/getBibleStudyFilters`,
+    async ({ req }, { rejectWithValue }) => {
+        const { origin } = absoluteUrl(req)
+        try {
+            const { data } = await axios.get(`${origin}/api/client/biblestudy/filters`)
+            return data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message)
+        }
+
+    }
+)
+
+
 
 const bibleStudiesSlice = createSlice({
     name: 'bibleStudies',
     initialState: {
         loading: true,
         bibleStudies: [],
+        preachers: [],
+        scriptures: [],
+        topics: [],
         message: null,
     },
     reducers: {
@@ -51,6 +69,19 @@ const bibleStudiesSlice = createSlice({
             state.bibleStudies = payload.bibleStudies
         },
         [getClientBibleStudies.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.message = payload
+        },
+        [getBibleStudyFilters.pending]: (state) => {
+            state.loading = true
+        },
+        [getBibleStudyFilters.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.topics = payload.topics
+            state.preachers = payload.preachers
+            state.scriptures = payload.scriptures
+        },
+        [getBibleStudyFilters.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },

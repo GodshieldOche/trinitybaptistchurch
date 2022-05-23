@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { format } from 'date-fns'
 import blur from '../common/blur'
-import { getAdminMinisters } from "../../redux/features/getMinisters"
+import { getClientMinisters } from "../../redux/features/client/ministers";
 
 const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307278/Global/sermons_nbw4cx.jpg"
 
@@ -23,7 +23,7 @@ const List = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAdminMinisters())
+        dispatch(getClientMinisters())
     },[sermons])
 
     return (

@@ -56,6 +56,12 @@ const Lists = () => {
         }
     }
 
+    const handleChange = (date) => {
+        setStartDate(date);
+        console.log(new Date(date).toISOString())
+        
+    }
+
 
    
     return (
@@ -117,7 +123,7 @@ const Lists = () => {
                         <div className="flex !mt-5 flex-col w-full items-center justify-center">
                             <DatePicker
                                 selected={startDate}
-                                onChange={(date) => setStartDate(date)}
+                                onChange={handleChange}
                                 inline
                             />
                         </div>

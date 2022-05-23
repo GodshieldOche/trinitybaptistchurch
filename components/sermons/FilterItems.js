@@ -5,7 +5,7 @@ import { getAdminMinisters } from '../../redux/features/getMinisters';
 
 const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptures }) => {
     const dispatch = useDispatch();
-    const { ministers } = useSelector(state => state.ministers);
+    const { ministers } = useSelector(state => state.clientMinisters);
     const router = useRouter();
     let pState = '';
 

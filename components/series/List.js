@@ -7,7 +7,7 @@ import Link from "next/link"
 import { useSelector, useDispatch } from "react-redux"
 import blur from '../common/blur'
 import { useEffect } from "react"
-import { getAdminMinisters } from "../../redux/features/getMinisters"
+import { getClientMinisters } from "../../redux/features/client/ministers";
 
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
@@ -17,7 +17,7 @@ const List = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAdminMinisters())
+        dispatch(getClientMinisters())
     }, [series])
 
 
