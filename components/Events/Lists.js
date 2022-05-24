@@ -13,7 +13,6 @@ import { useRouter } from 'next/router'
 const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg"
 
 const Lists = () => {
-    const speakers = [1, 2, 3]
     const [startDate, setStartDate] = useState(new Date());
     const [toggleDate, setToggleDate] = useState(false);
 

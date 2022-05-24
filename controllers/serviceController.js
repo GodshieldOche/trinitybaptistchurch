@@ -11,6 +11,24 @@ cloudinary.config({
 })
 
 
+// get client services
+// get => /api/client/services
+const getServices = asyncHandler(async (req, res) => {
+
+    const allServices = await Service.find({}).sort('date')
+
+    const services = allServices.filter(service => new Date(service.date) > new Date())
+
+
+    res.status(200).json({
+        success: "true",
+        services,
+    })
+
+})
+
+
+
 // create Service
 // post =>  /api/admin/services
 const createService = asyncHandler(async (req, res, next) => {
@@ -118,5 +136,6 @@ export {
     getAdminService,
     deleteService,
     getService,
-    updateService
+    updateService,
+    getServices
 }

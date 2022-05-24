@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { format } from "date-fns"
 
-const LiveStream = () => {
+const LiveStream = ({service}) => {
     const truncate = (des, val, lim) => {
         if (des.length > val) {
             return des.substr(0, lim) + "..."
@@ -21,9 +22,11 @@ const LiveStream = () => {
             </div>
             <div className="col-span-8 sm:col-span-7 flex flex-col sm:ml-3">
                 <div className="space-y-2">
-                    <h1 className="uppercase text-xs font-light !mb-3 ">Sunday morning service</h1>
-                    <h1 className="font-medium text-base uppercase  ">{truncate("The King who restores the sinner", 21, 20)}</h1>
-                    <h1 className=" text-xs ">9th October 2022</h1>
+                    <h1 className="uppercase text-xs font-light !mb-3 ">
+                        {service.service}
+                    </h1>
+                    <h1 className="font-medium text-base uppercase  ">{truncate(service.topic, 21, 20)}</h1>
+                    <h1 className=" text-xs ">{`${format(new Date(service.date), 'do MMM yyyy - h:mm a')}`}</h1>
 
                     <h1 className=" text-xs !mt-8 !mb-3 ">Live stream isn't started</h1>
 

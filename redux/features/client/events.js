@@ -26,6 +26,21 @@ export const getClientEvents = createAsyncThunk(
     }
 )
 
+export const getClientServices = createAsyncThunk(
+    `events/getClientServices`,
+    async ({req}, { rejectWithValue }) => {
+        const { origin } = absoluteUrl(req)
+
+        try {
+            const { data } = await axios.get(`${origin}/api/client/service`)
+            return data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message)
+        }
+
+    }
+)
+
 
 
 const eventsSlice = createSlice({
@@ -33,6 +48,7 @@ const eventsSlice = createSlice({
     initialState: {
         loading: true,
         events: [],
+        services: [],
         message: null,
     },
     reducers: {
@@ -47,6 +63,17 @@ const eventsSlice = createSlice({
             state.events = payload.events
         },
         [getClientEvents.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.message = payload
+        },
+        [getClientServices.pending]: (state) => {
+            state.loading = true
+        },
+        [getClientServices.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.services = payload.services
+        },
+        [getClientServices.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },
