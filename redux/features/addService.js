@@ -4,9 +4,9 @@ import axios from 'axios'
 
 export const postCreateService = createAsyncThunk(
     `user/postCreateService`,
-    async ({ service, date, topic, imageUrl, bulletin }, { rejectWithValue }) => {
+    async ({ service, startTime, endTime, topic, imageUrl, bulletin }, { rejectWithValue }) => {
         try {
-            const { data } = await axios.post(`/api/admin/service`, { service, date, topic, imageUrl, bulletin }, {
+            const { data } = await axios.post(`/api/admin/service`, { service, startTime, endTime, topic, imageUrl, bulletin }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -15,7 +15,6 @@ export const postCreateService = createAsyncThunk(
         } catch (error) {
             return rejectWithValue(error.response.data.message)
         }
-
     }
 )
 

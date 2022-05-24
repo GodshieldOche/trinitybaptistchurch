@@ -18,9 +18,9 @@ export const getServiceDetails = createAsyncThunk(
 
 export const updateService = createAsyncThunk(
     `service/updateService`,
-    async ({ id, service, date, topic, imageUrl, bulletin }, { rejectWithValue }) => {
+    async ({ id, service, startTime, endTime, topic, imageUrl, bulletin }, { rejectWithValue }) => {
         try {
-            const { data } = await axios.put(`/api/admin/service/${id}`, { service, date, topic, imageUrl, bulletin }, {
+            const { data } = await axios.put(`/api/admin/service/${id}`, { service, startTime, endTime, topic, imageUrl, bulletin }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

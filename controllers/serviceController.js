@@ -17,7 +17,7 @@ const getServices = asyncHandler(async (req, res) => {
 
     const allServices = await Service.find({}).sort('date')
 
-    const services = allServices.filter(service => new Date(service.date) > new Date())
+    const services = allServices.filter(service => new Date(service.endTime) > new Date())
 
 
     res.status(200).json({
@@ -32,8 +32,11 @@ const getServices = asyncHandler(async (req, res) => {
 // create Service
 // post =>  /api/admin/services
 const createService = asyncHandler(async (req, res, next) => {
-
+    
     const service = await Service.create(req.body)
+
+    service.save()
+    console.log(req.body)
 
     res.status(200).json({
         success: "true",
@@ -104,13 +107,14 @@ const getService = asyncHandler(async (req, res, next) => {
 // put => api/service/:id
 const updateService = asyncHandler(async (req, res, next) => {
     const selected = await Service.findById(req.query.id)
-    const { service, date, topic, imageUrl, bulletin } = req.body
+    const { service, startDate, endDate, topic, imageUrl, bulletin } = req.body
 
     if (!selected) {
         return next(new ErrorHandler('Service not found with this ID', 404))
     } else {
         selected.service = service
-        selected.date = date
+        selected.startDate = startDate
+        selected.endDate = endDate
         selected.topic = topic
         selected.bulletin = bulletin
         

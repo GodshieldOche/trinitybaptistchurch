@@ -23,6 +23,10 @@ const Services = () => {
         dispatch(getAdminServices())
     }, [])
 
+    const date = (start, end) => {
+        return `${format(new Date(start), 'MMM, do yyyy;  h:mm a')} - ${format(new Date(end), 'h:mm a')}`
+    }
+
     return (
         <div className="space-y-5">
             <div className="flex justify-center">
@@ -73,7 +77,7 @@ const Services = () => {
                                             <h1 className="capitalize">{ service.topic }</h1>
                                         </td>
                                         <td className="text-sm px-3 py-4 whitespace-nowrap">
-                                            <h1 className="capitalize">{`${format(new Date(service.date), 'MMM, do yyyy - h:mm a')}`}</h1>
+                                            <h1 className="capitalize">{date(service.startTime, service.endTime)}</h1>
                                         </td>
                                         <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
                                             <div className="flex space-x-2 items-center">

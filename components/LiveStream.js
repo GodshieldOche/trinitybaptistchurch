@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { format } from "date-fns"
 
+
 const LiveStream = ({service}) => {
     const truncate = (des, val, lim) => {
         if (des.length > val) {
@@ -10,6 +11,11 @@ const LiveStream = ({service}) => {
             return des
         }
     }
+
+    const date = (start, end) => {
+        return `${format(new Date(start), 'MMM, do yyyy;  h:mm a')} - ${format(new Date(end), 'h:mm a')}`
+    }
+
     return (
         <div className="grid grid-cols-12 gap-2 items-center px-2 md:px-0 ">
             <div className="order-last md:order-first col-span-4 sm:col-span-5 w-full sm:h-full h-[calc(100%-30px)] relative ">
@@ -26,9 +32,10 @@ const LiveStream = ({service}) => {
                         {service.service}
                     </h1>
                     <h1 className="font-medium text-base uppercase  ">{truncate(service.topic, 21, 20)}</h1>
-                    <h1 className=" text-xs ">{`${format(new Date(service.date), 'do MMM yyyy - h:mm a')}`}</h1>
+                    <h1 className=" text-xs ">{ date(service.startTime, service.endTime) }</h1>
 
-                    <h1 className=" text-xs !mt-8 !mb-3 ">Live stream isn't started</h1>
+                    <h1 className=" text-xs !mt-8 !mb-3 ">{new Date().toISOString() >= service.startTime ?
+                        "Live stream has started" : "Live stream isn't started" }</h1>
 
                     <div className="flex items-center space-x-3">
                         <Link href="/events/1">

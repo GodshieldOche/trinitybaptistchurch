@@ -19,7 +19,8 @@ const Details = () => {
     const [service, setService] = useState('')
     const [topic, setTopic] = useState('')
     const [audioUrl, setAudioUrl] = useState('');
-    const [date, setDate] = useState(new Date());
+    const [startTime, setStartTime] = useState(new Date());
+    const [endTime, setEndTime] = useState(new Date());
     const [loading, setLoading] = useState(false)
 
     const router = useRouter();
@@ -29,14 +30,15 @@ const Details = () => {
     useEffect(() => {
         dispatch(getServiceDetails(id)).then(result => {
             if (!result.error) {
-                const { service, date, topic, imageUrl, bulletin } = result.payload.service
+                const { service, startTime, endTime, topic, imageUrl, bulletin } = result.payload.service
                 console.log(result)
                 setService(service)
                 setTopic(topic)
                 setImageUrl(imageUrl)
                 setImagePreview(imageUrl.url)
                 setAudioUrl(bulletin)
-                setDate(new Date(date))
+                setStartTime(new Date(startTime))
+                setEndTime(new Date(endTime))
             } else {
                 console.log(result.error)
             }
@@ -93,16 +95,29 @@ const Details = () => {
                                   onChange={(e) => { setTopic(e.target.value) }}
                               />
                           </div>
-                          <div className="w-full space-y-2">
-                              <label htmlFor="title" className="ml-2 text-sm uppercase">Time</label>
-                              <DatePicker
-                                  selected={date}
-                                  onChange={(date) => setDate(date)}
-                                  className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                  timeInputLabel="Time:"
-                                  dateFormat="MM/dd/yyyy h:mm aa"
-                                  showTimeInput
-                              />
+                          <div className="grid grid-cols-2 w-full">
+                              <div className="w-full space-y-2">
+                                  <label htmlFor="title" className="ml-2 text-sm uppercase">Start Time</label>
+                                  <DatePicker
+                                      selected={startTime}
+                                      onChange={(date) => setStartTime(date)}
+                                      className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                      timeInputLabel="Time:"
+                                      dateFormat="MM/dd/yyyy h:mm aa"
+                                      showTimeInput
+                                  />
+                              </div>
+                              <div className="w-full space-y-2">
+                                  <label htmlFor="title" className="ml-2 text-sm uppercase">End Time</label>
+                                  <DatePicker
+                                      selected={endTime}
+                                      onChange={(date) => setEndTime(date)}
+                                      className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
+                                      timeInputLabel="Time:"
+                                      dateFormat="MM/dd/yyyy h:mm aa"
+                                      showTimeInput
+                                  />
+                              </div>
                           </div>
                       </div>
                       <div className="col-span-5 space-y-5 w-full text-gray-700 ">

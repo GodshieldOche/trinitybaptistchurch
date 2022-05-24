@@ -5,9 +5,13 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         required: true      
     },
-    date: {
+    startTime: {
         type: Date,
-        reuired: true
+        required: true
+    },
+    endTime: {
+        type: Date,
+        required: true
     },
     topic: {
         type: String,
