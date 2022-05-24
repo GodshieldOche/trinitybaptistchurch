@@ -14,9 +14,19 @@ cloudinary.config({
 
 // get client events
 // get => /api/client/events
-const getEvents = asyncHandler(async (req, res, next) => {
+const getEvents = asyncHandler(async (req, res) => {
+    const { month, next } = req.query
+    const query = {}
 
-    const allEvents = await Event.find({}).sort({ startDate: 1 }).populate({
+    if (month) {
+        query.startDate = { $gte: month }
+    }
+    if (next) {
+        query.endDate = { $lte: next }
+    }
+
+
+    const allEvents = await Event.find(query).sort('startDate').populate({
         path: 'sessions.preacher',
         select: "imageUrl",
         model: Minister

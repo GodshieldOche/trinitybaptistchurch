@@ -5,10 +5,19 @@ import absoluteUrl from 'next-absolute-url'
 
 export const getClientEvents = createAsyncThunk(
     `events/getClientEvents`,
-    async ({ req }, { rejectWithValue }) => {
+    async ({ req, month, next }, { rejectWithValue }) => {
         const { origin } = absoluteUrl(req)
+        let link = `${origin}/api/client/event`
+
+        if (month) {
+            link = link.concat(`?month=${month}`)
+        }
+        if (next) {
+            link = link.concat(`&next=${next}`)
+        }
+        
         try {
-            const { data } = await axios.get(`${origin}/api/client/event`)
+            const { data } = await axios.get(link)
             return data
         } catch (error) {
             return rejectWithValue(error.response.data.message)

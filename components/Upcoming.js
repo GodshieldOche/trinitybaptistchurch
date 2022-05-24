@@ -22,7 +22,7 @@ const Upcoming = ({event}) => {
     return (
         <div className="grid grid-cols-12 gap-2 items-center px-2 md:px-0 ">
             <div className="order-last col-span-4 sm:col-span-5 w-full sm:h-full h-[calc(100%-30px)] relative ">
-                <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307275/Global/conference_eojsyc.jpg"
+                <Image src={event.imageUrl.url}
                     className="object-cover w-full h-full"
                     layout="fill"
                     blurDataURL={blur}

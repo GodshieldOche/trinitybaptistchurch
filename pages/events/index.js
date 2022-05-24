@@ -17,5 +17,6 @@ export default function EventsPage() {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, query }) => {
-    await store.dispatch(getClientEvents({ req }))
+    const { month, next } = query
+    await store.dispatch(getClientEvents({ req, month, next }))
 })
