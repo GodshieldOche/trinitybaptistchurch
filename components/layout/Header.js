@@ -42,7 +42,7 @@ const Header = ({ menuState }) => {
             <header className={` bg-[#fff] shadow-md fixed top-0 left-0 right-0  !z-40 py-1 md:py-2 `}>
                 <nav className="flex justify-between items-center h-[50px] container px-1 md:px-0 xl:px-[2rem] lg:px-[1rem]  relative">
                     <div className="flex items-center">
-                        <Image src="/logo.png" width={45} height={45} alt="logo" />
+                        <Image src="/logo.png" width={37} height={37} alt="logo" />
                         <Link href="/"><a className="text-sm lg:text-base">Trinity Baptist Church</a></Link>
                     </div>
                     <div className=" hidden lg:flex  justify-between space-x-8 ">

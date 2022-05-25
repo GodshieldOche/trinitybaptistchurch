@@ -70,7 +70,7 @@ const Latest = ({latest}) => {
                                             {`| ${list.category ? "Sermon" : list.conferenceId ? "Conference" : list.seriesId ? "series" : "bible study"}`}
                                         </h1>
                                     </div>
-                                    <h1 className="capitalize ">{list.title}</h1>
+                                    <h1 className="capitalize h-10 max-h-12  ">{list.title}</h1>
                                     <h1 className="text-sm  font-light">{`${format(new Date(list.date), 'do MMM, yyyy')}`}</h1>
                                     <p className="hidden h-32 max-h-32 md:block  text-sm font-light  text-justify ">{truncate(list.description, 220, 217)}</p>
                                     <div className="flex items-center !mt-5 md:!mt-10 space-x-2">
@@ -82,7 +82,7 @@ const Latest = ({latest}) => {
                                                 placeholder="blur"
                                                 alt="logo" />
                                         </div>
-                                        <h1 className="text-sm font-light md:text-base">{list.preacher.name}</h1>
+                                        <h1 className="text-sm font-light capitalize md:text-base">{list.preacher.name}</h1>
                                     </div>
                                 </div>
                             </div>
