@@ -61,7 +61,7 @@ const List = () => {
                                         <a>
                                             <div className="w-full flex flex-row-reverse items-center md:rounded-md md:flex-col bg-[white] space-x-1 md:space-x-0
                                                     md:py-0 md:px-0 px-2 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
-                                                <div className="w-[100px] h-[80px] md:w-full md:h-[170px] md:rounded-t-md rounded-lg  relative">
+                                                <div className="w-[70px] h-[75px] md:w-full md:h-[170px] md:rounded-t-md rounded-lg  relative">
                                                     <Image src={serie.imageUrl.url}
                                                         className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md "
                                                         layout="fill"
