@@ -45,7 +45,7 @@ const Latest = ({latest}) => {
                                 } }
                                 className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-md bg-[white] space-x-1 md:space-x-0
                             md:py-0 md:px-0 px-1 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">
-                                <div className="w-[70px] h-[75px] md:w-full md:h-[170px] rounded-lg md:rounded-b-none md:rounded-t-md relative">
+                                <div className="w-[80px] h-[75px] md:w-full md:h-[170px] rounded-lg md:rounded-b-none md:rounded-t-md relative">
                                     <Image src={list.imageUrl?.url ? list.imageUrl?.url : defaultImage}
                                         className="object-cover w-full h-full rounded-lg md:rounded-none md:rounded-t-md"
                                         layout="fill"
@@ -70,7 +70,7 @@ const Latest = ({latest}) => {
                                             {`| ${list.category ? "Sermon" : list.conferenceId ? "Conference" : list.seriesId ? "series" : "bible study"}`}
                                         </h1>
                                     </div>
-                                    <h1 className="capitalize ">{truncate(list.title, 34, 27)}</h1>
+                                    <h1 className="capitalize ">{list.title}</h1>
                                     <h1 className="text-sm  font-light">{`${format(new Date(list.date), 'do MMM, yyyy')}`}</h1>
                                     <p className="hidden h-32 max-h-32 md:block  text-sm font-light  text-justify ">{truncate(list.description, 220, 217)}</p>
                                     <div className="flex items-center !mt-5 md:!mt-10 space-x-2">
