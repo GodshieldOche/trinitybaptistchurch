@@ -5,17 +5,22 @@ import Player from "../Player"
 import Body from "./Body"
 import { useDispatch } from "react-redux";
 import { loadUser } from "../../redux/features/currentUser";
+import { useRouter } from 'next/router'
 
 
 
 const Details = () => {
 
-    const { series} = useSelector(state => state.clientSeriesDetails)
+    const { series } = useSelector(state => state.clientSeriesDetails)
 
     const [current, setCurrent] = useState(series.sermons[0])
 
     const dispatch = useDispatch()
+    const router = useRouter()
     useEffect(() => {
+        if (router.query.index) {
+            setCurrent(series.sermons[router.query.index])
+        }
         dispatch(loadUser())
     }, [])
 

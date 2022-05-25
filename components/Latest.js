@@ -35,8 +35,13 @@ const Latest = ({latest}) => {
                             <div key={list._id}
                                 onClick={() => {
                                     list.category ? 
-                                        router.push(`/resources/sermons/${list._id}`) :
-                                        router.push(`/resources/biblestudy/${list._id}`)
+                                        router.push(`/resources/sermons/${list._id}`)
+                                        : list.conferenceId ?
+                                            router.push(`/resources/conference/${list.conferenceId}?index=${list.index}`)
+                                            : list.seriesId ?
+                                                router.push(`/resources/series/${list.seriesId}?index=${list.index}`)
+                                                : router.push(`/resources/biblestudy/${list._id}`)
+
                                 } }
                                 className="w-full flex flex-row-reverse items-center md:flex-col md:rounded-md bg-[white] space-x-1 md:space-x-0
                             md:py-0 md:px-0 px-1 py-2 shadow-sm md:shadow-xl hover:md:shadow-2xl hover:md:scale-105 cursor-pointer">

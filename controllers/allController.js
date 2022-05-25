@@ -34,7 +34,7 @@ const getLatestResources = asyncHandler(async (req, res, next) => {
     }).limit(5)
 
     conferences.map(conference => {
-        const sermons = conference.sermons.map(sermon => { 
+        const sermons = conference.sermons.map((sermon, index) => { 
             
             return {
                 title: sermon.title,
@@ -42,7 +42,8 @@ const getLatestResources = asyncHandler(async (req, res, next) => {
                 conferenceId: conference._id,
                 date: sermon.date,
                 description: sermon.description,
-                _id: sermon._id
+                _id: sermon._id,
+                index
             }
         })
         all.push(...sermons)
@@ -55,7 +56,7 @@ const getLatestResources = asyncHandler(async (req, res, next) => {
     }).limit(5)
 
     series.map(serie => {
-        const sermons = serie.sermons.map(sermon => {
+        const sermons = serie.sermons.map((sermon, index) => {
 
             return {
                 title: sermon.title,
@@ -63,7 +64,8 @@ const getLatestResources = asyncHandler(async (req, res, next) => {
                 seriesId: serie._id,
                 date: sermon.date,
                 description: sermon.description,
-                _id: sermon._id
+                _id: sermon._id,
+                index
             }
         })
         all.push(...sermons)

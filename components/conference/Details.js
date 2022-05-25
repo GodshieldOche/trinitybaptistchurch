@@ -5,6 +5,7 @@ import Body from "../series/Body"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
 import { loadUser } from "../../redux/features/currentUser";
+import { useRouter } from 'next/router'
 
 
 const Details = () => {
@@ -14,7 +15,11 @@ const Details = () => {
     const [current, setCurrent] = useState(conference.sermons[0])
 
     const dispatch = useDispatch()
+    const router = useRouter()
     useEffect(() => {
+        if (router.query.index) { 
+            setCurrent(conference.sermons[router.query.index])
+        }
         dispatch(loadUser())
     }, [])
 
