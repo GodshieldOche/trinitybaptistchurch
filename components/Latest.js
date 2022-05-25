@@ -51,7 +51,9 @@ const Latest = ({latest}) => {
                                         <div className="flex space-x-1">
                                             <GraphicEqIcon className="text-[orange] !text-base" />
                                             <OndemandVideoIcon className="text-[red]/80 !text-base" />
-                                            <h1 className="text-xs font-light uppercase">{`| ${list.category ? "Sermon" : "bible study"}`}</h1>
+                                            <h1 className="text-xs font-light uppercase">
+                                                {`| ${list.category ? "Sermon" : list.conferenceId ? "Conference" : list.seriesId ? "series" : "bible study"}`}
+                                            </h1>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +61,9 @@ const Latest = ({latest}) => {
                                     <div className="flex md:hidden space-x-1">
                                         <GraphicEqIcon className="text-[orange] !text-base" />
                                         <OndemandVideoIcon className="text-[red]/80 !text-base" />
-                                        <h1 className="text-xs font-light uppercase">{`| ${list.category ? "Sermon" : "bible study"}`}</h1>
+                                        <h1 className="text-xs font-light uppercase">
+                                            {`| ${list.category ? "Sermon" : list.conferenceId ? "Conference" : list.seriesId ? "series" : "bible study"}`}
+                                        </h1>
                                     </div>
                                     <h1 className="capitalize ">{truncate(list.title, 34, 27)}</h1>
                                     <h1 className="text-sm  font-light">{`${format(new Date(list.date), 'do MMM, yyyy')}`}</h1>
