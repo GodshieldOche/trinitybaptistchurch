@@ -27,8 +27,10 @@ const Header = ({ menuState }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(keyword.trim() !== '') {
-            router.push(`/search?keyword=${keyword}`)
+        if (keyword.trim() !== '') {
+            setToggleSearch(false)
+            setKeyword('')
+            router.push(`/search?keyword=${keyword.trim()}`)
         }
     }
 

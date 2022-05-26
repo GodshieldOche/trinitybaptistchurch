@@ -280,6 +280,8 @@ const updateConferenceSermon = asyncHandler(async (req, res, next) => {
                     } else {
                         sermon.imageUrl = imageUrl
                     }
+                } else {
+                    sermon.imageUrl = imageUrl
                 }
             }
         })

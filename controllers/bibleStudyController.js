@@ -201,6 +201,8 @@ const updateBibleStudy = asyncHandler(async (req, res, next) => {
                 bibleStudy.imageUrl = imageUrl
             }
 
+        } else {
+            bibleStudy.imageUrl = imageUrl
         }
 
         await bibleStudy.save({ validateBeforeSave: false })
