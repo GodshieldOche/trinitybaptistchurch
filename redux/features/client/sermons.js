@@ -5,9 +5,9 @@ import absoluteUrl from 'next-absolute-url'
 
 export const getClientSermons = createAsyncThunk(
     `sermons/getClientSermons`,
-    async ({ req, topic, preacher, scripture}, { rejectWithValue }) => {
+    async ({ req, topic, preacher, scripture, page=1}, { rejectWithValue }) => {
         const { origin } = absoluteUrl(req)
-        let link = `${origin}/api/client/sermon?query=query`
+        let link = `${origin}/api/client/sermon?page=${page}`
 
         if (topic) {
             link = link.concat(`&topic=${topic}`)
@@ -51,6 +51,8 @@ const sermonsSlice = createSlice({
     initialState: {
         loading: true,
         sermons: [],
+        resPerPage: 0,
+        sermonCount: 0,
         preachers: [],
         scriptures: [],
         topics: [],
@@ -66,6 +68,8 @@ const sermonsSlice = createSlice({
         [getClientSermons.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.sermons = payload.sermons
+            state.resPerPage = payload.resPerPage
+            state.sermonCount = payload.sermonCount
         },
         [getClientSermons.rejected]: (state, { payload }) => {
             state.loading = false

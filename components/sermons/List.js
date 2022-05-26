@@ -6,9 +6,13 @@ import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
+import { useRouter } from 'next/router'
 import { format } from 'date-fns'
 import blur from '../common/blur'
+import { Paginator } from "react-paginator-responsive";
 import { getClientMinisters } from "../../redux/features/client/ministers";
+
+
 
 const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307278/Global/sermons_nbw4cx.jpg"
 
@@ -16,11 +20,22 @@ const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
 
-    const { sermons } = useSelector(state => state.clientSermons)
+    const styles = {
+        hideBackNextButtonText: true,
+        paginatorButtonSelectedBackgroundColor: "#5481A8",
+        paginatorButtonSelectedColor: "white",
+        lateralMargin: "-5px -5px -5px -5px",
+        hidePaginatorInfo: true
+    };
+
+    const { sermons, sermonCount, resPerPage } = useSelector(state => state.clientSermons)
 
     const { topics, preachers, scriptures } = useSelector(state => state.clientSermons)
 
     const dispatch = useDispatch()
+    const router = useRouter()
+
+    const page = Number(router.query.page) || 1
 
     useEffect(() => {
         dispatch(getClientMinisters())
@@ -30,11 +45,11 @@ const List = () => {
         <div className={` md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
                 <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">
-                    {`${sermons.length > 1 ? sermons.length + " Results" : sermons.length + " Result"} - Page 1`}
+                    {`${sermons.length > 1 ? sermons.length + " Results" : sermons.length + " Result"} - ${page}`}
                 </h1>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-20 ">
                     <h1 className="lg:hidden text-center uppercase text-xs font-light ">
-                        {`${sermons.length > 1 ? sermons.length + " Results" : sermons.length + " Result"} - Page 1`}
+                        {`${sermons.length > 1 ? sermons.length + " Results" : sermons.length + " Result"} - ${page} 1`}
                     </h1>
                     <div className="lg:col-span-7">
                         <div className="flex flex-col mt-2 md:mt-5 space-y-3">
@@ -51,7 +66,7 @@ const List = () => {
                                                     </div>
                                                     <h1 className=" text-base md:text-lg capitalize ">{sermon.title}</h1>
                                                     <h1 className="font-light text-sm capitalize ">{`${sermon.book} ${sermon.chapter}:${sermon.verse}`}</h1>
-                                                    <div className="flex items-center !mt-3 space-x-2">
+                                                    <div className="flex items-center !mt-3 space-x-1">
                                                         <div className="h-[25px] w-[25px] rounded-full relative">
                                                             <Image src={sermon.preacher.imageUrl.url}
                                                                 className="object-cover w-full h-full rounded-full"
@@ -77,6 +92,19 @@ const List = () => {
                                     </Link>
                                 ))
                             }
+
+                            <div className="flex !mt-10 !py-10 w-full items-center justify-center">
+                                <Paginator
+                                    page={page}
+                                    pageSize={resPerPage}
+                                    pageGroupSize={3}
+                                    totalItems={sermonCount}
+                                    styles={styles}
+                                    callback={(page) => { 
+                                        router.push(`/resources/sermons?page=${page}`)
+                                    }}
+                                />
+                            </div>
                     
                         </div>
                     </div>

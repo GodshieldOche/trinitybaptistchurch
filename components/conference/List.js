@@ -29,7 +29,7 @@ const List = () => {
         let images = [...new Set(dp)];
 
         return images.map(image => (
-            <div key={image} className="!ml-[-6px] h-[25px] w-[25px] md:h-[35px] md:w-[35px] border-2 border-gray-300  rounded-full relative">
+            <div key={image} className="!ml-[-6px] h-[25px] w-[25px] md:h-[35px] md:w-[35px] border-2 border-gray-50  rounded-full relative">
                 <Image src={image}
                     className="object-cover w-full h-full rounded-full"
                     layout="fill"
@@ -77,7 +77,7 @@ const List = () => {
 
                                                     </div>
                                                     <h1 className="capitalize !mt-5">{conference.title}</h1>
-                                                    <div className="flex items-center justify-between pr-5 md:pr-0">
+                                                    <div className="flex items-center !mt-5 justify-between pr-5 md:pr-0">
                                                         <div className="flex items-center ml-[6px]">
                                                             {lister(index)}
                                                         </div>
