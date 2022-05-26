@@ -33,7 +33,7 @@ const getSermons = asyncHandler(async (req, res, next) => {
         query.book = {$regex: scripture, $options: 'i'}
     }
 
-    const sermonCount = await Sermon.countDocuments()
+    const totalItems = await Sermon.countDocuments(query)
     const sermons = await Sermon.find(query).sort('-date').skip((page - 1) * resPerPage).limit(resPerPage).populate({
         path: 'preacher',
         select: "name imageUrl",
@@ -43,7 +43,7 @@ const getSermons = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: "true",
         sermons,
-        sermonCount,
+        totalItems,
         resPerPage
     })
 

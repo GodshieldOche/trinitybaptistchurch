@@ -40,7 +40,7 @@ const List = () => {
                                 bibleStudies?.map(bibleStudy => (
                                     <Link href={`/resources/biblestudy/${bibleStudy._id}`} key={bibleStudy._id} >
                                         <a>
-                                            <div className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10">
+                                            <div className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center justify-between space-x-2 px-3 border-b border-b-primary-black/10">
                                                 <div className="flex flex-col space-y-2">
                                                     <div className="flex space-x-1">
                                                         <GraphicEqIcon className="text-[orange] !text-base" />

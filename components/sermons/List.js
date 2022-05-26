@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import { format } from 'date-fns'
 import blur from '../common/blur'
 import { Paginator } from "react-paginator-responsive";
+import Pagination from "../common/Pagination"
 import { getClientMinisters } from "../../redux/features/client/ministers";
 
 
@@ -28,7 +29,7 @@ const List = () => {
         hidePaginatorInfo: true
     };
 
-    const { sermons, sermonCount, resPerPage } = useSelector(state => state.clientSermons)
+    const { sermons, totalItems, resPerPage } = useSelector(state => state.clientSermons)
 
     const { topics, preachers, scriptures } = useSelector(state => state.clientSermons)
 
@@ -57,7 +58,7 @@ const List = () => {
                                 sermons.map(sermon => (
                                     <Link href={`/resources/sermons/${sermon._id}`} key={sermon._id} >
                                         <a>
-                                            <div  className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10">
+                                            <div  className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center justify-between space-x-2 px-3 border-b border-b-primary-black/10">
                                                 <div className="flex flex-col space-y-2">
                                                     <div className="flex space-x-1">
                                                         <GraphicEqIcon className="text-[orange] !text-base" />
@@ -94,15 +95,10 @@ const List = () => {
                             }
 
                             <div className="flex !mt-10 !py-10 w-full items-center justify-center">
-                                <Paginator
+                                <Pagination
+                                    resPerPage={resPerPage}
+                                    totalItems={totalItems}
                                     page={page}
-                                    pageSize={resPerPage}
-                                    pageGroupSize={3}
-                                    totalItems={sermonCount}
-                                    styles={styles}
-                                    callback={(page) => { 
-                                        router.push(`/resources/sermons?page=${page}`)
-                                    }}
                                 />
                             </div>
                     

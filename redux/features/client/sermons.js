@@ -52,7 +52,7 @@ const sermonsSlice = createSlice({
         loading: true,
         sermons: [],
         resPerPage: 0,
-        sermonCount: 0,
+        totalItems: 0,
         preachers: [],
         scriptures: [],
         topics: [],
@@ -69,7 +69,7 @@ const sermonsSlice = createSlice({
             state.loading = false
             state.sermons = payload.sermons
             state.resPerPage = payload.resPerPage
-            state.sermonCount = payload.sermonCount
+            state.totalItems = payload.totalItems
         },
         [getClientSermons.rejected]: (state, { payload }) => {
             state.loading = false
