@@ -84,23 +84,27 @@ const getLatestResources = asyncHandler(async (req, res, next) => {
 })
 
 
+
+
+
+
+
+
+
+
+
 // get client conference detail
 // get => /api/client/conference/:id
 const searchAllResources = asyncHandler(async (req, res, next) => {
 
-    const keyword = 'heart'
+    const {keyword} = req.query
 
     const query = {
         $or: [
-            {
-                title: { $regex: keyword, $options: "i" }
-            },
-            {
-                topic: { $regex: keyword, $options: "i" }
-            },
-            {
-                description: { $regex: keyword, $options: "i" }
-            }
+            {title: { $regex: keyword, $options: "i" }},
+            {topic: { $regex: keyword, $options: "i" }},
+            {description: { $regex: keyword, $options: "i" }},
+            {book: { $regex: keyword, $options: "i" }},
         ]
     }
 
@@ -110,7 +114,8 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
                 $or: [
                     { title: { $regex: keyword, $options: "i" } },
                     { topic: { $regex: keyword, $options: "i" } },
-                    { description: { $regex: keyword, $options: "i" } }
+                    { description: { $regex: keyword, $options: "i" } },
+                    { book: { $regex: keyword, $options: "i" } },
                 ]
             }
         }
@@ -124,7 +129,9 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
         select: "name imageUrl",
         model: Minister
     })
-    all.push(...sermons)
+    if (sermons.length > 0) { 
+        all.push(...sermons)
+    }
 
     // BibleStudies
     const bibleStudies = await BibleStudy.find(query).sort('-date').populate({
@@ -132,7 +139,10 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
         select: "name imageUrl",
         model: Minister
     })
-    all.push(...bibleStudies)
+
+    if (bibleStudies.length > 0) {
+        all.push(...bibleStudies)
+    }
 
     const conferences = await Conference.find(nestedQuery).sort("-startDate").populate({
         path: 'sermons.preacher',
@@ -142,9 +152,13 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
 
     conferences.map(conference => {
         const sermons = conference.sermons.map((sermon, index) => {
-
+           
             return {
                 title: sermon.title,
+                topic: sermon.topic,
+                book: sermon.book,
+                chapter: sermon.chapter,
+                verse: sermon.verse,
                 preacher: sermon.preacher,
                 conferenceId: conference._id,
                 date: sermon.date,
@@ -152,8 +166,19 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
                 _id: sermon._id,
                 index
             }
+           
         })
-        all.push(...sermons)
+        
+        sermons.map(sermon => {
+            if (
+                sermon.title.includes(keyword.toLowerCase())
+                || sermon.topic.includes(keyword.toLowerCase())
+                || sermon.description.includes(keyword.toLowerCase())
+                || sermon.book.includes(keyword.toLowerCase())
+            ) { 
+                all.push(sermon)
+            }
+        })     
     })
 
     const series = await Series.find(nestedQuery).sort("-startDate").populate({
@@ -164,9 +189,12 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
 
     series.map(serie => {
         const sermons = serie.sermons.map((sermon, index) => {
-
             return {
                 title: sermon.title,
+                topic: sermon.topic,
+                book: sermon.book,
+                chapter: sermon.chapter,
+                verse: sermon.verse,
                 preacher: sermon.preacher,
                 seriesId: serie._id,
                 date: sermon.date,
@@ -175,7 +203,17 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
                 index
             }
         })
-        all.push(...sermons)
+
+        sermons.map(sermon => {
+            if (
+                sermon.title.includes(keyword.toLowerCase())
+                || sermon.topic.includes(keyword.toLowerCase())
+                || sermon.description.includes(keyword.toLowerCase())
+                || sermon.book.includes(keyword.toLowerCase())
+            ) {
+                all.push(sermon)
+            }
+        })  
     })
 
 

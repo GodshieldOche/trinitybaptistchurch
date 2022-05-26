@@ -17,6 +17,19 @@ export const getClientLatest = createAsyncThunk(
     }
 )
 
+export const searchAllResources = createAsyncThunk(
+    `latest/searchAllResources`,
+    async ({ keyword }, { rejectWithValue }) => {
+        try {
+            const { data } = await axios.get(`/api/search?keyword=${keyword}`)
+            return data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message)
+        }
+
+    }
+)
+
 
 
 const latestSlice = createSlice({
@@ -24,6 +37,7 @@ const latestSlice = createSlice({
     initialState: {
         loading: true,
         latest: [],
+        searchResults: [],
         message: null,
     },
     reducers: {
@@ -38,6 +52,17 @@ const latestSlice = createSlice({
             state.latest = payload.latest
         },
         [getClientLatest.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.message = payload
+        },
+        [searchAllResources.pending]: (state) => {
+            state.loading = true
+        },
+        [searchAllResources.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.searchResults = payload.all
+        },
+        [searchAllResources.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },
