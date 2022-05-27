@@ -51,13 +51,22 @@ const getSeriesFilters = asyncHandler(async (req, res, next) => {
 // get => /api/client/series
 const getClientSeries = asyncHandler(async (req, res, next) => {
 
-    const { topic, preacher, scripture } = req.query
+    const { topic, preacher, scripture, sort } = req.query
 
     const page = Number(req.query.page) || 1
-    const resPerPage = 1
+    const resPerPage = 10
 
     const query = {
         "sermons": { $elemMatch: { } }
+    }
+
+    let sortQuery = "-createdAt"
+
+    if (sort) {
+        sort === 'oldest' 
+        ? sortQuery = 'createdAt' : sort === 'a-z'
+        ? sortQuery = 'title' : sort === 'z-a'
+        ? sortQuery = '-title' : sortQuery = '-createdAt'
     }
 
     if (topic) {
@@ -73,7 +82,7 @@ const getClientSeries = asyncHandler(async (req, res, next) => {
     const totalItems = await Series.countDocuments(query)
     const series = await Series
         .find(query)
-        .sort('-createdAt')
+        .sort(sortQuery)
         .skip((page - 1) * resPerPage)
         .limit(resPerPage)
         .populate({

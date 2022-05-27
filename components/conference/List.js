@@ -98,13 +98,16 @@ const List = () => {
                                 ))
                             }
                         </div>
-                        <div className="flex !my-10 w-full items-center justify-center">
-                            <Pagination
-                                resPerPage={resPerPage}
-                                page={page}
-                                totalItems={totalItems}
-                            />
-                        </div>
+                        {
+                            totalItems > resPerPage &&
+                            <div className="flex !my-10 w-full items-center justify-center">
+                                <Pagination
+                                    resPerPage={resPerPage}
+                                    page={page}
+                                    totalItems={totalItems}
+                                />
+                            </div>
+                        }
                     </div>
                     <div className=" lg:col-span-5 lg:!mt-10 order-first lg:order-last">
                         <Filter

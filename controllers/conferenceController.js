@@ -52,10 +52,19 @@ const getConferenceFilters = asyncHandler(async (req, res, next) => {
 // get => /api/client/conference
 const getClientConference = asyncHandler(async (req, res, next) => {
 
-    const { topic, preacher, scripture } = req.query
+    const { topic, preacher, scripture, sort } = req.query
 
     const page = Number(req.query.page) || 1
-    const resPerPage = 1
+    const resPerPage = 10
+
+    let sortQuery = "-startDate"
+
+    if (sort) {
+        sort === 'oldest' 
+        ? sortQuery = 'startDate' : sort === 'a-z'
+        ? sortQuery = 'title' : sort === 'z-a'
+        ? sortQuery = '-title' : sortQuery = '-startDate'
+    }
 
     const query = {
         "sermons": { $elemMatch: {} }
@@ -74,7 +83,7 @@ const getClientConference = asyncHandler(async (req, res, next) => {
     const totalItems = await Conference.countDocuments(query)
     const conferences = await Conference
         .find(query)
-        .sort("-startDate")
+        .sort(sortQuery)
         .skip((page - 1) * resPerPage)
         .limit(resPerPage)
         .populate({

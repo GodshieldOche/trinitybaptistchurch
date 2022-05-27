@@ -14,12 +14,21 @@ cloudinary.config({
 // get => /api/client/biblestudy
 const getBibleStudies = asyncHandler(async (req, res, next) => {
 
-    const { topic, preacher, scripture } = req.query
+    const { topic, preacher, scripture, sort } = req.query
 
     const page = Number(req.query.page) || 1
-    const resPerPage = 1
+    const resPerPage = 10
 
     const query = {}
+
+    let sortQuery = '-date'
+
+    if (sort) {
+        sort === 'oldest' 
+        ? sortQuery = 'date' : sort === 'a-z'
+        ? sortQuery = 'title' : sort === 'z-a'
+        ? sortQuery = '-title' : sortQuery = '-date'
+    }
 
     if (topic) {
         query.topic = { $regex: topic, $options: 'i' }
@@ -34,7 +43,7 @@ const getBibleStudies = asyncHandler(async (req, res, next) => {
     const totalItems = await BibleStudy.countDocuments(query)
     const bibleStudies = await BibleStudy
         .find(query)
-        .sort('-date')
+        .sort(sortQuery)
         .skip((page - 1) * resPerPage)
         .limit(resPerPage)
         .populate({

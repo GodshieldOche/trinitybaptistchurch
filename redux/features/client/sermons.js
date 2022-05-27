@@ -5,9 +5,9 @@ import absoluteUrl from 'next-absolute-url'
 
 export const getClientSermons = createAsyncThunk(
     `sermons/getClientSermons`,
-    async ({ req, topic, preacher, scripture, page=1}, { rejectWithValue }) => {
+    async ({ req, topic, preacher, scripture, page=1, sort = 'newest'}, { rejectWithValue }) => {
         const { origin } = absoluteUrl(req)
-        let link = `${origin}/api/client/sermon?page=${page}`
+        let link = `${origin}/api/client/sermon?page=${page}&sort=${sort}`
 
         if (topic) {
             link = link.concat(`&topic=${topic}`)

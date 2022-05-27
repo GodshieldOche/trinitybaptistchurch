@@ -16,12 +16,20 @@ cloudinary.config({
 // get => /api/client/sermons
 const getSermons = asyncHandler(async (req, res, next) => {
 
-    const { topic, preacher, scripture } = req.query
+    const { topic, preacher, scripture, sort } = req.query
 
     const page = Number(req.query.page) || 1
-    const resPerPage = 1
+    const resPerPage = 3
 
     const query = {}
+    let sortQuery = '-date'
+
+    if (sort) {
+        sort === 'oldest' 
+        ? sortQuery = 'date' : sort === 'a-z'
+        ? sortQuery = 'title' : sort === 'z-a'
+        ? sortQuery = '-title' : sortQuery = '-date'
+    }
 
     if (topic) {
         query.topic = {$regex: topic, $options: 'i'}
@@ -34,7 +42,7 @@ const getSermons = asyncHandler(async (req, res, next) => {
     }
 
     const totalItems = await Sermon.countDocuments(query)
-    const sermons = await Sermon.find(query).sort('-date').skip((page - 1) * resPerPage).limit(resPerPage).populate({
+    const sermons = await Sermon.find(query).sort(sortQuery).skip((page - 1) * resPerPage).limit(resPerPage).populate({
         path: 'preacher',
         select: "name imageUrl",
         model: Minister

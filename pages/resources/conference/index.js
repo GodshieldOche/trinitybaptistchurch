@@ -17,7 +17,7 @@ export default function ConferencePage() {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, query }) => {
-    const { topic, preacher, page, scripture } = query
-    await store.dispatch(getClientConferences({ req, topic, preacher, page, scripture  }))
+    const { topic, preacher, page, sort, scripture } = query
+    await store.dispatch(getClientConferences({ req, topic, preacher, page, sort, scripture  }))
     await store.dispatch(getConferenceFilters({ req }))
 })
