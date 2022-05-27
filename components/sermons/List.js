@@ -45,14 +45,14 @@ const List = () => {
     return (
         <div className={` md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
-                <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">
-                    {`${sermons.length > 1 ? sermons.length + " Results" : sermons.length + " Result"} - ${page}`}
+                <h1 className="hidden lg:block uppercase text-center lg:ml-3 lg:text-left text-sm font-light mb-5">
+                    {`${sermons.length > 1 ? sermons.length + " Results" : sermons.length + " Result"} - Page ${page}`}
                 </h1>
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-20 ">
+                <div className="grid grid-cols-1 !min-h-screen lg:grid-cols-12 gap-5 lg:gap-20 ">
                     <h1 className="lg:hidden text-center uppercase text-xs font-light ">
-                        {`${sermons.length > 1 ? sermons.length + " Results" : sermons.length + " Result"} - ${page} 1`}
+                        {`${sermons.length > 1 ? sermons.length + " Results" : sermons.length + " Result"} - Page ${page} `}
                     </h1>
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 h-full">
                         <div className="flex flex-col mt-2 md:mt-5 space-y-3">
                             {
                                 sermons.map(sermon => (
@@ -93,15 +93,13 @@ const List = () => {
                                     </Link>
                                 ))
                             }
-
-                            <div className="flex !mt-10 !py-10 w-full items-center justify-center">
-                                <Pagination
-                                    resPerPage={resPerPage}
-                                    totalItems={totalItems}
-                                    page={page}
-                                />
-                            </div>
-                    
+                        </div>
+                        <div className="flex justify-self-end !mt-10 !py-10 w-full items-center justify-center">
+                            <Pagination
+                                resPerPage={resPerPage}
+                                totalItems={totalItems}
+                                page={page}
+                            />
                         </div>
                     </div>
                     <div className=" lg:col-span-5 lg:!mt-10 order-first lg:order-last">
@@ -115,6 +113,8 @@ const List = () => {
                             setSortToggle={setSortToggle} />
                     </div>
                 </div>
+
+                
             </div>
         </div>
     )
