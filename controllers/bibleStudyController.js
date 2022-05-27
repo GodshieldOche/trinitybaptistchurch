@@ -16,6 +16,9 @@ const getBibleStudies = asyncHandler(async (req, res, next) => {
 
     const { topic, preacher, scripture } = req.query
 
+    const page = Number(req.query.page) || 1
+    const resPerPage = 1
+
     const query = {}
 
     if (topic) {
@@ -28,8 +31,13 @@ const getBibleStudies = asyncHandler(async (req, res, next) => {
         query.book = { $regex: scripture, $options: 'i' }
     }
 
-
-    const bibleStudies = await BibleStudy.find(query).sort('-date').populate({
+    const totalItems = await BibleStudy.countDocuments(query)
+    const bibleStudies = await BibleStudy
+        .find(query)
+        .sort('-date')
+        .skip((page - 1) * resPerPage)
+        .limit(resPerPage)
+        .populate({
         path: 'preacher',
         select: "name imageUrl",
         model: Minister
@@ -37,7 +45,9 @@ const getBibleStudies = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
         success: "true",
-        bibleStudies
+        bibleStudies,
+        totalItems,
+        resPerPage
     })
 
 })

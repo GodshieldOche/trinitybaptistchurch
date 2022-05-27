@@ -33,7 +33,7 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
 
     const handleSubmit = (tSelect, pSelect, sSelect) => { 
         let preacher = ''
-        let link = `${router.route}?sort=-date` 
+        let link = `${router.route}?page=1` 
 
         if (pSelect) {
             ministers.map(minister => {

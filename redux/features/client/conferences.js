@@ -5,10 +5,10 @@ import absoluteUrl from 'next-absolute-url'
 
 export const getClientConferences = createAsyncThunk(
     `conferences/getClientConferences`,
-    async ({ req, topic, preacher, scripture }, { rejectWithValue }) => {
+    async ({ req, topic, preacher, scripture, page = 1 }, { rejectWithValue }) => {
         const { origin } = absoluteUrl(req)
 
-        let link = `${origin}/api/client/conference?sort=-startDate`
+        let link = `${origin}/api/client/conference?page=${page}`
 
         if (topic) {
             link = link.concat(`&topic=${topic}`)
@@ -52,6 +52,8 @@ const conferencesSlice = createSlice({
     initialState: {
         loading: true,
         conferences: [],
+        resPerPage: 0,
+        totalItems: 0,
         preachers: [],
         scriptures: [],
         topics: [],
@@ -67,6 +69,8 @@ const conferencesSlice = createSlice({
         [getClientConferences.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.conferences = payload.conferences
+            state.resPerPage = payload.resPerPage
+            state.totalItems = payload.totalItems
         },
         [getClientConferences.rejected]: (state, { payload }) => {
             state.loading = false

@@ -5,10 +5,10 @@ import absoluteUrl from 'next-absolute-url'
 
 export const getClientBibleStudies = createAsyncThunk(
     `bibleStudies/getClientBibleStudies`,
-    async ({ req, topic, preacher, scripture }, { rejectWithValue }) => {
+    async ({ req, topic, preacher, scripture, page = 1 }, { rejectWithValue }) => {
         const { origin } = absoluteUrl(req)
 
-        let link = `${origin}/api/client/biblestudy?sort=-date`
+        let link = `${origin}/api/client/biblestudy?page=${page}`
 
         if (topic) {
             link = link.concat(`&topic=${topic}`)
@@ -52,6 +52,8 @@ const bibleStudiesSlice = createSlice({
     initialState: {
         loading: true,
         bibleStudies: [],
+        resPerPage: 0,
+        totalItems: 0,
         preachers: [],
         scriptures: [],
         topics: [],
@@ -67,6 +69,8 @@ const bibleStudiesSlice = createSlice({
         [getClientBibleStudies.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.bibleStudies = payload.bibleStudies
+            state.resPerPage = payload.resPerPage
+            state.totalItems = payload.totalItems
         },
         [getClientBibleStudies.rejected]: (state, { payload }) => {
             state.loading = false

@@ -5,10 +5,10 @@ import absoluteUrl from 'next-absolute-url'
 
 export const getClientSeries = createAsyncThunk(
     `series/getClientSeries`,
-    async ({ req, topic, preacher, scripture }, { rejectWithValue }) => {
+    async ({ req, topic, preacher, scripture, page = 1 }, { rejectWithValue }) => {
         const { origin } = absoluteUrl(req)
 
-        let link = `${origin}/api/client/series?sort=-date`
+        let link = `${origin}/api/client/series?page=${page}`
 
         if (topic) {
             link = link.concat(`&topic=${topic}`)
@@ -52,6 +52,8 @@ const seriesSlice = createSlice({
     initialState: {
         loading: true,
         series: [],
+        resPerPage: 0,
+        totalItems: 0,
         preachers: [],
         scriptures: [],
         topics: [],
@@ -67,6 +69,8 @@ const seriesSlice = createSlice({
         [getClientSeries.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.series = payload.series
+            state.resPerPage = payload.resPerPage
+            state.totalItems = payload.totalItems
         },
         [getClientSeries.rejected]: (state, { payload }) => {
             state.loading = false

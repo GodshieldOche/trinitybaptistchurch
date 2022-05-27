@@ -8,7 +8,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { format } from 'date-fns'
 import blur from '../common/blur'
 import { useEffect } from "react"
+import { useRouter } from 'next/router'
 import { getClientMinisters } from "../../redux/features/client/ministers";
+import { Pagination } from "../common/Pagination";
 
 
 const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307276/Global/bible_beofqt.jpg"
@@ -17,8 +19,11 @@ const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
 
-    const { bibleStudies, topics, preachers, scriptures } = useSelector(state => state.clientBibleStudies)
+    const { bibleStudies, totalItems, resPerPage, topics, preachers, scriptures } = useSelector(state => state.clientBibleStudies)
     const dispatch = useDispatch()
+    const router = useRouter()
+
+    const page = Number(router.query.page) || 1
 
     useEffect(() => {
         dispatch(getClientMinisters())
@@ -28,11 +33,11 @@ const List = () => {
         <div className={` md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
                 <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">
-                    {`${bibleStudies.length > 1 ? bibleStudies.length + " Results" : bibleStudies.length + " Result"} - Page 1`}
+                    {`${totalItems > 1 ? totalItems + " Results" : totalItems + " Result"} - Page ${page}`}
                 </h1>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-20 ">
                     <h1 className="lg:hidden text-center uppercase text-xs font-light ">
-                        {`${bibleStudies.length > 1 ? bibleStudies.length + " Results" : bibleStudies.length + " Result"} - Page 1`}
+                        {`${totalItems > 1 ? totalItems + " Results" : totalItems + " Result"} - Page ${page}`}
                     </h1>
                     <div className="lg:col-span-7">
                         <div className="flex flex-col mt-2 md:mt-5 space-y-3">
@@ -75,7 +80,14 @@ const List = () => {
                                     </Link>
                                 ))
                             }
+                        </div>
+                        <div className="flex !my-10 w-full items-center justify-center">
 
+                            <Pagination
+                                resPerPage={resPerPage}
+                                page={page}
+                                totalItems={totalItems}
+                            />
                         </div>
                     </div>
                     <div className=" lg:col-span-5 lg:!mt-10 order-first lg:order-last">

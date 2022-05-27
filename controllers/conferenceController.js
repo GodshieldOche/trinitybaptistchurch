@@ -54,6 +54,9 @@ const getClientConference = asyncHandler(async (req, res, next) => {
 
     const { topic, preacher, scripture } = req.query
 
+    const page = Number(req.query.page) || 1
+    const resPerPage = 1
+
     const query = {
         "sermons": { $elemMatch: {} }
     }
@@ -68,8 +71,13 @@ const getClientConference = asyncHandler(async (req, res, next) => {
         query.sermons.$elemMatch.book = { $regex: scripture, $options: 'i' }
     }
 
-
-    const conferences = await Conference.find(query).sort("-startDate").populate({
+    const totalItems = await Conference.countDocuments(query)
+    const conferences = await Conference
+        .find(query)
+        .sort("-startDate")
+        .skip((page - 1) * resPerPage)
+        .limit(resPerPage)
+        .populate({
         path: 'sermons.preacher',
         select: "name imageUrl",
         model: Minister
@@ -77,7 +85,9 @@ const getClientConference = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
         success: "true",
-        conferences
+        conferences,
+        totalItems,
+        resPerPage
     })
 
 })

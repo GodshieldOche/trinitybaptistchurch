@@ -7,14 +7,19 @@ import Link from "next/link"
 import { useSelector, useDispatch } from "react-redux"
 import blur from '../common/blur'
 import { useEffect } from "react"
+import { useRouter } from "next/router"
+import { Pagination } from "../common/Pagination";
 import { getClientMinisters } from "../../redux/features/client/ministers";
 
 const List = () => {
     const [fitlerToggle, setFilterToggle] = useState(false)
     const [sortToggle, setSortToggle] = useState(false)
 
-    const { series, topics, preachers, scriptures } = useSelector(state => state.clientSeries)
+    const { series, totalItems, resPerPage, topics, preachers, scriptures } = useSelector(state => state.clientSeries)
     const dispatch = useDispatch()
+    const router = useRouter()
+
+    const page = Number(router.query.page) || 1
 
     useEffect(() => {
         dispatch(getClientMinisters())
@@ -30,7 +35,7 @@ const List = () => {
         let images = [...new Set(dp)];
 
         return images.map(image => (
-            <div key={image} className="!ml-[-6px] h-[25px] w-[25px] md:h-[35px] md:w-[35px] border-2 border-gray-300  rounded-full relative">
+            <div key={image} className="!ml-[-6px] h-[25px] w-[25px] md:h-[35px] md:w-[35px] border-2 border-gray-50  rounded-full relative">
                 <Image src={image}
                     className="object-cover w-full h-full rounded-full"
                     layout="fill"
@@ -47,11 +52,11 @@ const List = () => {
         <div className={` md:mt-10`} >
             <div className="container md:px-0 lg:px-[2rem]">
                 <h1 className="hidden lg:block uppercase text-center lg:text-left text-sm font-light mb-5">
-                    {`${series.length > 1 ? series.length + " Results" : series.length + " Result"} - Page 1`}
+                    {`${totalItems > 1 ? totalItems + " Results" : totalItems + " Result"} - Page ${page}`}
                 </h1>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-20 ">
                     <h1 className="lg:hidden text-center uppercase text-xs font-light ">
-                        {`${series.length > 1 ? series.length + " Results" : series.length + " Result"} - Page 1`}
+                        {`${totalItems > 1 ? totalItems + " Results" : totalItems + " Result"} - Page ${page}`}
                     </h1>
                     <div className="lg:col-span-7 lg:!mt-10">
                         <div className="grid gap-5 grid-cols-1 md:grid-cols-2 ">
@@ -94,6 +99,13 @@ const List = () => {
                                     </Link>
                                 ))
                             }
+                        </div>
+                        <div className="flex !my-10 w-full items-center justify-center">
+                            <Pagination
+                                resPerPage={resPerPage}
+                                page={page}
+                                totalItems={totalItems}
+                            />
                         </div>
                     </div>
                     <div className=" lg:col-span-5 lg:!mt-10 order-first lg:order-last">
