@@ -7,7 +7,6 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
     const dispatch = useDispatch();
     const { ministers } = useSelector(state => state.clientMinisters);
     const router = useRouter();
-    let pState = '';
 
 
 
@@ -15,7 +14,7 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
     const [sValue, setSValue] = useState(5);
     const [pValue, setPValue] = useState(5);
     const [tSelect, setTSelect] = useState(router.query?.topic ? router.query.topic : "");
-    const [pSelect, setPSelect] = useState(router.query?.preacher ? pState : "");
+    const [pSelect, setPSelect] = useState("");
     const [sSelect, setSSelect] = useState(router.query?.scripture ? router.query.scripture : "");
 
     
@@ -23,12 +22,12 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
 
     useEffect(() => {
         ministers.map(minister => {
-            if (minister._id == router.query.preacher) {
+            if (minister._id === router.query.preacher) {
                 console.log(minister.name)
-                pState = minister.name
+                setPSelect(minister.name)
             }
         })
-    }, [])
+    }, [router.query?.preacher])
 
 
     const handleSubmit = (tSelect, pSelect, sSelect) => { 

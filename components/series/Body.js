@@ -10,11 +10,9 @@ const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307
 const Body = ({ series, changeCurrent, current }) => {
     return (
         <div className="container lg:px-[2rem]  ">
-
-            <div className="flex flex-col justify-center items-center space-y-3 mb-3">
-                <h1
-                    // onClick={() => scrollToAll()}
-                    className="text-xs lg:hidden uppercase bg-gray-700 rounded-2xl text-white px-5 py-2 lg:py-0"><a href="#all">View All from this series</a></h1>
+            <h1 className="text-xs lg:hidden uppercase bg-primary-dark text-center text-white px-5 py-2 lg:py-0"><a href="#all">View All from this series</a></h1>
+            <div className="flex flex-col justify-center !mt-5 !lg:mt-0 items-center space-y-3 mb-3">
+                
                 <h1 className="text-xs text-center lg:text-left tracking-widest font-light uppercase">{format(new Date(current.date), 'do MMM yyyy')}</h1>
                 <h1 className="text-xl md:text-3xl font-medium text-center lg:text-left uppercase">{current.title}</h1>
 
@@ -28,7 +26,9 @@ const Body = ({ series, changeCurrent, current }) => {
                         <h1 className=" ">{current.preacher.name}</h1>
                     </div>
                 </div>
+                
             </div>
+            
             <div className="grid grid-cols-1 md:!mt-10 lg:grid-cols-12 items-start gap-5 ">
 
                 {/* first grid */}
@@ -57,7 +57,7 @@ const Body = ({ series, changeCurrent, current }) => {
                                 series.sermons.map((sermon, index) => (
                                     <div
                                         onClick={() => changeCurrent(index)}
-                                        key={sermon._id} className={`${current._id === sermon._id ? "bg-gray-700 text-gray-200" : "lg:hover:bg-gray-300 lg:hover:text-gray-800"} flex py-3 cursor-pointer  items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
+                                        key={sermon._id} className={`${current._id === sermon._id ? "bg-primary-dark text-gray-200" : "lg:hover:bg-gray-300 lg:hover:text-gray-800"} flex py-3 cursor-pointer  items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10`}>
                                         <div className="flex flex-col space-y-2">
                                             <div className="flex space-x-1">
                                                 <GraphicEqIcon className="text-[orange] !text-base" />
