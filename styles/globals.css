@@ -21,7 +21,11 @@
     color: #e61e4d;
 }
 
-.page-ul {
+.itemClass {
+    padding: 5px;
+}
+
+.innerClass {
     display: flex;
-    justify-content: space-between;
+
 }

@@ -9,8 +9,7 @@ import { useEffect } from "react"
 import { useRouter } from 'next/router'
 import { format } from 'date-fns'
 import blur from '../common/blur'
-import { Paginator } from "react-paginator-responsive";
-import Pagination from "../common/Pagination"
+import {Pagination} from "../common/Pagination"
 import { getClientMinisters } from "../../redux/features/client/ministers";
 
 
@@ -108,10 +107,11 @@ const List = () => {
                 </div>
                 <div className="max-w-screen-md w-full">
                     <div className="flex !my-10 w-full items-center justify-center">
+                        
                         <Pagination
                             resPerPage={resPerPage}
-                            totalItems={totalItems}
                             page={page}
+                            totalItems={totalItems}
                         />
                     </div>
                 </div>
