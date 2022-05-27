@@ -24,9 +24,9 @@ const Pagination = ({ resPerPage, page, totalItems }) => {
                 itemsCountPerPage={resPerPage}
                 totalItemsCount={totalItems}
                 onChange={handlePagination}
-                innerClass='border border-[#0d6efd]/50 flex rounded-r-lg rounded-l-lg'
+                innerClass='border border-gray-300 flex rounded-r-lg rounded-l-lg'
                 activeClass='bg-[#0d6efd]'
-                itemClass='border-r border-[#0d6efd]/50 py-1 px-4'
+                itemClass='border-r border-gray-300 py-1 px-4'
                 linkClass='text-[#0d6efd]'
                 itemClassLast="!border-r-0 "
                 activeLinkClass="!text-[#ffffff]"
