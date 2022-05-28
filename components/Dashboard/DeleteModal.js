@@ -13,6 +13,7 @@ import { postDeleteConference } from "../../redux/features/conferences"
 import { postDeleteEvent } from "../../redux/features/events"
 import { postDeleteEventSession } from "../../redux/features/event"
 import { postDeleteService } from "../../redux/features/services"
+import { postDeleteNews } from "../../redux/features/news"
 
 
 const DeleteModal = () => {
@@ -60,6 +61,10 @@ const DeleteModal = () => {
         // service
         deleteModalData.service && setDataName(deleteModalData.service.service)
         deleteModalData.service && setData(deleteModalData.service)
+        
+        // News
+        deleteModalData.info && setDataName(deleteModalData.info.title)
+        deleteModalData.info && setData(deleteModalData.info)
     }, [])
     const dispatch = useDispatch()
 
@@ -182,11 +187,25 @@ const DeleteModal = () => {
             })
         }
 
+        // service
         if (deleteModalData.service) {
             dispatch(postDeleteService({ id, index })).then(result => {
                 if (!result.error) {
                     setLoading(false)
                     toast.success("successfully deleted")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+        // News
+        if (deleteModalData.info) {
+            dispatch(postDeleteNews({ id, index })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("Successfully Deleted")
                     dispatch(setDeletModalState(false))
                 } else {
                     console.log(result.error)

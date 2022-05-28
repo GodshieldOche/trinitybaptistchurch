@@ -2,41 +2,82 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect, } from 'react';
 import Editor from "../../../Editor"
-
-const New = () => {
-    const [image, setImage] = useState('')
+import { toast } from 'react-toastify'
+import ImageUploader from '../../../common/ImageUploader'
+import { useDispatch } from 'react-redux';
+import { postAddNews } from '../../../../redux/features/addNews';
+import ButtonLoader from '../../../common/ButtonLoader';
+import { getNewsDetails, updateNews } from '../../../../redux/features/newsDetails';
+ 
+const New = ({name}) => {
+    const [imageUrl, setImageUrl] = useState('')
     const [imagePreview, setImagePreview] = useState('')
     const [editorLoaded, setEditorLoaded] = useState(false);
     const [data, setData] = useState("");
+    const [title, setTitle] = useState("");
+    const [action, setAction] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const { id } = router.query;
 
     useEffect(() => {
         setEditorLoaded(true);
+        if (name === "update news") {
+            dispatch(getNewsDetails(id)).then(res => {
+                if (!res.error) {
+                    const { title, action, body, imageUrl } = res.payload.news;
+                    setTitle(title);
+                    setAction(action);
+                    setData(body);
+                    setImageUrl(imageUrl);
+                    setImagePreview(imageUrl.url);
+                }
+            })
+        }
     }, []);
 
-    const router = useRouter();
+    
 
-    const onChange = (e) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setImage(reader.result)
-                setImagePreview(reader.result)
-            }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setLoading(true)
+        if (title && action && data && imageUrl) {
+            name === "add news" &&
+                dispatch(postAddNews({ body: data, title, action, imageUrl })).then(res => {
+                if (!res.error) {
+                    setLoading(false)
+                    toast.success("News Added Successfully")
+                    router.back()
+                } else {
+                    setLoading(false)
+                    console.log(res.error)
+                } 
+            })
+
+            name === "update news" &&
+                dispatch(updateNews({ id, body: data, title, action, imageUrl })).then(res => { 
+                    if (!res.error) {
+                        setLoading(false)
+                        toast.success("News Updated Successfully")
+                        router.back()
+                    } else {
+                        setLoading(false)
+                        console.log(res.error)
+                    } 
+                })
+        } else {
+            toast.info('Please fill all the fields')
         }
-        reader.readAsDataURL(e.target.files[0])
     }
 
-    const onDrop = (e) => {
-        const droppedFile = Array.from(e.dataTransfer.files);
-        setImage(droppedFile[0]);
-        setImagePreview(URL.createObjectURL(droppedFile[0]));
-    }
 
 
     return (
         <div className="flex  w-full min-h-screen  my-2  mx-2 rounded-2xl bg-white">
             <div className="w-full flex flex-col space-y-7 h-fit items-center  pt-5 px-3">
-                <h1 className="uppercase text-lg text-primary-dark font-medium">Add News</h1>
+                <h1 className="uppercase text-lg text-primary-dark font-medium">{name}</h1>
                 <form className="w-full flex flex-col space-y-4" autoComplete="off">
                     <div className="w-full h-full grid grid-cols-12 items-center gap-5">
                         <div className="col-span-7 space-y-5 w-full text-gray-700 ">
@@ -48,8 +89,8 @@ const New = () => {
                                     name="title"
                                     className="w-full px-3 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
                                     required
-                                // value={name}
-                                // onChange={(e) => { setName(e.target.value) }}
+                                    value={title}
+                                    onChange={(e) => { setTitle(e.target.value) }}
                                 />
                             </div>
                             {/* select Action */}
@@ -59,11 +100,10 @@ const New = () => {
                                     type="text"
                                     name="category"
                                     className="w-full capitalize text-gray-500 !px-1 py-2 text-sm rounded-md border-gray-300  border focus:outline-none focus:ring-1 focus:ring-primary-light"
-                                // value={category}
-                                // onChange={(e) => {
-                                //     setCategory(e.target.value)
-                                //     handleTopic(e.target.value)
-                                // }}
+                                    value={action}
+                                    onChange={(e) => {
+                                        setAction(e.target.value)
+                                    }}
                                 >
                                     {
                                         ["select call to action", "give"].map(action => (
@@ -75,50 +115,18 @@ const New = () => {
                         </div>
                         <div className="col-span-5 space-y-5 w-full text-gray-700 ">
                             {/* image upload */}
-                            <div className="space-y-3 w-full">
-                                <h1 className=" uppercase text-sm">Image <span className="capitalize text-primary-dark text-xs font-light">(optional)</span></h1>
-                                <label
-                                    onDragOver={e => {
-                                        e.preventDefault();
-                                    }}
-                                    onDragLeave={e => {
-                                        e.preventDefault();
-                                    }}
-                                    onDrop={e => {
-                                        e.preventDefault();
-                                        onDrop(e)
-                                    }}
-                                    htmlFor="dropzone-file" className="relative flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                                    {
-                                        imagePreview ?
-                                            <Image src={imagePreview} className="object-cover w-1/2 h-1/2 "
-                                                layout="fill"
-                                                blurDataURL="data:..."
-                                                placeholder="blur"
-                                                alt="preview" />
-                                            :
-                                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 font-medium capitalize">Drag 'n' Drop</p>
-                                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 capitalize">or Click to select</p>
-                                                <p className="text-xs text-gray-500 dark:text-gray-400">PNG or JPG </p>
-                                            </div>
-                                    }
-                                    <input onChange={onChange} id="dropzone-file" type="file" className="hidden" />
-                                </label>
-                                <h1 className="text-center cursor-pointer w-full py-2 text-white text-sm uppercase bg-violet-700 rounded-lg">Upload Image</h1>
-                            </div>
+                            <ImageUploader imagePreview={imagePreview} setImagePreview={setImagePreview} setImageUrl={setImageUrl} imageUrl={imageUrl} height={"h-44"} />
                         </div>
                     </div>
+
                     <div className="flex flex-col w-full space-y-3">
-                        <h1 className="ml-2 text-sm uppercase">
-                            Body
-                        </h1>
-                        <Editor name="description"
-                            onChange={(data) => {
-                                setData(data);
-                                console.log(data)
-                            }}
-                            editorLoaded={editorLoaded}/>
+                        <h1 className="ml-2 text-sm uppercase"> Body</h1>
+                        <Editor
+                            name="description"
+                            onChange={(data) => {setData(data) }}
+                            editorLoaded={editorLoaded}
+                            value={data}
+                        />
                     </div>
                     <div className="flex items-center justify-between w-full !mt-5 mb-3">
                         <h1
@@ -126,8 +134,10 @@ const New = () => {
                             className="cursor-pointer text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-red-700">
                             cancel
                         </h1>
-                        <button className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
-                            add 
+                        <button onClick={handleSubmit} className="text-center text-white py-1.5 rounded-md text-sm  px-7 uppercase bg-blue-600">
+                            {
+                                loading ? <ButtonLoader /> : name === "update news" ? "update" : "add"
+                           }
                         </button>
                     </div>
                 </form>

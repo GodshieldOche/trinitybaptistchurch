@@ -35,6 +35,9 @@ import clientEventsReducer from './features/client/events'
 import clientEventReducer from './features/client/event'
 import latestReducer from './features/client/latest'
 import clientMinistersReducer from './features/client/ministers'
+import addNewsReducer from './features/addNews'
+import newsReducer from './features/news'
+import newsDetailsReducer from './features/newsDetails'
 
 
 
@@ -65,6 +68,9 @@ const combinedReducers = combineReducers({
     addService: addServiceReducer,
     services: servicesReducer,
     service: serviceReducer,
+    addNews: addNewsReducer,
+    news: newsReducer,
+    newsDetails: newsDetailsReducer,
     clientSermons: clientSermonsReducer,
     clientSermon: clientSermonReducer,
     clientBibleStudies: clientBibleStudiesReducer,
