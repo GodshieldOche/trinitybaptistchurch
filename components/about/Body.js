@@ -85,8 +85,8 @@ const Body = () => {
                                 placeholder="blur"
                                 alt="logo" />
                         </div>
-                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">Trinity Baptist Church was birthed on the 9th of December 2018, this follows the ordination of the Missionary Pastor Peter Joshua Abutu on he 4th of March, the same year by the leadership of the sending Church, Kabwata Baptist Church, Lusaka Zambia.About eight persons gathered in Pastor Abutu’s living room on the 3rd of June 2018 for prayer and Bible study signalling the beginning of the work.In that meeting, intentions, missions and visions for the work were shared and prayers offered.We continued meeting every Sunday evening till the first Sunday morning service on the 9th of December 2018 at the Arcade. </p>
-                        <p className=" font-light leading-relaxed  indent-8 text-justify px-2 md:px-5">
+                        <p className=" font-light leading-relaxed px-3 md:px-5">Trinity Baptist Church was birthed on the 9th of December 2018, this follows the ordination of the Missionary Pastor Peter Joshua Abutu on he 4th of March, the same year by the leadership of the sending Church, Kabwata Baptist Church, Lusaka Zambia.About eight persons gathered in Pastor Abutu’s living room on the 3rd of June 2018 for prayer and Bible study signalling the beginning of the work.In that meeting, intentions, missions and visions for the work were shared and prayers offered.We continued meeting every Sunday evening till the first Sunday morning service on the 9th of December 2018 at the Arcade. </p>
+                        <p className=" font-light leading-relaxed  indent-8 px-3 md:px-5">
                             TBCA now worship and operates from a rented facility at no 4 Juba street Suncity Estate Abuja-FCT, Nigeria.</p>
                     </div>
                 </div>
@@ -101,11 +101,11 @@ const Body = () => {
                 <div  className="max-w-screen-md mx-auto">
                     <div className="flex flex-col justify-center   space-y-3">
                         <h1 className="text-center text-2xl uppercase font-medium">Statement of faith</h1>
-                        <p className="pb-14 leading-relaxed text-sm text-center px-2 md:px-5" >TBCA is Reformed Baptist Church and does subscribes to the 1689 2nd London Baptist confessions of faith.
+                        <p className="pb-14 leading-relaxed text-sm text-center px-3 md:px-5" >TBCA is Reformed Baptist Church and does subscribes to the 1689 2nd London Baptist confessions of faith.
                             We agree with T4G Affirmations and Denials
                             We agree with 9Marks</p>
                     </div>
-                    <div className="flex flex-col space-y-5 px-2 md:px-5">
+                    <div className="flex flex-col space-y-5 px-3 md:px-5">
                         {
                             statements.map(statement => (
                                 <div key={statement.id} className="flex flex-col space-y-2">
@@ -131,13 +131,13 @@ const Body = () => {
                                     alt="logo" />
                             </div>
                         </div>
-                        <div className="flex flex-col px-2 md:px-0 space-y-2">
+                        <div className="flex flex-col px-3 md:px-0 space-y-2">
                             <h1 className="uppercase font-medium text-center md:text-left text-xl md:text-2xl">Our Mission</h1>
-                            <p className="text-justify md:text-left font-light">
+                            <p className=" md:text-left font-light">
                                 We exist to glorify God by being gospel centred and driven; faithfully worshiping God joyfully, Evangelising sinners, Equipping the saints, Planting Churches, and promoting Biblical worldview.
                             </p>
                             <h1 className="uppercase !mt-8 font-medium text-center md:text-left text-xl md:text-2xl">Our Vision</h1>
-                            <p className="text-justify md:text-left font-light">
+                            <p className=" md:text-left font-light">
                                 To be a People zealous for God’s Holiness and Glory in a Joyful and loving society.
                             </p>
                         </div>
@@ -145,13 +145,13 @@ const Body = () => {
                 </div>
             </div>
             <div className="bg-white py-5 " id="leadership">
-                <div className="max-w-screen-md mx-auto px-2 md:px-0 space-y-10">
+                <div className="max-w-screen-md mx-auto px-3 md:px-0 space-y-10">
                     <h1 className="text-2xl font-medium text-center uppercase">Leadership</h1>
-                    <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    <div className="grid gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {
                             leaders.map(leader => (
                                 <div key={leader.id} className="flex flex-col space-y-2 shadow-xl">
-                                    <div className="w-full mx-auto h-[150px]  relative">
+                                    <div className="w-full mx-auto h-[130px]  relative">
                                         <Image src="/img/abutu.jpg"
                                             className="object-cover w-full h-full"
                                             layout="fill"
@@ -160,8 +160,8 @@ const Body = () => {
                                             alt="logo" />
                                     </div>
                                     <div className="py-3 px-2 flex flex-col space-y-2">
-                                        <h1 className="text-center text-sm font-medium uppercase">Abutu Peter Joshua</h1>
-                                        <h2 className="text-center text-xs uppercase">Pastor/Teacher</h2>
+                                        <h1 className="text-center text-xs font-medium uppercase">Abutu Peter Joshua</h1>
+                                        <h2 className="text-center text-xs capitalize">Pastor/Teacher</h2>
                                     </div>
                                 </div>
                             ))
