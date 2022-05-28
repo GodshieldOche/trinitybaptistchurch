@@ -5,24 +5,24 @@ import { format } from "date-fns"
 
 const Upcoming = ({event}) => {
     const truncate = (des, val, lim) => {
-        // if (des.length > val) {
-        //     return des.substr(0, lim) + "..."
-        // } else {
-        //     return des
-        // }
+        if (des.length > val) {
+            return des.substr(0, lim) + "..."
+        } else {
+            return des
+        }
     }
 
     const date = (start, end) => {
-        // if (start === end) {
-        //     return format(new Date(start), 'MMM, do yyyy')
-        // } else {
-        //     return `${format(new Date(start), 'do')} - ${format(new Date(end), 'do MMM yyyy')}`
-        // }
+        if (start === end) {
+            return format(new Date(start), 'MMM, do yyyy')
+        } else {
+            return `${format(new Date(start), 'do')} - ${format(new Date(end), 'do MMM yyyy')}`
+        }
     }
     return (
         <div className="grid grid-cols-12 gap-2 items-center px-2 md:px-0 ">
             <div className="order-last col-span-4 sm:col-span-5 w-full sm:h-full h-[calc(100%-30px)] relative ">
-                <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307276/Global/bible_beofqt.jpg"
+                <Image src={event?.imageUrl?.url}
                     className="object-cover w-full h-full"
                     layout="fill"
                     blurDataURL={blur}
