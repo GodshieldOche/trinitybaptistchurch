@@ -5,15 +5,15 @@ import { format } from "date-fns"
 
 const LiveStream = ({service}) => {
     const truncate = (des, val, lim) => {
-        if (des.length > val) {
-            return des.substr(0, lim) + "..."
-        } else {
-            return des
-        }
+        // if (des.length > val) {
+        //     return des.substr(0, lim) + "..."
+        // } else {
+        //     return des
+        // }
     }
 
     const date = (start, end) => {
-        return `${format(new Date(start), 'MMM, do yyyy;  h:mm a')} - ${format(new Date(end), 'h:mm a')}`
+        // return `${format(new Date(start), 'MMM, do yyyy;  h:mm a')} - ${format(new Date(end), 'h:mm a')}`
     }
 
     return (
@@ -29,12 +29,12 @@ const LiveStream = ({service}) => {
             <div className="col-span-8 sm:col-span-7 flex flex-col sm:ml-3">
                 <div className="space-y-2">
                     <h1 className="uppercase text-xs font-light !mb-3 ">
-                        {service.service}
+                        {service?.service}
                     </h1>
-                    <h1 className="font-medium text-base uppercase  ">{truncate(service.topic, 21, 20)}</h1>
-                    <h1 className=" text-xs ">{ date(service.startTime, service.endTime) }</h1>
+                    <h1 className="font-medium text-base uppercase  ">{truncate(service?.topic, 21, 20)}</h1>
+                    <h1 className=" text-xs ">{ date(service?.startTime, service?.endTime) }</h1>
 
-                    <h1 className=" text-xs !mt-8 !mb-3 ">{new Date().toISOString() >= service.startTime ?
+                    <h1 className=" text-xs !mt-8 !mb-3 ">{new Date().toISOString() >= service?.startTime ?
                         "Live stream has started" : "Live stream isn't started" }</h1>
 
                     <div className="flex items-center space-x-3">
