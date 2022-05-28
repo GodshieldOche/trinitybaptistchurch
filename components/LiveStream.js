@@ -1,28 +1,29 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { format } from "date-fns"
+import blur from './common/blur'
 
 
 const LiveStream = ({service}) => {
     const truncate = (des, val, lim) => {
-        // if (des.length > val) {
-        //     return des.substr(0, lim) + "..."
-        // } else {
-        //     return des
-        // }
+        if (des.length > val) {
+            return des.substr(0, lim) + "..."
+        } else {
+            return des
+        }
     }
 
     const date = (start, end) => {
-        // return `${format(new Date(start), 'MMM, do yyyy;  h:mm a')} - ${format(new Date(end), 'h:mm a')}`
+        return `${format(new Date(start), 'MMM, do yyyy;  h:mm a')} - ${format(new Date(end), 'h:mm a')}`
     }
 
     return (
         <div className="grid grid-cols-12 gap-2 items-center px-2 md:px-0 ">
             <div className="order-last md:order-first col-span-4 sm:col-span-5 w-full sm:h-full h-[calc(100%-30px)] relative ">
-                <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307276/Global/bible_beofqt.jpg"
+                <Image src={service?.imageUrl?.url}
                     className="object-cover w-full h-full"
                     layout="fill"
-                    blurDataURL="data:..."
+                    blurDataURL={blur}
                     placeholder="blur"
                     alt="logo" />
             </div>
