@@ -101,7 +101,7 @@ const Body = () => {
                 <div  className="max-w-screen-md mx-auto">
                     <div className="flex flex-col justify-center   space-y-3">
                         <h1 className="text-center text-2xl uppercase font-medium">Statement of faith</h1>
-                        <p className="pb-14 leading-relaxed text-sm text-center px-3 md:px-5" >TBCA is Reformed Baptist Church and does subscribes to the 1689 2nd London Baptist confessions of faith.
+                        <p className="pb-14 leading-relaxed text-sm text-center px-2 md:px-5" >TBCA is Reformed Baptist Church and does subscribes to the 1689 2nd London Baptist confessions of faith.
                             We agree with T4G Affirmations and Denials
                             We agree with 9Marks</p>
                     </div>
@@ -133,11 +133,11 @@ const Body = () => {
                         </div>
                         <div className="flex flex-col px-3 md:px-0 space-y-2">
                             <h1 className="uppercase font-medium text-center md:text-left text-xl md:text-2xl">Our Mission</h1>
-                            <p className=" md:text-left font-light">
+                            <p className="text-center md:text-left font-light">
                                 We exist to glorify God by being gospel centred and driven; faithfully worshiping God joyfully, Evangelising sinners, Equipping the saints, Planting Churches, and promoting Biblical worldview.
                             </p>
                             <h1 className="uppercase !mt-8 font-medium text-center md:text-left text-xl md:text-2xl">Our Vision</h1>
-                            <p className=" md:text-left font-light">
+                            <p className="text-center md:text-left font-light">
                                 To be a People zealous for God’s Holiness and Glory in a Joyful and loving society.
                             </p>
                         </div>
@@ -146,7 +146,7 @@ const Body = () => {
             </div>
             <div className="bg-white py-5 " id="leadership">
                 <div className="max-w-screen-md mx-auto px-3 md:px-0 space-y-10">
-                    <h1 className="text-2xl font-medium text-center uppercase">Leadership</h1>
+                    <h1 className="md:text-2xl font-medium text-center uppercase">Leadership</h1>
                     <div className="grid gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {
                             leaders.map(leader => (
@@ -171,7 +171,7 @@ const Body = () => {
             </div>
             <div className="container lg-:px-[2rem] py-10 space-y-5" id="contact">
                 <div className="flex flex-col space-y-8">
-                    <h1 className="text-2xl font-medium uppercase text-center">Contact</h1>
+                    <h1 className="md:text-2xl font-medium uppercase text-center">Contact</h1>
                     <div className="max-w-screen-lg mx-auto mt- grid grid-cols-1 gap-7 md:grid-cols-2">
                         <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-center space-x-4">
                             <h1 className="uppercase font-medium text-primary-dark">Contact us via</h1>
