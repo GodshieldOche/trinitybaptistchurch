@@ -19,9 +19,9 @@ export const getClientLatest = createAsyncThunk(
 
 export const searchAllResources = createAsyncThunk(
     `latest/searchAllResources`,
-    async ({ keyword }, { rejectWithValue }) => {
+    async ({ keyword, page = 1 }, { rejectWithValue }) => {
         try {
-            const { data } = await axios.get(`/api/search?keyword=${keyword}`)
+            const { data } = await axios.get(`/api/search?keyword=${keyword}&page=${page}`)
             return data
         } catch (error) {
             return rejectWithValue(error.response.data.message)
@@ -38,6 +38,8 @@ const latestSlice = createSlice({
         loading: true,
         latest: [],
         searchResults: [],
+        resPerPage: 0,
+        totalItems: 0,
         message: null,
     },
     reducers: {
@@ -61,6 +63,8 @@ const latestSlice = createSlice({
         [searchAllResources.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.searchResults = payload.all
+            state.resPerPage = payload.resPerPage
+            state.totalItems = payload.totalItems
         },
         [searchAllResources.rejected]: (state, { payload }) => {
             state.loading = false

@@ -3,12 +3,15 @@ import { useRouter } from 'next/router'
 import Head from "next/head";
 import Paginate from 'react-js-pagination'
 
-const Pagination = ({ resPerPage, page, totalItems }) => {
+const Pagination = ({ resPerPage, page, totalItems, keyword }) => {
 
     const router = useRouter()
 
     const handlePagination = (pageNumber) => { 
-        router.push(`${router.route}?page=${pageNumber}`)
+        keyword ?
+            router.push(`${router.route}?keyword=${keyword}&page=${pageNumber}`)
+            :
+            router.push(`${router.route}?page=${pageNumber}`)
     }
 
 

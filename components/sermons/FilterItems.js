@@ -23,7 +23,6 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
     useEffect(() => {
         ministers.map(minister => {
             if (minister._id === router.query.preacher) {
-                console.log(minister.name)
                 setPSelect(minister.name)
             }
         })

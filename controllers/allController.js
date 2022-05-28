@@ -99,6 +99,8 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
 
     const {keyword} = req.query
 
+    const page = Number(req.query.page) || 1
+
     const query = {
         $or: [
             {title: { $regex: keyword, $options: "i" }},
@@ -219,9 +221,17 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
 
     all.sort((a, b) => new Date(b.date) - new Date(a.date))
 
+    const resPerPage = 3
+    const totalItems = all.length
+
+    const start = (page - 1) * resPerPage
+    const end = page * resPerPage
+
     res.status(200).json({
         success: "true",
-        all
+        all: all.slice(start, end),
+        totalItems,
+        resPerPage
     })
 
 })

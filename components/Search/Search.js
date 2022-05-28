@@ -9,27 +9,30 @@ import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Link from "next/link"
 import { format } from 'date-fns'
+import { Pagination } from '../common/Pagination'
 
 
 const defaultImage = "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307278/Global/sermons_nbw4cx.jpg"
 
 const Search = () => {
-    const { loading, searchResults } = useSelector(state => state.latest)
+    const { loading, searchResults, resPerPage, totalItems } = useSelector(state => state.latest)
     const dispatch = useDispatch()
     const router = useRouter()
 
     const { keyword } = router.query
 
+    const page = Number(router.query.page) || 1
+
     useEffect(() => {
-        dispatch(searchAllResources({keyword}))
-    }, [keyword])
+        dispatch(searchAllResources({keyword, page}))
+    }, [keyword, page])
     
     return (
         <div>
             <div className="mt-[100px] min-h-screen  container md:px-0 lg:px-[2rem] !mb-20 sm:mt-24 w-full">
                 <div className="max-w-screen-md space-y-8 mx-auto px-2 md:px-0">
                     <h1 className="text-center uppercase text-xs md:text-sm ">
-                        {`${searchResults.length > 1 ? searchResults.length + " Results" : searchResults.length + " Result"} for "${keyword}" - Page 1`}
+                        {`${totalItems > 1 ? totalItems + " Results" : totalItems + " Result"} for "${keyword}" - Page 1`}
                     </h1>
                     <div className="flex flex-col justify-center mt-2 md:mt-5 space-y-3">
                         {
@@ -81,6 +84,17 @@ const Search = () => {
                             : <h1 className="text-center uppercase text-xs font-light ">No Results Found</h1>
                         }
                     </div>
+                    {
+                        totalItems > resPerPage && !loading &&
+                        <div className="flex !my-10 w-full items-center justify-center">
+                            <Pagination
+                                resPerPage={resPerPage}
+                                page={page}
+                                totalItems={totalItems}
+                                keyword={keyword}
+                            />
+                        </div>
+                    }
 
                 </div>
             </div>

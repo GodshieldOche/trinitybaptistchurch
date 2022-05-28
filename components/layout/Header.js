@@ -21,6 +21,7 @@ const Header = ({ menuState }) => {
 
     const { loading, user, message } = useSelector(state => state.currentUser)
 
+
     useEffect(() => {
         dispatch(loadUser())
     }, [])
