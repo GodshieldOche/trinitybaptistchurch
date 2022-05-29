@@ -40,6 +40,7 @@ const getLatestResources = asyncHandler(async (req, res, next) => {
                 title: sermon.title,
                 preacher: sermon.preacher,
                 conferenceId: conference._id,
+                imageUrl: sermon.imageUrl,
                 date: sermon.date,
                 description: sermon.description,
                 _id: sermon._id,
@@ -62,6 +63,7 @@ const getLatestResources = asyncHandler(async (req, res, next) => {
                 title: sermon.title,
                 preacher: sermon.preacher,
                 seriesId: serie._id,
+                imageUrl: sermon.imageUrl,
                 date: sermon.date,
                 description: sermon.description,
                 _id: sermon._id,
@@ -221,7 +223,7 @@ const searchAllResources = asyncHandler(async (req, res, next) => {
 
     all.sort((a, b) => new Date(b.date) - new Date(a.date))
 
-    const resPerPage = 3
+    const resPerPage = 10
     const totalItems = all.length
 
     const start = (page - 1) * resPerPage

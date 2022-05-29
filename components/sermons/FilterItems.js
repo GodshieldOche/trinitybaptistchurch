@@ -58,6 +58,14 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
             setFilterToggle(false)
         }
     }
+
+    const toggleDisable = () => { 
+        if (tSelect || pSelect || sSelect) {
+            return false
+        } else {
+            return true
+        }
+    }
     
 
     return (
@@ -76,13 +84,19 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
                                 
                             }} key={index} className="flex items-center space-x-1">
                                 <div className={`${tSelect === topic ? "bg-primary-dark" : ""} border cursor-pointer rounded w-4 h-4 border-primary-dark`}></div>
-                                <h1 className="capitalize font-light">{ topic }</h1>
+                                <h1 className="capitalize  font-light">{ topic }</h1>
                             </div>
                         ))
                     }
                     {
                         topics.length > tValue && <button onClick={() => setTValue(topics.length)}
-                            className="text-sm text-primary-dark">see more...</button >
+                            className="text-sm cursor-pointer text-primary-dark">see more...</button >
+                    }
+                    {
+                        tValue !== 5 && tValue === topics.length && <h1 onClick={() => setTValue(5)}
+                            className="text-sm cursor-pointer text-primary-dark">
+                            see less...
+                        </h1>
                     }
                 </div>
             </div>
@@ -105,8 +119,14 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
                         ))
                     }
                     {
-                        preachers.length >= pValue && <h1 onClick={() => setPValue(preachers.length)}
-                            className="text-sm text-primary-dark">see more...</h1>
+                        preachers.length > pValue && <h1 onClick={() => setPValue(preachers.length)}
+                            className="text-sm cursor-pointer text-primary-dark">see more...</h1>
+                    }
+                    {
+                        pValue !== 5 && pValue === preachers.length && <h1 onClick={() => setPValue(5)}
+                            className="text-sm cursor-pointer text-primary-dark">
+                            see less...
+                        </h1>
                     }
                 </div>
             </div>
@@ -129,8 +149,14 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
                         ))
                     }
                     {
-                        scriptures.length >= sValue && <h1 onClick={() => setSValue(scriptures.length)}
-                            className="text-sm text-primary-dark">see more...</h1>
+                        scriptures.length > sValue && <h1 onClick={() => setSValue(scriptures.length)}
+                            className="text-sm cursor-pointer text-primary-dark">see more...</h1>
+                    }
+                    {
+                        sValue !== 5 && sValue === scriptures.length && <h1 onClick={() => setSValue(5)}
+                        className="text-sm cursor-pointer text-primary-dark">
+                            see less...
+                        </h1>
                     }
                 </div>
             </div>
@@ -143,7 +169,7 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
                         setPSelect('');
                         setSSelect('');
                     }}
-                    disabled={tSelect == ''} className="py-1 px-3 uppercase text-[white] text-xs  bg-red-600 disabled:bg-red-300">Reset</button>
+                    disabled={toggleDisable()} className="py-1 px-3 uppercase text-[white] text-xs  bg-red-600 disabled:bg-red-300">Reset</button>
                 <button
                     onClick={() => { handleSubmit(tSelect, pSelect, sSelect) }}
                     className="py-1 px-3 uppercase text-[white]  text-xs  bg-primary-light disabled:bg-primary-dark/60">Done</button>

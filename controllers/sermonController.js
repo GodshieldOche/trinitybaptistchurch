@@ -19,7 +19,7 @@ const getSermons = asyncHandler(async (req, res, next) => {
     const { topic, preacher, scripture, sort } = req.query
 
     const page = Number(req.query.page) || 1
-    const resPerPage = 3
+    const resPerPage = 10
 
     const query = {}
     let sortQuery = '-date'
