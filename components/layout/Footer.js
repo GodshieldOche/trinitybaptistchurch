@@ -3,9 +3,28 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { useRouter } from 'next/router'
 import Link from "next/link"
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { postAddEmail } from '../../redux/features/client/addEmail';
 
 const Footer = () => {
+    const [email, setEmail] = useState('')
+
+
     const router = useRouter()
+    const dispatch = useDispatch()
+
+    const handleSubmit = (e) => { 
+        e.preventDefault()
+        dispatch(postAddEmail({ email })).then((res) => {
+            if (!res.error) {
+                setEmail('')
+            } else {
+                console.log(res)
+            }
+        })
+    }
+    
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -18,6 +37,8 @@ const Footer = () => {
             router.push('/')
         }   
     };
+
+
     return (
         <div className={`${router.pathname.includes("admin") || router.pathname.includes("sign")  ? "hidden" : "block"} `}>
             <div className="flex  w-full mb-1">
@@ -46,10 +67,14 @@ const Footer = () => {
                         <div className="flex flex-col space-y-1">
                             <h1 className="uppercase text-xs lg:text-sm">New Resources in your inbox</h1>
                             <div className="flex ">
-                                <input type="text" className="border bg-transparent  py-1
-                        text-sm lg:text-base !w-full h-9 px-3 lg:px-5  outline-none text-white " placeholder="Email Address" />
-                                <button className="border py-1 px-3 md:px-4 uppercase
-                        text-xs w-28 lg:text-sm bg-white text-black rounded-r-xl ">Submit</button>
+                                <input
+                                    type="text"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="border bg-transparent  py-1 text-sm lg:text-base !w-full h-9 px-3 lg:px-5  outline-none text-white "
+                                    placeholder="Email Address" />
+                                <button onClick={handleSubmit} className="border py-1 px-3 md:px-4 uppercase
+                                    text-xs w-28 lg:text-sm bg-white text-black rounded-r-xl ">Submit</button>
                             </div>
                         </div>
 

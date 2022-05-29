@@ -18,8 +18,8 @@ const LiveStream = ({service}) => {
     }
 
     return (
-        <div className="grid grid-cols-12 gap-2 items-center px-2 md:px-0 ">
-            <div className="order-last md:order-first col-span-4 sm:col-span-5 w-full sm:h-full h-[calc(100%-30px)] relative ">
+        <div className="grid grid-cols-12 gap-2 md:justify-between items-center px-2 md:px-0 ">
+            <div className="order-last rounded-md md:order-first col-span-4 sm:col-span-5 md:col-span-6  w-full sm:h-full h-[calc(100%-30px)] relative ">
                 <Image src={service?.imageUrl?.url}
                     className="object-cover w-full h-full"
                     layout="fill"
@@ -27,7 +27,7 @@ const LiveStream = ({service}) => {
                     placeholder="blur"
                     alt="logo" />
             </div>
-            <div className="col-span-8 sm:col-span-7 flex flex-col sm:ml-3">
+            <div className="col-span-8 sm:col-span-7 md:col-span-6  flex flex-col sm:ml-3">
                 <div className="space-y-2">
                     <h1 className="uppercase text-xs font-light !mb-3 ">
                         {service?.service}

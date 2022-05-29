@@ -14,7 +14,7 @@ const Home = () => {
         dispatch(loadUser())
     }, [])
     return (
-        <div className="mt-[60px] !mb-20 sm:mt-24 w-full">
+        <div className="mt-[60px]  !mb-20 sm:mt-20 w-full">
             <Hero />
             <Latest latest={latest} />
             <Sections />

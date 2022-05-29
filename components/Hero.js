@@ -11,9 +11,9 @@ const Hero = () => {
     const { events, services } = useSelector(state => state.clientEvents)
 
     return (
-        <div className="container xl:px-[2rem] lg:px-[1rem] grid gap-5 xl:gap-20 mb-5  grid-cols-1 lg:grid-cols-12 items-center w-full overflow-hidden">
+        <div className="container xl:px-[2rem] lg:px-[1rem] grid gap-5 xl:gap-10 mb-5  grid-cols-1 lg:grid-cols-12 items-center w-full overflow-hidden">
         {/* col 1 */}
-            <div className="lg:col-span-5 order-last lg:order-first space-y-10 ">
+            <div className="lg:col-span-6 xl:col-span-5 order-last lg:order-first space-y-10 ">
                 <div className="space-y-2 px-2 md:px-0">
                     <h1 className="text-center lg:text-left text-2xl uppercase font-medium text-secondary-black/90 md:text-secondary-black ">Trinity Baptist Church</h1>
                     <h1 className="text-primary-dark text-sm text-center lg:text-left">GOD-FOCUSED, CHRIST-CENTERED, GOSPEL-DRIVEN CHURCH LOCATED AT THE HEART OF ABUJA</h1>
@@ -53,7 +53,7 @@ const Hero = () => {
 
 
         {/* col 2 */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-6 xl:col-span-7">
                 <div className="w-full h-[250px] sm:h-[400px] lg:h-[500px] relative">
                     <Image src="https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651308450/Global/hero_p9ln3m.jpg"
                         className="object-cover w-full h-full"

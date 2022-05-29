@@ -38,6 +38,10 @@ import clientMinistersReducer from './features/client/ministers'
 import addNewsReducer from './features/addNews'
 import newsReducer from './features/news'
 import newsDetailsReducer from './features/newsDetails'
+import registerReducer from './features/register'
+import emailReducer from './features/emails'
+import addRegisterReducer from './features/client/addRegister'
+import addEmailReducer from './features/client/addEmail'
 
 
 
@@ -70,6 +74,8 @@ const combinedReducers = combineReducers({
     service: serviceReducer,
     addNews: addNewsReducer,
     news: newsReducer,
+    register: registerReducer,
+    email: emailReducer,
     newsDetails: newsDetailsReducer,
     clientSermons: clientSermonsReducer,
     clientSermon: clientSermonReducer,
@@ -83,6 +89,8 @@ const combinedReducers = combineReducers({
     clientEvent: clientEventReducer,
     latest: latestReducer,
     clientMinisters: clientMinistersReducer,
+    addRegister: addRegisterReducer,
+    addEmail: addEmailReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {

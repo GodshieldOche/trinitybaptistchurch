@@ -21,7 +21,7 @@ const Upcoming = ({event}) => {
     }
     return (
         <div className="grid grid-cols-12 gap-2 items-center px-2 md:px-0 ">
-            <div className="order-last col-span-4 sm:col-span-5 w-full sm:h-full h-[calc(100%-30px)] relative ">
+            <div className="order-last rounded-md col-span-4 sm:col-span-5 md:col-span-6  w-full sm:h-full h-[calc(100%-30px)] relative ">
                 <Image src={event?.imageUrl?.url}
                     className="object-cover w-full h-full"
                     layout="fill"
@@ -29,7 +29,7 @@ const Upcoming = ({event}) => {
                     placeholder="blur"
                     alt="logo" />
             </div>
-            <div className="col-span-8 sm:col-span-7 flex flex-col sm:ml-3">
+            <div className="col-span-8 sm:col-span-7 md:col-span-6  flex flex-col sm:ml-3">
                 <div className="space-y-2">
                     <h1 className="uppercase text-xs font-light !mb-3 ">{event?.type}</h1>
                     <h1 className="font-medium text-base uppercase  ">{truncate(event?.title, 25, 24) }</h1>
