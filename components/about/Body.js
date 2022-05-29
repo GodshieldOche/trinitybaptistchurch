@@ -144,7 +144,7 @@ const Body = () => {
             </div>
             <div className="bg-white py-5 " id="leadership">
                 <div className="max-w-screen-md mx-auto px-3 md:px-0 space-y-10">
-                    <h1 className="md:text-2xl font-medium text-center uppercase">Leadership</h1>
+                    <h1 className="text-xl md:text-2xl font-medium text-center uppercase">Leadership</h1>
                     <div className="grid gap-5 grid-cols-2 justify-center items-center md:grid-cols-3 lg:grid-cols-4">
                         {
                             leaders.map(leader => (
@@ -169,7 +169,7 @@ const Body = () => {
             </div>
             <div className="container lg-:px-[2rem] py-10 space-y-5" id="contact">
                 <div className="flex flex-col space-y-8">
-                    <h1 className="md:text-2xl font-medium uppercase text-center">Contact</h1>
+                    <h1 className="text-xl md:text-2xl font-medium uppercase text-center">Contact</h1>
                     <div className="max-w-screen-lg mx-auto mt- grid grid-cols-1 gap-7 md:grid-cols-2">
                         <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-center space-x-4">
                             <h1 className="uppercase font-medium text-primary-dark">Contact us via</h1>
