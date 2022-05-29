@@ -12,7 +12,6 @@ const newsSchema = new mongoose.Schema({
     },
     action: {
         type: String,
-        required: true
     },
     imageUrl: {
         public_id: {

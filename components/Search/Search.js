@@ -50,8 +50,8 @@ const Search = () => {
 
                                     }}
                                     key={sermon._id}
-                                    className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center justify-between space-x-2 px-2 border-b border-b-primary-black/10">
-                                    <div className="flex flex-col space-y-2">
+                                    className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center space-x-2 px-2 border-b border-b-primary-black/10">
+                                    <div className="flex flex-col  w-full space-y-2">
                                         <div className="flex space-x-1">
                                             <GraphicEqIcon className="text-[orange] !text-base" />
                                             <OndemandVideoIcon className="text-[red]/80 !text-base" />
@@ -71,7 +71,7 @@ const Search = () => {
                                             <h1 className="text-sm  font-light">{sermon.preacher?.name}</h1>
                                         </div>
                                     </div>
-                                    <div className="w-[70px] h-[75px] rounded-lg  relative">
+                                    <div className="w-[80px] h-[75px] rounded-lg  relative">
                                         <Image src={sermon?.imageUrl?.url ? sermon.imageUrl.url : defaultImage}
                                             className="object-cover rounded-lg w-full h-full "
                                             layout="fill"

@@ -49,8 +49,8 @@ const List = () => {
                                 sermons.map(sermon => (
                                     <Link href={`/resources/sermons/${sermon._id}`} key={sermon._id} >
                                         <a>
-                                            <div  className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center justify-between space-x-2 px-3 border-b border-b-primary-black/10">
-                                                <div className="flex flex-col space-y-2">
+                                            <div  className="flex py-3 hover:bg-secondary-one/20 cursor-pointer items-center space-x-2 px-3 border-b border-b-primary-black/10">
+                                                <div className="flex flex-col w-full space-y-2">
                                                     <div className="flex space-x-1">
                                                         <GraphicEqIcon className="text-[orange] !text-base" />
                                                         <OndemandVideoIcon className="text-[red]/80 !text-base" />
@@ -58,7 +58,7 @@ const List = () => {
                                                     </div>
                                                     <h1 className=" text-base md:text-lg capitalize ">{sermon.title}</h1>
                                                     <h1 className="font-light text-sm capitalize ">{`${sermon.book} ${sermon.chapter}:${sermon.verse}`}</h1>
-                                                    <div className="flex items-center !mt-3 space-x-1">
+                                                    <div className="flex items-center !mt-3 space-x-2">
                                                         <div className="h-[25px] w-[25px] rounded-full relative">
                                                             <Image src={sermon.preacher.imageUrl.url}
                                                                 className="object-cover w-full h-full rounded-full"
@@ -70,7 +70,7 @@ const List = () => {
                                                         <h1 className="text-sm  font-light">{ sermon.preacher?.name }</h1>
                                                     </div>
                                                 </div>
-                                                <div className="w-[70px] h-[75px] rounded-lg  relative">
+                                                <div className="w-[80px] h-[75px] rounded-lg  relative">
                                                     <Image src={sermon?.imageUrl?.url ? sermon.imageUrl.url : defaultImage }
                                                         className="object-cover rounded-lg w-full h-full "
                                                         layout="fill"

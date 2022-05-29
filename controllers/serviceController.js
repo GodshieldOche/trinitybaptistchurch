@@ -15,7 +15,7 @@ cloudinary.config({
 // get => /api/client/services
 const getServices = asyncHandler(async (req, res) => {
 
-    const allServices = await Service.find({}).sort('date')
+    const allServices = await Service.find({}).sort('endTime')
 
     const services = allServices.filter(service => new Date(service.endTime) > new Date())
 
@@ -107,14 +107,14 @@ const getService = asyncHandler(async (req, res, next) => {
 // put => api/service/:id
 const updateService = asyncHandler(async (req, res, next) => {
     const selected = await Service.findById(req.query.id)
-    const { service, startDate, endDate, topic, imageUrl, bulletin } = req.body
+    const { service, startTime, endTime, topic, imageUrl, bulletin } = req.body
 
     if (!selected) {
         return next(new ErrorHandler('Service not found with this ID', 404))
     } else {
         selected.service = service
-        selected.startDate = startDate
-        selected.endDate = endDate
+        selected.startTime = startTime
+        selected.endTime = endTime
         selected.topic = topic
         selected.bulletin = bulletin
         

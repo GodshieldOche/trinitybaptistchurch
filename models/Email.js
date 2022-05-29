@@ -5,6 +5,10 @@ const emailSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: [true, 'Email already exists']
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 

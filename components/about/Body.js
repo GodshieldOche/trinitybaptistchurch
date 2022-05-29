@@ -85,9 +85,7 @@ const Body = () => {
                                 placeholder="blur"
                                 alt="logo" />
                         </div>
-                        <p className=" font-light leading-relaxed px-3 md:px-5">Trinity Baptist Church was birthed on the 9th of December 2018, this follows the ordination of the Missionary Pastor Peter Joshua Abutu on he 4th of March, the same year by the leadership of the sending Church, Kabwata Baptist Church, Lusaka Zambia.About eight persons gathered in Pastor Abutu’s living room on the 3rd of June 2018 for prayer and Bible study signalling the beginning of the work.In that meeting, intentions, missions and visions for the work were shared and prayers offered.We continued meeting every Sunday evening till the first Sunday morning service on the 9th of December 2018 at the Arcade. </p>
-                        <p className=" font-light leading-relaxed  indent-8 px-3 md:px-5">
-                            TBCA now worship and operates from a rented facility at no 4 Juba street Suncity Estate Abuja-FCT, Nigeria.</p>
+                        <p className=" font-light leading-relaxed px-3 md:px-5">Trinity Baptist Church was birthed on the 9th of December 2018, this follows the ordination of the Missionary Pastor Peter Joshua Abutu on he 4th of March, the same year by the leadership of the sending Church, Kabwata Baptist Church, Lusaka Zambia. About eight persons gathered in Pastor Abutu’s living room on the 3rd of June 2018 for prayer and Bible study signalling the beginning of the work.In that meeting, intentions, missions and visions for the work were shared and prayers offered.We continued meeting every Sunday evening till the first Sunday morning service on the 9th of December 2018 at the Arcade. TBCA now worship and operates from a rented facility at no 4 Juba street Suncity Estate Abuja-FCT, Nigeria. </p>
                     </div>
                 </div>
 
@@ -147,7 +145,7 @@ const Body = () => {
             <div className="bg-white py-5 " id="leadership">
                 <div className="max-w-screen-md mx-auto px-3 md:px-0 space-y-10">
                     <h1 className="md:text-2xl font-medium text-center uppercase">Leadership</h1>
-                    <div className="grid gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    <div className="grid gap-5 grid-cols-2 justify-center items-center md:grid-cols-3 lg:grid-cols-4">
                         {
                             leaders.map(leader => (
                                 <div key={leader.id} className="flex flex-col space-y-2 shadow-xl">

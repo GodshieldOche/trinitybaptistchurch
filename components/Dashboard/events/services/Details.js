@@ -48,9 +48,9 @@ const Details = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (audioUrl && date && topic && imageUrl && service) {
+        if (endTime && startTime && topic && imageUrl && service) {
             setLoading(true)
-            dispatch(updateService({ id, service, date, topic, imageUrl, bulletin: audioUrl })).then(result => {
+            dispatch(updateService({ id, service, endTime, startTime, topic, imageUrl, bulletin: audioUrl })).then(result => {
                 if (!result.error) {
                     setLoading(false)
                     toast.success('Service Updated Successfully')
@@ -95,7 +95,7 @@ const Details = () => {
                                   onChange={(e) => { setTopic(e.target.value) }}
                               />
                           </div>
-                          <div className="grid grid-cols-2 w-full">
+                          <div className="grid grid-cols-2 gap-2 w-full">
                               <div className="w-full space-y-2">
                                   <label htmlFor="title" className="ml-2 text-sm uppercase">Start Time</label>
                                   <DatePicker
