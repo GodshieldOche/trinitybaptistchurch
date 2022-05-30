@@ -69,7 +69,7 @@ const Body = () => {
                     active === 'schedule' && <Schedule sessions={event.sessions} startDate={event.startDate} endDate={event.endDate} />
                 }  
                 {
-                    active === 'register' && <Register />
+                    active === 'register' && <Register conference={event._id} />
                 }  
             </div>
         </div>

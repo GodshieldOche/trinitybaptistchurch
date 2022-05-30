@@ -1,6 +1,6 @@
 import nc from 'next-connect'
 import dbConnect from '../../../../utils/dbConnect'
-import onError from '../../../../middleware/errorHandler'
+import onError from '../../../../middleware/errorMiddleware'
 import { getConferenceFilters } from '../../../../controllers/conferenceController'
 
 const handler = nc({ onError })

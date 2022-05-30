@@ -5,7 +5,7 @@ const Categories = () => {
 
     const lists = [
         {
-            name: "sermons",
+            name: "stand-alone sermons",
             link: "sermons",
             image: "https://res.cloudinary.com/dk6uhtgvo/image/upload/v1651307278/Global/sermons_nbw4cx.jpg",
             id: 1

@@ -48,8 +48,8 @@ const Schedule = ({ sessions, startDate, endDate }) => {
                                     <div key={session._id} className="!mb-5">
                                         <div className="flex flex-col space-y-3 py-5 border-b border-b-primary-light   ">
                                             <div className="flex space-x-1 items-center ">
-                                                <h1 className="text-xs font-medium uppercase">{`Session ${i + 1} :`}</h1>
-                                                <h1 className="text-xs uppercase">{`${format(new Date(session.startTime), 'h:mm a')} - ${format(new Date(session.endTime), 'h:mm a')} `}</h1>
+                                                <h1 className="text-sm  uppercase">{`Session ${i + 1} :`}</h1>
+                                                <h1 className="text-sm font-light uppercase">{`${format(new Date(session.startTime), 'h:mm a')} - ${format(new Date(session.endTime), 'h:mm a')} `}</h1>
                                             </div>
                                             <div className="flex flex-col space-y-2">
                                                 <h1 className="font-medium uppercase">{session.topic}</h1>
@@ -57,7 +57,7 @@ const Schedule = ({ sessions, startDate, endDate }) => {
                                             </div>
                                             {
                                                 session.preacher.name && 
-                                                <h1 className="text-[13px] capitalize">{`Speaker: ${session.preacher.name}`}</h1>
+                                                <h1 className="text-sm font-light capitalize">{`Speaker: ${session.preacher.name}`}</h1>
                                             }
                                         </div>
                                     </div >

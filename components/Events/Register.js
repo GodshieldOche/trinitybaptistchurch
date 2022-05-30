@@ -1,4 +1,45 @@
-const Register = () => {
+import { useDispatch } from 'react-redux'
+import { useState } from 'react';
+import { toast } from 'react-toastify'
+import { postAddRegister } from '../../redux/features/client/addRegister';
+import ButtonLoader from '../common/ButtonLoader'
+
+const Register = ({conference}) => {
+    const [email, setEmail] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phone, setPhone] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const dispatch = useDispatch()
+
+
+    const handleSubmit = (e) => { 
+        e.preventDefault()
+        setLoading(true)
+        if (email?.includes('@') && email?.includes('.') && firstName && lastName && phone && conference) {
+            console.log(email, firstName, lastName, phone, conference)
+            dispatch(postAddRegister({ email, firstName, lastName, phone, conference })).then(res => {
+                if (!res.error) {
+                    setFirstName('')
+                    setLastName('')
+                    setEmail('')
+                    setPhone('')
+                    setLoading(false)
+                    toast.success('Successfully registered!')
+                } else {
+                    setLoading(false)
+                    toast.error('Registration failed!')
+                }
+            })
+        } else {
+            setLoading(false)
+            toast.info('Please enter a valid email')
+        }
+    }
+
+
+
     return (
         <div className="max-w-full px-3 md:px-0 md:max-w-[400px] mx-auto">
             <form className="space-y-3">
@@ -8,8 +49,8 @@ const Register = () => {
                         type="name"
                         name="name"
                         className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-primary-dark focus:outline-none"
-                        // value={name}
-                        // onChange={(e) => { setName(e.target.value) }}
+                        value={firstName}
+                        onChange={(e) => { setFirstName(e.target.value) }}
                     />
                 </div>
                 <div className="space-y-2">
@@ -18,8 +59,8 @@ const Register = () => {
                         type="name"
                         name="name"
                         className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-primary-dark focus:outline-none"
-                        // value={name}
-                        // onChange={(e) => { setName(e.target.value) }}
+                        value={lastName}
+                        onChange={(e) => { setLastName(e.target.value) }}
                     />
                 </div>
                 <div className="space-y-2">
@@ -28,8 +69,8 @@ const Register = () => {
                         type="email"
                         name="email address"
                         className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-primary-dark focus:outline-none"
-                        // value={name}
-                        // onChange={(e) => { setName(e.target.value) }}
+                        value={email}
+                        onChange={(e) => { setEmail(e.target.value) }}
                     />
                 </div>
                 <div className="space-y-2">
@@ -38,13 +79,17 @@ const Register = () => {
                         type="number"
                         name="number"
                         className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-primary-dark focus:outline-none"
-                        // value={name}
-                        // onChange={(e) => { setName(e.target.value) }}
+                        value={phone}
+                        onChange={(e) => { setPhone(e.target.value.toString()) }}
                     />
                 </div>
                 <div className="flex justify-center space-x-3 items-center !mt-5">
-                    <button className="text-sm uppercase text-white bg-primary-light py-1 rounded-lg px-4">
-                        Register
+                    <button
+                        onClick={handleSubmit}
+                        className="text-sm uppercase text-white bg-primary-light py-1 rounded-lg px-4">
+                        {
+                            loading ? <ButtonLoader /> : 'Register'
+                        }
                     </button>
                     <p className="text-xs uppercase font-medium">you can also!</p>
                     <button className="text-sm uppercase text-white bg-primary-dark py-1 rounded-lg px-4">

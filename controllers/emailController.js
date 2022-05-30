@@ -14,7 +14,7 @@ const postEmail = asyncHandler(async (req, res, next) => {
         success: "true",
         message: "email created successfully",
     })
-
+ 
 })
 
 
@@ -22,13 +22,17 @@ const postEmail = asyncHandler(async (req, res, next) => {
 // create Email
 // get =>  /api/admin/Email
 const getAdminEmails = asyncHandler(async (req, res, next) => {
+    try {
+        const emails = await Email.find({})
 
-    const emails = await Email.find({})
-
-    res.status(200).json({
-        success: "true",
-        emails,
-    })
+        res.status(200).json({
+            success: "true",
+            emails,
+        })
+    } catch (error) {
+        next(error)
+    }   
+    
 
 })
 

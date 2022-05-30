@@ -6,9 +6,12 @@ import Link from "next/link"
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postAddEmail } from '../../redux/features/client/addEmail';
+import { toast } from 'react-toastify';
+import ButtonLoader from '../common/ButtonLoader';
 
 const Footer = () => {
     const [email, setEmail] = useState('')
+    const [loading, setLoading] = useState(false)
 
 
     const router = useRouter()
@@ -16,13 +19,22 @@ const Footer = () => {
 
     const handleSubmit = (e) => { 
         e.preventDefault()
-        dispatch(postAddEmail({ email })).then((res) => {
-            if (!res.error) {
-                setEmail('')
-            } else {
-                console.log(res)
-            }
-        })
+        setLoading(true)
+        if (email.includes('@') && email.includes('.')) { 
+            dispatch(postAddEmail({ email })).then((res) => {
+                if (!res.error) {
+                    setEmail('')
+                    setLoading(false)
+                    toast.success('Email added successfully')
+                } else {
+                    setLoading(false)
+                    toast.error('Email already exists')
+                }
+            })
+        } else {
+            setLoading(false)
+            toast.info('Please enter a valid email')
+        }
     }
     
 
@@ -68,13 +80,17 @@ const Footer = () => {
                             <h1 className="uppercase text-xs lg:text-sm">New Resources in your inbox</h1>
                             <div className="flex ">
                                 <input
-                                    type="text"
+                                    type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="border bg-transparent  py-1 text-sm lg:text-base !w-full h-9 px-3 lg:px-5  outline-none text-white "
                                     placeholder="Email Address" />
                                 <button onClick={handleSubmit} className="border py-1 px-3 md:px-4 uppercase
-                                    text-xs w-28 lg:text-sm bg-white text-black rounded-r-xl ">Submit</button>
+                                    text-xs w-28 lg:text-sm bg-white text-black rounded-r-xl ">
+                                    {
+                                        loading ? <ButtonLoader /> : "Submit"
+                                    }
+                                </button>
                             </div>
                         </div>
 

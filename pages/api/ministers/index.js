@@ -2,7 +2,7 @@ import nc from 'next-connect'
 import dbConnect from '../../../utils/dbConnect'
 import { addMinister, getMinisters } from '../../../controllers/ministerController'
 import { authorizeRoles, isAuthenticatedUser } from '../../../middleware/auth'
-import onError from '../../../middleware/errorHandler'
+import onError from '../../../middleware/errorMiddleware'
 
 const handler = nc({onError})
 
