@@ -1,5 +1,5 @@
 import Register from '../models/Register'
-import Conference from '../models/Conference'
+import Event from '../models/Event'
 import asyncHandler from "express-async-handler";
 import ErrorHandler from "../middleware/errorHandler"
 
@@ -27,7 +27,7 @@ const getAdminRegisters = asyncHandler(async (req, res, next) => {
     const registers = await Register.find({}).sort('-date').populate({
         path: 'conference',
         select: "title",
-        model: Conference
+        model: Event
     })
 
     res.status(200).json({
