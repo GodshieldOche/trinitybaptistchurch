@@ -1,7 +1,7 @@
 import nc from 'next-connect'
 import dbConnect from '../../../../utils/dbConnect'
-import onError from '../../../../middleware/errorHandler'
-import { getServices } from '../../../../controllers/errorMiddleware'
+import onError from '../../../../middleware/errorMiddleware'
+import { getServices } from '../../../../controllers/serviceController'
 
 const handler = nc({ onError })
 
