@@ -6,12 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../../common/Loader';
 import { format } from 'date-fns';
 import { getAdminRegisters } from '../../../../redux/features/register';
+import { useRouter } from 'next/router';
+import { setDeleteModalData, setDeletModalState } from '../../../../redux/features/menu'
 
 
 const Conference = () => {
 
     const { loading, registers } = useSelector(state => state.register)
     const dispatch = useDispatch();
+    const router = useRouter();
 
     useEffect(() => {
         dispatch(getAdminRegisters())
@@ -73,7 +76,12 @@ const Conference = () => {
                                         </td>
                                         <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
                                             <div className="flex space-x-2 items-center">
-                                                <div className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
+                                                <div
+                                                    onClick={() => {
+                                                        dispatch(setDeleteModalData({ register, index }))
+                                                        dispatch(setDeletModalState(true))
+                                                    }}
+                                                    className="flex justify-center items-center cursor-pointer hover:bg-red-600 bg-red-600/90 w-7 h-7 rounded-full">
                                                     <DeleteIcon className="!text-white !text-base" />
                                                 </div>
                                             </div>

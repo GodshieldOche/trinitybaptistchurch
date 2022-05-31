@@ -40,7 +40,7 @@ const registerSlice = createSlice({
     },
     reducers: {
         deleteOne: (state, { payload }) => {
-            state.register.splice(payload, 1)
+            state.registers.splice(payload, 1)
         },
     },
     extraReducers: {

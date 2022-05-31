@@ -14,6 +14,8 @@ import { postDeleteEvent } from "../../redux/features/events"
 import { postDeleteEventSession } from "../../redux/features/event"
 import { postDeleteService } from "../../redux/features/services"
 import { postDeleteNews } from "../../redux/features/news"
+import { postDeleteEmail } from "../../redux/features/emails"
+import { postDeleteRegister } from "../../redux/features/register"
 
 
 const DeleteModal = () => {
@@ -65,6 +67,14 @@ const DeleteModal = () => {
         // News
         deleteModalData.info && setDataName(deleteModalData.info.title)
         deleteModalData.info && setData(deleteModalData.info)
+
+        // Email
+        deleteModalData.email && setDataName(deleteModalData.email.email)
+        deleteModalData.email && setData(deleteModalData.email)
+
+        // Register
+        deleteModalData.register && setDataName(deleteModalData.register.email)
+        deleteModalData.register && setData(deleteModalData.register)
     }, [])
     const dispatch = useDispatch()
 
@@ -203,6 +213,32 @@ const DeleteModal = () => {
         // News
         if (deleteModalData.info) {
             dispatch(postDeleteNews({ id, index })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("Successfully Deleted")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+        // Email
+        if (deleteModalData.email) {
+            dispatch(postDeleteEmail({ id, index })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success("Successfully Deleted")
+                    dispatch(setDeletModalState(false))
+                } else {
+                    console.log(result.error)
+                }
+            })
+        }
+
+        // Register
+        if (deleteModalData.register) {
+            dispatch(postDeleteRegister({ id, index })).then(result => {
                 if (!result.error) {
                     setLoading(false)
                     toast.success("Successfully Deleted")
