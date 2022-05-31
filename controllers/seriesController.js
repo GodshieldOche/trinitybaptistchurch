@@ -284,13 +284,9 @@ const updateSeriesSermon = asyncHandler(async (req, res, next) => {
                 sermon.audioUrl = audioUrl
                 sermon.youtubeLink = youtubeLink
 
-                if (imageUrl) {
-                    if (sermon.imageUrl?.public_id && sermon.imageUrl.public_id !== imageUrl.public_id) { 
-                        await cloudinary.v2.uploader.destroy(sermon.imageUrl.public_id)
-                        sermon.imageUrl = imageUrl
-                    } else {
-                        sermon.imageUrl = imageUrl
-                    }
+                if (sermon?.imageUrl?.public_id !== imageUrl.public_id) { 
+                    await cloudinary.v2.uploader.destroy(sermon.imageUrl.public_id)
+                    sermon.imageUrl = imageUrl
                 } else {
                     sermon.imageUrl = imageUrl
                 }

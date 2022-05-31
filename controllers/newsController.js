@@ -12,6 +12,25 @@ cloudinary.config({
 })
 
 
+
+// Get news
+// get =>  /api/admin/news
+const getClientNews = asyncHandler(async (req, res, next) => {
+
+    const news = await News.find({}).sort('-updatedAt').populate({
+        path: 'author',
+        select: "name",
+        model: User
+    })
+
+    res.status(200).json({
+        success: "true",
+        news,
+    })
+
+})
+
+
 // create news
 // post =>  /api/admin/news
 const createNews = asyncHandler(async (req, res, next) => {
@@ -119,5 +138,6 @@ export {
     getAdminNews,
     deleteNews,
     getNews,
-    updateNews
+    updateNews,
+    getClientNews
 }

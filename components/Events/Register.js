@@ -48,7 +48,7 @@ const Register = ({conference}) => {
                     <input
                         type="name"
                         name="name"
-                        className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-primary-dark focus:outline-none"
+                        className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-gray-300 focus:outline-none"
                         value={firstName}
                         onChange={(e) => { setFirstName(e.target.value) }}
                     />
@@ -58,7 +58,7 @@ const Register = ({conference}) => {
                     <input
                         type="name"
                         name="name"
-                        className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-primary-dark focus:outline-none"
+                        className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-gray-300 focus:outline-none"
                         value={lastName}
                         onChange={(e) => { setLastName(e.target.value) }}
                     />
@@ -68,7 +68,7 @@ const Register = ({conference}) => {
                     <input
                         type="email"
                         name="email address"
-                        className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-primary-dark focus:outline-none"
+                        className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-gray-300 focus:outline-none"
                         value={email}
                         onChange={(e) => { setEmail(e.target.value) }}
                     />
@@ -78,7 +78,7 @@ const Register = ({conference}) => {
                     <input
                         type="number"
                         name="number"
-                        className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-primary-dark focus:outline-none"
+                        className="w-full px-3 rounded-lg py-2 md:text-xs xl:text-sm  border border-gray-300 focus:outline-none"
                         value={phone}
                         onChange={(e) => { setPhone(e.target.value.toString()) }}
                     />
