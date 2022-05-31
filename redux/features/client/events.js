@@ -26,6 +26,30 @@ export const getClientEvents = createAsyncThunk(
     }
 )
 
+export const getClientNews = createAsyncThunk(
+    `events/getClientNews`,
+    async ({ req, month, next }, { rejectWithValue }) => {
+        const { origin } = absoluteUrl(req)
+        let link = `${origin}/api/client/news`
+
+        // if (month) {
+        //     link = link.concat(`?month=${month}`)
+        // }
+        // if (next) {
+        //     link = link.concat(`&next=${next}`)
+        // }
+
+        try {
+            const { data } = await axios.get(link)
+            return data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message)
+        }
+
+    }
+)
+
+
 export const getClientServices = createAsyncThunk(
     `events/getClientServices`,
     async ({req}, { rejectWithValue }) => {
@@ -49,6 +73,7 @@ const eventsSlice = createSlice({
         loading: true,
         events: [],
         services: [],
+        news: [],
         message: null,
     },
     reducers: {
@@ -74,6 +99,17 @@ const eventsSlice = createSlice({
             state.services = payload.services
         },
         [getClientServices.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.message = payload
+        },
+        [getClientNews.pending]: (state) => {
+            state.loading = true
+        },
+        [getClientNews.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.news = payload.news
+        },
+        [getClientNews.rejected]: (state, { payload }) => {
             state.loading = false
             state.message = payload
         },

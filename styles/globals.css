@@ -33,7 +33,27 @@ html, body {
     padding: 5px;
 }
 
-.innerClass {
-    display: flex;
+.output p {
+    color: red;
 
+}
+
+.output h2 {
+    color: green;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.output blockquote {
+    padding-left: 5px;
+    border-left: 3px solid gray;
+}
+
+.output ol {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.output a {
+    color: blue;
 }
