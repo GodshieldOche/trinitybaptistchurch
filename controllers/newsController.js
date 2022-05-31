@@ -13,7 +13,29 @@ cloudinary.config({
 
 
 
-// Get news
+// Get news details
+// get =>  /api/admin/news
+const getNewsDetails = asyncHandler(async (req, res, next) => {
+
+    const news = await News.findById(req.query.id).sort('-updatedAt').populate({
+        path: 'author',
+        select: "name",
+        model: User
+    })
+
+    if (!news) {
+        return next(new ErrorHandler('News not found with this ID', 404))
+    } else {
+
+        res.status(200).json({
+            success: "true",
+            news
+        })
+    }
+})
+
+
+// Get news details
 // get =>  /api/admin/news
 const getClientNews = asyncHandler(async (req, res, next) => {
 
@@ -139,5 +161,6 @@ export {
     deleteNews,
     getNews,
     updateNews,
-    getClientNews
+    getClientNews,
+    getNewsDetails
 }

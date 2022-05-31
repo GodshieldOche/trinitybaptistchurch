@@ -51,11 +51,16 @@ const Lists = () => {
     }
 
     const truncate = (des) => {
-        if (des.length > 260) {
+        if (des.length > 10) {
             return des.substr(0, 257) + "..."
         } else {
             return des
         }
+    }
+
+    const parser = (html) => {
+        const short = truncate(html)
+        return parse(short)
     }
 
     const handleChange = (date) => {
@@ -78,13 +83,14 @@ const Lists = () => {
                     className="max-w-[270px] lg:hidden mx-auto text-center bg-primary-dark text-sm text-white py-2  uppercase mt-5">Filter by month</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-20 ">
                     <div className="lg:col-span-8">
+{/* upcoming events */}
                         <div className="flex px-2 items-center mt-7 mb-4 space-x-1">
-                            <span className="w-5 h-[2.5px] bg-primary-dark"></span>
-                            <h1 className="text-base lg:text-lg font-medium uppercase">Upcoming events</h1>
+                            <span className="w-3 h-[2.5px] bg-primary-dark"></span>
+                            <h1 className="text-base font-medium uppercase">Upcoming events</h1>
                         </div>
                         <div className="flex flex-col w-full mt-2 md:mt-5 space-y-5">
                             {
-                                events.map((event, index) => (
+                              events.length ?  events.map((event, index) => (
                                     <Link href={`/events/${event._id}`} key={event._id} >
                                         <a>
                                             <div className="flex flex-col w-full md:flex-row items-center shadow-lg hover:scale-105 
@@ -123,18 +129,20 @@ const Lists = () => {
                                             </div>
                                         </a>
                                     </Link>
-                              
-                                ))
+                              ))
+                                    : <h1 className="text-center uppercase font-medium"> No Events To Display</h1>
                             }
                         </div>
+
+{/* News */}
                         <div className="flex px-2 items-center mt-7 mb-4 space-x-1">
-                            <span className="w-5 h-[2.5px] bg-primary-dark"></span>
-                            <h1 className="text-base lg:text-lg font-medium uppercase">Latest News</h1>
+                            <span className="w-3 h-[2.5px] bg-primary-dark"></span>
+                            <h1 className="text-base font-medium uppercase">Latest News</h1>
                         </div>
                         <div className="flex flex-col w-full mt-2 md:mt-5 space-y-5">
                             {
-                                news.map((info, index) => (
-                                    <Link href={`/events/${info._id}`} key={info._id} >
+                              news.length ?  news.map((info, index) => (
+                                    <Link href={`/news/${info._id}`} key={info._id} >
                                         <a>
                                             <div className="flex flex-col w-full md:flex-row items-center shadow-lg hover:scale-105 
                                             hover:shadow-xl space-y-3 md:space-y-0 md:space-x-3 h-fit bg-gray-50/50 py-3 px-3 cursor-pointer">
@@ -154,13 +162,11 @@ const Lists = () => {
                                                         <h1 className=" text-sm mb-2 md:mb-0">{format(new Date(info.updatedAt), 'MMM, do yyyy')}</h1>
                                                     </div>
                                                     <p className="font-light text-sm text-justify">
-                                                        {truncate(parse(info.body))}
+                                                        {parser(info.body)}
                                                     </p>
                                                     <div className="flex items-center justify-between">
                                                         <div className="flex items-center ml-[6px]">
-                                                            {/* {
-                                                                lister(index)
-                                                            } */}
+                                                          <h1 className="text-sm italic">written by <span>{ info.author.name }</span></h1>
                                                         </div>
 
                                                         <h1 className="text-xs rounded-l-full uppercase bg-primary-light text-white py-1 px-3">
@@ -172,8 +178,10 @@ const Lists = () => {
                                             </div>
                                         </a>
                                     </Link>
-                              
+                                    
                                 ))
+
+                                    : <h1 className="text-center uppercase text-lg font-medium"> No News To Display</h1>
                             }
                         </div>
                     </div>
