@@ -66,10 +66,13 @@ const MenuLinks = ({ title }) => {
 
             {
                 title === "ministries" && ministries && menuState &&
-                <div className={`flex flex-col w-full text-lg font-light border-l border-l-primary-black/30 pl-3 space-y-2 ml-3  `}>
-                    <h1 className=" ">Men</h1>
-                    <h1 className=" ">Women</h1>
-                    <h1 className=" ">Children</h1>
+                <div className={`flex flex-col w-full text-lg font-light pl-3 space-y-2 ml-3  `}>
+                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Men</h1>
+                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Women</h1>
+                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Children</h1>
+                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Sunday School</h1>
+                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Internship</h1>
+                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Conference</h1>
                 </div>
             }
         </div>
