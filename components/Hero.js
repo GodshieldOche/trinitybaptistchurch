@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 
 const Hero = () => {
     const [isLiveStream, setIsLiveStream] = useState(false)
-    const { events, services } = useSelector(state => state.clientEvents)
+    const { events, services, defaultEvent, defaultService } = useSelector(state => state.clientEvents)
 
     return (
         <div className="container xl:px-[2rem] lg:px-[1rem] grid gap-5 xl:gap-10 mb-5  grid-cols-1 lg:grid-cols-12 items-center w-full overflow-hidden">
@@ -45,7 +45,9 @@ const Hero = () => {
                         </div>
                     </div>
                     {
-                        isLiveStream ? <LiveStream service={services[0]} /> : <Upcoming event={events[0]} />
+                        isLiveStream ?
+                            <LiveStream service={services[0]} defaultService={defaultService} />
+                            : <Upcoming defaultEvent={defaultEvent} event={events[0]} />
                     }
                 </div>
                 

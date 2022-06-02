@@ -72,6 +72,8 @@ const eventsSlice = createSlice({
     initialState: {
         loading: true,
         events: [],
+        defaultEvent: {},
+        defaultService: {},
         services: [],
         news: [],
         message: null,
@@ -86,6 +88,7 @@ const eventsSlice = createSlice({
         [getClientEvents.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.events = payload.events
+            state.defaultEvent = payload.defaultEvent
         },
         [getClientEvents.rejected]: (state, { payload }) => {
             state.loading = false
@@ -97,6 +100,7 @@ const eventsSlice = createSlice({
         [getClientServices.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.services = payload.services
+            state.defaultService = payload.defaultService
         },
         [getClientServices.rejected]: (state, { payload }) => {
             state.loading = false
