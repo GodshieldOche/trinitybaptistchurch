@@ -2,6 +2,10 @@ import Link from "next/link"
 import { useState } from "react"
 import { signIn } from 'next-auth/react'
 import ButtonLoader from '../common/ButtonLoader'
+import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { postCreateUser } from '../../redux/features/createUser'
 
 const SignUp = () => {
     const [email, setEmail] = useState('')
@@ -9,9 +13,27 @@ const SignUp = () => {
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
 
+    const router = useRouter()
+    const dispatch = useDispatch()
+
 
     const handleSubmit = async (e) => { 
-
+        e.preventDefault()
+        if (email && email.includes('@') && email.includes('.') && name && password) {
+            setLoading(true)
+            dispatch(postCreateUser({ name, email, password })).then(result => {
+                if (!result.error) {
+                    setLoading(false)
+                    toast.success('User created successfully')
+                    router.push('/signin')
+                } else {
+                    setLoading(false)
+                    toast.error('Email already Exists')
+                }
+            })
+        } else {
+            toast.info('Please fill all the fields correctly')
+        }
     }
 
 
@@ -54,7 +76,7 @@ const SignUp = () => {
                   />
               </div>
               <div className="absolute bottom-4 left-0 right-0 justify-center flex w-full items-center space-x-5 ">
-                  <button className="uppercase text-sm  text-white bg-primary-light px-5 rounded-full py-1">
+                  <button onClick={handleSubmit} className="uppercase text-sm  text-white bg-primary-light px-5 rounded-full py-1">
                       {loading ? <ButtonLoader /> : "SIGN Up"}
                   </button>
                   <h1 className="text-sm uppercase cursor-pointer">Or signin</h1>

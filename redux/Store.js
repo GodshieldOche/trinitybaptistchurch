@@ -42,6 +42,7 @@ import registerReducer from './features/register'
 import emailReducer from './features/emails'
 import addRegisterReducer from './features/client/addRegister'
 import addEmailReducer from './features/client/addEmail'
+import addUserReducer from './features/createUser'
 
 
 
@@ -91,6 +92,7 @@ const combinedReducers = combineReducers({
     clientMinisters: clientMinistersReducer,
     addRegister: addRegisterReducer,
     addEmail: addEmailReducer,
+    addUser: addUserReducer,
 });
 
 const rootReducer = createReducer(combinedReducers(undefined, { type: "" }), (builder) => {
