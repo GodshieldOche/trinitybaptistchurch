@@ -69,7 +69,7 @@ const FilterItems = ({ setFilterToggle, fitlerToggle, topics, preachers, scriptu
     
 
     return (
-        <div className="flex ml-3 md:ml-5 mt-3 flex-col transition duration-500 ease-in-out space-y-5">
+        <div className="flex ml-3 md:ml-5 mt-3 flex-col transition duration-500 ease-in-out space-y-5 !mb-10">
             <div className="topics flex-col space-y-2 text-sm">
                 <h1 className="uppercase font-medium">Topics</h1>
                 <div className="ml-4 flex-col space-y-2">

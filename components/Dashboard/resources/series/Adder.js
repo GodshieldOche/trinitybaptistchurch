@@ -61,7 +61,7 @@ const Adder = ({ name }) => {
                 }
             })
         }
-    }, []);
+    }, [dispatch, id, index]);
 
     const handleSubmit = (e) => { 
         e.preventDefault()
