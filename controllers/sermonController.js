@@ -19,7 +19,7 @@ const getSermons = asyncHandler(async (req, res, next) => {
     const { topic, preacher, scripture, sort } = req.query
 
     const page = Number(req.query.page) || 1
-    const resPerPage = 5
+    const resPerPage = 10
 
     const query = {}
     let sortQuery = '-date'
@@ -126,7 +126,15 @@ const createSermon = asyncHandler(async (req, res, next) => {
 // get =>  /api/admin/sermons
 const getAdminSermons = asyncHandler(async (req, res, next) => {
 
-    const sermons = await Sermon.find({}).sort({ date: -1 }).populate({
+    const page = Number(req.query.page) || 1
+    const resPerPage = 10
+
+    const totalItems = await Sermon.countDocuments({})
+    const sermons = await Sermon.find({})
+        .sort('-date')
+        .skip((page - 1) * resPerPage)
+        .limit(resPerPage)
+        .populate({
         path: 'preacher',
         select: "name",
         model: Minister
@@ -134,7 +142,9 @@ const getAdminSermons = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
         success: "true",
-        sermons
+        sermons,
+        totalItems,
+        resPerPage
     })
 
 }) 

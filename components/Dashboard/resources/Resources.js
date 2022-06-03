@@ -45,16 +45,17 @@ const Resources = ({children}) => {
     const [noOfStudy, setNoOfStudy] = useState(0)
     const router = useRouter()
     const dispatch = useDispatch()
+    const page = Number(router.query.page) || 1
 
     useEffect(() => {
         if (router.route === "/admin/resources") {
             router.push("/admin/resources/sermon")
         }
-        dispatch(getAdminSermons()).then((result) => {
+        dispatch(getAdminSermons({page})).then((result) => {
             if (result.error) {
                 console.log(result.error)
             } else {
-                setNoOfSermons(result.payload.sermons.length)
+                setNoOfSermons(result.payload.totalItems)
             }
         })
         dispatch(getAdminSeries()).then((result) => {
@@ -79,7 +80,7 @@ const Resources = ({children}) => {
             }
         })
 
-    }, [dispatch])
+    }, [dispatch, page])
 
 
     return (

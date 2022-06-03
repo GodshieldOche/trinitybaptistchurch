@@ -4,9 +4,9 @@ import axios from 'axios'
 
 export const getAdminSermons = createAsyncThunk(
     `sermons/getAdminSermons`,
-    async (obj, { rejectWithValue }) => {
-        try {
-            const { data } = await axios.get(`/api/admin/sermons`)
+    async ({ page }, { rejectWithValue }) => {
+        try { 
+            const { data } = await axios.get(`/api/admin/sermons?page=${page}`)
             return data
         } catch (error) {
             return rejectWithValue(error.response.data.message)
@@ -36,6 +36,8 @@ const sermonsSlice = createSlice({
     initialState: {
         loading: true,
         sermons: [],
+        resPerPage: 0,
+        totalItems: 0,
         message: null,
     },
     reducers: {
@@ -50,6 +52,8 @@ const sermonsSlice = createSlice({
         [getAdminSermons.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.sermons = payload.sermons
+            state.resPerPage = payload.resPerPage
+            state.totalItems = payload.totalItems
         },
         [getAdminSermons.rejected]: (state, { payload }) => {
             state.loading = false

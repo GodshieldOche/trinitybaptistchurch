@@ -58,8 +58,8 @@ const Links = ({ title }) => {
                         <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Sunday School</h1>
                         <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Internship</h1>
                         <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Conferences</h1>
-                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Books and Library</h1>
-                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Media</h1>
+                        {/* <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Books and Library</h1>
+                        <h1 className="text-sm border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer">Media</h1> */}
                     </div>
                 </div>
             }

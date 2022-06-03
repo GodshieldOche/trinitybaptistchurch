@@ -9,21 +9,24 @@ import Loader from '../../../common/Loader';
 import { getAdminSermons } from "../../../../redux/features/sermons";
 import { format } from 'date-fns'
 import { setDeleteModalData, setDeletModalState  } from '../../../../redux/features/menu'
+import { Pagination } from '../../../common/Pagination';
 
 
 const List = () => {
 
-    const { loading, sermons, message } = useSelector(state => state.sermons)
+    const { loading, sermons, totalItems, resPerPage, message } = useSelector(state => state.sermons)
     const dispatch = useDispatch();
     const router = useRouter();
 
+    const page = Number(router.query.page) || 1
+
     useEffect(() => {
-        dispatch(getAdminSermons()).then((result) => {
+        dispatch(getAdminSermons({page})).then((result) => {
             if (result.error) {
                 console.log(result.error)
             }
         })
-    }, [dispatch])
+    }, [dispatch, page])
 
 
     return (
@@ -104,9 +107,19 @@ const List = () => {
                                 ))
                             }
                         </tbody>
+                        
                     </table>
            } 
-            
+            {
+                totalItems > resPerPage && !loading &&
+                <div className="flex !my-10 w-full items-center justify-center">
+                    <Pagination
+                        resPerPage={resPerPage}
+                        page={page}
+                        totalItems={totalItems}
+                    />
+                </div>
+            }
             
         </div>
     )

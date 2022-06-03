@@ -1,7 +1,7 @@
 import Head from "next/head";
-import NewsDetails from "../../components/Events/NewsDetails";
-import { getClientNewsDetails } from "../../redux/features/client/event";
-import { wrapper } from "../../redux/Store";
+import NewsDetails from "../../../components/Events/NewsDetails";
+import { getClientNewsDetails } from "../../../redux/features/client/event";
+import { wrapper } from "../../../redux/Store";
 
 export default function EventDetailsPage() {
     return (
