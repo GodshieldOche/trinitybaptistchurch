@@ -43,6 +43,14 @@ const Conference = () => {
 
     }
 
+    const date = (start, end) => {
+        if (start === end) {
+            return format(new Date(start), 'MMM, do yyyy')
+        } else {
+            return `${format(new Date(start), 'do')} - ${format(new Date(end), 'do MMM yyyy')}`
+        }
+    }
+
 
     return (
         <div className="space-y-5">
@@ -105,7 +113,7 @@ const Conference = () => {
                                             <h1 className="capitalize">{`${conference.sermons.length > 1 ? conference.sermons.length + " sermons" : conference.sermons.length + " sermon"} `}</h1>
                                         </td>
                                         <td className="text-sm px-3 py-4 whitespace-nowrap">
-                                            <h1 className="capitalize">{`${format(new Date(conference.startDate), 'MMM, do')}-${format(new Date(conference.endDate), 'do, yyyy')}`}</h1>
+                                            <h1 className="capitalize">{date(conference.startDate, conference.endDate )}</h1>
                                         </td>
                                         <td className="text-sm  font-light px-3 py-4 whitespace-nowrap">
                                             <div className="flex space-x-2 items-center">
