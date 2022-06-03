@@ -5,7 +5,14 @@ const SortItems = ({ setSortToggle }) => {
     const sort = router.query.sort || "newest"
 
     const handleSort = (key) => {
-        router.push(`${router.route}?page=1&sort=${key}`)
+        router.push({
+            pathname: router.pathname,
+            query: {
+                ...router.query,
+                page: 1,
+                sort: key
+            },
+        })
         setSortToggle && setSortToggle(false)
     }
 

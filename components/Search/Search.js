@@ -32,7 +32,7 @@ const Search = () => {
             <div className="mt-[100px] min-h-screen  container md:px-0 lg:px-[2rem] !mb-20 sm:mt-24 w-full">
                 <div className="max-w-screen-md space-y-8 mx-auto px-2 md:px-0">
                     <h1 className="text-center uppercase text-xs md:text-sm ">
-                        {`${totalItems > 1 ? totalItems + " Results" : totalItems + " Result"} for "${keyword}" - Page 1`}
+                        {`${totalItems > 1 ? totalItems + " Results" : totalItems + " Result"} for "${keyword}" - Page ${page}`}
                     </h1>
                     <div className="flex flex-col justify-center mt-2 md:mt-5 space-y-3">
                         {

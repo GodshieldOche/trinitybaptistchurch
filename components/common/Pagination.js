@@ -11,7 +11,14 @@ const Pagination = ({ resPerPage, page, totalItems, keyword }) => {
         keyword ?
             router.push(`${router.route}?keyword=${keyword}&page=${pageNumber}`)
             :
-            router.push(`${router.route}?page=${pageNumber}`)
+            // router.push(`${router.route}?page=${pageNumber}`)
+            router.push({
+                pathname: router.pathname,
+                query: {
+                    ...router.query,
+                    page: pageNumber
+                },
+            })
     }
 
 
