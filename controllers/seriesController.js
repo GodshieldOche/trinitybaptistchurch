@@ -293,19 +293,21 @@ const updateSeriesSermon = asyncHandler(async (req, res, next) => {
                 //     sermon.imageUrl = imageUrl
                 // }
 
-                if (imageUrl?.public_id) {
-                    if (sermon.imageUrl?.public_id.toString() !== imageUrl.public_id.toString()) {
-                        await cloudinary.v2.uploader.destroy(sermon.imageUrl?.public_id)
-                        sermon.imageUrl = imageUrl
+                if (imageUrl) {
+                    if (sermon.imageUrl?.public_id && sermon.imageUrl.public_id !== imageUrl.public_id) {
+                        await cloudinary.v2.uploader.destroy(sermon.imageUrl.public_id)
+                        return sermon.imageUrl = imageUrl
+                    } else {
+                        return sermon.imageUrl = imageUrl
                     }
                 } else {
-                    sermon.imageUrl = imageUrl
+                    return sermon.imageUrl = imageUrl
                 }
             }
         })
 
+        
         await series.save({ validateBeforeSave: false })
-
 
         res.status(200).json({
             success: "true",
@@ -329,7 +331,7 @@ const updateSeries = asyncHandler(async (req, res, next) => {
         if (imageUrl && imageUrl?.public_id) {
             if (series?.imageUrl?.public_id !== imageUrl.public_id) {
                 await cloudinary.v2.uploader.destroy(series.imageUrl.public_id)
-                series.imageUrl = imageUrl
+                return series.imageUrl = imageUrl
             }
         }
 

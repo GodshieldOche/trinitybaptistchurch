@@ -4,7 +4,7 @@ import SortItems from "./SortItems"
 const Filter = ({topics, preachers, scriptures, fitlerToggle, setFilterToggle, sortToggle, setSortToggle }) => {
     return (
         <div>
-            <div className={` ${fitlerToggle || sortToggle ? "pb-5 pt-1  w-full h-screen fixed top-0 right-0  !z-50 !overflow-y-scroll !overscroll-contain" : "mb-5"}
+            <div className={` ${fitlerToggle || sortToggle ? "pb-5 pt-1  w-full min-h-screen fixed top-0 right-0  !z-50 !overflow-y-scroll !overscroll-contain" : "mb-5"}
             transition-all duration-500 ease-in-out lg:hidden  bg-[white]`}>
                 <div className="grid grid-cols-2 items-center ">
                     <div className={`${fitlerToggle ? "text-[white] bg-primary-dark" : "bg-[white] text-[black]"}

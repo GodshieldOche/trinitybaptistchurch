@@ -295,12 +295,12 @@ const updateConferenceSermon = asyncHandler(async (req, res, next) => {
                 if (imageUrl) {
                     if (sermon.imageUrl?.public_id && sermon.imageUrl.public_id !== imageUrl.public_id) {
                         await cloudinary.v2.uploader.destroy(sermon.imageUrl.public_id)
-                        sermon.imageUrl = imageUrl
+                        return sermon.imageUrl = imageUrl
                     } else {
-                        sermon.imageUrl = imageUrl
+                        return sermon.imageUrl = imageUrl
                     }
                 } else {
-                    sermon.imageUrl = imageUrl
+                    return sermon.imageUrl = imageUrl
                 }
             }
         })
@@ -332,7 +332,7 @@ const updateConference = asyncHandler(async (req, res, next) => {
         if (imageUrl && imageUrl?.public_id) {
             if (conference?.imageUrl?.public_id !== imageUrl.public_id) {
                 await cloudinary.v2.uploader.destroy(conference.imageUrl.public_id)
-                conference.imageUrl = imageUrl
+                return conference.imageUrl = imageUrl
             }
         }
 
