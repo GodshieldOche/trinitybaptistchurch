@@ -111,7 +111,11 @@ const Footer = () => {
                             <h2 className="text-xs lg:text-sm ">House 4, Juba Street,</h2>
                             <h2 className="text-xs lg:text-sm ">Galadimawa, Suncity Estate,</h2>
                             <h2 className="text-xs lg:text-sm ">Abuja FCT</h2>
-                            <h2 className="text-xs lg:text-sm uppercase !mt-6 underline cursor-pointer hover:scale-105 ">Maps and Direction </h2>
+                            <Link href="https://www.google.com/maps/place/Trinity+Baptist+Church,+Abuja/@8.989531,7.433382,16z/data=!4m5!3m4!1s0x0:0x95fb206cd5ea74f5!8m2!3d8.9895309!4d7.4333819?hl=en">
+                                <a target="_blank">
+                                    <h2 className="text-xs lg:text-sm uppercase !mt-6 underline cursor-pointer hover:scale-105 ">Maps and Direction </h2>
+                                </a>
+                            </Link>
 
                         </div>
                         <div className="flex flex-col w-full md:!w-fit text-center md:text-left space-y-3">

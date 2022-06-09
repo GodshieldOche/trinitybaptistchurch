@@ -59,7 +59,8 @@ const LiveStream = ({ service, defaultService}) => {
                                         ">
                                 {service ? 'Join live' : 'service sermon'}
                             </h1>
-                        <h1 className=" text-xs md:text-xs capitalize  hover:scale-105 border-b border-b-primary-black cursor-pointer">{ service ? 'Bulletin' : 'see all'}</h1>
+                        <h1 onClick={() => { router.push('/resources') }}
+                            className=" text-xs md:text-xs capitalize  hover:scale-105 border-b border-b-primary-black cursor-pointer">{service ? 'Bulletin' : 'see all'}</h1>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useEffect } from "react"
 import { useState } from "react"
+import ministriesData from './Ministries/data'
 
 const MenuLinks = ({ title }) => {
     const [ministries, setMinistries] = useState(false)
@@ -67,12 +68,19 @@ const MenuLinks = ({ title }) => {
             {
                 title === "ministries" && ministries && menuState &&
                 <div className={`flex flex-col w-full text-lg font-light pl-3 space-y-2  `}>
-                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Men</h1>
-                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Women</h1>
-                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Children</h1>
-                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Sunday School</h1>
-                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Internship</h1>
-                    <h1 className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">Conference</h1>
+                        {
+                            ministriesData?.map(data => (
+                                <h1
+                                    key={data.id}
+                                    onClick={() => {
+                                        router.push(`/ministries/${data.id}`)
+                                        dispatch(setMenuState(false))
+                                    }}
+                                    className="text-sm hover:text-black hover:font-normal border-b border-b-gray-100 pb-1 capitalize font-light cursor-pointer ">
+                                    {data.title}
+                                </h1>
+                            ))
+                        }
                 </div>
             }
         </div>

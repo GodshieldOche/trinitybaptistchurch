@@ -1,59 +1,9 @@
 import Image from "next/image"
+import { ministersData, statements } from './data'
+import blur from '../common/blur'
 
 
-const statements = [
-    {
-        topic: "Bible",
-        text: "The Bible, in its entirety, is the infallible, inerrant, and inspired Word of God; it is divine revelation that carries the full weight of God’s authority and to which we are obliged to submit.",
-        id: 1
-    },
-    {
-        topic: "The Trinity",
-        text: "Within the Godhead there is a unity of three distinct yet fully divine persons, the Father, the Son, and the Holy Spirit; these three are one true, eternal God, the same in substance, equal in power and glory.",
-        id: 2
-    },
-    {
-        topic: "God",
-        text: "God is a Spirit, infinite, eternal, and unchangeable in His being, wisdom, power, holiness, justice, goodness, and truth. God is fully omniscient, omnipotent, and omnipresent, not given to learning or “openness.”",
-        id: 3
-    },
-    {
-        topic: "Jesus Christ",
-        text: "Jesus Christ is truly God and truly man, having two natures inseparably united in one divine person without confusion, mixture, separation, or division. Each nature retains its own attributes. In the incarnation, Jesus was born of the Virgin Mary, lived a perfect life among us, was crucified, dead, and buried, rose on the third day, ascended to heaven, and will come again in glory and judgment. He is the only Mediator between God and man.",
-        id: 4
-    },
-    {
-        topic: "The Holy Spirit",
-        text: "The Holy Spirit is of one substance with the Father and the Son. He eternally proceeds from the Father and the Son, and He dwells in the hearts of believers, effecting their regeneration monergistically and operating in their sanctification synergistically.",
-        id: 5
-    },
-    {
-        topic: "Creation",
-        text: "God, by the word of His power, created from nothing the heavens and the earth and all that is in them. He further preserves and governs all His creatures and all their actions according to His most holy, wise, and powerful providence.",
-        id: 6
-    },
-    {
-        topic: "Man",
-        text: "God, by the word of His power, created from nothing the heavens and the earth and all that is in them. He further preserves and governs all His creatures and all their actions according to His most holy, wise, and powerful providence.",
-        id: 7
-    },
-    {
-        topic: "Atonement",
-        text: "God, by the word of His power, created from nothing the heavens and the earth and all that is in them. He further preserves and governs all His creatures and all their actions according to His most holy, wise, and powerful providence.",
-        id: 8
-    },
-    {
-        topic: "The Law",
-        text: "God, by the word of His power, created from nothing the heavens and the earth and all that is in them. He further preserves and governs all His creatures and all their actions according to His most holy, wise, and powerful providence.",
-        id: 9
-    },
-    {
-        topic: "Christianity & Culture",
-        text: "God, by the word of His power, created from nothing the heavens and the earth and all that is in them. He further preserves and governs all His creatures and all their actions according to His most holy, wise, and powerful providence.",
-        id: 10
-    },
-    
-]
+
 
 const leaders = [1,2,3,4,5,6,7]
 
@@ -147,19 +97,19 @@ const Body = () => {
                     <h1 className="text-xl md:text-2xl font-medium text-center uppercase">Leadership</h1>
                     <div className="grid gap-5 grid-cols-2 justify-center items-center md:grid-cols-3 lg:grid-cols-4">
                         {
-                            leaders.map(leader => (
+                            ministersData.map(leader => (
                                 <div key={leader.id} className="flex flex-col space-y-2 shadow-xl">
-                                    <div className="w-full mx-auto h-[130px]  relative">
-                                        <Image src="/img/abutu.jpg"
+                                    <div className="w-full mx-auto h-[200px]  relative">
+                                        <Image src={leader.image}
                                             className="object-cover w-full h-full"
                                             layout="fill"
-                                            blurDataURL="data:..."
+                                            blurDataURL={blur}
                                             placeholder="blur"
                                             alt="logo" />
                                     </div>
                                     <div className="py-3 px-2 flex flex-col space-y-2">
-                                        <h1 className="text-center text-xs font-medium uppercase">Abutu Peter Joshua</h1>
-                                        <h2 className="text-center text-xs capitalize">Pastor/Teacher</h2>
+                                        <h1 className="text-center text-xs font-medium uppercase">{leader.name}</h1>
+                                        <h2 className="text-center text-xs capitalize">{leader.role}</h2>
                                     </div>
                                 </div>
                             ))

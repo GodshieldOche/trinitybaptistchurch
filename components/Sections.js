@@ -16,9 +16,10 @@ const Sections = () => {
                         </div>
                     </div>
                     <div className="flex flex-col px-2 md:px-0 space-y-2">
-                        <h1 className="uppercase font-medium text-xl md:text-2xl">Our Mission</h1>
+                        <h1 className="uppercase font-medium text-xl md:text-2xl">Our Mission & Vision</h1>
                         <p className="text-left font-light">
-                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters as opposed to using Content here content here making it look like readable English Many desktop publishing packages and web page editors now use Lorem Ipsum
+                            We exist to glorify God by being gospel centred and driven; faithfully worshiping God joyfully, Evangelising sinners, Equipping the saints, Planting Churches, and promoting Biblical worldview.
+                            To be a People zealous for God’s Holiness and Glory in a Joyful and loving society.
                         </p>
                         <div className=" flex  !mt-10 mb-5">
                             <h1 className="uppercase text-sm md:text-base
