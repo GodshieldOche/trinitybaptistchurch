@@ -220,22 +220,23 @@ const updateSermon = asyncHandler(async (req, res, next) => {
         if (imageUrl && imageUrl.public_id) {
             if (sermon.imageUrl && sermon.imageUrl.public_id && sermon.imageUrl.public_id !== imageUrl.public_id) {
                 await cloudinary.v2.uploader.destroy(sermon.imageUrl.public_id)
-                return sermon.imageUrl = imageUrl
+                sermon.imageUrl = imageUrl
             } else {
-                return sermon.imageUrl = imageUrl
+                sermon.imageUrl = imageUrl
             }
 
         } else {
-            return sermon.imageUrl = imageUrl
+            sermon.imageUrl = imageUrl
         }
-
-        await sermon.save({ validateBeforeSave: false })
-
-
-        res.status(200).json({
-            success: "true",
-        })
     }
+
+
+    await sermon.save({ validateBeforeSave: false })
+
+
+    res.status(200).json({
+        success: "true",
+    })
 }) 
 
 

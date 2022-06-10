@@ -215,22 +215,23 @@ const updateBibleStudy = asyncHandler(async (req, res, next) => {
         if (imageUrl && imageUrl.public_id) {
             if (bibleStudy.imageUrl && bibleStudy.imageUrl.public_id && bibleStudy.imageUrl.public_id !== imageUrl.public_id) {
                 await cloudinary.v2.uploader.destroy(bibleStudy.imageUrl.public_id)
-                return bibleStudy.imageUrl = imageUrl
+                bibleStudy.imageUrl = imageUrl
             } else {
-                return bibleStudy.imageUrl = imageUrl
+                bibleStudy.imageUrl = imageUrl
             }
 
         } else {
-            return bibleStudy.imageUrl = imageUrl
+            rbibleStudy.imageUrl = imageUrl
         }
 
-        await bibleStudy.save({ validateBeforeSave: false })
-
-
-        res.status(200).json({
-            success: "true",
-        })
     }
+
+    await bibleStudy.save({ validateBeforeSave: false })
+
+
+    res.status(200).json({
+        success: "true",
+    })
 })
 
 
