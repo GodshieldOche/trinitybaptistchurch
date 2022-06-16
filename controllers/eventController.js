@@ -33,7 +33,7 @@ const getEvents = asyncHandler(async (req, res) => {
     })
 
     const events = allEvents.filter(event => new Date(event.endDate) > new Date())
-    const defaultEvent = allEvents[0]
+    const defaultEvent = allEvents[allEvents.length - 1]
     
 
     res.status(200).json({
